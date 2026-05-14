@@ -1,0 +1,277 @@
+import 'package:flutter/material.dart';
+import 'package:lucide_icons/lucide_icons.dart';
+import '../core/app_theme.dart';
+
+class SearchDetailScreen extends StatelessWidget {
+  const SearchDetailScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.surface,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18, color: AppColors.primary),
+        ),
+        title: const Text(
+          'Kết quả tìm kiếm',
+          style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: AppColors.primary),
+        ),
+        centerTitle: true,
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Divider(height: 1, color: AppColors.gray100),
+        ),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            // Profile card
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(28),
+                border: Border.all(color: AppColors.gray100),
+                boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10)],
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      color: AppColors.blue100,
+                      borderRadius: BorderRadius.circular(24),
+                      border: Border.all(color: Colors.white, width: 3),
+                      boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 12)],
+                    ),
+                    child: const Icon(LucideIcons.user, size: 36, color: AppColors.primary),
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'LM. Giuse Trần Văn Huy',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.gray800),
+                  ),
+                  const SizedBox(height: 4),
+                  const Text(
+                    'TỔNG GIÁO PHẬN HÀ NỘI',
+                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.primary, letterSpacing: 1.5),
+                  ),
+                  const SizedBox(height: 12),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: AppColors.emerald50,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: AppColors.emerald100),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          width: 8,
+                          height: 8,
+                          decoration: const BoxDecoration(color: AppColors.emerald, shape: BoxShape.circle),
+                        ),
+                        const SizedBox(width: 6),
+                        const Text(
+                          'Đang hoạt động',
+                          style: TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: AppColors.emerald600),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 14),
+
+            // Info section
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(28),
+                border: Border.all(color: AppColors.gray100),
+                boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 8)],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        width: 32,
+                        height: 32,
+                        decoration: BoxDecoration(color: AppColors.gray50, borderRadius: BorderRadius.circular(10)),
+                        child: const Icon(LucideIcons.user, size: 15, color: AppColors.gray400),
+                      ),
+                      const SizedBox(width: 8),
+                      const Text(
+                        'THÔNG TIN CƠ BẢN',
+                        style: TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1.5),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  _InfoItem(
+                    bgColor: AppColors.blue50,
+                    iconColor: AppColors.primary,
+                    icon: LucideIcons.calendar,
+                    label: 'Ngày sinh & Thụ phong',
+                    value: '12/05/1980 — Thụ phong: 20/06/2008',
+                  ),
+                  const SizedBox(height: 12),
+                  _InfoItem(
+                    bgColor: AppColors.indigo50,
+                    iconColor: AppColors.indigo600,
+                    icon: LucideIcons.church,
+                    label: 'Giáo xứ hiện tại',
+                    value: 'Giáo xứ Hàm Long, Q. Hoàn Kiếm, Hà Nội',
+                  ),
+                  const SizedBox(height: 12),
+                  _InfoItem(
+                    bgColor: AppColors.emerald50,
+                    iconColor: AppColors.emerald600,
+                    icon: LucideIcons.graduationCap,
+                    label: 'Học vị',
+                    value: 'Thạc sĩ Mục vụ Giáo hội',
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 14),
+
+            // Action buttons
+            Row(
+              children: [
+                Expanded(
+                  child: _ActionButton(
+                    icon: LucideIcons.phone,
+                    label: 'Gọi điện',
+                    bgColor: AppColors.blue100,
+                    iconColor: AppColors.primary,
+                    onTap: () {},
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: _ActionButton(
+                    icon: LucideIcons.mail,
+                    label: 'Gửi Email',
+                    bgColor: AppColors.indigo50,
+                    iconColor: AppColors.indigo600,
+                    onTap: () {},
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 32),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _InfoItem extends StatelessWidget {
+  final Color bgColor;
+  final Color iconColor;
+  final IconData icon;
+  final String label;
+  final String value;
+
+  const _InfoItem({
+    required this.bgColor,
+    required this.iconColor,
+    required this.icon,
+    required this.label,
+    required this.value,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(color: bgColor, borderRadius: BorderRadius.circular(12)),
+          child: Icon(icon, size: 18, color: iconColor),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label.toUpperCase(),
+                style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1),
+              ),
+              const SizedBox(height: 2),
+              Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.gray700)),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ActionButton extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final Color bgColor;
+  final Color iconColor;
+  final VoidCallback onTap;
+
+  const _ActionButton({
+    required this.icon,
+    required this.label,
+    required this.bgColor,
+    required this.iconColor,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(28),
+          border: Border.all(color: AppColors.gray100),
+          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 8)],
+        ),
+        child: Column(
+          children: [
+            Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(color: bgColor, borderRadius: BorderRadius.circular(14)),
+              child: Icon(icon, size: 22, color: iconColor),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              label.toUpperCase(),
+              style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray600, letterSpacing: 1),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

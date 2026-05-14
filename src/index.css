@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Manrope", sans-serif;
+  
+  /* Brand Colors from Design Spec */
+  --color-primary: #004ac6;
+  --color-primary-container: #2563eb;
+  --color-secondary: #00687a;
+  --color-secondary-container: #57dffe;
+  --color-tertiary: #943700;
+  --color-tertiary-container: #bc4800;
+  --color-surface: #faf8ff;
+  --color-surface-container: #ededf9;
+  --color-surface-container-low: #f3f3fe;
+  --color-surface-container-lowest: #ffffff;
+  --color-on-surface: #191b23;
+  --color-on-surface-variant: #434655;
+  --color-outline-variant: #c3c6d7;
+  --color-error: #ba1a1a;
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-[#faf8ff] text-[#191b23] antialiased;
+  }
+}
+
+.nfc-gradient {
+  background: linear-gradient(135deg, #1D4ED8 0%, #06B6D4 100%);
+}
+
+.id-card-shadow {
+  box-shadow: 0 16px 32px rgba(0, 83, 219, 0.15);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
