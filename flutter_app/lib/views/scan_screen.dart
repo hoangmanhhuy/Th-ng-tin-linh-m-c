@@ -98,7 +98,10 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
             controller: _controller,
             onDetect: _onDetect,
             errorBuilder: (context, error, child) {
-              return _CameraError(error: error.errorCode.name);
+              return _CameraError(
+                error: error.errorCode.name,
+                controller: _controller,
+              );
             },
           ),
 
@@ -264,24 +267,94 @@ class _OverlayPainter extends CustomPainter {
 
 class _CameraError extends StatelessWidget {
   final String error;
-  const _CameraError({required this.error});
+  final MobileScannerController controller;
+  const _CameraError({required this.error, required this.controller});
+
+  bool get _isPermission => error == 'permissionDenied';
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(Icons.camera_alt_rounded, size: 64, color: Colors.white30),
-          const SizedBox(height: 16),
-          Text(
-            error == 'permissionDenied'
-                ? 'Chưa cấp quyền camera\nVào Cài đặt > Quyền riêng tư > Camera'
-                : 'Không thể mở camera',
-            textAlign: TextAlign.center,
-            style: const TextStyle(color: Colors.white60, fontSize: 14),
+    return Container(
+      color: Colors.black,
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 80,
+                height: 80,
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.08),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  _isPermission ? Icons.no_photography_rounded : Icons.camera_alt_rounded,
+                  size: 40,
+                  color: Colors.white38,
+                ),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                _isPermission ? 'Chưa cấp quyền camera' : 'Không thể mở camera',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                _isPermission
+                    ? 'Vào Cài đặt → Thông Tin Linh Mục\n→ Camera → bật quyền truy cập'
+                    : 'Thiết bị không hỗ trợ camera\nhoặc camera đang được dùng bởi app khác',
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: Colors.white54, fontSize: 13, height: 1.6),
+              ),
+              const SizedBox(height: 28),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: () => controller.start(),
+                  icon: const Icon(Icons.refresh_rounded, size: 18),
+                  label: const Text(
+                    'THỬ LẠI',
+                    style: TextStyle(fontWeight: FontWeight.w900, letterSpacing: 1),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    elevation: 0,
+                  ),
+                ),
+              ),
+              if (_isPermission) ...[
+                const SizedBox(height: 12),
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton.icon(
+                    onPressed: () => Navigator.pop(context),
+                    icon: const Icon(Icons.arrow_back_rounded, size: 18),
+                    label: const Text(
+                      'QUAY LẠI',
+                      style: TextStyle(fontWeight: FontWeight.w900, letterSpacing: 1),
+                    ),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.white70,
+                      side: const BorderSide(color: Colors.white24),
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    ),
+                  ),
+                ),
+              ],
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
