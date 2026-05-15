@@ -10,6 +10,7 @@ import 'qr_screen.dart';
 import 'help_screen.dart';
 import 'mass_request_screen.dart';
 import 'search_detail_screen.dart';
+import 'priest_profile_screen.dart';
 
 // ─── Public Home ────────────────────────────────────────────────────────────
 
@@ -769,7 +770,7 @@ class _PriestIdCard extends StatelessWidget {
               GestureDetector(
                 onTap: () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const SearchDetailScreen()),
+                  MaterialPageRoute(builder: (_) => PriestProfileScreen(user: user)),
                 ),
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
