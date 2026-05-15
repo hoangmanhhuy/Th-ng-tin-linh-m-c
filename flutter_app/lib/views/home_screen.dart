@@ -7,6 +7,8 @@ import '../core/app_theme.dart';
 import 'login_screen.dart';
 import 'notifications_screen.dart';
 import 'qr_screen.dart';
+import 'scan_screen.dart';
+import 'biometrics_screen.dart';
 import 'help_screen.dart';
 import 'mass_request_screen.dart';
 import 'search_detail_screen.dart';
@@ -858,7 +860,10 @@ class _ActionBar extends StatelessWidget {
             icon: Icons.nfc_rounded,
             label: 'Quét thẻ',
             color: AppColors.orange500,
-            onTap: () {},
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const ScanScreen()),
+            ),
           ),
           _ActionItem(
             icon: LucideIcons.clock,
@@ -882,7 +887,10 @@ class _ActionBar extends StatelessWidget {
             icon: LucideIcons.fingerprint,
             label: 'FaceID',
             color: AppColors.emerald,
-            onTap: () {},
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const BiometricsScreen()),
+            ),
           ),
         ],
       ),
