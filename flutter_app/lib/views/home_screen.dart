@@ -14,6 +14,7 @@ import 'mass_request_screen.dart';
 import 'search_detail_screen.dart';
 import 'search_results_screen.dart';
 import 'priest_profile_screen.dart';
+import 'emergency_anointing_screen.dart';
 
 // ─── Public Home ────────────────────────────────────────────────────────────
 
@@ -235,7 +236,12 @@ class _SearchCardState extends State<_SearchCard> {
 class _EmergencyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const EmergencyAnointingScreen()),
+      ),
+      child: Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: AppColors.red50,
@@ -276,6 +282,7 @@ class _EmergencyCard extends StatelessWidget {
           ),
         ],
       ),
+    ),
     );
   }
 }
