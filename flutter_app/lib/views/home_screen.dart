@@ -12,6 +12,7 @@ import 'biometrics_screen.dart';
 import 'help_screen.dart';
 import 'mass_request_screen.dart';
 import 'search_detail_screen.dart';
+import 'search_results_screen.dart';
 import 'priest_profile_screen.dart';
 
 // ─── Public Home ────────────────────────────────────────────────────────────
@@ -53,7 +54,7 @@ class _PublicAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       pinned: true,
-      backgroundColor: Colors.white.withOpacity(0.95),
+      backgroundColor: Colors.white.withValues(alpha: 0.95),
       surfaceTintColor: Colors.transparent,
       title: Row(
         children: [
@@ -64,7 +65,7 @@ class _PublicAppBar extends StatelessWidget {
               color: AppColors.primary,
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
-                BoxShadow(color: AppColors.primary.withOpacity(0.2), blurRadius: 8),
+                BoxShadow(color: AppColors.primary.withValues(alpha: 0.2), blurRadius: 8),
               ],
             ),
             child: const Icon(LucideIcons.shieldCheck, color: Colors.white, size: 18),
@@ -109,16 +110,48 @@ class _PublicAppBar extends StatelessWidget {
   }
 }
 
-class _SearchCard extends StatelessWidget {
+class _SearchCard extends StatefulWidget {
+  @override
+  State<_SearchCard> createState() => _SearchCardState();
+}
+
+class _SearchCardState extends State<_SearchCard> {
+  final TextEditingController _nameController = TextEditingController();
+  String _selectedDiocese = 'Chọn giáo phận';
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
+  }
+
+  void _doSearch(BuildContext context) {
+    final results = PriestDatabase.search(
+      query: _nameController.text,
+      diocese: _selectedDiocese,
+    );
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => SearchResultsScreen(
+          query: _nameController.text.trim(),
+          diocese: _selectedDiocese == 'Chọn giáo phận' ? '' : _selectedDiocese,
+          results: results,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final dioceses = ['Chọn giáo phận', ...PriestDatabase.allDioceses];
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(28),
         border: Border.all(color: AppColors.gray100),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10)],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 10)],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,6 +162,7 @@ class _SearchCard extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           TextField(
+            controller: _nameController,
             decoration: InputDecoration(
               hintText: 'Nhập tên linh mục',
               hintStyle: const TextStyle(color: AppColors.gray400, fontSize: 14),
@@ -156,16 +190,39 @@ class _SearchCard extends StatelessWidget {
             child: DropdownButtonHideUnderline(
               child: DropdownButton<String>(
                 isExpanded: true,
-                value: 'Chọn giáo phận',
+                value: _selectedDiocese,
                 icon: const Icon(Icons.keyboard_arrow_down_rounded, color: AppColors.gray400),
                 style: const TextStyle(color: AppColors.textMain, fontSize: 14),
-                items: const [
-                  DropdownMenuItem(value: 'Chọn giáo phận', child: Text('Chọn giáo phận', style: TextStyle(color: AppColors.gray400))),
-                  DropdownMenuItem(value: 'Phú Cường', child: Text('Phú Cường')),
-                  DropdownMenuItem(value: 'Sài Gòn', child: Text('Sài Gòn')),
-                  DropdownMenuItem(value: 'Hà Nội', child: Text('Hà Nội')),
-                ],
-                onChanged: (_) {},
+                items: dioceses.map((d) {
+                  return DropdownMenuItem(
+                    value: d,
+                    child: Text(
+                      d,
+                      style: TextStyle(
+                        color: d == 'Chọn giáo phận' ? AppColors.gray400 : AppColors.textMain,
+                      ),
+                    ),
+                  );
+                }).toList(),
+                onChanged: (val) {
+                  if (val != null) setState(() => _selectedDiocese = val);
+                },
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          SizedBox(
+            width: double.infinity,
+            height: 52,
+            child: ElevatedButton.icon(
+              onPressed: () => _doSearch(context),
+              icon: const Icon(LucideIcons.search, size: 16),
+              label: const Text('TÌM KIẾM', style: TextStyle(fontWeight: FontWeight.w900, letterSpacing: 1)),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                elevation: 0,
               ),
             ),
           ),
@@ -292,7 +349,7 @@ class _DailyWordCard extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
-                boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 4)],
+                boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 4)],
               ),
               child: const Text('— Ga 14, 6', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: AppColors.primary)),
             ),
@@ -393,7 +450,7 @@ class _PriestCard extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(28),
           border: Border.all(color: AppColors.gray100),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10)],
+          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 10)],
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -420,7 +477,7 @@ class _PriestCard extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: diocese == 'Sài Gòn' ? const Color(0xFFFFEEDD) : const Color(0xFFE1EFFF),
                         borderRadius: BorderRadius.circular(20),
-                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.08), blurRadius: 4)],
+                        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.08), blurRadius: 4)],
                       ),
                       child: Text(
                         diocese,
@@ -551,7 +608,7 @@ class _InfoRow extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(14),
-            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 6)],
+            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 6)],
           ),
           child: Icon(icon, size: 20, color: AppColors.primary),
         ),
@@ -662,7 +719,7 @@ class _PriestAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       pinned: true,
-      backgroundColor: AppColors.surface.withOpacity(0.95),
+      backgroundColor: AppColors.surface.withValues(alpha: 0.95),
       surfaceTintColor: Colors.transparent,
       titleSpacing: 16,
       title: Row(
@@ -739,7 +796,7 @@ class _PriestIdCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.3),
+            color: AppColors.primary.withValues(alpha: 0.3),
             blurRadius: 24,
             offset: const Offset(0, 8),
           ),
@@ -755,7 +812,7 @@ class _PriestIdCard extends StatelessWidget {
               width: 100,
               height: 100,
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.08),
+                color: Colors.white.withValues(alpha: 0.08),
                 shape: BoxShape.circle,
               ),
             ),
@@ -767,7 +824,7 @@ class _PriestIdCard extends StatelessWidget {
               width: 60,
               height: 60,
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.05),
+                color: Colors.white.withValues(alpha: 0.05),
                 shape: BoxShape.circle,
               ),
             ),
@@ -818,9 +875,9 @@ class _PriestIdCard extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.15),
+                    color: Colors.white.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.white.withOpacity(0.3)),
+                    border: Border.all(color: Colors.white.withValues(alpha: 0.3)),
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -853,7 +910,7 @@ class _ActionBar extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(28),
         border: Border.all(color: AppColors.gray100),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10)],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 10)],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -926,7 +983,7 @@ class _ActionItem extends StatelessWidget {
               color: color,
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
-                BoxShadow(color: color.withOpacity(0.35), blurRadius: 12, offset: const Offset(0, 4)),
+                BoxShadow(color: color.withValues(alpha: 0.35), blurRadius: 12, offset: const Offset(0, 4)),
               ],
             ),
             child: Icon(icon, color: Colors.white, size: 24),
@@ -950,7 +1007,7 @@ class _MassRequestCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: AppColors.gray100),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 8)],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 8)],
       ),
       child: Stack(
         children: [
@@ -1023,7 +1080,7 @@ class _MassRequestCard extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: AppColors.indigo600,
                             borderRadius: BorderRadius.circular(10),
-                            boxShadow: [BoxShadow(color: AppColors.indigo600.withOpacity(0.3), blurRadius: 8)],
+                            boxShadow: [BoxShadow(color: AppColors.indigo600.withValues(alpha: 0.3), blurRadius: 8)],
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -1047,12 +1104,44 @@ class _MassRequestCard extends StatelessWidget {
   }
 }
 
-class _SearchSection extends StatelessWidget {
-  final BuildContext context;
-  const _SearchSection({required this.context});
+class _SearchSection extends StatefulWidget {
+  final BuildContext outerContext;
+  const _SearchSection({required BuildContext context}) : outerContext = context;
+
+  @override
+  State<_SearchSection> createState() => _SearchSectionState();
+}
+
+class _SearchSectionState extends State<_SearchSection> {
+  final TextEditingController _nameController = TextEditingController();
+  String _selectedDiocese = 'Chọn Giáo phận';
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
+  }
+
+  void _doSearch() {
+    final results = PriestDatabase.search(
+      query: _nameController.text,
+      diocese: _selectedDiocese,
+    );
+    Navigator.push(
+      widget.outerContext,
+      MaterialPageRoute(
+        builder: (_) => SearchResultsScreen(
+          query: _nameController.text.trim(),
+          diocese: _selectedDiocese == 'Chọn Giáo phận' ? '' : _selectedDiocese,
+          results: results,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext ctx) {
+    final dioceses = ['Chọn Giáo phận', ...PriestDatabase.allDioceses];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -1067,11 +1156,12 @@ class _SearchSection extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(28),
             border: Border.all(color: AppColors.gray100),
-            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10)],
+            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 10)],
           ),
           child: Column(
             children: [
               TextField(
+                controller: _nameController,
                 decoration: InputDecoration(
                   hintText: 'Nhập tên Linh mục...',
                   hintStyle: const TextStyle(color: AppColors.gray400, fontSize: 14),
@@ -1094,15 +1184,23 @@ class _SearchSection extends StatelessWidget {
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<String>(
                     isExpanded: true,
-                    value: 'Chọn Giáo phận',
+                    value: _selectedDiocese,
                     icon: const Icon(Icons.keyboard_arrow_down_rounded, color: AppColors.gray300),
-                    items: const [
-                      DropdownMenuItem(value: 'Chọn Giáo phận', child: Text('Chọn Giáo phận', style: TextStyle(color: AppColors.gray400, fontSize: 14))),
-                      DropdownMenuItem(value: 'Phú Cường', child: Text('Phú Cường')),
-                      DropdownMenuItem(value: 'Sài Gòn', child: Text('Sài Gòn')),
-                      DropdownMenuItem(value: 'Hà Nội', child: Text('Hà Nội')),
-                    ],
-                    onChanged: (_) {},
+                    items: dioceses.map((d) {
+                      return DropdownMenuItem(
+                        value: d,
+                        child: Text(
+                          d,
+                          style: TextStyle(
+                            color: d == 'Chọn Giáo phận' ? AppColors.gray400 : AppColors.textMain,
+                            fontSize: 14,
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (val) {
+                      if (val != null) setState(() => _selectedDiocese = val);
+                    },
                   ),
                 ),
               ),
@@ -1111,10 +1209,7 @@ class _SearchSection extends StatelessWidget {
                 width: double.infinity,
                 height: 52,
                 child: ElevatedButton.icon(
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => const SearchDetailScreen()),
-                  ),
+                  onPressed: _doSearch,
                   icon: const Icon(LucideIcons.search, size: 16),
                   label: const Text('TÌM KIẾM', style: TextStyle(fontWeight: FontWeight.w900, letterSpacing: 1)),
                   style: ElevatedButton.styleFrom(
@@ -1151,7 +1246,7 @@ class _LiturgicalSection extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: AppColors.emerald50.withOpacity(0.5),
+              color: AppColors.emerald50.withValues(alpha: 0.5),
               borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
               border: const Border(bottom: BorderSide(color: Color(0xFFD1FAE5))),
             ),
@@ -1249,7 +1344,7 @@ class _LiturgicalSection extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                        color: AppColors.primary.withOpacity(0.06),
+                        color: AppColors.primary.withValues(alpha: 0.06),
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(r.text, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: AppColors.primary)),
