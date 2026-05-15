@@ -574,7 +574,8 @@ class _InfoRow extends StatelessWidget {
 // ─── Priest Home ─────────────────────────────────────────────────────────────
 
 class PriestHomeScreen extends StatefulWidget {
-  const PriestHomeScreen({super.key});
+  final VoidCallback? onSwitchToScan;
+  const PriestHomeScreen({super.key, this.onSwitchToScan});
 
   @override
   State<PriestHomeScreen> createState() => _PriestHomeScreenState();
@@ -624,7 +625,7 @@ class _PriestHomeScreenState extends State<PriestHomeScreen> {
               delegate: SliverChildListDelegate([
                 _PriestIdCard(user: user),
                 const SizedBox(height: 16),
-                _ActionBar(context: context),
+                _ActionBar(context: context, onSwitchToScan: widget.onSwitchToScan),
                 const SizedBox(height: 16),
                 _MassRequestCard(context: context),
                 const SizedBox(height: 20),
@@ -841,7 +842,8 @@ class _PriestIdCard extends StatelessWidget {
 
 class _ActionBar extends StatelessWidget {
   final BuildContext context;
-  const _ActionBar({required this.context});
+  final VoidCallback? onSwitchToScan;
+  const _ActionBar({required this.context, this.onSwitchToScan});
 
   @override
   Widget build(BuildContext ctx) {
@@ -860,7 +862,7 @@ class _ActionBar extends StatelessWidget {
             icon: Icons.nfc_rounded,
             label: 'Quét thẻ',
             color: AppColors.orange500,
-            onTap: () => Navigator.push(
+            onTap: onSwitchToScan ?? () => Navigator.push(
               context,
               MaterialPageRoute(builder: (_) => const ScanScreen()),
             ),

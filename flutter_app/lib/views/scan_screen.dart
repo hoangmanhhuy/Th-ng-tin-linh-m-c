@@ -5,7 +5,10 @@ import '../models/models.dart';
 import 'priest_result_sheet.dart';
 
 class ScanScreen extends StatefulWidget {
-  const ScanScreen({super.key});
+  /// Khi dùng trong IndexedStack, truyền isActive để kiểm soát camera.
+  /// Khi push riêng lẻ (Navigator.push), mặc định là true.
+  final bool isActive;
+  const ScanScreen({super.key, this.isActive = true});
 
   @override
   State<ScanScreen> createState() => _ScanScreenState();
@@ -23,10 +26,28 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
     _controller = MobileScannerController(
       detectionSpeed: DetectionSpeed.noDuplicates,
     );
+    // Nếu không active (ẩn trong IndexedStack), stop camera ngay
+    if (!widget.isActive) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _controller.stop();
+      });
+    }
+  }
+
+  @override
+  void didUpdateWidget(ScanScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.isActive && !oldWidget.isActive) {
+      _controller.start();
+    } else if (!widget.isActive && oldWidget.isActive) {
+      _controller.stop();
+      setState(() => _torchOn = false);
+    }
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (!widget.isActive) return;
     if (!_controller.value.isInitialized) return;
     if (state == AppLifecycleState.resumed) {
       _controller.start();

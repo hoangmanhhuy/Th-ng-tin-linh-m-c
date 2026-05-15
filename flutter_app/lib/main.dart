@@ -80,13 +80,7 @@ class PriestMainLayout extends StatefulWidget {
 class _PriestMainLayoutState extends State<PriestMainLayout> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = const [
-    PriestHomeScreen(),
-    NfcScreen(),
-    ScanScreen(),
-    HistoryScreen(),
-    SettingsScreen(),
-  ];
+  void _switchTab(int index) => setState(() => _currentIndex = index);
 
   static const _tabs = [
     _TabItem(label: 'Trang chủ', icon: Icons.home_rounded, activeColor: AppColors.primary),
@@ -102,7 +96,13 @@ class _PriestMainLayoutState extends State<PriestMainLayout> {
       backgroundColor: AppColors.surface,
       body: IndexedStack(
         index: _currentIndex,
-        children: _screens,
+        children: [
+          PriestHomeScreen(onSwitchToScan: () => _switchTab(2)),
+          const NfcScreen(),
+          ScanScreen(isActive: _currentIndex == 2),
+          const HistoryScreen(),
+          const SettingsScreen(),
+        ],
       ),
       bottomNavigationBar: _BottomNav(
         currentIndex: _currentIndex,
