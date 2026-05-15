@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../viewmodels/viewmodels.dart';
 import '../core/app_theme.dart';
 import 'notifications_screen.dart';
-import 'personal_info_screen.dart';
+import 'priest_profile_screen.dart';
 import 'biometrics_screen.dart';
 import 'change_password_screen.dart';
 import 'language_screen.dart';
@@ -54,7 +54,7 @@ class SettingsScreen extends StatelessWidget {
             // Profile Card
             GestureDetector(
               onTap: user != null
-                  ? () => Navigator.push(context, MaterialPageRoute(builder: (_) => PersonalInfoScreen(user: user)))
+                  ? () => Navigator.push(context, MaterialPageRoute(builder: (_) => PriestProfileScreen(user: user)))
                   : null,
               child: Container(
                 padding: const EdgeInsets.all(20),
@@ -114,7 +114,7 @@ class SettingsScreen extends StatelessWidget {
               iconColor: AppColors.primary,
               bgColor: AppColors.blue50,
               onTap: user != null
-                  ? () => Navigator.push(context, MaterialPageRoute(builder: (_) => PersonalInfoScreen(user: user)))
+                  ? () => Navigator.push(context, MaterialPageRoute(builder: (_) => PriestProfileScreen(user: user)))
                   : null,
             ),
             _SettingsTile(

@@ -15,10 +15,126 @@ class _MassRequestScreenState extends State<MassRequestScreen> {
   String _selectedType = 'Tạ ơn';
   final _massTypes = ['Tạ ơn', 'Cầu bình an', 'An táng', 'Hôn phối', 'Khác'];
   final _noteController = TextEditingController();
+  final _locationController = TextEditingController();
+
+  DateTime _selectedDate = DateTime.now().add(const Duration(days: 1));
+  TimeOfDay _selectedTime = const TimeOfDay(hour: 18, minute: 0);
+
+  static const _weekdays = ['Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy', 'Chúa Nhật'];
+
+  String get _formattedDateTime {
+    final wd = _weekdays[_selectedDate.weekday - 1];
+    final d = _selectedDate.day.toString().padLeft(2, '0');
+    final m = _selectedDate.month.toString().padLeft(2, '0');
+    final y = _selectedDate.year;
+    final h = _selectedTime.hour.toString().padLeft(2, '0');
+    final min = _selectedTime.minute.toString().padLeft(2, '0');
+    return '$h:$min - $wd, $d/$m/$y';
+  }
+
+  Future<void> _pickDateTime() async {
+    // Bước 1: chọn ngày
+    final pickedDate = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate,
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(const Duration(days: 365)),
+      locale: const Locale('vi', 'VN'),
+      builder: (ctx, child) => Theme(
+        data: Theme.of(ctx).copyWith(
+          colorScheme: const ColorScheme.light(
+            primary: AppColors.primary,
+            onPrimary: Colors.white,
+            surface: Colors.white,
+          ),
+          dialogBackgroundColor: Colors.white,
+        ),
+        child: child!,
+      ),
+    );
+    if (pickedDate == null) return;
+
+    // Bước 2: chọn giờ
+    if (!mounted) return;
+    final pickedTime = await showTimePicker(
+      context: context,
+      initialTime: _selectedTime,
+      builder: (ctx, child) => Theme(
+        data: Theme.of(ctx).copyWith(
+          colorScheme: const ColorScheme.light(
+            primary: AppColors.primary,
+            onPrimary: Colors.white,
+            surface: Colors.white,
+          ),
+          timePickerTheme: TimePickerThemeData(
+            backgroundColor: Colors.white,
+            hourMinuteShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            dayPeriodShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          ),
+        ),
+        child: child!,
+      ),
+    );
+    if (pickedTime == null) return;
+
+    setState(() {
+      _selectedDate = pickedDate;
+      _selectedTime = pickedTime;
+    });
+  }
+
+  Future<void> _submit() async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        contentPadding: const EdgeInsets.all(28),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 64,
+              height: 64,
+              decoration: const BoxDecoration(color: Color(0xFFEFF6FF), shape: BoxShape.circle),
+              child: const Icon(LucideIcons.send, color: AppColors.primary, size: 30),
+            ),
+            const SizedBox(height: 16),
+            const Text('Đã gửi yêu cầu!', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppColors.gray800)),
+            const SizedBox(height: 8),
+            const Text(
+              'Yêu cầu dâng lễ của vị đã được gửi đến văn phòng giáo phận. Chúng tôi sẽ xác nhận sớm nhất.',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 12, color: AppColors.gray500, height: 1.5),
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context); // close dialog
+                  Navigator.pop(context); // back
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary,
+                  foregroundColor: Colors.white,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                ),
+                child: const Text('Xong', style: TextStyle(fontWeight: FontWeight.w900)),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   void dispose() {
     _noteController.dispose();
+    _locationController.dispose();
     super.dispose();
   }
 
@@ -104,25 +220,32 @@ class _MassRequestScreenState extends State<MassRequestScreen> {
               iconColor: AppColors.primary,
               label: 'Thời gian dự kiến',
               child: InkWell(
-                onTap: () {},
+                onTap: _pickDateTime,
                 borderRadius: BorderRadius.circular(14),
                 child: Container(
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
                     color: AppColors.surface,
                     borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: AppColors.gray100),
+                    border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
                   ),
                   child: Row(
-                    children: const [
-                      Icon(LucideIcons.calendar, size: 16, color: AppColors.primary),
-                      SizedBox(width: 10),
+                    children: [
+                      const Icon(LucideIcons.calendar, size: 16, color: AppColors.primary),
+                      const SizedBox(width: 10),
                       Text(
-                        '18:00 - Thứ Sáu, 24/11/2024',
-                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.gray700),
+                        _formattedDateTime,
+                        style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.gray700),
                       ),
-                      Spacer(),
-                      Icon(Icons.keyboard_arrow_down_rounded, color: AppColors.gray400),
+                      const Spacer(),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: AppColors.blue50,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const Text('Chọn', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: AppColors.primary)),
+                      ),
                     ],
                   ),
                 ),
@@ -138,6 +261,7 @@ class _MassRequestScreenState extends State<MassRequestScreen> {
               iconColor: AppColors.emerald600,
               label: 'Địa điểm',
               child: TextField(
+                controller: _locationController,
                 decoration: InputDecoration(
                   hintText: 'Nhập tên giáo xứ hoặc địa điểm...',
                   hintStyle: const TextStyle(color: AppColors.gray400, fontSize: 13),
@@ -181,7 +305,7 @@ class _MassRequestScreenState extends State<MassRequestScreen> {
               width: double.infinity,
               height: 56,
               child: ElevatedButton(
-                onPressed: () => Navigator.pop(context),
+                onPressed: _submit,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   foregroundColor: Colors.white,
