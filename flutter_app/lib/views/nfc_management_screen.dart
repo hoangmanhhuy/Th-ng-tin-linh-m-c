@@ -1,0 +1,513 @@
+import 'package:flutter/material.dart';
+import 'package:lucide_icons/lucide_icons.dart';
+import '../core/app_theme.dart';
+import '../models/models.dart';
+
+class NfcManagementScreen extends StatefulWidget {
+  final UserProfile priest;
+  const NfcManagementScreen({super.key, required this.priest});
+
+  @override
+  State<NfcManagementScreen> createState() => _NfcManagementScreenState();
+}
+
+class _NfcCard {
+  final String id;
+  final String addedDate;
+  bool isActive;
+  _NfcCard({required this.id, required this.addedDate, this.isActive = true});
+}
+
+class _NfcManagementScreenState extends State<NfcManagementScreen> {
+  late List<_NfcCard> _cards;
+
+  @override
+  void initState() {
+    super.initState();
+    // Dữ liệu thẻ mẫu dựa theo ID linh mục
+    _cards = [
+      _NfcCard(
+        id: 'NFC-${widget.priest.id.substring(widget.priest.id.length > 8 ? widget.priest.id.length - 8 : 0)}-01',
+        addedDate: '01/01/2024',
+      ),
+    ];
+  }
+
+  Future<void> _addCardDialog() async {
+    final controller = TextEditingController();
+    final result = await showDialog<String>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        contentPadding: const EdgeInsets.fromLTRB(24, 20, 24, 16),
+        title: Row(
+          children: [
+            Container(
+              width: 36, height: 36,
+              decoration: BoxDecoration(color: AppColors.orange50, borderRadius: BorderRadius.circular(10)),
+              child: const Icon(Icons.nfc_rounded, size: 20, color: AppColors.orange500),
+            ),
+            const SizedBox(width: 10),
+            const Text('Thêm thẻ NFC', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppColors.gray800)),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Nhập mã thẻ NFC hoặc chạm thẻ vào điện thoại.',
+              style: TextStyle(fontSize: 13, color: AppColors.gray500, height: 1.4),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: controller,
+              autofocus: true,
+              textCapitalization: TextCapitalization.characters,
+              decoration: InputDecoration(
+                hintText: 'VD: NFC-ABC123',
+                hintStyle: const TextStyle(color: AppColors.gray400),
+                prefixIcon: const Icon(Icons.nfc_rounded, color: AppColors.gray400, size: 20),
+                filled: true,
+                fillColor: AppColors.gray50,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  borderSide: BorderSide.none,
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  borderSide: BorderSide.none,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+            // Simulated NFC scan button
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                onPressed: () {
+                  // Simulate NFC scan — generate random ID
+                  final ts = DateTime.now().millisecondsSinceEpoch % 100000;
+                  controller.text = 'NFC-${ts.toString().padLeft(5, '0')}';
+                },
+                icon: const Icon(Icons.nfc_rounded, size: 18),
+                label: const Text('Quét thẻ NFC', style: TextStyle(fontWeight: FontWeight.w700)),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: AppColors.orange500,
+                  side: const BorderSide(color: AppColors.orange500),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                ),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Hủy', style: TextStyle(color: AppColors.gray400, fontWeight: FontWeight.w700)),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx, controller.text.trim()),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primary,
+              foregroundColor: Colors.white,
+              elevation: 0,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            ),
+            child: const Text('Thêm', style: TextStyle(fontWeight: FontWeight.w900)),
+          ),
+        ],
+      ),
+    );
+
+    if (result != null && result.isNotEmpty) {
+      final now = DateTime.now();
+      setState(() {
+        _cards.add(_NfcCard(
+          id: result.toUpperCase(),
+          addedDate: '${now.day.toString().padLeft(2, '0')}/${now.month.toString().padLeft(2, '0')}/${now.year}',
+        ));
+      });
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Đã thêm thẻ $result'),
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: AppColors.emerald600,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> _deleteCard(_NfcCard card) async {
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        contentPadding: const EdgeInsets.all(24),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 56, height: 56,
+              decoration: const BoxDecoration(color: AppColors.red50, shape: BoxShape.circle),
+              child: const Icon(LucideIcons.trash2, color: AppColors.red, size: 28),
+            ),
+            const SizedBox(height: 16),
+            const Text('Xoá thẻ NFC?', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppColors.gray800)),
+            const SizedBox(height: 8),
+            Text(
+              'Thẻ "${card.id}" sẽ bị xoá khỏi hệ thống. Linh mục sẽ không thể dùng thẻ này để xác thực.',
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 13, color: AppColors.gray500, height: 1.4),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('Hủy', style: TextStyle(color: AppColors.gray500, fontWeight: FontWeight.w700)),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.red,
+              foregroundColor: Colors.white,
+              elevation: 0,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            ),
+            child: const Text('Xoá', style: TextStyle(fontWeight: FontWeight.w900)),
+          ),
+        ],
+      ),
+    );
+    if (confirm == true) {
+      setState(() => _cards.remove(card));
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Đã xoá thẻ ${card.id}'),
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: AppColors.gray800,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          ),
+        );
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.surface,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18, color: AppColors.primary),
+        ),
+        title: Column(
+          children: [
+            const Text('Quản lý thẻ NFC', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: AppColors.primary)),
+            Text(
+              'LM. ${widget.priest.holyName} ${widget.priest.fullName}',
+              style: const TextStyle(fontSize: 10, color: AppColors.gray400, fontWeight: FontWeight.w600),
+            ),
+          ],
+        ),
+        centerTitle: true,
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Divider(height: 1, color: AppColors.gray100),
+        ),
+      ),
+      body: Column(
+        children: [
+          // Priest info banner
+          Container(
+            width: double.infinity,
+            margin: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [Color(0xFF0EA5E9), Color(0xFF2563EB)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.primary.withValues(alpha: 0.25),
+                  blurRadius: 16, offset: const Offset(0, 6),
+                ),
+              ],
+            ),
+            child: Row(
+              children: [
+                Container(
+                  width: 48, height: 48,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: 0.2),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  child: const Icon(LucideIcons.user, color: Colors.white, size: 24),
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'LM. ${widget.priest.holyName} ${widget.priest.fullName}',
+                        style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w900),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        widget.priest.diocese,
+                        style: const TextStyle(color: Colors.white70, fontSize: 11),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: 0.2),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.nfc_rounded, color: Colors.white, size: 14),
+                      const SizedBox(width: 4),
+                      Text(
+                        '${_cards.length} thẻ',
+                        style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w900),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // Section header
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 10),
+            child: Row(
+              children: [
+                const Text(
+                  'DANH SÁCH THẺ ĐÃ ĐĂNG KÝ',
+                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1.5),
+                ),
+                const Spacer(),
+                GestureDetector(
+                  onTap: _addCardDialog,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.add_rounded, color: Colors.white, size: 14),
+                        SizedBox(width: 4),
+                        Text('Thêm thẻ', style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w900)),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // Card list
+          Expanded(
+            child: _cards.isEmpty
+                ? _buildEmpty()
+                : ListView.separated(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 32),
+                    itemCount: _cards.length,
+                    separatorBuilder: (_, __) => const SizedBox(height: 10),
+                    itemBuilder: (_, i) => _NfcCardTile(
+                      card: _cards[i],
+                      onDelete: () => _deleteCard(_cards[i]),
+                      onToggle: () => setState(() => _cards[i].isActive = !_cards[i].isActive),
+                    ),
+                  ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildEmpty() {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(40),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 80, height: 80,
+              decoration: BoxDecoration(color: AppColors.gray100, borderRadius: BorderRadius.circular(24)),
+              child: const Icon(Icons.nfc_rounded, size: 36, color: AppColors.gray300),
+            ),
+            const SizedBox(height: 20),
+            const Text('Chưa có thẻ NFC', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: AppColors.gray700)),
+            const SizedBox(height: 8),
+            const Text(
+              'Nhấn "Thêm thẻ" để đăng ký\nthẻ NFC cho linh mục này.',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 13, color: AppColors.gray400, height: 1.5),
+            ),
+            const SizedBox(height: 24),
+            ElevatedButton.icon(
+              onPressed: _addCardDialog,
+              icon: const Icon(Icons.add_rounded, size: 18),
+              label: const Text('Thêm thẻ NFC', style: TextStyle(fontWeight: FontWeight.w900)),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                foregroundColor: Colors.white,
+                elevation: 0,
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _NfcCardTile extends StatelessWidget {
+  final _NfcCard card;
+  final VoidCallback onDelete;
+  final VoidCallback onToggle;
+
+  const _NfcCardTile({required this.card, required this.onDelete, required this.onToggle});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: card.isActive ? AppColors.gray100 : AppColors.gray100),
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 8)],
+      ),
+      child: Row(
+        children: [
+          // NFC icon
+          Container(
+            width: 44, height: 44,
+            decoration: BoxDecoration(
+              color: card.isActive ? AppColors.orange50 : AppColors.gray50,
+              borderRadius: BorderRadius.circular(13),
+            ),
+            child: Icon(
+              Icons.nfc_rounded,
+              size: 22,
+              color: card.isActive ? AppColors.orange500 : AppColors.gray300,
+            ),
+          ),
+          const SizedBox(width: 14),
+
+          // Info
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  card.id,
+                  style: TextStyle(
+                    fontSize: 14, fontWeight: FontWeight.w900,
+                    color: card.isActive ? AppColors.gray800 : AppColors.gray400,
+                    fontFamily: 'monospace',
+                  ),
+                ),
+                const SizedBox(height: 3),
+                Row(
+                  children: [
+                    const Icon(LucideIcons.calendar, size: 11, color: AppColors.gray400),
+                    const SizedBox(width: 4),
+                    Text('Thêm ngày ${card.addedDate}', style: const TextStyle(fontSize: 11, color: AppColors.gray400)),
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          // Status + Toggle
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              GestureDetector(
+                onTap: onToggle,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: card.isActive ? AppColors.emerald50 : AppColors.gray100,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        width: 6, height: 6,
+                        decoration: BoxDecoration(
+                          color: card.isActive ? AppColors.emerald : AppColors.gray400,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      const SizedBox(width: 5),
+                      Text(
+                        card.isActive ? 'Hoạt động' : 'Tắt',
+                        style: TextStyle(
+                          fontSize: 10, fontWeight: FontWeight.w900,
+                          color: card.isActive ? AppColors.emerald600 : AppColors.gray400,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+              GestureDetector(
+                onTap: onDelete,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  decoration: BoxDecoration(
+                    color: AppColors.red50,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(LucideIcons.trash2, size: 12, color: AppColors.red),
+                      const SizedBox(width: 4),
+                      const Text('Xoá', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: AppColors.red)),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}

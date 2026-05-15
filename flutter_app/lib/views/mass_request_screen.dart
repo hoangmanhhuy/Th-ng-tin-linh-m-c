@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import '../core/app_theme.dart';
+import '../models/models.dart';
 
 // ─── Mass Request Form (Linh mục gửi yêu cầu) ───────────────────────────────
 
 class MassRequestScreen extends StatefulWidget {
-  const MassRequestScreen({super.key});
+  /// Nếu mở từ trang quản lý linh mục, truyền priest để hiển thị thông tin
+  final UserProfile? priest;
+  const MassRequestScreen({super.key, this.priest});
 
   @override
   State<MassRequestScreen> createState() => _MassRequestScreenState();
@@ -173,6 +176,47 @@ class _MassRequestScreenState extends State<MassRequestScreen> {
         child: Column(
           children: [
             const SizedBox(height: 8),
+
+            // Priest banner (nếu mở từ quản lý linh mục)
+            if (widget.priest != null) ...[
+              Container(
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: AppColors.indigo50,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: AppColors.indigo600.withValues(alpha: 0.2)),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 40, height: 40,
+                      decoration: BoxDecoration(color: AppColors.primary.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(12)),
+                      child: const Icon(LucideIcons.user, size: 20, color: AppColors.primary),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text('XIN LỄ CHO', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.indigo600, letterSpacing: 1.5)),
+                          const SizedBox(height: 2),
+                          Text(
+                            'LM. ${widget.priest!.holyName} ${widget.priest!.fullName}',
+                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w900, color: AppColors.primary),
+                          ),
+                          Text(
+                            widget.priest!.diocese,
+                            style: const TextStyle(fontSize: 11, color: AppColors.indigo600),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
+            ],
+
             // Mass Type
             _SectionCard(
               icon: LucideIcons.listFilter,

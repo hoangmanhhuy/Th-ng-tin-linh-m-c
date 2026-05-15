@@ -3,6 +3,8 @@ import 'package:lucide_icons/lucide_icons.dart';
 import '../core/app_theme.dart';
 import '../models/models.dart';
 import 'search_detail_screen.dart';
+import 'nfc_management_screen.dart';
+import 'mass_request_screen.dart';
 
 class SearchResultsScreen extends StatelessWidget {
   final String query;
@@ -238,126 +240,213 @@ class _PriestResultCard extends StatelessWidget {
     required this.abbreviate,
   });
 
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_) => SearchDetailScreen(priest: priest),
-        ),
-      ),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: AppColors.gray100),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.03),
-              blurRadius: 8,
+  void _resetPassword(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        contentPadding: const EdgeInsets.all(24),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 56, height: 56,
+              decoration: const BoxDecoration(color: AppColors.red50, shape: BoxShape.circle),
+              child: const Icon(LucideIcons.keyRound, color: AppColors.red, size: 26),
+            ),
+            const SizedBox(height: 16),
+            const Text('Reset mật khẩu?', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppColors.gray800)),
+            const SizedBox(height: 8),
+            const Text(
+              'Mật khẩu sẽ được đặt lại về mặc định. Linh mục cần đổi mật khẩu khi đăng nhập lại.',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 13, color: AppColors.gray500, height: 1.4),
             ),
           ],
         ),
-        child: Row(
-          children: [
-            // Avatar
-            Container(
-              width: 52,
-              height: 52,
-              decoration: BoxDecoration(
-                color: AppColors.blue100,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: const Icon(
-                LucideIcons.user,
-                size: 24,
-                color: AppColors.primary,
-              ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Hủy', style: TextStyle(color: AppColors.gray400, fontWeight: FontWeight.w700)),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Đã reset mật khẩu cho LM. ${priest.holyName} ${priest.fullName}'),
+                  behavior: SnackBarBehavior.floating,
+                  backgroundColor: AppColors.emerald600,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                ),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.red,
+              foregroundColor: Colors.white,
+              elevation: 0,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),
-            const SizedBox(width: 14),
+            child: const Text('Reset', style: TextStyle(fontWeight: FontWeight.w900)),
+          ),
+        ],
+      ),
+    );
+  }
 
-            // Info
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppColors.gray100),
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 8)],
+      ),
+      child: Column(
+        children: [
+          // ── Priest info row (tap → details) ──
+          InkWell(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => SearchDetailScreen(priest: priest)),
+            ),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 14),
+              child: Row(
                 children: [
-                  Text(
-                    'LM. ${priest.holyName}',
-                    style: const TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.w900,
-                      color: AppColors.primary,
-                      letterSpacing: 0.3,
-                    ),
+                  Container(
+                    width: 52, height: 52,
+                    decoration: BoxDecoration(color: AppColors.blue100, borderRadius: BorderRadius.circular(16)),
+                    child: const Icon(LucideIcons.user, size: 24, color: AppColors.primary),
                   ),
-                  const SizedBox(height: 2),
-                  Text(
-                    priest.fullName,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w900,
-                      color: AppColors.textMain,
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                  Row(
-                    children: [
-                      const Icon(
-                        LucideIcons.church,
-                        size: 12,
-                        color: AppColors.gray400,
-                      ),
-                      const SizedBox(width: 4),
-                      Expanded(
-                        child: Text(
-                          priest.parish ?? priest.diocese,
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: AppColors.gray500,
-                          ),
-                          overflow: TextOverflow.ellipsis,
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'LM. ${priest.holyName}',
+                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: AppColors.primary, letterSpacing: 0.3),
                         ),
+                        const SizedBox(height: 2),
+                        Text(priest.fullName, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppColors.textMain)),
+                        const SizedBox(height: 5),
+                        Row(
+                          children: [
+                            const Icon(LucideIcons.church, size: 12, color: AppColors.gray400),
+                            const SizedBox(width: 4),
+                            Expanded(
+                              child: Text(
+                                priest.parish ?? priest.diocese,
+                                style: const TextStyle(fontSize: 12, color: AppColors.gray500),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(color: AppColors.blue50, borderRadius: BorderRadius.circular(8), border: Border.all(color: AppColors.blue100)),
+                        child: Text(abbreviate(priest.diocese), style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.primary)),
                       ),
+                      const SizedBox(height: 6),
+                      const Icon(Icons.chevron_right_rounded, size: 20, color: AppColors.gray300),
                     ],
                   ),
                 ],
               ),
             ),
-            const SizedBox(width: 8),
+          ),
 
-            // Diocese badge + chevron
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+          // ── Divider ──
+          const Divider(height: 1, indent: 16, endIndent: 16, color: AppColors.gray100),
+
+          // ── Management action buttons ──
+          Padding(
+            padding: const EdgeInsets.fromLTRB(12, 10, 12, 12),
+            child: Row(
               children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
+                Expanded(
+                  child: _MgmtBtn(
+                    icon: LucideIcons.keyRound,
+                    label: 'Reset MK',
+                    color: AppColors.red600,
+                    bg: AppColors.red50,
+                    onTap: () => _resetPassword(context),
                   ),
-                  decoration: BoxDecoration(
-                    color: AppColors.blue50,
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: AppColors.blue100),
-                  ),
-                  child: Text(
-                    abbreviate(priest.diocese),
-                    style: const TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w900,
-                      color: AppColors.primary,
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: _MgmtBtn(
+                    icon: Icons.nfc_rounded,
+                    label: 'Thẻ NFC',
+                    color: AppColors.orange500,
+                    bg: AppColors.orange50,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => NfcManagementScreen(priest: priest)),
                     ),
                   ),
                 ),
-                const SizedBox(height: 8),
-                const Icon(
-                  Icons.chevron_right_rounded,
-                  size: 20,
-                  color: AppColors.gray300,
+                const SizedBox(width: 8),
+                Expanded(
+                  child: _MgmtBtn(
+                    icon: LucideIcons.clock,
+                    label: 'Xin lễ',
+                    color: AppColors.indigo600,
+                    bg: AppColors.indigo50,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => MassRequestScreen(priest: priest)),
+                    ),
+                  ),
                 ),
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _MgmtBtn extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final Color color;
+  final Color bg;
+  final VoidCallback onTap;
+
+  const _MgmtBtn({
+    required this.icon,
+    required this.label,
+    required this.color,
+    required this.bg,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 9),
+        decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(12)),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 18, color: color),
+            const SizedBox(height: 4),
+            Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: color)),
           ],
         ),
       ),
