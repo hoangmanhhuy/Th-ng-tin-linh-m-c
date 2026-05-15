@@ -1,0 +1,141 @@
+{
+  "chuan_hoa_ten": {
+    "Ngày II Tuần Bát Nhật Giáng Sinh":   "Ngày II Tuần Bát nhật Giáng Sinh",
+    "Ngày III Tuần Bát Nhật Giáng Sinh":  "Ngày III Tuần Bát nhật Giáng Sinh",
+    "Ngày IV Tuần Bát Nhật Giáng Sinh":   "Ngày IV Tuần Bát nhật Giáng Sinh",
+    "Ngày V Tuần Bát Nhật Giáng Sinh":    "Ngày V Tuần Bát nhật Giáng Sinh",
+    "Ngày VI Tuần Bát Nhật Giáng Sinh":   "Ngày VI Tuần Bát nhật Giáng Sinh",
+    "Ngày VII Tuần Bát Nhật Giáng Sinh":  "Ngày VII Tuần Bát nhật Giáng Sinh",
+    "Ngày VIII Tuần Bát Nhật Giáng Sinh": "Ngày VIII Tuần Bát nhật Giáng Sinh",
+    "Cuối Tuần Bát Nhật Giáng Sinh":      "Cuối Tuần Bát nhật Giáng Sinh",
+    "Thứ Hai Bát Nhật Phục Sinh":         "Thứ Hai Tuần Bát nhật Phục Sinh",
+    "Thứ Ba Bát Nhật Phục Sinh":          "Thứ Ba Tuần Bát nhật Phục Sinh",
+    "Thứ Tư Bát Nhật Phục Sinh":          "Thứ Tư Tuần Bát nhật Phục Sinh",
+    "Thứ Năm Bát Nhật Phục Sinh":         "Thứ Năm Tuần Bát nhật Phục Sinh",
+    "Thứ Sáu Bát Nhật Phục Sinh":         "Thứ Sáu Tuần Bát nhật Phục Sinh",
+    "Thứ Bảy Bát Nhật Phục Sinh":         "Thứ Bảy Tuần Bát nhật Phục Sinh",
+    "Thứ Năm Tuần Thánh":                 "Thứ Năm Tuần Thánh — Lễ Tiệc Ly",
+    "Thứ Sáu Tuần Thánh. Tưởng Niệm Cuộc Thương Khó Của Chúa. Giữ chay và kiêng thịt": "Thứ Sáu Tuần Thánh — Cuộc Khổ Nạn Chúa",
+    "Thứ Tư Lễ Tro. Giữ chay và kiêng thịt": "Thứ Tư Lễ Tro — Giữ chay và kiêng thịt",
+    "Chúa Nhật II Phục Sinh. Cuối Tuần Bát Nhật Phục Sinh. Chúa Nhật Về Lòng Thương Xót Chúa": "Chúa Nhật II Phục Sinh — Lòng Thương Xót Chúa",
+    "Thứ Năm Tuần Thánh (buổi sáng)\r\nThánh Lễ Làm Phép Dầu": "Thứ Năm Tuần Thánh (sáng) — Thánh Lễ Làm Phép Dầu"
+  },
+
+  "le_kinh_chua_co_dinh": {
+    "11-09": {
+      "bd1": "Ez 47,1-2.8-9.12",
+      "bd2": "1 Cr 3,9b-11.16-17",
+      "tm":  "Ga 2,13-22"
+    }
+  },
+
+  "triduum": {
+    "thu_5": {
+      "bd1": "Xh 12,1-8.11-14",
+      "bd2": "1 Cr 11,23-26",
+      "tm":  "Ga 13,1-15",
+      "ghi_chu": "Thứ Năm Tuần Thánh — Lễ Tiệc Ly"
+    },
+    "thu_6": {
+      "bd1": "Is 52,13-53,12",
+      "bd2": "Dt 4,14-16; 5,7-9",
+      "tm":  "Ga 18,1-19,42",
+      "ghi_chu": "Thứ Sáu Tuần Thánh — Cuộc Khổ Nạn Chúa"
+    },
+    "thu_7": {
+      "bd1": "",
+      "bd2": "",
+      "tm":  "",
+      "ghi_chu": "Thứ Bảy Tuần Thánh — không có Thánh lễ ban ngày"
+    },
+    "ps_A": {
+      "bd1": "Cv 10,34a.37-43",
+      "bd2": "Cl 3,1-4",
+      "tm":  "Ga 20,1-9",
+      "ghi_chu": "Lễ Phục Sinh Năm A"
+    },
+    "ps_B": {
+      "bd1": "Cv 10,34a.37-43",
+      "bd2": "Cl 3,1-4",
+      "tm":  "Ga 20,1-9",
+      "ghi_chu": "Lễ Phục Sinh Năm B"
+    },
+    "ps_C": {
+      "bd1": "Cv 10,34a.37-43",
+      "bd2": "Cl 3,1-4",
+      "tm":  "Ga 20,1-9 (hay Lc 24,1-12)",
+      "ghi_chu": "Lễ Phục Sinh Năm C"
+    }
+  },
+
+  "le_trong_co_dinh": [
+    {"mm": 1,  "dd": 1,  "ten": "Đức Maria, Mẹ Thiên Chúa",         "bac_le": 3, "la_truyen_tin": false},
+    {"mm": 2,  "dd": 2,  "ten": "Dâng Chúa Vào Đền Thánh",          "bac_le": 5, "la_truyen_tin": false},
+    {"mm": 3,  "dd": 19, "ten": "Thánh Giuse Bạn Đức Mẹ",           "bac_le": 3, "la_truyen_tin": false},
+    {"mm": 3,  "dd": 25, "ten": "Truyền Tin",                        "bac_le": 3, "la_truyen_tin": true},
+    {"mm": 6,  "dd": 24, "ten": "Sinh nhật Thánh Gioan Tẩy Giả",    "bac_le": 3, "la_truyen_tin": false},
+    {"mm": 6,  "dd": 29, "ten": "Thánh Phêrô và Thánh Phaolô",      "bac_le": 3, "la_truyen_tin": false},
+    {"mm": 8,  "dd": 15, "ten": "Đức Mẹ Hồn Xác Lên Trời",         "bac_le": 3, "la_truyen_tin": false},
+    {"mm": 11, "dd": 1,  "ten": "Các Thánh Nam Nữ",                  "bac_le": 3, "la_truyen_tin": false},
+    {"mm": 11, "dd": 24, "ten": "Các Thánh Tử Đạo Việt Nam",        "bac_le": 5, "la_truyen_tin": false},
+    {"mm": 12, "dd": 8,  "ten": "Đức Mẹ Vô Nhiễm Nguyên Tội",      "bac_le": 3, "la_truyen_tin": false}
+  ],
+
+  "tang_thien_tin_mung": {
+    "A": "Mt 28,16-20",
+    "B": "Mc 16,15-20",
+    "C": "Lc 24,46-53"
+  },
+
+  "bai_doc_hien_linh": {
+    "bd1": "Is 60,1-6",
+    "bd2": "Ep 3,2-3a.5-6",
+    "tm":  "Mt 2,1-12",
+    "ghi_chu": "Lễ Hiển Linh"
+  },
+
+  "bai_doc_cau_hon": {
+    "bd1": "Kn 3,1-9",
+    "bd2": "Rm 5,5-11",
+    "tm":  "Ga 6,37-40",
+    "ghi_chu": "Lễ Cầu Cho Các Tín Hữu Đã Qua Đời (bài đọc có thể thay đổi theo chủ ý mục vụ)"
+  },
+
+  "le_trong_di_dong": [
+    "Lễ Thăng Thiên",
+    "Lễ Hiển Linh",
+    "Lễ Chúa Giêsu Chịu Phép Rửa",
+    "Lễ Giáng Sinh",
+    "Lễ Thánh Gia Thất",
+    "Lễ Chúa Thánh Thần Hiện Xuống",
+    "Lễ Chúa Ba Ngôi",
+    "Lễ Mình Máu Thánh Chúa Kitô",
+    "Lễ Thánh Tâm Chúa Giêsu",
+    "Lễ Chúa Giêsu Kitô, Vua Vũ Trụ"
+  ],
+
+  "le_kinh_chua_thang_cn": ["02-02", "08-06", "09-14", "11-09"],
+
+  "bai_doc_thanh_gia_that": {
+    "A": {"bd1": "Hc 3,2-7.12-14",    "bd2": "Cl 3,12-21",           "tm": "Mt 2,13-15.19-23"},
+    "B": {"bd1": "Hc 3,2-7.12-14",    "bd2": "Cl 3,12-21",           "tm": "Lc 2,22-40"},
+    "C": {"bd1": "1Sm 1,20-22.24-28", "bd2": "1Ga 3,1-2.21-24",     "tm": "Lc 2,41-52"}
+  },
+
+  "bai_doc_cuoi_vong": {
+    "12-17": {"bd1": "Gn 49,2.8-10",     "bd2": "", "tm": "Mt 1,1-17",           "ghi_chu": "17/12 — Mùa Vọng"},
+    "12-18": {"bd1": "Gr 23,5-8",         "bd2": "", "tm": "Mt 1,18-24",          "ghi_chu": "18/12 — Mùa Vọng"},
+    "12-19": {"bd1": "Tl 13,2-7.24-25a",  "bd2": "", "tm": "Lc 1,5-25",           "ghi_chu": "19/12 — Mùa Vọng"},
+    "12-20": {"bd1": "Is 7,10-14",        "bd2": "", "tm": "Lc 1,26-38",          "ghi_chu": "20/12 — Mùa Vọng"},
+    "12-21": {"bd1": "So 3,14-18a",       "bd2": "", "tm": "Lc 1,39-45",          "ghi_chu": "21/12 — Mùa Vọng"},
+    "12-22": {"bd1": "1Sm 1,24-28",       "bd2": "", "tm": "Lc 1,46-56",          "ghi_chu": "22/12 — Mùa Vọng"},
+    "12-23": {"bd1": "Ml 3,1-4.23-24",    "bd2": "", "tm": "Lc 1,57-66",          "ghi_chu": "23/12 — Mùa Vọng"},
+    "12-24": {"bd1": "Is 62,1-5",         "bd2": "Cv 13,16-17.22-25", "tm": "Mt 1,1-25", "ghi_chu": "24/12 — Lễ Vọng Giáng Sinh"}
+  },
+
+  "ten_cn_mua": {
+    "Mùa Vọng":       "Chúa Nhật Mùa Vọng",
+    "Mùa Chay":       "Chúa Nhật Mùa Chay",
+    "Mùa Phục Sinh":  "Chúa Nhật Mùa Phục Sinh"
+  }
+}

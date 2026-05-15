@@ -1,0 +1,2319 @@
+{
+  "_readme": {
+    "mo_ta": "Data lịch phụng vụ Công Giáo — trích từ Source_Lich.xls (Giáo phận Phú Cường)",
+    "canh_bao": "File gốc có thể có sai sót nhỏ. Cần đối chiếu với lịch chính thức khi in ấn.",
+    "nam_phung_vu": {
+      "cong_thuc": "NamPV % 3: 1=A, 2=B, 0=C",
+      "vi_du": "2026%3=1 → Năm A | 2027%3=2 → Năm B | 2028%3=0 → Năm C"
+    },
+    "chon_bai_doc": {
+      "chua_nhat": {
+        "Nam_A": "Dùng sunday_year_a.json, tra theo ID = base_id + 1000",
+        "Nam_B": "Dùng readings.json, tra ID gốc (base_id), cột bd1_nam_le",
+        "Nam_C": "Dùng readings.json, tra ID gốc (base_id), cột bd1_nam_le (hoặc bộ Năm C riêng)",
+        "ghi_chu": "Năm B/C: bài đọc trong BaiDoc1moi/TinMungmoi theo ID mùa"
+      },
+      "ngay_thuong": {
+        "BacLe2_lt_61": "Mùa Vọng/GS/Chay/PS: bài đọc cố định, dùng bd1_nam_le",
+        "BacLe2_gte_61": "Thường Niên: năm DL lẻ → bd1_nam_le, năm DL chẵn → bd1_nam_chan",
+        "tin_mung": "Dùng chung cột tin_mung bất kể năm"
+      },
+      "le_thanh": {
+        "BacLe1_le_7": "Lễ Trọng/Kính: có bài đọc riêng trong readings.json",
+        "BacLe1_gt_7": "Lễ Nhớ trở xuống: dùng bài đọc mùa (không dùng bài đọc lễ thánh)"
+      }
+    },
+    "saints_json": "Tra theo key 'MM-DD', list được sắp theo bậc lễ (bậc nhỏ = ưu tiên cao)",
+    "bac_le_map": {
+      "1": "Tam Nhật Vượt Qua",
+      "2": "Lễ Trọng (CN/Mùa)",
+      "3": "Lễ Trọng (ngày thường)",
+      "5": "Lễ Trọng riêng",
+      "6": "Chúa Nhật Thường Niên/GS",
+      "7": "Lễ Kính",
+      "9": "Mùa đặc biệt (Vọng 17-24/12, Chay)",
+      "10": "Lễ Nhớ buộc",
+      "12": "Lễ Nhớ không buộc",
+      "13": "Ngày thường"
+    }
+  },
+  "12-25": [
+    {
+      "id": 29,
+      "ten_le": "Lễ Giáng Sinh",
+      "bac_le": 2,
+      "bac_le_ten": "Lễ Trọng (CN/Mùa)",
+      "mau_le": "Tr",
+      "luu_y_truoc": "Trong lễ Vọng và lễ chính ngày, khi đọc kinh Tin Kính đến chỗ : \"Bởi phép Chúa Thánh Thần...và đã làm người\" thì bái gối (IM 137).",
+      "luu_y_sau": "Hôm nay, các linh mục có thể cử hành hay đồng tế ba thánh lễ, miễn là vào giờ thích hợp cho mỗi thánh lễ. Linh mục có thể nhận bổng lễ cho mỗi thánh lễ này (GL 951, 1)."
+    }
+  ],
+  "01-02": [
+    {
+      "id": 400,
+      "ten_le": "Thánh Basiliô Cả và thánh Grêgôriô, giám mục, tiến sĩ hội Thánh",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    },
+    {
+      "id": 39,
+      "ten_le": "Thứ Hai Trước Lễ Hiển Linh",
+      "bac_le": 13,
+      "bac_le_ten": "Ngày thường",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "01-03": [
+    {
+      "id": 401,
+      "ten_le": "Danh Thánh Chúa Giêsu",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    },
+    {
+      "id": 40,
+      "ten_le": "Thứ Ba Trước Lễ Hiển Linh",
+      "bac_le": 13,
+      "bac_le_ten": "Ngày thường",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "01-04": [
+    {
+      "id": 41,
+      "ten_le": "Thứ Tư Trước Lễ Hiển Linh",
+      "bac_le": 13,
+      "bac_le_ten": "Ngày thường",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "01-05": [
+    {
+      "id": 42,
+      "ten_le": "Thứ Năm Trước Lễ Hiển Linh",
+      "bac_le": 13,
+      "bac_le_ten": "Ngày thường",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "01-06": [
+    {
+      "id": 43,
+      "ten_le": "Thứ Sáu Trước Lễ Hiển Linh",
+      "bac_le": 13,
+      "bac_le_ten": "Ngày thường",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "01-07": [
+    {
+      "id": 402,
+      "ten_le": "Thánh Raimunđô Penyafort, linh mục",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    },
+    {
+      "id": 44,
+      "ten_le": "Thứ Bảy Trước Lễ Hiển Linh",
+      "bac_le": 13,
+      "bac_le_ten": "Ngày thường",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "12-17": [
+    {
+      "id": 391,
+      "ten_le": "Mùa Vọng",
+      "bac_le": 9,
+      "bac_le_ten": "Mùa đặc biệt (Vọng 17-24/12, Chay)",
+      "mau_le": "Tm",
+      "luu_y_truoc": "",
+      "luu_y_sau": "Thánh lễ và Các giờ Kinh Phụng Vụ (CGKPV) theo ngày 17 tháng 12 (bỏ các ngày trong tuần III Mùa Vọng). Các ngày tiếp theo cũng thế. Các ngày trong tuần từ 17 đến 31 tháng 12 : a. Không được cử hành các lễ ngoại lịch và các lễ cầu hồn bằng ngày (IM 381). b. Chỉ được cử hành các lễ tùy nhu cầu nếu có nhu cầu và lợi ích mục vụ quan trọng đòi hỏi (IM 374). c. Nếu muốn kính nhớ một vị thánh ghi trong lịch ngày hôm đó, có thể cử hành như sau : 1. Các Giờ Kinh Phụng Vụ: a. Giờ Kinh Sách : sau khi đọc bài đọc các giáo phụ lấy trong phần riêng về mùa với câu xướng đáp, đọc thêm bài đọc về vị thánh nhớ ngày hôm đó với lời nguyện về vị thánh để kết thúc. b. Giờ Kinh Sáng và Kinh Chiều : sau lời nguyện về mùa (bỏ câu kết thúc), có thể thêm điệp ca (riêng hay chung) và lời nguyện về bị thánh rồi mới kết thúc (xem Văn kiện trình bày và quy định CGKPV, số 238-239). 2. Thánh lễ: Linh mục cử hành thánh lễ theo ngày phụng vụ, nhưng có thể đọc lời nguyện nhập lễ của lễ nhớ, nếu lễ nhớ được ghi trong lịch ngày đó (IM 355a)."
+    }
+  ],
+  "12-18": [
+    {
+      "id": 392,
+      "ten_le": "Mùa Vọng",
+      "bac_le": 9,
+      "bac_le_ten": "Mùa đặc biệt (Vọng 17-24/12, Chay)",
+      "mau_le": "Tm",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "12-19": [
+    {
+      "id": 393,
+      "ten_le": "Mùa Vọng",
+      "bac_le": 9,
+      "bac_le_ten": "Mùa đặc biệt (Vọng 17-24/12, Chay)",
+      "mau_le": "Tm",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "12-20": [
+    {
+      "id": 394,
+      "ten_le": "Mùa Vọng",
+      "bac_le": 9,
+      "bac_le_ten": "Mùa đặc biệt (Vọng 17-24/12, Chay)",
+      "mau_le": "Tm",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "12-21": [
+    {
+      "id": 395,
+      "ten_le": "Mùa Vọng",
+      "bac_le": 9,
+      "bac_le_ten": "Mùa đặc biệt (Vọng 17-24/12, Chay)",
+      "mau_le": "Tm",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    },
+    {
+      "id": 578,
+      "ten_le": "Thánh Phêrô Canisiô, linh mục, tiến sĩ Hội Thánh",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "12-22": [
+    {
+      "id": 396,
+      "ten_le": "Mùa Vọng",
+      "bac_le": 9,
+      "bac_le_ten": "Mùa đặc biệt (Vọng 17-24/12, Chay)",
+      "mau_le": "Tm",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "12-23": [
+    {
+      "id": 397,
+      "ten_le": "Mùa Vọng",
+      "bac_le": 9,
+      "bac_le_ten": "Mùa đặc biệt (Vọng 17-24/12, Chay)",
+      "mau_le": "Tm",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    },
+    {
+      "id": 579,
+      "ten_le": "Thánh Gioan Kêty, linh mục",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "12-24": [
+    {
+      "id": 398,
+      "ten_le": "Mùa Vọng",
+      "bac_le": 9,
+      "bac_le_ten": "Mùa đặc biệt (Vọng 17-24/12, Chay)",
+      "mau_le": "Tm",
+      "luu_y_truoc": "GIỚI THIỆU MÙA GIÁNG SINH “Sau việc cử hành hằng năm mầu nhiệm Vượt Qua, Hội Thánh không có việc cử hành nào cổ xưa bằng việc kính nhớ Chúa Giáng Sinh và kính nhớ những lần tỏ mình đầu tiên của Người: đó là Mùa Giáng Sinh” (AC 32)",
+      "luu_y_sau": ""
+    }
+  ],
+  "01-01": [
+    {
+      "id": 399,
+      "ten_le": "Thánh Maria, Mẹ Thiên Chúa. Ngày thế giới hòa bình",
+      "bac_le": 3,
+      "bac_le_ten": "Lễ Trọng (ngày thường)",
+      "mau_le": "Tr",
+      "luu_y_truoc": "Các ngày trong tuần Mùa Giáng Sinh từ 02 tháng Giêng : a. Không được cử hành các lễ cầu hồn hằng ngày (IM 381) ; b. Chỉ được cử hành các lễ tùy nhu cầu hay ngoại lịch, nếu thật sự có nhu cầu và lợi ích mục vụ đòi hỏi (IM 376) ; c. Được cử hành các lễ nhớ không bắt buộc về vị thánh có tên trong lịch hay trong Sổ bộ các thánh ngày đó (IM 355b).",
+      "luu_y_sau": ""
+    }
+  ],
+  "01-13": [
+    {
+      "id": 403,
+      "ten_le": "Thánh Hilariô, giám mục, tiến sĩ Hội Thánh",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "01-17": [
+    {
+      "id": 404,
+      "ten_le": "Thánh Antôn, viện phụ",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "01-20": [
+    {
+      "id": 405,
+      "ten_le": "Thánh Fabianô, giáo hoàng, tử đạo. Thánh Sêbastianô, tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "01-21": [
+    {
+      "id": 406,
+      "ten_le": "Thánh Anê, trinh nữ, tử đạo",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "01-22": [
+    {
+      "id": 407,
+      "ten_le": "Vinh Sơn, phó tế, tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "01-24": [
+    {
+      "id": 408,
+      "ten_le": "Thánh Phanxicô Salêsiô, giám mục, tiến sĩ Hội Thánh",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "01-25": [
+    {
+      "id": 409,
+      "ten_le": "Thánh Phaolô, tông đồ, trở lại",
+      "bac_le": 7,
+      "bac_le_ten": "Lễ Kính",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "01-26": [
+    {
+      "id": 410,
+      "ten_le": "Thánh Timôthêô và thánh Titô, giám mục",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "01-27": [
+    {
+      "id": 411,
+      "ten_le": "Thánh Angêla Mêrici, trinh nữ",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "01-28": [
+    {
+      "id": 412,
+      "ten_le": "Thánh Tôma Aquinô, linh mục, tiến sĩ Hội Thánh",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "01-31": [
+    {
+      "id": 413,
+      "ten_le": "Thánh Gioan Bosco, linh mục",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "02-02": [
+    {
+      "id": 414,
+      "ten_le": "Dâng Chúa Giêsu Trong Đền Thánh (Lễ Nến)",
+      "bac_le": 5,
+      "bac_le_ten": "Lễ Trọng riêng",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "02-03": [
+    {
+      "id": 415,
+      "ten_le": "Thánh Blasiô, giám mục, tử đạo. Thánh Ansgariô, giám mục",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "(Tr/Đ)",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "02-05": [
+    {
+      "id": 416,
+      "ten_le": "Thánh Agatha, trinh nữ, tử đạo",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "02-06": [
+    {
+      "id": 417,
+      "ten_le": "Thánh Phaolô Miki, Linh mục và các bạn tử đạo",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "02-08": [
+    {
+      "id": 418,
+      "ten_le": "Thánh Giêrônimô Êmilianô. Thánh Jôsêphina Bakhita, trinh nữ",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "02-10": [
+    {
+      "id": 419,
+      "ten_le": "Thánh Scholastica, trinh nữ",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "02-11": [
+    {
+      "id": 420,
+      "ten_le": "Đức Mẹ Lộ Đức. Ngày Quốc Tế Bệnh Nhân",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "02-14": [
+    {
+      "id": 421,
+      "ten_le": "Thánh Cyrillô, đan sĩ và thánh Mêthôđiô, giám mục",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "02-17": [
+    {
+      "id": 422,
+      "ten_le": "Bảy thánh lập dòng Tôi Tớ Đức Trinh Nữ Maria",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "02-21": [
+    {
+      "id": 423,
+      "ten_le": "Thánh Phêrô Đamianô, giám mục, tiến sĩ Hội Thánh",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "02-22": [
+    {
+      "id": 424,
+      "ten_le": "Lập Tông Tòa Thánh Phêrô",
+      "bac_le": 7,
+      "bac_le_ten": "Lễ Kính",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "02-23": [
+    {
+      "id": 425,
+      "ten_le": "Thánh Pôlycarpô, giám mục, tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "03-04": [
+    {
+      "id": 426,
+      "ten_le": "Thánh Casimirô",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "03-07": [
+    {
+      "id": 427,
+      "ten_le": "Thánh nữ Perpêtua và thánh nữ Fêlicita, tử đạo",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "03-08": [
+    {
+      "id": 428,
+      "ten_le": "Thánh Gioan Thiên Chúa, tu sĩ",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "03-09": [
+    {
+      "id": 429,
+      "ten_le": "Thánh Phanxica Rôma, nữ tu",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "03-17": [
+    {
+      "id": 430,
+      "ten_le": "Thánh Patriciô, giám mục",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "03-18": [
+    {
+      "id": 431,
+      "ten_le": "Thánh Cyrillô Giêrusalem, tiến sĩ Hội Thánh",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "03-19": [
+    {
+      "id": 432,
+      "ten_le": "Thánh Giuse, bạn trăm năm Đức Maria",
+      "bac_le": 3,
+      "bac_le_ten": "Lễ Trọng (ngày thường)",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "03-23": [
+    {
+      "id": 433,
+      "ten_le": "Thánh Turibô Môgrôvêjô, giám mục",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "03-25": [
+    {
+      "id": 434,
+      "ten_le": "Lễ Truyền Tin",
+      "bac_le": 3,
+      "bac_le_ten": "Lễ Trọng (ngày thường)",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": "Trong thánh lễ, khi đọc kinh Tin Kính đến chỗ : “Bởi phép Chúa Thánh Thần … và đã làm người” thì bái gối (IM 137)."
+    }
+  ],
+  "04-02": [
+    {
+      "id": 435,
+      "ten_le": "Thánh Phanxicô Phaola, ẩn tu. Kỷ niệm ngày Đức Cố Giáo Hoàng Gioan Phaolô II qua đời [2005]",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "04-04": [
+    {
+      "id": 436,
+      "ten_le": "Thánh Isiđôrô, giám mục, tiến sĩ Hội Thánh",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "04-05": [
+    {
+      "id": 437,
+      "ten_le": "Thánh Vinh Sơn Ferrê, linh mục",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "04-11": [
+    {
+      "id": 438,
+      "ten_le": "Thánh Stanislaô, giám mục, tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "04-13": [
+    {
+      "id": 439,
+      "ten_le": "Thánh Martinô I, giáo hoàng, tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "04-21": [
+    {
+      "id": 440,
+      "ten_le": "Thánh Anselmô, giám mục, tiến sĩ Hội Thánh",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "04-23": [
+    {
+      "id": 441,
+      "ten_le": "Thánh Giogiô, tử đạo. Thánh Ađalbertô, giám mục, tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "04-24": [
+    {
+      "id": 442,
+      "ten_le": "Thánh Fiđêlê Sigmaringen, linh mục, tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "04-25": [
+    {
+      "id": 443,
+      "ten_le": "Thánh Marcô, tác giả Tin Mừng",
+      "bac_le": 7,
+      "bac_le_ten": "Lễ Kính",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "04-28": [
+    {
+      "id": 444,
+      "ten_le": "Thánh Phêrô Chanel, linh mục, tử đạo. Thánh Luy Grignion Montfont, linh mục",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "04-29": [
+    {
+      "id": 445,
+      "ten_le": "Thánh Catarina Siêna, trinh nữ, tiến sĩ Hội Thánh",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "04-30": [
+    {
+      "id": 446,
+      "ten_le": "Thánh Piô V, giáo hoàng",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "05-01": [
+    {
+      "id": 447,
+      "ten_le": "Thánh Giuse Thợ",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "05-02": [
+    {
+      "id": 448,
+      "ten_le": "Thánh Athanasiô, giám mục, tiến sĩ Hội Thánh",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "05-03": [
+    {
+      "id": 449,
+      "ten_le": "Thánh Philipphê và thánh Giacôbê, tông đồ",
+      "bac_le": 7,
+      "bac_le_ten": "Lễ Kính",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "05-12": [
+    {
+      "id": 450,
+      "ten_le": "Thánh Nêrêô và thánh Achilêô, tử đạo. Thánh Pancratiô, tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "05-13": [
+    {
+      "id": 451,
+      "ten_le": "Đức Mẹ Fatima",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "05-14": [
+    {
+      "id": 452,
+      "ten_le": "Thánh Matthia, tông đồ",
+      "bac_le": 7,
+      "bac_le_ten": "Lễ Kính",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "05-18": [
+    {
+      "id": 453,
+      "ten_le": "Thánh Gioan I, giáo hoàng, tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "05-20": [
+    {
+      "id": 454,
+      "ten_le": "Thánh Bernarđinô Siêna, linh mục",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "05-25": [
+    {
+      "id": 455,
+      "ten_le": "Thánh Bêđa Khả Kính, linh mục, tiến sĩ Hội Thánh. Thánh Grêgôriô VII, giáo hoàng. Thánh Maria Magđalêna Pazzi, trinh nữ",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "05-26": [
+    {
+      "id": 456,
+      "ten_le": "Thánh Philipphê Nêri, linh mục",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "05-27": [
+    {
+      "id": 457,
+      "ten_le": "Thánh Augustinô Cantuariô",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "05-31": [
+    {
+      "id": 458,
+      "ten_le": "Đức Maria thăm viếng bà Êlisabeth",
+      "bac_le": 7,
+      "bac_le_ten": "Lễ Kính",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "06-01": [
+    {
+      "id": 459,
+      "ten_le": "Thánh Justinô, tử đạo",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "06-02": [
+    {
+      "id": 460,
+      "ten_le": "Thánh Marcellinô và thánh Phêrô, tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "06-03": [
+    {
+      "id": 461,
+      "ten_le": "Thánh Carôlô Lwanga và các bạn, tử đạo",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "06-05": [
+    {
+      "id": 462,
+      "ten_le": "Thánh Bônifitiô, giám mục, tử đạo",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "06-06": [
+    {
+      "id": 463,
+      "ten_le": "Thánh Norbertô, giám mục",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "06-09": [
+    {
+      "id": 464,
+      "ten_le": "Thánh Ephrem, phó tế, tiến sĩ Hội Thánh",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "06-11": [
+    {
+      "id": 465,
+      "ten_le": "Thánh Barnaba, tông đồ",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "06-13": [
+    {
+      "id": 466,
+      "ten_le": "Thánh Antôn Pađôva, linh mục, tiến sĩ Hội Thánh",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "06-19": [
+    {
+      "id": 467,
+      "ten_le": "Thánh Rômualđô, viện phụ",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "06-21": [
+    {
+      "id": 468,
+      "ten_le": "Thánh Luy Gônzaga, tu sĩ",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "06-22": [
+    {
+      "id": 469,
+      "ten_le": "Thánh Paulinô, giám mục Nôla. Thánh Gioan Fisher, giám mục, tử đạo, và thánh Tôma More, tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "06-24": [
+    {
+      "id": 470,
+      "ten_le": "Sinh Nhật Thánh Gioan Tẩy Giả",
+      "bac_le": 3,
+      "bac_le_ten": "Lễ Trọng (ngày thường)",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "06-27": [
+    {
+      "id": 471,
+      "ten_le": "Thánh Cyrillô Alexendria, tiến sĩ Hội Thánh",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "06-28": [
+    {
+      "id": 472,
+      "ten_le": "Thánh Irênê, giám mục, tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "06-29": [
+    {
+      "id": 473,
+      "ten_le": "Thánh Phêrô và Thánh Phaolô tông đồ",
+      "bac_le": 3,
+      "bac_le_ten": "Lễ Trọng (ngày thường)",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "06-30": [
+    {
+      "id": 474,
+      "ten_le": "Các thánh tử đạo tiên khởi của giáo đoàn Roma",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "07-03": [
+    {
+      "id": 475,
+      "ten_le": "Thánh Tôma, tông đồ",
+      "bac_le": 7,
+      "bac_le_ten": "Lễ Kính",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "07-04": [
+    {
+      "id": 476,
+      "ten_le": "Thánh nữ Êlisabeth Bồ Đào Nha",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "07-05": [
+    {
+      "id": 477,
+      "ten_le": "Thánh Antôn Maria Zaccaria, linh mục",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "07-06": [
+    {
+      "id": 478,
+      "ten_le": "Thánh Maria Gôretti, trinh nữ, tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "07-11": [
+    {
+      "id": 479,
+      "ten_le": "Thánh Bênêđictô, viện phụ",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "07-13": [
+    {
+      "id": 480,
+      "ten_le": "Thánh Henricô",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "07-14": [
+    {
+      "id": 481,
+      "ten_le": "Thánh Camillô Lellis, linh mục",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "07-15": [
+    {
+      "id": 482,
+      "ten_le": "Thánh Bônaventura, giám mục, tiến sĩ Hội Thánh",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "07-16": [
+    {
+      "id": 483,
+      "ten_le": "Đức Mẹ Núi Carmêlô",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "07-21": [
+    {
+      "id": 484,
+      "ten_le": "Thánh Laurensô Brinđisi, linh mục, tiến sĩ Hội Thánh",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "07-22": [
+    {
+      "id": 485,
+      "ten_le": "Thánh nữ Maria Magđêlêna",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "07-23": [
+    {
+      "id": 486,
+      "ten_le": "Thánh Birgitta, nữ tu",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "07-24": [
+    {
+      "id": 487,
+      "ten_le": "Thánh Sarbêliô Makhluf, linh mục",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "07-25": [
+    {
+      "id": 488,
+      "ten_le": "Thánh Giacôbê, tông đồ",
+      "bac_le": 7,
+      "bac_le_ten": "Lễ Kính",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "07-26": [
+    {
+      "id": 489,
+      "ten_le": "Thánh Joachim và Anna, song thân Đức Maria",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "07-29": [
+    {
+      "id": 490,
+      "ten_le": "Thánh nữ Martha",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "07-30": [
+    {
+      "id": 491,
+      "ten_le": "Thánh Phêrô Kim Ngôn, giám mục, tiến sĩ Hội Thánh",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "07-31": [
+    {
+      "id": 492,
+      "ten_le": "Thánh Ignatiô Loyôla, linh mục",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-01": [
+    {
+      "id": 493,
+      "ten_le": "Thánh Alphongsô Maria Liguori, giám mục, tiến sĩ Hội Thánh",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": "Từ trưa hôm nay cho đến nửa đêm ngày mai, ai viếng nhà thờ giáo xứ, đọc một kinh Lạy Cha và một kinh Tin Kính, thì được hưởng ơn đại xá “Portiuncula”, với những điều kiện theo thường lệ (xưng tội, rước lễ, cầu nguyện theo ý Đức Giáo Hoàng). Ân xá này chỉ được hưởng một lần mà thôi (Ench. Indulg., ấn bản 1999, concessio 33)."
+    }
+  ],
+  "08-02": [
+    {
+      "id": 494,
+      "ten_le": "Thánh Êusêbiô Vercellêci. Thánh Phêrô Julianô Eymard, linh mục",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-04": [
+    {
+      "id": 495,
+      "ten_le": "Thánh Gioan Maria Vianney, linh mục",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-05": [
+    {
+      "id": 496,
+      "ten_le": "Cung hiến thánh đường Đức Maria",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-06": [
+    {
+      "id": 497,
+      "ten_le": "Chúa Hiển Dung",
+      "bac_le": 5,
+      "bac_le_ten": "Lễ Trọng riêng",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-07": [
+    {
+      "id": 498,
+      "ten_le": "Thánh Xystô II, giáo hoàng, và các bạn, tử đạo. Thánh Cajêtanô, linh mục",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-08": [
+    {
+      "id": 499,
+      "ten_le": "Thánh Đa Minh, linh mục",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-09": [
+    {
+      "id": 500,
+      "ten_le": "Thánh Têrêsa Bênêđicta Thánh Giá, nữ tu, tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-10": [
+    {
+      "id": 501,
+      "ten_le": "Thánh Laurensô, phó tế, tử đạo",
+      "bac_le": 7,
+      "bac_le_ten": "Lễ Kính",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-11": [
+    {
+      "id": 502,
+      "ten_le": "Thánh Clara, trinh nữ",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-12": [
+    {
+      "id": 503,
+      "ten_le": "Thánh Joanna Phanxica Chantal, nữ tu",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-13": [
+    {
+      "id": 504,
+      "ten_le": "Thánh Pontianô, giáo hoàng, tử đạo, và thánh Hippôlytô, linh mục, tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-14": [
+    {
+      "id": 505,
+      "ten_le": "Thánh Maximilianô Maria Kolbê, linh mục, tử đạo",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-15": [
+    {
+      "id": 506,
+      "ten_le": "Đức Mẹ Lên Trời",
+      "bac_le": 3,
+      "bac_le_ten": "Lễ Trọng (ngày thường)",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-16": [
+    {
+      "id": 507,
+      "ten_le": "Thánh Stêphanô Hungari",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-19": [
+    {
+      "id": 508,
+      "ten_le": "Thánh Gioan Êuđê, linh mục",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-20": [
+    {
+      "id": 509,
+      "ten_le": "Thánh Bênađô, viện phụ, tiến sĩ Hội Thánh",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-21": [
+    {
+      "id": 510,
+      "ten_le": "Thánh Piô X, giáo Hoàng",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-22": [
+    {
+      "id": 511,
+      "ten_le": "Đức Maria Nữ Vương",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-23": [
+    {
+      "id": 512,
+      "ten_le": "Thánh Rôsa Lima, trinh nữ",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-24": [
+    {
+      "id": 513,
+      "ten_le": "Thánh Barthôlômêô, tông đồ",
+      "bac_le": 7,
+      "bac_le_ten": "Lễ Kính",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-25": [
+    {
+      "id": 514,
+      "ten_le": "Thánh Luy. Thánh Giuse Calasanz, linh mục",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-27": [
+    {
+      "id": 515,
+      "ten_le": "Thánh nữ Mônica",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-28": [
+    {
+      "id": 516,
+      "ten_le": "Thánh Augustinô, giám mục, tiến sĩ Hội Thánh",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "08-29": [
+    {
+      "id": 517,
+      "ten_le": "Thánh Gioan Tẩy Giả bị trảm quyết",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "09-03": [
+    {
+      "id": 518,
+      "ten_le": "Thánh Grêgôriô Cả, giáo hoàng, tiến sĩ Hội Thánh",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "09-08": [
+    {
+      "id": 519,
+      "ten_le": "Sinh Nhật Đức Trinh Nữ Maria",
+      "bac_le": 7,
+      "bac_le_ten": "Lễ Kính",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "09-09": [
+    {
+      "id": 520,
+      "ten_le": "Thánh Phêrô Claver, linh mục",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "09-12": [
+    {
+      "id": 521,
+      "ten_le": "Danh Thánh Đức maria",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "09-13": [
+    {
+      "id": 522,
+      "ten_le": "Thánh Gioan Kim Khẩu, giám mục, tiến sĩ Hội Thánh",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "09-14": [
+    {
+      "id": 523,
+      "ten_le": "Suy Tôn Thánh Giá",
+      "bac_le": 5,
+      "bac_le_ten": "Lễ Trọng riêng",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "09-15": [
+    {
+      "id": 524,
+      "ten_le": "Đức Mẹ Sầu Bi",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "09-16": [
+    {
+      "id": 525,
+      "ten_le": "Thánh Cornêliô, giáo hoàng, và thánh Cyprianô, giám mục, tử đạo",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "09-17": [
+    {
+      "id": 526,
+      "ten_le": "Thánh Robertô Bellarminô, giám mục, tiến sĩ Hội Thánh",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "09-19": [
+    {
+      "id": 527,
+      "ten_le": "Thánh Junuariô, giám mục, tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "09-20": [
+    {
+      "id": 528,
+      "ten_le": "Thánh Anrê Kim Têgôn, Phaolô Chong Hasang và các bạn, tử đạo",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "09-21": [
+    {
+      "id": 529,
+      "ten_le": "Thánh Matthêô, tông đồ, tác giả sách Tin Mừng",
+      "bac_le": 7,
+      "bac_le_ten": "Lễ Kính",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "09-23": [
+    {
+      "id": 530,
+      "ten_le": "Thánh Piô Pietrelcina, linh mục",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "09-26": [
+    {
+      "id": 531,
+      "ten_le": "Thánh Cosma và thánh Đamianô, tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "09-27": [
+    {
+      "id": 532,
+      "ten_le": "Thánh Vinh Sơn Phaolô, linh mục",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "09-28": [
+    {
+      "id": 533,
+      "ten_le": "Thánh Venceslaô tử đạo. Thánh Laurensô Ruiz và các bạn, tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "09-29": [
+    {
+      "id": 534,
+      "ten_le": "Các Tổng Lãnh Thiên Thần Michael, Gabriel, Raphael",
+      "bac_le": 7,
+      "bac_le_ten": "Lễ Kính",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "09-30": [
+    {
+      "id": 535,
+      "ten_le": "Thánh Giêrônimô, linh mục, tiến sĩ Hội Thánh",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "10-01": [
+    {
+      "id": 536,
+      "ten_le": "Thánh Têrêsa Hài Đồng Giêsu, trinh nữ, tiến sĩ Hội Thánh. Bổn mạng các xứ truyền giáo",
+      "bac_le": 7,
+      "bac_le_ten": "Lễ Kính",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "10-02": [
+    {
+      "id": 537,
+      "ten_le": "Các thiên thần hộ thủ",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "10-04": [
+    {
+      "id": 538,
+      "ten_le": "Thánh Phanxicô Assisi",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "10-06": [
+    {
+      "id": 539,
+      "ten_le": "Thánh Brunô, linh mục",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "10-07": [
+    {
+      "id": 540,
+      "ten_le": "Lễ Đức Mẹ Mân Côi",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "10-09": [
+    {
+      "id": 541,
+      "ten_le": "Thánh Diônysiô, giám mục, và các bạn, tử đạo. Thánh Gioan Lêônarđô, linh mục",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "10-14": [
+    {
+      "id": 542,
+      "ten_le": "Thánh Callistô I, giáo hoàng, tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "10-15": [
+    {
+      "id": 543,
+      "ten_le": "Thánh Nữ Têrêsa Avila, trinh nữ, tiến sĩ Hội Thánh",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "10-16": [
+    {
+      "id": 544,
+      "ten_le": "Thánh Hedviges, nữ tu. Thánh Margarita Alacoque, trinh nữ",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "10-17": [
+    {
+      "id": 545,
+      "ten_le": "Thánh Ignatiô Antiôchia, giám mục, tử đạo",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "10-18": [
+    {
+      "id": 546,
+      "ten_le": "Thánh Luca, tác giả sách Tin Mừng",
+      "bac_le": 7,
+      "bac_le_ten": "Lễ Kính",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "10-19": [
+    {
+      "id": 547,
+      "ten_le": "Thánh Gioan Brêbeuf, linh mục, thánh Isaac Jôgues, linh mục và các bạn, tử đạo. Thánh Phaolô Thánh Giá, linh mục",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "10-23": [
+    {
+      "id": 548,
+      "ten_le": "Thánh Gioan Capestranô, linh mục",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "10-24": [
+    {
+      "id": 549,
+      "ten_le": "Thánh Antôn Maria Claret, giám mục",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "10-28": [
+    {
+      "id": 550,
+      "ten_le": "Thánh Simon và thánh Giuđa, tông đồ",
+      "bac_le": 7,
+      "bac_le_ten": "Lễ Kính",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "11-01": [
+    {
+      "id": 551,
+      "ten_le": "Các Thánh Nam Nữ",
+      "bac_le": 3,
+      "bac_le_ten": "Lễ Trọng (ngày thường)",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": "Về việc viếng nhà thờ và viếng nghĩa địa. 1. Từ trưa ngày Lễ Các Thánh đến nửa đêm ngày Cầu cho các tín hữu qua đời, ai viếng nhà thờ, nhà nguyện, đọc một kinh Lạy Cha và một kinh Tin Kính, thì được hưởng một ơn đại xá, với những điều kiện theo thường lệ (xưng tội, rước lễ, cầu nguyện theo ý Đức Giáo Hoàng), nhưng phải nhường lại cho các linh hồn. Mỗi ngày được hưởng một lần mà thôi. Ai bị ngăn trở, có thể viếng nhà thờ, nhà nguyện, lãnh ơn đại xá vào Chúa nhật trước hay Chúa nhật sau. 2. Từ ngày 01 đến hết ngày 08 tháng 11 này, các tín hữu thành kính đi viếng nghĩa địa, và dù có cầu nguyện thầm cho các linh hồn, thì cũng được hưởng một ơn đại xá, với những điều kiện như thường lệ (xưng tội, rước lễ, cầu nguyện theo ý Đức Giáo Hoàng), nhưng phải nhường lại cho các linh hồn (trong tám ngày, mỗi ngày được hưởng một lần mà thôi). 3. Các ngày khác trong năm, khi đi viếng nghĩa địa và cầu nguyện cho các linh hồn, thì được hưởng ơn tiểu xá (Ench. Indulg., ấn bản 1999, concessio 29)."
+    }
+  ],
+  "11-02": [
+    {
+      "id": 552,
+      "ten_le": "Cầu cho các tín hữu đã qua đời (lễ các đẳng)",
+      "bac_le": 5,
+      "bac_le_ten": "Lễ Trọng riêng",
+      "mau_le": "Tm",
+      "luu_y_truoc": "",
+      "luu_y_sau": "Theo tông hiến ngày 10/08/1915, hôm nay mọi linh mục được phép cử hành hoặc đồng tế ba thánh lễ, miễn là cử hành vào những giờ khác nhau; có thể chỉ một ý lễ cho bất cứ ai và nhận bổng lễ, còn ngoài ra phải dành một lễ cầu nguyện cho mọi tín hữu đã qua đời và một lễ cầu nguyện theo ý Đức Giáo Hoàng (không có bổng lễ đối với hai lễ này). Cho mỗi thánh lễ, có thể chọn các bài đọc trong Sách Bài Đọc cầu cho các tín hữu đã qua đời (Sách Bài Đọc các thánh lễ chung,v.v..., 1973, trang 225-249, hoặc Nghi lễ An Táng và Thánh lễ cầu hồn, 1974, trang 61-106)"
+    }
+  ],
+  "11-03": [
+    {
+      "id": 553,
+      "ten_le": "Thánh Martinô Porres, tu sĩ",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "11-04": [
+    {
+      "id": 554,
+      "ten_le": "Thánh Carôlô Borrômêô, giám mục",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "11-09": [
+    {
+      "id": 555,
+      "ten_le": "Cung hiến thánh đường Latêranô",
+      "bac_le": 7,
+      "bac_le_ten": "Lễ Kính",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "11-10": [
+    {
+      "id": 556,
+      "ten_le": "Thánh Lêô Cả, giáo hoàng, tiến sĩ Hội Thánh",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "11-11": [
+    {
+      "id": 557,
+      "ten_le": "Thánh Martinô, giám mục",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "11-12": [
+    {
+      "id": 558,
+      "ten_le": "Thánh Jôsaphat, giám mục, tử đạo",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "11-15": [
+    {
+      "id": 559,
+      "ten_le": "Thánh Albertô Cả, giám mục, tiến sĩ Hội Thánh",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "11-16": [
+    {
+      "id": 560,
+      "ten_le": "Thánh nữ Margarita Scotland. Thánh Gertruđê, trinh nữ",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "11-17": [
+    {
+      "id": 561,
+      "ten_le": "Thánh nữ Êlisabeth Hungari",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "11-18": [
+    {
+      "id": 562,
+      "ten_le": "Cung hiến thánh đường thánh Phêrô và thánh đường thánh Phaolô",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "11-21": [
+    {
+      "id": 563,
+      "ten_le": "Đức Mẹ dâng mình trong đền thờ",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "11-22": [
+    {
+      "id": 564,
+      "ten_le": "Thánh Cêcilia, trinh nữ, tử đạo",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "11-23": [
+    {
+      "id": 565,
+      "ten_le": "Thánh Clêmentê I, giáo hoàng, tử đạo. Thánh Côlumbanô, viện phụ",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "11-24": [
+    {
+      "id": 566,
+      "ten_le": "Thánh Anrê Trần An Dũng Lạc và các bạn, tử đạo",
+      "bac_le": 3,
+      "bac_le_ten": "Lễ Trọng (ngày thường)",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": "",
+      "ten_le_day_du": "Các Thánh Tử Đạo Việt Nam. Bổn mạng Hội Thánh Việt Nam"
+    }
+  ],
+  "11-30": [
+    {
+      "id": 567,
+      "ten_le": "Thánh Anrê, tông đồ",
+      "bac_le": 7,
+      "bac_le_ten": "Lễ Kính",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "12-03": [
+    {
+      "id": 568,
+      "ten_le": "Thánh Phanxicô Xaviê, linh mục. Bổn mạng các xứ truyền giáo",
+      "bac_le": 7,
+      "bac_le_ten": "Lễ Kính",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "12-04": [
+    {
+      "id": 569,
+      "ten_le": "Thánh Gioan Đamas, linh mục, tiến sĩ Hội Thánh",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "12-06": [
+    {
+      "id": 570,
+      "ten_le": "Thánh Nicôla, giám mục",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "12-07": [
+    {
+      "id": 571,
+      "ten_le": "Thánh Ambrôsiô, giám mục, tiến sĩ Hội Thánh",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "12-08": [
+    {
+      "id": 572,
+      "ten_le": "Đức Mẹ Vô Nhiễm Nguyên Tội",
+      "bac_le": 3,
+      "bac_le_ten": "Lễ Trọng (ngày thường)",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": "Lễ cầu cho giáo dân (các lịch quen gọi là Lễ họ, v.v…) là lễ mà giám mục giáo phận dâng để chỉ cho giáo dân trong giáo phận, và linh mục quản xứ dâng để chỉ cho giáo dân trong giáo xứ, như luật dạy. Hiện nay, tại Việt Nam, mỗi năm có 11 ngày cử hành lễ cầu cho giáo dân."
+    }
+  ],
+  "12-09": [
+    {
+      "id": 573,
+      "ten_le": "Thánh Gioan Điđacô",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "12-11": [
+    {
+      "id": 574,
+      "ten_le": "Thánh Đamasô I, giáo hoàng",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "12-12": [
+    {
+      "id": 575,
+      "ten_le": "Đức Mẹ Guađalupê",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "12-13": [
+    {
+      "id": 576,
+      "ten_le": "Thánh Lucia, trinh nữ, tử đạo",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "12-14": [
+    {
+      "id": 577,
+      "ten_le": "Thánh Gioan Thánh Giá, linh mục",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "12-26": [
+    {
+      "id": 580,
+      "ten_le": "Thánh Stêphanô, tử đạo tiên khởi",
+      "bac_le": 7,
+      "bac_le_ten": "Lễ Kính",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "12-27": [
+    {
+      "id": 581,
+      "ten_le": "Thánh Gioan, Tông Đồ. Tác giả sách Tin Mừng",
+      "bac_le": 7,
+      "bac_le_ten": "Lễ Kính",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "12-28": [
+    {
+      "id": 582,
+      "ten_le": "Các Thánh Anh Hài, tử đạo",
+      "bac_le": 7,
+      "bac_le_ten": "Lễ Kính",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "12-29": [
+    {
+      "id": 583,
+      "ten_le": "Thánh Toma Becket, giám mục, tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "12-31": [
+    {
+      "id": 584,
+      "ten_le": "Thánh Silvester I, giáo hoàng",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "04-07": [
+    {
+      "id": 585,
+      "ten_le": "Thánh Gioan Lasan, linh mục",
+      "bac_le": 10,
+      "bac_le_ten": "Lễ Nhớ buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "05-21": [
+    {
+      "id": 603,
+      "ten_le": "Thánh Christôphôrô Magallanes, linh mục , và các bạn tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "05-22": [
+    {
+      "id": 604,
+      "ten_le": "Thánh Rita Cascia, nữ tu",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "07-09": [
+    {
+      "id": 605,
+      "ten_le": "Thánh Augustinô Zhao Rong, linh mục và các bạn tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "07-20": [
+    {
+      "id": 606,
+      "ten_le": "Thánh Apôllinarê, giám mục, tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "11-25": [
+    {
+      "id": 607,
+      "ten_le": "Thánh Catarina Alexandria, trinh nữ, tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Tr",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ],
+  "09-18": [
+    {
+      "id": 608,
+      "ten_le": "Thánh Đa Minh Trạch, tử đạo",
+      "bac_le": 12,
+      "bac_le_ten": "Lễ Nhớ không buộc",
+      "mau_le": "Đ",
+      "luu_y_truoc": "",
+      "luu_y_sau": ""
+    }
+  ]
+}

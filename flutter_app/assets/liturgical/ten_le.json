@@ -1,0 +1,3650 @@
+[
+  {
+    "ID": 1,
+    "TenLe": "Chúa Nhật I Mùa Vọng",
+    "BacLe1": 2,
+    "BacLe2": 5
+  },
+  {
+    "ID": 2,
+    "TenLe": "Thứ Hai sau Chúa Nhật I Mùa Vọng",
+    "BacLe1": 13,
+    "BacLe2": 1
+  },
+  {
+    "ID": 3,
+    "TenLe": "Thứ Ba sau Chúa Nhật I Mùa Vọng",
+    "BacLe1": 13,
+    "BacLe2": 2
+  },
+  {
+    "ID": 4,
+    "TenLe": "Thứ Tư sau Chúa Nhật I Mùa Vọng",
+    "BacLe1": 13,
+    "BacLe2": 3
+  },
+  {
+    "ID": 5,
+    "TenLe": "Thứ Năm sau Chúa Nhật I Mùa Vọng",
+    "BacLe1": 13,
+    "BacLe2": 4
+  },
+  {
+    "ID": 6,
+    "TenLe": "Thứ Sáu sau Chúa Nhật I Mùa Vọng",
+    "BacLe1": 13,
+    "BacLe2": 5
+  },
+  {
+    "ID": 7,
+    "TenLe": "Thứ Bảy sau Chúa Nhật I Mùa Vọng",
+    "BacLe1": 13,
+    "BacLe2": 6
+  },
+  {
+    "ID": 8,
+    "TenLe": "Chúa Nhật II Mùa Vọng",
+    "BacLe1": 2,
+    "BacLe2": 5
+  },
+  {
+    "ID": 9,
+    "TenLe": "Thứ Hai sau Chúa Nhật II Mùa Vọng",
+    "BacLe1": 13,
+    "BacLe2": 7
+  },
+  {
+    "ID": 10,
+    "TenLe": "Thứ Ba sau Chúa Nhật II Mùa Vọng",
+    "BacLe1": 13,
+    "BacLe2": 8
+  },
+  {
+    "ID": 11,
+    "TenLe": "Thứ Tư sau Chúa Nhật II Mùa Vọng",
+    "BacLe1": 13,
+    "BacLe2": 9
+  },
+  {
+    "ID": 12,
+    "TenLe": "Thứ Năm sau Chúa Nhật II Mùa Vọng",
+    "BacLe1": 13,
+    "BacLe2": 10
+  },
+  {
+    "ID": 13,
+    "TenLe": "Thứ Sáu sau Chúa Nhật II Mùa Vọng",
+    "BacLe1": 13,
+    "BacLe2": 11
+  },
+  {
+    "ID": 14,
+    "TenLe": "Thứ Bảy sau Chúa Nhật II Mùa Vọng",
+    "BacLe1": 13,
+    "BacLe2": 12
+  },
+  {
+    "ID": 15,
+    "TenLe": "Chúa Nhật III Mùa Vọng",
+    "BacLe1": 2,
+    "BacLe2": 5
+  },
+  {
+    "ID": 16,
+    "TenLe": "Thứ Hai sau Chúa Nhật III Mùa Vọng",
+    "BacLe1": 9,
+    "BacLe2": 8
+  },
+  {
+    "ID": 17,
+    "TenLe": "Thứ Ba sau Chúa Nhật III Mùa Vọng",
+    "BacLe1": 9,
+    "BacLe2": 8
+  },
+  {
+    "ID": 18,
+    "TenLe": "Thứ Tư sau Chúa Nhật III Mùa Vọng",
+    "BacLe1": 9,
+    "BacLe2": 8
+  },
+  {
+    "ID": 19,
+    "TenLe": "Thứ Năm sau Chúa Nhật III Mùa Vọng",
+    "BacLe1": 9,
+    "BacLe2": 8
+  },
+  {
+    "ID": 20,
+    "TenLe": "Thứ Sáu sau Chúa Nhật III Mùa Vọng",
+    "BacLe1": 9,
+    "BacLe2": 8
+  },
+  {
+    "ID": 21,
+    "TenLe": "Thứ Bảy sau Chúa Nhật III Mùa Vọng",
+    "BacLe1": 9,
+    "BacLe2": 8
+  },
+  {
+    "ID": 22,
+    "TenLe": "Chúa Nhật IV Mùa Vọng",
+    "BacLe1": 2,
+    "BacLe2": 5
+  },
+  {
+    "ID": 23,
+    "TenLe": "Thứ Hai sau Chúa Nhật IV Mùa Vọng",
+    "BacLe1": 9,
+    "BacLe2": 8
+  },
+  {
+    "ID": 24,
+    "TenLe": "Thứ Ba sau Chúa Nhật IV Mùa Vọng",
+    "BacLe1": 9,
+    "BacLe2": 8
+  },
+  {
+    "ID": 25,
+    "TenLe": "Thứ Tư sau Chúa Nhật IV Mùa Vọng",
+    "BacLe1": 9,
+    "BacLe2": 8
+  },
+  {
+    "ID": 26,
+    "TenLe": "Thứ Năm sau Chúa Nhật IV Mùa Vọng",
+    "BacLe1": 9,
+    "BacLe2": 8
+  },
+  {
+    "ID": 27,
+    "TenLe": "Thứ Sáu sau Chúa Nhật IV Mùa Vọng",
+    "BacLe1": 9,
+    "BacLe2": 8
+  },
+  {
+    "ID": 28,
+    "TenLe": "Thứ Bảy sau Chúa Nhật IV Mùa Vọng",
+    "BacLe1": 9,
+    "BacLe2": 8
+  },
+  {
+    "ID": 29,
+    "TenLe": "Lễ Giáng Sinh",
+    "BacLe1": 2,
+    "BacLe2": 1
+  },
+  {
+    "ID": 30,
+    "TenLe": "Ngày II Tuần Bát Nhật Giáng Sinh",
+    "BacLe1": 9,
+    "BacLe2": 9
+  },
+  {
+    "ID": 31,
+    "TenLe": "Ngày III Tuần Bát Nhật Giáng Sinh",
+    "BacLe1": 9,
+    "BacLe2": 10
+  },
+  {
+    "ID": 32,
+    "TenLe": "Ngày IV Tuần Bát Nhật Giáng Sinh",
+    "BacLe1": 9,
+    "BacLe2": 11
+  },
+  {
+    "ID": 33,
+    "TenLe": "Ngày V Tuần Bát Nhật Giáng Sinh",
+    "BacLe1": 9,
+    "BacLe2": 12
+  },
+  {
+    "ID": 34,
+    "TenLe": "Ngày VI Tuần Bát Nhật Giáng Sinh",
+    "BacLe1": 9,
+    "BacLe2": 13
+  },
+  {
+    "ID": 35,
+    "TenLe": "Ngày VII Tuần Bát Nhật Giáng Sinh",
+    "BacLe1": 9,
+    "BacLe2": 14
+  },
+  {
+    "ID": 36,
+    "TenLe": "Ngày VIII Tuần Bát Nhật Giáng Sinh",
+    "BacLe1": null,
+    "BacLe2": null
+  },
+  {
+    "ID": 37,
+    "TenLe": "Cuối Tuần Bát Nhật Giáng Sinh",
+    "BacLe1": 1,
+    "BacLe2": 15
+  },
+  {
+    "ID": 38,
+    "TenLe": "Lễ Thánh Gia Thất",
+    "BacLe1": 5,
+    "BacLe2": 1
+  },
+  {
+    "ID": 39,
+    "TenLe": "Thứ Hai Trước Lễ Hiển Linh",
+    "BacLe1": 13,
+    "BacLe2": 19
+  },
+  {
+    "ID": 40,
+    "TenLe": "Thứ Ba Trước Lễ Hiển Linh",
+    "BacLe1": 13,
+    "BacLe2": 20
+  },
+  {
+    "ID": 41,
+    "TenLe": "Thứ Tư Trước Lễ Hiển Linh",
+    "BacLe1": 13,
+    "BacLe2": 21
+  },
+  {
+    "ID": 42,
+    "TenLe": "Thứ Năm Trước Lễ Hiển Linh",
+    "BacLe1": 13,
+    "BacLe2": 22
+  },
+  {
+    "ID": 43,
+    "TenLe": "Thứ Sáu Trước Lễ Hiển Linh",
+    "BacLe1": 13,
+    "BacLe2": 23
+  },
+  {
+    "ID": 44,
+    "TenLe": "Thứ Bảy Trước Lễ Hiển Linh",
+    "BacLe1": 13,
+    "BacLe2": 24
+  },
+  {
+    "ID": 45,
+    "TenLe": "Chúa Hiển Linh",
+    "BacLe1": 2,
+    "BacLe2": 2
+  },
+  {
+    "ID": 46,
+    "TenLe": "Thứ Hai sau Lễ Hiển Linh",
+    "BacLe1": 13,
+    "BacLe2": 13
+  },
+  {
+    "ID": 47,
+    "TenLe": "Thứ Ba sau Lễ Hiển Linh",
+    "BacLe1": 13,
+    "BacLe2": 14
+  },
+  {
+    "ID": 48,
+    "TenLe": "Thứ Tư sau Lễ Hiển Linh",
+    "BacLe1": 13,
+    "BacLe2": 15
+  },
+  {
+    "ID": 49,
+    "TenLe": "Thứ Năm sau Lễ Hiển Linh",
+    "BacLe1": 13,
+    "BacLe2": 16
+  },
+  {
+    "ID": 50,
+    "TenLe": "Thứ Sáu sau Lễ Hiển Linh",
+    "BacLe1": 13,
+    "BacLe2": 17
+  },
+  {
+    "ID": 51,
+    "TenLe": "Thứ Bảy sau Lễ Hiển Linh",
+    "BacLe1": 13,
+    "BacLe2": 18
+  },
+  {
+    "ID": 52,
+    "TenLe": "Chúa Nhật II sau Lễ Giáng Sinh",
+    "BacLe1": 6,
+    "BacLe2": 1
+  },
+  {
+    "ID": 53,
+    "TenLe": "Lễ Chúa Giêsu Chịu Phép Rửa",
+    "BacLe1": 5,
+    "BacLe2": 3
+  },
+  {
+    "ID": 54,
+    "TenLe": "Thứ Hai sau Chúa Nhật I Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 61
+  },
+  {
+    "ID": 55,
+    "TenLe": "Thứ Ba sau Chúa Nhật I Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 62
+  },
+  {
+    "ID": 56,
+    "TenLe": "Thứ Tư sau Chúa Nhật I Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 63
+  },
+  {
+    "ID": 57,
+    "TenLe": "Thứ Năm sau Chúa Nhật I Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 64
+  },
+  {
+    "ID": 58,
+    "TenLe": "Thứ Sáu sau Chúa Nhật I Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 65
+  },
+  {
+    "ID": 59,
+    "TenLe": "Thứ Bảy sau Chúa Nhật I Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 66
+  },
+  {
+    "ID": 60,
+    "TenLe": "Chúa Nhật II Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 2
+  },
+  {
+    "ID": 61,
+    "TenLe": "Thứ Hai sau Chúa Nhật II Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 67
+  },
+  {
+    "ID": 62,
+    "TenLe": "Thứ Ba sau Chúa Nhật II Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 68
+  },
+  {
+    "ID": 63,
+    "TenLe": "Thứ Tư sau Chúa Nhật II Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 69
+  },
+  {
+    "ID": 64,
+    "TenLe": "Thứ Năm sau Chúa Nhật II Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 70
+  },
+  {
+    "ID": 65,
+    "TenLe": "Thứ Sáu sau Chúa Nhật II Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 71
+  },
+  {
+    "ID": 66,
+    "TenLe": "Thứ Bảy sau Chúa Nhật II Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 72
+  },
+  {
+    "ID": 67,
+    "TenLe": "Chúa Nhật III Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 3
+  },
+  {
+    "ID": 68,
+    "TenLe": "Thứ Hai sau Chúa Nhật III Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 73
+  },
+  {
+    "ID": 69,
+    "TenLe": "Thứ Ba sau Chúa Nhật III Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 74
+  },
+  {
+    "ID": 70,
+    "TenLe": "Thứ Tư sau Chúa Nhật III Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 75
+  },
+  {
+    "ID": 71,
+    "TenLe": "Thứ Năm sau Chúa Nhật III Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 76
+  },
+  {
+    "ID": 72,
+    "TenLe": "Thứ Sáu sau Chúa Nhật III Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 77
+  },
+  {
+    "ID": 73,
+    "TenLe": "Thứ Bảy sau Chúa Nhật III Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 78
+  },
+  {
+    "ID": 74,
+    "TenLe": "Chúa Nhật IV Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 4
+  },
+  {
+    "ID": 75,
+    "TenLe": "Thứ Hai sau Chúa Nhật IV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 79
+  },
+  {
+    "ID": 76,
+    "TenLe": "Thứ Ba sau Chúa Nhật IV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 80
+  },
+  {
+    "ID": 77,
+    "TenLe": "Thứ Tư sau Chúa Nhật IV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 81
+  },
+  {
+    "ID": 78,
+    "TenLe": "Thứ Năm sau Chúa Nhật IV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 82
+  },
+  {
+    "ID": 79,
+    "TenLe": "Thứ Sáu sau Chúa Nhật IV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 83
+  },
+  {
+    "ID": 80,
+    "TenLe": "Thứ Bảy sau Chúa Nhật IV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 84
+  },
+  {
+    "ID": 81,
+    "TenLe": "Chúa Nhật V Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 5
+  },
+  {
+    "ID": 82,
+    "TenLe": "Thứ Hai sau Chúa Nhật V Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 85
+  },
+  {
+    "ID": 83,
+    "TenLe": "Thứ Ba sau Chúa Nhật V Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 86
+  },
+  {
+    "ID": 84,
+    "TenLe": "Thứ Tư sau Chúa Nhật V Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 87
+  },
+  {
+    "ID": 85,
+    "TenLe": "Thứ Năm sau Chúa Nhật V Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 88
+  },
+  {
+    "ID": 86,
+    "TenLe": "Thứ Sáu sau Chúa Nhật V Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 89
+  },
+  {
+    "ID": 87,
+    "TenLe": "Thứ Bảy sau Chúa Nhật V Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 90
+  },
+  {
+    "ID": 88,
+    "TenLe": "Chúa Nhật VI Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 6
+  },
+  {
+    "ID": 89,
+    "TenLe": "Thứ Hai sau Chúa Nhật VI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 91
+  },
+  {
+    "ID": 90,
+    "TenLe": "Thứ Ba sau Chúa Nhật VI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 92
+  },
+  {
+    "ID": 91,
+    "TenLe": "Thứ Tư sau Chúa Nhật VI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 93
+  },
+  {
+    "ID": 92,
+    "TenLe": "Thứ Năm sau Chúa Nhật VI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 94
+  },
+  {
+    "ID": 93,
+    "TenLe": "Thứ Sáu sau Chúa Nhật VI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 95
+  },
+  {
+    "ID": 94,
+    "TenLe": "Thứ Bảy sau Chúa Nhật VI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 96
+  },
+  {
+    "ID": 95,
+    "TenLe": "Chúa Nhật VII Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 7
+  },
+  {
+    "ID": 96,
+    "TenLe": "Thứ Hai sau Chúa Nhật VII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 97
+  },
+  {
+    "ID": 97,
+    "TenLe": "Thứ Ba sau Chúa Nhật VII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 98
+  },
+  {
+    "ID": 98,
+    "TenLe": "Thứ Tư sau Chúa Nhật VII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 99
+  },
+  {
+    "ID": 99,
+    "TenLe": "Thứ Năm sau Chúa Nhật VII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 100
+  },
+  {
+    "ID": 100,
+    "TenLe": "Thứ Sáu sau Chúa Nhật VII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 101
+  },
+  {
+    "ID": 101,
+    "TenLe": "Thứ Bảy sau Chúa Nhật VII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 102
+  },
+  {
+    "ID": 102,
+    "TenLe": "Chúa Nhật VIII Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 8
+  },
+  {
+    "ID": 103,
+    "TenLe": "Thứ Hai sau Chúa Nhật VIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 103
+  },
+  {
+    "ID": 104,
+    "TenLe": "Thứ Ba sau Chúa Nhật VIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 104
+  },
+  {
+    "ID": 105,
+    "TenLe": "Thứ Tư sau Chúa Nhật VIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 105
+  },
+  {
+    "ID": 106,
+    "TenLe": "Thứ Năm sau Chúa Nhật VIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 106
+  },
+  {
+    "ID": 107,
+    "TenLe": "Thứ Sáu sau Chúa Nhật VIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 107
+  },
+  {
+    "ID": 108,
+    "TenLe": "Thứ Bảy sau Chúa Nhật VIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 108
+  },
+  {
+    "ID": 109,
+    "TenLe": "Chúa Nhật IX Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 9
+  },
+  {
+    "ID": 110,
+    "TenLe": "Thứ Hai sau Chúa Nhật IX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 109
+  },
+  {
+    "ID": 111,
+    "TenLe": "Thứ Ba sau Chúa Nhật IX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 110
+  },
+  {
+    "ID": 112,
+    "TenLe": "Thứ Tư sau Chúa Nhật IX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 111
+  },
+  {
+    "ID": 113,
+    "TenLe": "Thứ Năm sau Chúa Nhật IX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 112
+  },
+  {
+    "ID": 114,
+    "TenLe": "Thứ Sáu sau Chúa Nhật IX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 113
+  },
+  {
+    "ID": 115,
+    "TenLe": "Thứ Bảy sau Chúa Nhật IX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 114
+  },
+  {
+    "ID": 116,
+    "TenLe": "Chúa Nhật X Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 10
+  },
+  {
+    "ID": 117,
+    "TenLe": "Thứ Hai sau Chúa Nhật X Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 115
+  },
+  {
+    "ID": 118,
+    "TenLe": "Thứ Ba sau Chúa Nhật X Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 116
+  },
+  {
+    "ID": 119,
+    "TenLe": "Thứ Tư sau Chúa Nhật X Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 117
+  },
+  {
+    "ID": 120,
+    "TenLe": "Thứ Năm sau Chúa Nhật X Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 118
+  },
+  {
+    "ID": 121,
+    "TenLe": "Thứ Sáu sau Chúa Nhật X Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 119
+  },
+  {
+    "ID": 122,
+    "TenLe": "Thứ Bảy sau Chúa Nhật X Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 120
+  },
+  {
+    "ID": 123,
+    "TenLe": "Chúa Nhật XI Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 11
+  },
+  {
+    "ID": 124,
+    "TenLe": "Thứ Hai sau Chúa Nhật XI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 121
+  },
+  {
+    "ID": 125,
+    "TenLe": "Thứ Ba sau Chúa Nhật XI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 122
+  },
+  {
+    "ID": 126,
+    "TenLe": "Thứ Tư sau Chúa Nhật XI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 123
+  },
+  {
+    "ID": 127,
+    "TenLe": "Thứ Năm sau Chúa Nhật XI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 124
+  },
+  {
+    "ID": 128,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 125
+  },
+  {
+    "ID": 129,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 126
+  },
+  {
+    "ID": 130,
+    "TenLe": "Chúa Nhật XII Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 12
+  },
+  {
+    "ID": 131,
+    "TenLe": "Thứ Hai sau Chúa Nhật XII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 127
+  },
+  {
+    "ID": 132,
+    "TenLe": "Thứ Ba sau Chúa Nhật XII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 128
+  },
+  {
+    "ID": 133,
+    "TenLe": "Thứ Tư sau Chúa Nhật XII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 129
+  },
+  {
+    "ID": 134,
+    "TenLe": "Thứ Năm sau Chúa Nhật XII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 130
+  },
+  {
+    "ID": 135,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 131
+  },
+  {
+    "ID": 136,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 132
+  },
+  {
+    "ID": 137,
+    "TenLe": "Chúa Nhật XIII Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 13
+  },
+  {
+    "ID": 138,
+    "TenLe": "Thứ Hai sau Chúa Nhật XIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 133
+  },
+  {
+    "ID": 139,
+    "TenLe": "Thứ Ba sau Chúa Nhật XIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 134
+  },
+  {
+    "ID": 140,
+    "TenLe": "Thứ Tư sau Chúa Nhật XIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 135
+  },
+  {
+    "ID": 141,
+    "TenLe": "Thứ Năm sau Chúa Nhật XIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 136
+  },
+  {
+    "ID": 142,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 137
+  },
+  {
+    "ID": 143,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 138
+  },
+  {
+    "ID": 144,
+    "TenLe": "Chúa Nhật XIV Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 14
+  },
+  {
+    "ID": 145,
+    "TenLe": "Thứ Hai sau Chúa Nhật XIV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 139
+  },
+  {
+    "ID": 146,
+    "TenLe": "Thứ Ba sau Chúa Nhật XIV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 140
+  },
+  {
+    "ID": 147,
+    "TenLe": "Thứ Tư sau Chúa Nhật XIV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 141
+  },
+  {
+    "ID": 148,
+    "TenLe": "Thứ Năm sau Chúa Nhật XIV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 142
+  },
+  {
+    "ID": 149,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XIV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 143
+  },
+  {
+    "ID": 150,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XIV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 144
+  },
+  {
+    "ID": 151,
+    "TenLe": "Chúa Nhật XV Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 15
+  },
+  {
+    "ID": 152,
+    "TenLe": "Thứ Hai sau Chúa Nhật XV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 145
+  },
+  {
+    "ID": 153,
+    "TenLe": "Thứ Ba sau Chúa Nhật XV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 146
+  },
+  {
+    "ID": 154,
+    "TenLe": "Thứ Tư sau Chúa Nhật XV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 147
+  },
+  {
+    "ID": 155,
+    "TenLe": "Thứ Năm sau Chúa Nhật XV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 148
+  },
+  {
+    "ID": 156,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 149
+  },
+  {
+    "ID": 157,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 150
+  },
+  {
+    "ID": 158,
+    "TenLe": "Chúa Nhật XVI Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 16
+  },
+  {
+    "ID": 159,
+    "TenLe": "Thứ Hai sau Chúa Nhật XVI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 151
+  },
+  {
+    "ID": 160,
+    "TenLe": "Thứ Ba sau Chúa Nhật XVI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 152
+  },
+  {
+    "ID": 161,
+    "TenLe": "Thứ Tư sau Chúa Nhật XVI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 153
+  },
+  {
+    "ID": 162,
+    "TenLe": "Thứ Năm sau Chúa Nhật XVI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 154
+  },
+  {
+    "ID": 163,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XVI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 155
+  },
+  {
+    "ID": 164,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XVI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 156
+  },
+  {
+    "ID": 165,
+    "TenLe": "Chúa Nhật XVII Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 17
+  },
+  {
+    "ID": 166,
+    "TenLe": "Thứ Hai sau Chúa Nhật XVII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 157
+  },
+  {
+    "ID": 167,
+    "TenLe": "Thứ Ba sau Chúa Nhật XVII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 158
+  },
+  {
+    "ID": 168,
+    "TenLe": "Thứ Tư sau Chúa Nhật XVII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 159
+  },
+  {
+    "ID": 169,
+    "TenLe": "Thứ Năm sau Chúa Nhật XVII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 160
+  },
+  {
+    "ID": 170,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XVII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 161
+  },
+  {
+    "ID": 171,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XVII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 162
+  },
+  {
+    "ID": 172,
+    "TenLe": "Chúa Nhật XVIII Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 18
+  },
+  {
+    "ID": 173,
+    "TenLe": "Thứ Hai sau Chúa Nhật XVIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 163
+  },
+  {
+    "ID": 174,
+    "TenLe": "Thứ Ba sau Chúa Nhật XVIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 164
+  },
+  {
+    "ID": 175,
+    "TenLe": "Thứ Tư sau Chúa Nhật XVIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 165
+  },
+  {
+    "ID": 176,
+    "TenLe": "Thứ Năm sau Chúa Nhật XVIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 166
+  },
+  {
+    "ID": 177,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XVIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 167
+  },
+  {
+    "ID": 178,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XVIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 168
+  },
+  {
+    "ID": 179,
+    "TenLe": "Chúa Nhật XIX Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 19
+  },
+  {
+    "ID": 180,
+    "TenLe": "Thứ Hai sau Chúa Nhật XIX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 169
+  },
+  {
+    "ID": 181,
+    "TenLe": "Thứ Ba sau Chúa Nhật XIX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 170
+  },
+  {
+    "ID": 182,
+    "TenLe": "Thứ Tư sau Chúa Nhật XIX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 171
+  },
+  {
+    "ID": 183,
+    "TenLe": "Thứ Năm sau Chúa Nhật XIX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 172
+  },
+  {
+    "ID": 184,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XIX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 173
+  },
+  {
+    "ID": 185,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XIX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 174
+  },
+  {
+    "ID": 186,
+    "TenLe": "Chúa Nhật XX Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 20
+  },
+  {
+    "ID": 187,
+    "TenLe": "Thứ Hai sau Chúa Nhật XX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 175
+  },
+  {
+    "ID": 188,
+    "TenLe": "Thứ Ba sau Chúa Nhật XX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 176
+  },
+  {
+    "ID": 189,
+    "TenLe": "Thứ Tư sau Chúa Nhật XX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 177
+  },
+  {
+    "ID": 190,
+    "TenLe": "Thứ Năm sau Chúa Nhật XX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 178
+  },
+  {
+    "ID": 191,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 179
+  },
+  {
+    "ID": 192,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 180
+  },
+  {
+    "ID": 193,
+    "TenLe": "Chúa Nhật XXI Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 21
+  },
+  {
+    "ID": 194,
+    "TenLe": "Thứ Hai sau Chúa Nhật XXI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 181
+  },
+  {
+    "ID": 195,
+    "TenLe": "Thứ Ba sau Chúa Nhật XXI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 182
+  },
+  {
+    "ID": 196,
+    "TenLe": "Thứ Tư sau Chúa Nhật XXI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 183
+  },
+  {
+    "ID": 197,
+    "TenLe": "Thứ Năm sau Chúa Nhật XXI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 184
+  },
+  {
+    "ID": 198,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XXI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 185
+  },
+  {
+    "ID": 199,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XXI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 186
+  },
+  {
+    "ID": 200,
+    "TenLe": "Chúa Nhật XXII Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 22
+  },
+  {
+    "ID": 201,
+    "TenLe": "Thứ Hai sau Chúa Nhật XXII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 187
+  },
+  {
+    "ID": 202,
+    "TenLe": "Thứ Ba sau Chúa Nhật XXII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 188
+  },
+  {
+    "ID": 203,
+    "TenLe": "Thứ Tư sau Chúa Nhật XXII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 189
+  },
+  {
+    "ID": 204,
+    "TenLe": "Thứ Năm sau Chúa Nhật XXII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 190
+  },
+  {
+    "ID": 205,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XXII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 191
+  },
+  {
+    "ID": 206,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XXII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 192
+  },
+  {
+    "ID": 207,
+    "TenLe": "Chúa Nhật XXIII Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 23
+  },
+  {
+    "ID": 208,
+    "TenLe": "Thứ Hai sau Chúa Nhật XXIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 193
+  },
+  {
+    "ID": 209,
+    "TenLe": "Thứ Ba sau Chúa Nhật XXIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 194
+  },
+  {
+    "ID": 210,
+    "TenLe": "Thứ Tư sau Chúa Nhật XXIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 195
+  },
+  {
+    "ID": 211,
+    "TenLe": "Thứ Năm sau Chúa Nhật XXIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 196
+  },
+  {
+    "ID": 212,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XXIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 197
+  },
+  {
+    "ID": 213,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XXIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 198
+  },
+  {
+    "ID": 214,
+    "TenLe": "Chúa Nhật XXIV Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 24
+  },
+  {
+    "ID": 215,
+    "TenLe": "Thứ Hai sau Chúa Nhật XXIV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 199
+  },
+  {
+    "ID": 216,
+    "TenLe": "Thứ Ba sau Chúa Nhật XXIV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 200
+  },
+  {
+    "ID": 217,
+    "TenLe": "Thứ Tư sau Chúa Nhật XXIV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 201
+  },
+  {
+    "ID": 218,
+    "TenLe": "Thứ Năm sau Chúa Nhật XXIV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 202
+  },
+  {
+    "ID": 219,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XXIV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 203
+  },
+  {
+    "ID": 220,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XXIV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 204
+  },
+  {
+    "ID": 221,
+    "TenLe": "Chúa Nhật XXV Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 25
+  },
+  {
+    "ID": 222,
+    "TenLe": "Thứ Hai sau Chúa Nhật XXV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 205
+  },
+  {
+    "ID": 223,
+    "TenLe": "Thứ Ba sau Chúa Nhật XXV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 206
+  },
+  {
+    "ID": 224,
+    "TenLe": "Thứ Tư sau Chúa Nhật XXV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 207
+  },
+  {
+    "ID": 225,
+    "TenLe": "Thứ Năm sau Chúa Nhật XXV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 208
+  },
+  {
+    "ID": 226,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XXV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 209
+  },
+  {
+    "ID": 227,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XXV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 210
+  },
+  {
+    "ID": 228,
+    "TenLe": "Chúa Nhật XXVI Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 26
+  },
+  {
+    "ID": 229,
+    "TenLe": "Thứ Hai sau Chúa Nhật XXVI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 211
+  },
+  {
+    "ID": 230,
+    "TenLe": "Thứ Ba sau Chúa Nhật XXVI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 212
+  },
+  {
+    "ID": 231,
+    "TenLe": "Thứ Tư sau Chúa Nhật XXVI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 213
+  },
+  {
+    "ID": 232,
+    "TenLe": "Thứ Năm sau Chúa Nhật XXVI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 214
+  },
+  {
+    "ID": 233,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XXVI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 215
+  },
+  {
+    "ID": 234,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XXVI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 216
+  },
+  {
+    "ID": 235,
+    "TenLe": "Chúa Nhật XXVII Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 27
+  },
+  {
+    "ID": 236,
+    "TenLe": "Thứ Hai sau Chúa Nhật XXVII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 217
+  },
+  {
+    "ID": 237,
+    "TenLe": "Thứ Ba sau Chúa Nhật XXVII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 218
+  },
+  {
+    "ID": 238,
+    "TenLe": "Thứ Tư sau Chúa Nhật XXVII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 219
+  },
+  {
+    "ID": 239,
+    "TenLe": "Thứ Năm sau Chúa Nhật XXVII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 220
+  },
+  {
+    "ID": 240,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XXVII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 221
+  },
+  {
+    "ID": 241,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XXVII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 222
+  },
+  {
+    "ID": 242,
+    "TenLe": "Chúa Nhật XXVIII Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 28
+  },
+  {
+    "ID": 243,
+    "TenLe": "Thứ Hai sau Chúa Nhật XXVIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 223
+  },
+  {
+    "ID": 244,
+    "TenLe": "Thứ Ba sau Chúa Nhật XXVIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 224
+  },
+  {
+    "ID": 245,
+    "TenLe": "Thứ Tư sau Chúa Nhật XXVIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 225
+  },
+  {
+    "ID": 246,
+    "TenLe": "Thứ Năm sau Chúa Nhật XXVIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 226
+  },
+  {
+    "ID": 247,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XXVIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 227
+  },
+  {
+    "ID": 248,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XXVIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 228
+  },
+  {
+    "ID": 249,
+    "TenLe": "Chúa Nhật XXIX Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 29
+  },
+  {
+    "ID": 250,
+    "TenLe": "Thứ Hai sau Chúa Nhật XXIX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 229
+  },
+  {
+    "ID": 251,
+    "TenLe": "Thứ Ba sau Chúa Nhật XXIX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 230
+  },
+  {
+    "ID": 252,
+    "TenLe": "Thứ Tư sau Chúa Nhật XXIX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 231
+  },
+  {
+    "ID": 253,
+    "TenLe": "Thứ Năm sau Chúa Nhật XXIX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 232
+  },
+  {
+    "ID": 254,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XXIX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 233
+  },
+  {
+    "ID": 255,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XXIX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 234
+  },
+  {
+    "ID": 256,
+    "TenLe": "Chúa Nhật XXX Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 30
+  },
+  {
+    "ID": 257,
+    "TenLe": "Thứ Hai sau Chúa Nhật XXX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 235
+  },
+  {
+    "ID": 258,
+    "TenLe": "Thứ Ba sau Chúa Nhật XXX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 236
+  },
+  {
+    "ID": 259,
+    "TenLe": "Thứ Tư sau Chúa Nhật XXX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 237
+  },
+  {
+    "ID": 260,
+    "TenLe": "Thứ Năm sau Chúa Nhật XXX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 238
+  },
+  {
+    "ID": 261,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XXX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 239
+  },
+  {
+    "ID": 262,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XXX Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 240
+  },
+  {
+    "ID": 263,
+    "TenLe": "Chúa Nhật XXXI Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 31
+  },
+  {
+    "ID": 264,
+    "TenLe": "Thứ Hai sau Chúa Nhật XXXI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 241
+  },
+  {
+    "ID": 265,
+    "TenLe": "Thứ Ba sau Chúa Nhật XXXI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 242
+  },
+  {
+    "ID": 266,
+    "TenLe": "Thứ Tư sau Chúa Nhật XXXI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 243
+  },
+  {
+    "ID": 267,
+    "TenLe": "Thứ Năm sau Chúa Nhật XXXI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 244
+  },
+  {
+    "ID": 268,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XXXI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 245
+  },
+  {
+    "ID": 269,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XXXI Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 246
+  },
+  {
+    "ID": 270,
+    "TenLe": "Chúa Nhật XXXII Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 32
+  },
+  {
+    "ID": 271,
+    "TenLe": "Thứ Hai sau Chúa Nhật XXXII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 247
+  },
+  {
+    "ID": 272,
+    "TenLe": "Thứ Ba sau Chúa Nhật XXXII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 248
+  },
+  {
+    "ID": 273,
+    "TenLe": "Thứ Tư sau Chúa Nhật XXXII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 249
+  },
+  {
+    "ID": 274,
+    "TenLe": "Thứ Năm sau Chúa Nhật XXXII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 250
+  },
+  {
+    "ID": 275,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XXXII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 251
+  },
+  {
+    "ID": 276,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XXXII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 252
+  },
+  {
+    "ID": 277,
+    "TenLe": "Chúa Nhật XXXIII Thường Niên",
+    "BacLe1": 6,
+    "BacLe2": 33
+  },
+  {
+    "ID": 278,
+    "TenLe": "Thứ Hai sau Chúa Nhật XXXIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 253
+  },
+  {
+    "ID": 279,
+    "TenLe": "Thứ Ba sau Chúa Nhật XXXIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 254
+  },
+  {
+    "ID": 280,
+    "TenLe": "Thứ Tư sau Chúa Nhật XXXIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 255
+  },
+  {
+    "ID": 281,
+    "TenLe": "Thứ Năm sau Chúa Nhật XXXIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 256
+  },
+  {
+    "ID": 282,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XXXIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 257
+  },
+  {
+    "ID": 283,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XXXIII Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 258
+  },
+  {
+    "ID": 284,
+    "TenLe": "Chúa Nhật XXXIV Thường Niên. Đức Giêsu Kitô Vua Vũ Trụ",
+    "BacLe1": 3,
+    "BacLe2": 5
+  },
+  {
+    "ID": 285,
+    "TenLe": "Thứ Hai sau Chúa Nhật XXXIV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 259
+  },
+  {
+    "ID": 286,
+    "TenLe": "Thứ Ba sau Chúa Nhật XXXIV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 260
+  },
+  {
+    "ID": 287,
+    "TenLe": "Thứ Tư sau Chúa Nhật XXXIV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 261
+  },
+  {
+    "ID": 288,
+    "TenLe": "Thứ Năm sau Chúa Nhật XXXIV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 262
+  },
+  {
+    "ID": 289,
+    "TenLe": "Thứ Sáu sau Chúa Nhật XXXIV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 263
+  },
+  {
+    "ID": 290,
+    "TenLe": "Thứ Bảy sau Chúa Nhật XXXIV Thường Niên",
+    "BacLe1": 13,
+    "BacLe2": 264
+  },
+  {
+    "ID": 291,
+    "TenLe": "Thứ Tư Lễ Tro. Giữ chay và kiêng thịt",
+    "BacLe1": 2,
+    "BacLe2": 8
+  },
+  {
+    "ID": 292,
+    "TenLe": "Thứ Năm sau Lễ Tro",
+    "BacLe1": 9,
+    "BacLe2": 16
+  },
+  {
+    "ID": 293,
+    "TenLe": "Thứ Sáu sau Lễ Tro",
+    "BacLe1": 9,
+    "BacLe2": 17
+  },
+  {
+    "ID": 294,
+    "TenLe": "Thứ Bảy sau Lễ Tro",
+    "BacLe1": 9,
+    "BacLe2": 18
+  },
+  {
+    "ID": 295,
+    "TenLe": "Chúa Nhật I Mùa Chay",
+    "BacLe1": 2,
+    "BacLe2": 6
+  },
+  {
+    "ID": 296,
+    "TenLe": "Thứ Hai sau Chúa Nhật I Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 19
+  },
+  {
+    "ID": 297,
+    "TenLe": "Thứ Ba sau Chúa Nhật I Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 20
+  },
+  {
+    "ID": 298,
+    "TenLe": "Thứ Tư sau Chúa Nhật I Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 21
+  },
+  {
+    "ID": 299,
+    "TenLe": "Thứ Năm sau Chúa Nhật I Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 22
+  },
+  {
+    "ID": 300,
+    "TenLe": "Thứ Sáu sau Chúa Nhật I Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 23
+  },
+  {
+    "ID": 301,
+    "TenLe": "Thứ Bảy sau Chúa Nhật I Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 24
+  },
+  {
+    "ID": 302,
+    "TenLe": "Chúa Nhật II Mùa Chay",
+    "BacLe1": 2,
+    "BacLe2": 6
+  },
+  {
+    "ID": 303,
+    "TenLe": "Thứ Hai sau Chúa Nhật II Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 25
+  },
+  {
+    "ID": 304,
+    "TenLe": "Thứ Ba sau Chúa Nhật II Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 26
+  },
+  {
+    "ID": 305,
+    "TenLe": "Thứ Tư sau Chúa Nhật II Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 27
+  },
+  {
+    "ID": 306,
+    "TenLe": "Thứ Năm sau Chúa Nhật II Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 28
+  },
+  {
+    "ID": 307,
+    "TenLe": "Thứ Sáu sau Chúa Nhật II Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 29
+  },
+  {
+    "ID": 308,
+    "TenLe": "Thứ Bảy sau Chúa Nhật II Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 30
+  },
+  {
+    "ID": 309,
+    "TenLe": "Chúa Nhật III Mùa Chay",
+    "BacLe1": 2,
+    "BacLe2": 6
+  },
+  {
+    "ID": 310,
+    "TenLe": "Thứ Hai sau Chúa Nhật III Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 31
+  },
+  {
+    "ID": 311,
+    "TenLe": "Thứ Ba sau Chúa Nhật III Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 32
+  },
+  {
+    "ID": 312,
+    "TenLe": "Thứ Tư sau Chúa Nhật III Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 33
+  },
+  {
+    "ID": 313,
+    "TenLe": "Thứ Năm sau Chúa Nhật III Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 34
+  },
+  {
+    "ID": 314,
+    "TenLe": "Thứ Sáu sau Chúa Nhật III Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 35
+  },
+  {
+    "ID": 315,
+    "TenLe": "Thứ Bảy sau Chúa Nhật III Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 36
+  },
+  {
+    "ID": 316,
+    "TenLe": "Chúa Nhật IV Mùa Chay",
+    "BacLe1": 2,
+    "BacLe2": 6
+  },
+  {
+    "ID": 317,
+    "TenLe": "Thứ Hai sau Chúa Nhật IV Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 37
+  },
+  {
+    "ID": 318,
+    "TenLe": "Thứ Ba sau Chúa Nhật IV Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 38
+  },
+  {
+    "ID": 319,
+    "TenLe": "Thứ Tư sau Chúa Nhật IV Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 39
+  },
+  {
+    "ID": 320,
+    "TenLe": "Thứ Năm sau Chúa Nhật IV Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 40
+  },
+  {
+    "ID": 321,
+    "TenLe": "Thứ Sáu sau Chúa Nhật IV Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 41
+  },
+  {
+    "ID": 322,
+    "TenLe": "Thứ Bảy sau Chúa Nhật IV Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 42
+  },
+  {
+    "ID": 323,
+    "TenLe": "Chúa Nhật V Mùa Chay",
+    "BacLe1": 2,
+    "BacLe2": 6
+  },
+  {
+    "ID": 324,
+    "TenLe": "Thứ Hai sau Chúa Nhật V Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 43
+  },
+  {
+    "ID": 325,
+    "TenLe": "Thứ Ba sau Chúa Nhật V Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 44
+  },
+  {
+    "ID": 326,
+    "TenLe": "Thứ Tư sau Chúa Nhật V Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 45
+  },
+  {
+    "ID": 327,
+    "TenLe": "Thứ Năm sau Chúa Nhật V Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 46
+  },
+  {
+    "ID": 328,
+    "TenLe": "Thứ Sáu sau Chúa Nhật V Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 47
+  },
+  {
+    "ID": 329,
+    "TenLe": "Thứ Bảy sau Chúa Nhật V Mùa Chay",
+    "BacLe1": 9,
+    "BacLe2": 48
+  },
+  {
+    "ID": 330,
+    "TenLe": "Chúa Nhật Lễ Lá",
+    "BacLe1": 2,
+    "BacLe2": 6
+  },
+  {
+    "ID": 331,
+    "TenLe": "Thứ Hai Tuần Thánh",
+    "BacLe1": 2,
+    "BacLe2": 9
+  },
+  {
+    "ID": 332,
+    "TenLe": "Thứ Ba Tuần Thánh",
+    "BacLe1": 2,
+    "BacLe2": 9
+  },
+  {
+    "ID": 333,
+    "TenLe": "Thứ Tư Tuần Thánh",
+    "BacLe1": 2,
+    "BacLe2": 9
+  },
+  {
+    "ID": 334,
+    "TenLe": "Thứ Năm Tuần Thánh",
+    "BacLe1": 1,
+    "BacLe2": 1
+  },
+  {
+    "ID": 335,
+    "TenLe": "Thứ Sáu Tuần Thánh. Tưởng Niệm Cuộc Thương Khó Của Chúa. Giữ chay và kiêng thịt",
+    "BacLe1": 1,
+    "BacLe2": 2
+  },
+  {
+    "ID": 336,
+    "TenLe": "Thứ Bảy Tuần Thánh",
+    "BacLe1": 1,
+    "BacLe2": 3
+  },
+  {
+    "ID": 337,
+    "TenLe": "Thánh Lễ Chúa Nhật Phục Sinh",
+    "BacLe1": 1,
+    "BacLe2": 4
+  },
+  {
+    "ID": 338,
+    "TenLe": "Thứ Hai Bát Nhật Phục Sinh",
+    "BacLe1": 2,
+    "BacLe2": 10
+  },
+  {
+    "ID": 339,
+    "TenLe": "Thứ Ba Bát Nhật Phục Sinh",
+    "BacLe1": 2,
+    "BacLe2": 10
+  },
+  {
+    "ID": 340,
+    "TenLe": "Thứ Tư Bát Nhật Phục Sinh",
+    "BacLe1": 2,
+    "BacLe2": 10
+  },
+  {
+    "ID": 341,
+    "TenLe": "Thứ Năm Bát Nhật Phục Sinh",
+    "BacLe1": 2,
+    "BacLe2": 10
+  },
+  {
+    "ID": 342,
+    "TenLe": "Thứ Sáu Bát Nhật Phục Sinh",
+    "BacLe1": 2,
+    "BacLe2": 10
+  },
+  {
+    "ID": 343,
+    "TenLe": "Thứ Bảy Bát Nhật Phục Sinh",
+    "BacLe1": 2,
+    "BacLe2": 10
+  },
+  {
+    "ID": 344,
+    "TenLe": "Chúa Nhật II Phục Sinh. Cuối Tuần Bát Nhật Phục Sinh. Chúa Nhật Về Lòng Thương Xót Chúa",
+    "BacLe1": 2,
+    "BacLe2": 7
+  },
+  {
+    "ID": 345,
+    "TenLe": "Thứ Hai sau Chúa Nhật II Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 25
+  },
+  {
+    "ID": 346,
+    "TenLe": "Thứ Ba sau Chúa Nhật II Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 26
+  },
+  {
+    "ID": 347,
+    "TenLe": "Thứ Tư sau Chúa Nhật II Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 27
+  },
+  {
+    "ID": 348,
+    "TenLe": "Thứ Năm sau Chúa Nhật II Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 28
+  },
+  {
+    "ID": 349,
+    "TenLe": "Thứ Sáu sau Chúa Nhật II Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 29
+  },
+  {
+    "ID": 350,
+    "TenLe": "Thứ Bảy sau Chúa Nhật II Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 30
+  },
+  {
+    "ID": 351,
+    "TenLe": "Chúa Nhật III Phục Sinh",
+    "BacLe1": 2,
+    "BacLe2": 7
+  },
+  {
+    "ID": 352,
+    "TenLe": "Thứ Hai sau Chúa Nhật III Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 31
+  },
+  {
+    "ID": 353,
+    "TenLe": "Thứ Ba sau Chúa Nhật III Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 32
+  },
+  {
+    "ID": 354,
+    "TenLe": "Thứ Tư sau Chúa Nhật III Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 33
+  },
+  {
+    "ID": 355,
+    "TenLe": "Thứ Năm sau Chúa Nhật III Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 34
+  },
+  {
+    "ID": 356,
+    "TenLe": "Thứ Sáu sau Chúa Nhật III Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 35
+  },
+  {
+    "ID": 357,
+    "TenLe": "Thứ Bảy sau Chúa Nhật III Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 36
+  },
+  {
+    "ID": 358,
+    "TenLe": "Chúa Nhật IV Phục Sinh. Chúa Nhật Chúa Chiên Lành. Cầu cho ơn thiên triệu linh mục và tu sĩ",
+    "BacLe1": 2,
+    "BacLe2": 7
+  },
+  {
+    "ID": 359,
+    "TenLe": "Thứ Hai sau Chúa Nhật IV Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 37
+  },
+  {
+    "ID": 360,
+    "TenLe": "Thứ Ba sau Chúa Nhật IV Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 38
+  },
+  {
+    "ID": 361,
+    "TenLe": "Thứ Tư sau Chúa Nhật IV Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 39
+  },
+  {
+    "ID": 362,
+    "TenLe": "Thứ Năm sau Chúa Nhật IV Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 40
+  },
+  {
+    "ID": 363,
+    "TenLe": "Thứ Sáu sau Chúa Nhật IV Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 41
+  },
+  {
+    "ID": 364,
+    "TenLe": "Thứ Bảy sau Chúa Nhật IV Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 42
+  },
+  {
+    "ID": 365,
+    "TenLe": "Chúa Nhật V Phục Sinh",
+    "BacLe1": 2,
+    "BacLe2": 7
+  },
+  {
+    "ID": 366,
+    "TenLe": "Thứ Hai sau Chúa Nhật V Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 43
+  },
+  {
+    "ID": 367,
+    "TenLe": "Thứ Ba sau Chúa Nhật V Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 44
+  },
+  {
+    "ID": 368,
+    "TenLe": "Thứ Tư sau Chúa Nhật V Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 45
+  },
+  {
+    "ID": 369,
+    "TenLe": "Thứ Năm sau Chúa Nhật V Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 46
+  },
+  {
+    "ID": 370,
+    "TenLe": "Thứ Sáu sau Chúa Nhật V Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 47
+  },
+  {
+    "ID": 371,
+    "TenLe": "Thứ Bảy sau Chúa Nhật V Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 48
+  },
+  {
+    "ID": 372,
+    "TenLe": "Chúa Nhật VI Phục Sinh.",
+    "BacLe1": 2,
+    "BacLe2": 7
+  },
+  {
+    "ID": 373,
+    "TenLe": "Thứ Hai sau Chúa Nhật VI Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 49
+  },
+  {
+    "ID": 374,
+    "TenLe": "Thứ Ba sau Chúa Nhật VI Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 50
+  },
+  {
+    "ID": 375,
+    "TenLe": "Thứ Tư sau Chúa Nhật VI Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 51
+  },
+  {
+    "ID": 376,
+    "TenLe": "Thứ Năm sau Chúa Nhật VI Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 52
+  },
+  {
+    "ID": 377,
+    "TenLe": "Thứ Sáu sau Chúa Nhật VI Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 53
+  },
+  {
+    "ID": 378,
+    "TenLe": "Thứ Bảy sau Chúa Nhật VI Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 54
+  },
+  {
+    "ID": 379,
+    "TenLe": "Chúa Nhật VII Phục Sinh.  Lễ Chúa Thăng Thiên",
+    "BacLe1": 2,
+    "BacLe2": 3
+  },
+  {
+    "ID": 380,
+    "TenLe": "Thứ Hai sau Chúa Nhật VII Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 55
+  },
+  {
+    "ID": 381,
+    "TenLe": "Thứ Ba sau Chúa Nhật VII Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 56
+  },
+  {
+    "ID": 382,
+    "TenLe": "Thứ Tư sau Chúa Nhật VII Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 57
+  },
+  {
+    "ID": 383,
+    "TenLe": "Thứ Năm sau Chúa Nhật VII Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 58
+  },
+  {
+    "ID": 384,
+    "TenLe": "Thứ Sáu sau Chúa Nhật VII Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 59
+  },
+  {
+    "ID": 385,
+    "TenLe": "Thứ Bảy sau Chúa Nhật VII Phục Sinh",
+    "BacLe1": 13,
+    "BacLe2": 60
+  },
+  {
+    "ID": 386,
+    "TenLe": "Lễ Chúa Thánh Thần Hiện Xuống",
+    "BacLe1": 2,
+    "BacLe2": 4
+  },
+  {
+    "ID": 387,
+    "TenLe": "Lễ Chúa Ba Ngôi",
+    "BacLe1": 3,
+    "BacLe2": 1
+  },
+  {
+    "ID": 388,
+    "TenLe": "Lễ Mình Máu Thánh Chúa Kitô",
+    "BacLe1": 3,
+    "BacLe2": 2
+  },
+  {
+    "ID": 389,
+    "TenLe": "Lễ Thánh Tâm Chúa Giêsu",
+    "BacLe1": 3,
+    "BacLe2": 3
+  },
+  {
+    "ID": 390,
+    "TenLe": "Trái Tim Vô Nhiễm Đức Mẹ",
+    "BacLe1": 10,
+    "BacLe2": 1
+  },
+  {
+    "ID": 391,
+    "TenLe": "Mùa Vọng",
+    "BacLe1": 9,
+    "BacLe2": 1
+  },
+  {
+    "ID": 392,
+    "TenLe": "Mùa Vọng",
+    "BacLe1": 9,
+    "BacLe2": 2
+  },
+  {
+    "ID": 393,
+    "TenLe": "Mùa Vọng",
+    "BacLe1": 9,
+    "BacLe2": 3
+  },
+  {
+    "ID": 394,
+    "TenLe": "Mùa Vọng",
+    "BacLe1": 9,
+    "BacLe2": 4
+  },
+  {
+    "ID": 395,
+    "TenLe": "Mùa Vọng",
+    "BacLe1": 9,
+    "BacLe2": 5
+  },
+  {
+    "ID": 396,
+    "TenLe": "Mùa Vọng",
+    "BacLe1": 9,
+    "BacLe2": 6
+  },
+  {
+    "ID": 397,
+    "TenLe": "Mùa Vọng",
+    "BacLe1": 9,
+    "BacLe2": 7
+  },
+  {
+    "ID": 398,
+    "TenLe": "Mùa Vọng",
+    "BacLe1": 9,
+    "BacLe2": 8
+  },
+  {
+    "ID": 399,
+    "TenLe": "Thánh Maria, Mẹ Thiên Chúa. Ngày thế giới hòa bình",
+    "BacLe1": 3,
+    "BacLe2": 6
+  },
+  {
+    "ID": 400,
+    "TenLe": "Thánh Basiliô Cả và thánh Grêgôriô, giám mục, tiến sĩ hội Thánh",
+    "BacLe1": 10,
+    "BacLe2": 2
+  },
+  {
+    "ID": 401,
+    "TenLe": "Danh Thánh Chúa Giêsu",
+    "BacLe1": 12,
+    "BacLe2": 1
+  },
+  {
+    "ID": 402,
+    "TenLe": "Thánh Raimunđô Penyafort, linh mục",
+    "BacLe1": 12,
+    "BacLe2": 2
+  },
+  {
+    "ID": 403,
+    "TenLe": "Thánh Hilariô, giám mục, tiến sĩ Hội Thánh",
+    "BacLe1": 12,
+    "BacLe2": 3
+  },
+  {
+    "ID": 404,
+    "TenLe": "Thánh Antôn, viện phụ",
+    "BacLe1": 10,
+    "BacLe2": 3
+  },
+  {
+    "ID": 405,
+    "TenLe": "Thánh Fabianô, giáo hoàng, tử đạo. Thánh Sêbastianô, tử đạo",
+    "BacLe1": 12,
+    "BacLe2": 4
+  },
+  {
+    "ID": 406,
+    "TenLe": "Thánh Anê, trinh nữ, tử đạo",
+    "BacLe1": 10,
+    "BacLe2": 4
+  },
+  {
+    "ID": 407,
+    "TenLe": "Vinh Sơn, phó tế, tử đạo",
+    "BacLe1": 12,
+    "BacLe2": 5
+  },
+  {
+    "ID": 408,
+    "TenLe": "Thánh Phanxicô Salêsiô, giám mục, tiến sĩ Hội Thánh",
+    "BacLe1": 10,
+    "BacLe2": 5
+  },
+  {
+    "ID": 409,
+    "TenLe": "Thánh Phaolô, tông đồ, trở lại",
+    "BacLe1": 7,
+    "BacLe2": 3
+  },
+  {
+    "ID": 410,
+    "TenLe": "Thánh Timôthêô và thánh Titô, giám mục",
+    "BacLe1": 10,
+    "BacLe2": 6
+  },
+  {
+    "ID": 411,
+    "TenLe": "Thánh Angêla Mêrici, trinh nữ",
+    "BacLe1": 12,
+    "BacLe2": 6
+  },
+  {
+    "ID": 412,
+    "TenLe": "Thánh Tôma Aquinô, linh mục, tiến sĩ Hội Thánh",
+    "BacLe1": 10,
+    "BacLe2": 7
+  },
+  {
+    "ID": 413,
+    "TenLe": "Thánh Gioan Bosco, linh mục",
+    "BacLe1": 10,
+    "BacLe2": 8
+  },
+  {
+    "ID": 414,
+    "TenLe": "Dâng Chúa Giêsu Trong Đền Thánh (Lễ Nến)",
+    "BacLe1": 5,
+    "BacLe2": 2
+  },
+  {
+    "ID": 415,
+    "TenLe": "Thánh Blasiô, giám mục, tử đạo. Thánh Ansgariô, giám mục",
+    "BacLe1": 12,
+    "BacLe2": 7
+  },
+  {
+    "ID": 416,
+    "TenLe": "Thánh Agatha, trinh nữ, tử đạo",
+    "BacLe1": 10,
+    "BacLe2": 9
+  },
+  {
+    "ID": 417,
+    "TenLe": "Thánh Phaolô Miki, Linh mục và các bạn tử đạo",
+    "BacLe1": 10,
+    "BacLe2": 10
+  },
+  {
+    "ID": 418,
+    "TenLe": "Thánh Giêrônimô Êmilianô. Thánh Jôsêphina Bakhita, trinh nữ",
+    "BacLe1": 12,
+    "BacLe2": 8
+  },
+  {
+    "ID": 419,
+    "TenLe": "Thánh Scholastica, trinh nữ",
+    "BacLe1": 12,
+    "BacLe2": 9
+  },
+  {
+    "ID": 420,
+    "TenLe": "Đức Mẹ Lộ Đức. Ngày Quốc Tế Bệnh Nhân",
+    "BacLe1": 12,
+    "BacLe2": 11
+  },
+  {
+    "ID": 421,
+    "TenLe": "Thánh Cyrillô, đan sĩ và thánh Mêthôđiô, giám mục",
+    "BacLe1": 10,
+    "BacLe2": 12
+  },
+  {
+    "ID": 422,
+    "TenLe": "Bảy thánh lập dòng Tôi Tớ Đức Trinh Nữ Maria",
+    "BacLe1": 12,
+    "BacLe2": 10
+  },
+  {
+    "ID": 423,
+    "TenLe": "Thánh Phêrô Đamianô, giám mục, tiến sĩ Hội Thánh",
+    "BacLe1": 12,
+    "BacLe2": 11
+  },
+  {
+    "ID": 424,
+    "TenLe": "Lập Tông Tòa Thánh Phêrô",
+    "BacLe1": 7,
+    "BacLe2": 4
+  },
+  {
+    "ID": 425,
+    "TenLe": "Thánh Pôlycarpô, giám mục, tử đạo",
+    "BacLe1": 12,
+    "BacLe2": 13
+  },
+  {
+    "ID": 426,
+    "TenLe": "Thánh Casimirô",
+    "BacLe1": 12,
+    "BacLe2": 14
+  },
+  {
+    "ID": 427,
+    "TenLe": "Thánh nữ Perpêtua và thánh nữ Fêlicita, tử đạo",
+    "BacLe1": 10,
+    "BacLe2": 15
+  },
+  {
+    "ID": 428,
+    "TenLe": "Thánh Gioan Thiên Chúa, tu sĩ",
+    "BacLe1": 12,
+    "BacLe2": 12
+  },
+  {
+    "ID": 429,
+    "TenLe": "Thánh Phanxica Rôma, nữ tu",
+    "BacLe1": 12,
+    "BacLe2": 13
+  },
+  {
+    "ID": 430,
+    "TenLe": "Thánh Patriciô, giám mục",
+    "BacLe1": 12,
+    "BacLe2": 14
+  },
+  {
+    "ID": 431,
+    "TenLe": "Thánh Cyrillô Giêrusalem, tiến sĩ Hội Thánh",
+    "BacLe1": 12,
+    "BacLe2": 15
+  },
+  {
+    "ID": 432,
+    "TenLe": "Thánh Giuse, bạn trăm năm Đức Maria",
+    "BacLe1": 3,
+    "BacLe2": 9
+  },
+  {
+    "ID": 433,
+    "TenLe": "Thánh Turibô Môgrôvêjô, giám mục",
+    "BacLe1": 12,
+    "BacLe2": 16
+  },
+  {
+    "ID": 434,
+    "TenLe": "Lễ Truyền Tin",
+    "BacLe1": 3,
+    "BacLe2": 4
+  },
+  {
+    "ID": 435,
+    "TenLe": "Thánh Phanxicô Phaola, ẩn tu. Kỷ niệm ngày Đức Cố Giáo Hoàng Gioan Phaolô II qua đời [2005]",
+    "BacLe1": 12,
+    "BacLe2": 17
+  },
+  {
+    "ID": 436,
+    "TenLe": "Thánh Isiđôrô, giám mục, tiến sĩ Hội Thánh",
+    "BacLe1": 12,
+    "BacLe2": 18
+  },
+  {
+    "ID": 437,
+    "TenLe": "Thánh Vinh Sơn Ferrê, linh mục",
+    "BacLe1": 12,
+    "BacLe2": 19
+  },
+  {
+    "ID": 438,
+    "TenLe": "Thánh Stanislaô, giám mục, tử đạo",
+    "BacLe1": 12,
+    "BacLe2": 17
+  },
+  {
+    "ID": 439,
+    "TenLe": "Thánh Martinô I, giáo hoàng, tử đạo",
+    "BacLe1": 12,
+    "BacLe2": 20
+  },
+  {
+    "ID": 440,
+    "TenLe": "Thánh Anselmô, giám mục, tiến sĩ Hội Thánh",
+    "BacLe1": 12,
+    "BacLe2": 21
+  },
+  {
+    "ID": 441,
+    "TenLe": "Thánh Giogiô, tử đạo. Thánh Ađalbertô, giám mục, tử đạo",
+    "BacLe1": 12,
+    "BacLe2": 22
+  },
+  {
+    "ID": 442,
+    "TenLe": "Thánh Fiđêlê Sigmaringen, linh mục, tử đạo",
+    "BacLe1": 12,
+    "BacLe2": 23
+  },
+  {
+    "ID": 443,
+    "TenLe": "Thánh Marcô, tác giả Tin Mừng",
+    "BacLe1": 7,
+    "BacLe2": 5
+  },
+  {
+    "ID": 444,
+    "TenLe": "Thánh Phêrô Chanel, linh mục, tử đạo. Thánh Luy Grignion Montfont, linh mục",
+    "BacLe1": 12,
+    "BacLe2": 24
+  },
+  {
+    "ID": 445,
+    "TenLe": "Thánh Catarina Siêna, trinh nữ, tiến sĩ Hội Thánh",
+    "BacLe1": 10,
+    "BacLe2": 18
+  },
+  {
+    "ID": 446,
+    "TenLe": "Thánh Piô V, giáo hoàng",
+    "BacLe1": 12,
+    "BacLe2": 25
+  },
+  {
+    "ID": 447,
+    "TenLe": "Thánh Giuse Thợ",
+    "BacLe1": 12,
+    "BacLe2": 26
+  },
+  {
+    "ID": 448,
+    "TenLe": "Thánh Athanasiô, giám mục, tiến sĩ Hội Thánh",
+    "BacLe1": 10,
+    "BacLe2": 19
+  },
+  {
+    "ID": 449,
+    "TenLe": "Thánh Philipphê và thánh Giacôbê, tông đồ",
+    "BacLe1": 7,
+    "BacLe2": 6
+  },
+  {
+    "ID": 450,
+    "TenLe": "Thánh Nêrêô và thánh Achilêô, tử đạo. Thánh Pancratiô, tử đạo",
+    "BacLe1": 12,
+    "BacLe2": 27
+  },
+  {
+    "ID": 451,
+    "TenLe": "Đức Mẹ Fatima",
+    "BacLe1": 12,
+    "BacLe2": 28
+  },
+  {
+    "ID": 452,
+    "TenLe": "Thánh Matthia, tông đồ",
+    "BacLe1": 7,
+    "BacLe2": 7
+  },
+  {
+    "ID": 453,
+    "TenLe": "Thánh Gioan I, giáo hoàng, tử đạo",
+    "BacLe1": 12,
+    "BacLe2": 29
+  },
+  {
+    "ID": 454,
+    "TenLe": "Thánh Bernarđinô Siêna, linh mục",
+    "BacLe1": 12,
+    "BacLe2": 30
+  },
+  {
+    "ID": 455,
+    "TenLe": "Thánh Bêđa Khả Kính, linh mục, tiến sĩ Hội Thánh. Thánh Grêgôriô VII, giáo hoàng. Thánh Maria Magđalêna Pazzi, trinh nữ",
+    "BacLe1": 12,
+    "BacLe2": 31
+  },
+  {
+    "ID": 456,
+    "TenLe": "Thánh Philipphê Nêri, linh mục",
+    "BacLe1": 10,
+    "BacLe2": 20
+  },
+  {
+    "ID": 457,
+    "TenLe": "Thánh Augustinô Cantuariô",
+    "BacLe1": 12,
+    "BacLe2": 32
+  },
+  {
+    "ID": 458,
+    "TenLe": "Đức Maria thăm viếng bà Êlisabeth",
+    "BacLe1": 7,
+    "BacLe2": 1
+  },
+  {
+    "ID": 459,
+    "TenLe": "Thánh Justinô, tử đạo",
+    "BacLe1": 10,
+    "BacLe2": 21
+  },
+  {
+    "ID": 460,
+    "TenLe": "Thánh Marcellinô và thánh Phêrô, tử đạo",
+    "BacLe1": 12,
+    "BacLe2": 33
+  },
+  {
+    "ID": 461,
+    "TenLe": "Thánh Carôlô Lwanga và các bạn, tử đạo",
+    "BacLe1": 10,
+    "BacLe2": 22
+  },
+  {
+    "ID": 462,
+    "TenLe": "Thánh Bônifitiô, giám mục, tử đạo",
+    "BacLe1": 10,
+    "BacLe2": 23
+  },
+  {
+    "ID": 463,
+    "TenLe": "Thánh Norbertô, giám mục",
+    "BacLe1": 12,
+    "BacLe2": 34
+  },
+  {
+    "ID": 464,
+    "TenLe": "Thánh Ephrem, phó tế, tiến sĩ Hội Thánh",
+    "BacLe1": 12,
+    "BacLe2": 35
+  },
+  {
+    "ID": 465,
+    "TenLe": "Thánh Barnaba, tông đồ",
+    "BacLe1": 10,
+    "BacLe2": 24
+  },
+  {
+    "ID": 466,
+    "TenLe": "Thánh Antôn Pađôva, linh mục, tiến sĩ Hội Thánh",
+    "BacLe1": 10,
+    "BacLe2": 25
+  },
+  {
+    "ID": 467,
+    "TenLe": "Thánh Rômualđô, viện phụ",
+    "BacLe1": 12,
+    "BacLe2": 36
+  },
+  {
+    "ID": 468,
+    "TenLe": "Thánh Luy Gônzaga, tu sĩ",
+    "BacLe1": 10,
+    "BacLe2": 26
+  },
+  {
+    "ID": 469,
+    "TenLe": "Thánh Paulinô, giám mục Nôla. Thánh Gioan Fisher, giám mục, tử đạo, và thánh Tôma More, tử đạo",
+    "BacLe1": 12,
+    "BacLe2": 37
+  },
+  {
+    "ID": 470,
+    "TenLe": "Sinh Nhật Thánh Gioan Tẩy Giả",
+    "BacLe1": 3,
+    "BacLe2": 10
+  },
+  {
+    "ID": 471,
+    "TenLe": "Thánh Cyrillô Alexendria, tiến sĩ Hội Thánh",
+    "BacLe1": 12,
+    "BacLe2": 38
+  },
+  {
+    "ID": 472,
+    "TenLe": "Thánh Irênê, giám mục, tử đạo",
+    "BacLe1": 12,
+    "BacLe2": 27
+  },
+  {
+    "ID": 473,
+    "TenLe": "Thánh Phêrô và Thánh Phaolô tông đồ",
+    "BacLe1": 3,
+    "BacLe2": 11
+  },
+  {
+    "ID": 474,
+    "TenLe": "Các thánh tử đạo tiên khởi của giáo đoàn Roma",
+    "BacLe1": 12,
+    "BacLe2": 39
+  },
+  {
+    "ID": 475,
+    "TenLe": "Thánh Tôma, tông đồ",
+    "BacLe1": 7,
+    "BacLe2": 8
+  },
+  {
+    "ID": 476,
+    "TenLe": "Thánh nữ Êlisabeth Bồ Đào Nha",
+    "BacLe1": 12,
+    "BacLe2": 40
+  },
+  {
+    "ID": 477,
+    "TenLe": "Thánh Antôn Maria Zaccaria, linh mục",
+    "BacLe1": 12,
+    "BacLe2": 41
+  },
+  {
+    "ID": 478,
+    "TenLe": "Thánh Maria Gôretti, trinh nữ, tử đạo",
+    "BacLe1": 12,
+    "BacLe2": 42
+  },
+  {
+    "ID": 479,
+    "TenLe": "Thánh Bênêđictô, viện phụ",
+    "BacLe1": 10,
+    "BacLe2": 28
+  },
+  {
+    "ID": 480,
+    "TenLe": "Thánh Henricô",
+    "BacLe1": 12,
+    "BacLe2": 43
+  },
+  {
+    "ID": 481,
+    "TenLe": "Thánh Camillô Lellis, linh mục",
+    "BacLe1": 12,
+    "BacLe2": 44
+  },
+  {
+    "ID": 482,
+    "TenLe": "Thánh Bônaventura, giám mục, tiến sĩ Hội Thánh",
+    "BacLe1": 10,
+    "BacLe2": 29
+  },
+  {
+    "ID": 483,
+    "TenLe": "Đức Mẹ Núi Carmêlô",
+    "BacLe1": 12,
+    "BacLe2": 45
+  },
+  {
+    "ID": 484,
+    "TenLe": "Thánh Laurensô Brinđisi, linh mục, tiến sĩ Hội Thánh",
+    "BacLe1": 12,
+    "BacLe2": 46
+  },
+  {
+    "ID": 485,
+    "TenLe": "Thánh nữ Maria Magđêlêna",
+    "BacLe1": 10,
+    "BacLe2": 30
+  },
+  {
+    "ID": 486,
+    "TenLe": "Thánh Birgitta, nữ tu",
+    "BacLe1": 12,
+    "BacLe2": 47
+  },
+  {
+    "ID": 487,
+    "TenLe": "Thánh Sarbêliô Makhluf, linh mục",
+    "BacLe1": 12,
+    "BacLe2": 48
+  },
+  {
+    "ID": 488,
+    "TenLe": "Thánh Giacôbê, tông đồ",
+    "BacLe1": 7,
+    "BacLe2": 9
+  },
+  {
+    "ID": 489,
+    "TenLe": "Thánh Joachim và Anna, song thân Đức Maria",
+    "BacLe1": 10,
+    "BacLe2": 31
+  },
+  {
+    "ID": 490,
+    "TenLe": "Thánh nữ Martha",
+    "BacLe1": 10,
+    "BacLe2": 32
+  },
+  {
+    "ID": 491,
+    "TenLe": "Thánh Phêrô Kim Ngôn, giám mục, tiến sĩ Hội Thánh",
+    "BacLe1": 12,
+    "BacLe2": 49
+  },
+  {
+    "ID": 492,
+    "TenLe": "Thánh Ignatiô Loyôla, linh mục",
+    "BacLe1": 10,
+    "BacLe2": 33
+  },
+  {
+    "ID": 493,
+    "TenLe": "Thánh Alphongsô Maria Liguori, giám mục, tiến sĩ Hội Thánh",
+    "BacLe1": 10,
+    "BacLe2": 34
+  },
+  {
+    "ID": 494,
+    "TenLe": "Thánh Êusêbiô Vercellêci. Thánh Phêrô Julianô Eymard, linh mục",
+    "BacLe1": 12,
+    "BacLe2": 50
+  },
+  {
+    "ID": 495,
+    "TenLe": "Thánh Gioan Maria Vianney, linh mục",
+    "BacLe1": 10,
+    "BacLe2": 35
+  },
+  {
+    "ID": 496,
+    "TenLe": "Cung hiến thánh đường Đức Maria",
+    "BacLe1": 12,
+    "BacLe2": 51
+  },
+  {
+    "ID": 497,
+    "TenLe": "Chúa Hiển Dung",
+    "BacLe1": 5,
+    "BacLe2": 4
+  },
+  {
+    "ID": 498,
+    "TenLe": "Thánh Xystô II, giáo hoàng, và các bạn, tử đạo. Thánh Cajêtanô, linh mục",
+    "BacLe1": 12,
+    "BacLe2": 52
+  },
+  {
+    "ID": 499,
+    "TenLe": "Thánh Đa Minh, linh mục",
+    "BacLe1": 10,
+    "BacLe2": 36
+  },
+  {
+    "ID": 500,
+    "TenLe": "Thánh Têrêsa Bênêđicta Thánh Giá, nữ tu, tử đạo",
+    "BacLe1": 12,
+    "BacLe2": 53
+  },
+  {
+    "ID": 501,
+    "TenLe": "Thánh Laurensô, phó tế, tử đạo",
+    "BacLe1": 7,
+    "BacLe2": 10
+  },
+  {
+    "ID": 502,
+    "TenLe": "Thánh Clara, trinh nữ",
+    "BacLe1": 10,
+    "BacLe2": 37
+  },
+  {
+    "ID": 503,
+    "TenLe": "Thánh Joanna Phanxica Chantal, nữ tu",
+    "BacLe1": 12,
+    "BacLe2": 54
+  },
+  {
+    "ID": 504,
+    "TenLe": "Thánh Pontianô, giáo hoàng, tử đạo, và thánh Hippôlytô, linh mục, tử đạo",
+    "BacLe1": 12,
+    "BacLe2": 38
+  },
+  {
+    "ID": 505,
+    "TenLe": "Thánh Maximilianô Maria Kolbê, linh mục, tử đạo",
+    "BacLe1": 10,
+    "BacLe2": 39
+  },
+  {
+    "ID": 506,
+    "TenLe": "Đức Mẹ Lên Trời",
+    "BacLe1": 3,
+    "BacLe2": 7
+  },
+  {
+    "ID": 507,
+    "TenLe": "Thánh Stêphanô Hungari",
+    "BacLe1": 12,
+    "BacLe2": 55
+  },
+  {
+    "ID": 508,
+    "TenLe": "Thánh Gioan Êuđê, linh mục",
+    "BacLe1": 12,
+    "BacLe2": 40
+  },
+  {
+    "ID": 509,
+    "TenLe": "Thánh Bênađô, viện phụ, tiến sĩ Hội Thánh",
+    "BacLe1": 10,
+    "BacLe2": 41
+  },
+  {
+    "ID": 510,
+    "TenLe": "Thánh Piô X, giáo Hoàng",
+    "BacLe1": 10,
+    "BacLe2": 42
+  },
+  {
+    "ID": 511,
+    "TenLe": "Đức Maria Nữ Vương",
+    "BacLe1": 10,
+    "BacLe2": 43
+  },
+  {
+    "ID": 512,
+    "TenLe": "Thánh Rôsa Lima, trinh nữ",
+    "BacLe1": 12,
+    "BacLe2": 56
+  },
+  {
+    "ID": 513,
+    "TenLe": "Thánh Barthôlômêô, tông đồ",
+    "BacLe1": 7,
+    "BacLe2": 11
+  },
+  {
+    "ID": 514,
+    "TenLe": "Thánh Luy. Thánh Giuse Calasanz, linh mục",
+    "BacLe1": 12,
+    "BacLe2": 57
+  },
+  {
+    "ID": 515,
+    "TenLe": "Thánh nữ Mônica",
+    "BacLe1": 10,
+    "BacLe2": 44
+  },
+  {
+    "ID": 516,
+    "TenLe": "Thánh Augustinô, giám mục, tiến sĩ Hội Thánh",
+    "BacLe1": 10,
+    "BacLe2": 45
+  },
+  {
+    "ID": 517,
+    "TenLe": "Thánh Gioan Tẩy Giả bị trảm quyết",
+    "BacLe1": 10,
+    "BacLe2": 46
+  },
+  {
+    "ID": 518,
+    "TenLe": "Thánh Grêgôriô Cả, giáo hoàng, tiến sĩ Hội Thánh",
+    "BacLe1": 10,
+    "BacLe2": 47
+  },
+  {
+    "ID": 519,
+    "TenLe": "Sinh Nhật Đức Trinh Nữ Maria",
+    "BacLe1": 7,
+    "BacLe2": 2
+  },
+  {
+    "ID": 520,
+    "TenLe": "Thánh Phêrô Claver, linh mục",
+    "BacLe1": 12,
+    "BacLe2": 58
+  },
+  {
+    "ID": 521,
+    "TenLe": "Danh Thánh Đức maria",
+    "BacLe1": 12,
+    "BacLe2": 48
+  },
+  {
+    "ID": 522,
+    "TenLe": "Thánh Gioan Kim Khẩu, giám mục, tiến sĩ Hội Thánh",
+    "BacLe1": 10,
+    "BacLe2": 49
+  },
+  {
+    "ID": 523,
+    "TenLe": "Suy Tôn Thánh Giá",
+    "BacLe1": 5,
+    "BacLe2": 5
+  },
+  {
+    "ID": 524,
+    "TenLe": "Đức Mẹ Sầu Bi",
+    "BacLe1": 10,
+    "BacLe2": 59
+  },
+  {
+    "ID": 525,
+    "TenLe": "Thánh Cornêliô, giáo hoàng, và thánh Cyprianô, giám mục, tử đạo",
+    "BacLe1": 10,
+    "BacLe2": 50
+  },
+  {
+    "ID": 526,
+    "TenLe": "Thánh Robertô Bellarminô, giám mục, tiến sĩ Hội Thánh",
+    "BacLe1": 12,
+    "BacLe2": 60
+  },
+  {
+    "ID": 527,
+    "TenLe": "Thánh Junuariô, giám mục, tử đạo",
+    "BacLe1": 12,
+    "BacLe2": 61
+  },
+  {
+    "ID": 528,
+    "TenLe": "Thánh Anrê Kim Têgôn, Phaolô Chong Hasang và các bạn, tử đạo",
+    "BacLe1": 10,
+    "BacLe2": 51
+  },
+  {
+    "ID": 529,
+    "TenLe": "Thánh Matthêô, tông đồ, tác giả sách Tin Mừng",
+    "BacLe1": 7,
+    "BacLe2": 12
+  },
+  {
+    "ID": 530,
+    "TenLe": "Thánh Piô Pietrelcina, linh mục",
+    "BacLe1": 10,
+    "BacLe2": 52
+  },
+  {
+    "ID": 531,
+    "TenLe": "Thánh Cosma và thánh Đamianô, tử đạo",
+    "BacLe1": 12,
+    "BacLe2": 62
+  },
+  {
+    "ID": 532,
+    "TenLe": "Thánh Vinh Sơn Phaolô, linh mục",
+    "BacLe1": 10,
+    "BacLe2": 53
+  },
+  {
+    "ID": 533,
+    "TenLe": "Thánh Venceslaô tử đạo. Thánh Laurensô Ruiz và các bạn, tử đạo",
+    "BacLe1": 12,
+    "BacLe2": 63
+  },
+  {
+    "ID": 534,
+    "TenLe": "Các Tổng Lãnh Thiên Thần Michael, Gabriel, Raphael",
+    "BacLe1": 7,
+    "BacLe2": 13
+  },
+  {
+    "ID": 535,
+    "TenLe": "Thánh Giêrônimô, linh mục, tiến sĩ Hội Thánh",
+    "BacLe1": 10,
+    "BacLe2": 54
+  },
+  {
+    "ID": 536,
+    "TenLe": "Thánh Têrêsa Hài Đồng Giêsu, trinh nữ, tiến sĩ Hội Thánh. Bổn mạng các xứ truyền giáo",
+    "BacLe1": 7,
+    "BacLe2": 20
+  },
+  {
+    "ID": 537,
+    "TenLe": "Các thiên thần hộ thủ",
+    "BacLe1": 10,
+    "BacLe2": 55
+  },
+  {
+    "ID": 538,
+    "TenLe": "Thánh Phanxicô Assisi",
+    "BacLe1": 10,
+    "BacLe2": 56
+  },
+  {
+    "ID": 539,
+    "TenLe": "Thánh Brunô, linh mục",
+    "BacLe1": 12,
+    "BacLe2": 64
+  },
+  {
+    "ID": 540,
+    "TenLe": "Lễ Đức Mẹ Mân Côi",
+    "BacLe1": 10,
+    "BacLe2": 57
+  },
+  {
+    "ID": 541,
+    "TenLe": "Thánh Diônysiô, giám mục, và các bạn, tử đạo. Thánh Gioan Lêônarđô, linh mục",
+    "BacLe1": 12,
+    "BacLe2": 65
+  },
+  {
+    "ID": 542,
+    "TenLe": "Thánh Callistô I, giáo hoàng, tử đạo",
+    "BacLe1": 12,
+    "BacLe2": 66
+  },
+  {
+    "ID": 543,
+    "TenLe": "Thánh Nữ Têrêsa Avila, trinh nữ, tiến sĩ Hội Thánh",
+    "BacLe1": 10,
+    "BacLe2": 58
+  },
+  {
+    "ID": 544,
+    "TenLe": "Thánh Hedviges, nữ tu. Thánh Margarita Alacoque, trinh nữ",
+    "BacLe1": 12,
+    "BacLe2": 67
+  },
+  {
+    "ID": 545,
+    "TenLe": "Thánh Ignatiô Antiôchia, giám mục, tử đạo",
+    "BacLe1": 10,
+    "BacLe2": 59
+  },
+  {
+    "ID": 546,
+    "TenLe": "Thánh Luca, tác giả sách Tin Mừng",
+    "BacLe1": 7,
+    "BacLe2": 14
+  },
+  {
+    "ID": 547,
+    "TenLe": "Thánh Gioan Brêbeuf, linh mục, thánh Isaac Jôgues, linh mục và các bạn, tử đạo. Thánh Phaolô Thánh Giá, linh mục",
+    "BacLe1": 12,
+    "BacLe2": 68
+  },
+  {
+    "ID": 548,
+    "TenLe": "Thánh Gioan Capestranô, linh mục",
+    "BacLe1": 12,
+    "BacLe2": 69
+  },
+  {
+    "ID": 549,
+    "TenLe": "Thánh Antôn Maria Claret, giám mục",
+    "BacLe1": 12,
+    "BacLe2": 70
+  },
+  {
+    "ID": 550,
+    "TenLe": "Thánh Simon và thánh Giuđa, tông đồ",
+    "BacLe1": 7,
+    "BacLe2": 15
+  },
+  {
+    "ID": 551,
+    "TenLe": "Các Thánh Nam Nữ",
+    "BacLe1": 3,
+    "BacLe2": 12
+  },
+  {
+    "ID": 552,
+    "TenLe": "Cầu cho các tín hữu đã qua đời (lễ các đẳng)",
+    "BacLe1": 10,
+    "BacLe2": 60
+  },
+  {
+    "ID": 553,
+    "TenLe": "Thánh Martinô Porres, tu sĩ",
+    "BacLe1": 12,
+    "BacLe2": 71
+  },
+  {
+    "ID": 554,
+    "TenLe": "Thánh Carôlô Borrômêô, giám mục",
+    "BacLe1": 10,
+    "BacLe2": 61
+  },
+  {
+    "ID": 555,
+    "TenLe": "Cung hiến thánh đường Latêranô",
+    "BacLe1": 7,
+    "BacLe2": 6
+  },
+  {
+    "ID": 556,
+    "TenLe": "Thánh Lêô Cả, giáo hoàng, tiến sĩ Hội Thánh",
+    "BacLe1": 10,
+    "BacLe2": 62
+  },
+  {
+    "ID": 557,
+    "TenLe": "Thánh Martinô, giám mục",
+    "BacLe1": 10,
+    "BacLe2": 63
+  },
+  {
+    "ID": 558,
+    "TenLe": "Thánh Jôsaphat, giám mục, tử đạo",
+    "BacLe1": 10,
+    "BacLe2": 64
+  },
+  {
+    "ID": 559,
+    "TenLe": "Thánh Albertô Cả, giám mục, tiến sĩ Hội Thánh",
+    "BacLe1": 12,
+    "BacLe2": 72
+  },
+  {
+    "ID": 560,
+    "TenLe": "Thánh nữ Margarita Scotland. Thánh Gertruđê, trinh nữ",
+    "BacLe1": 12,
+    "BacLe2": 73
+  },
+  {
+    "ID": 561,
+    "TenLe": "Thánh nữ Êlisabeth Hungari",
+    "BacLe1": 10,
+    "BacLe2": 65
+  },
+  {
+    "ID": 562,
+    "TenLe": "Cung hiến thánh đường thánh Phêrô và thánh đường thánh Phaolô",
+    "BacLe1": 12,
+    "BacLe2": 74
+  },
+  {
+    "ID": 563,
+    "TenLe": "Đức Mẹ dâng mình trong đền thờ",
+    "BacLe1": 10,
+    "BacLe2": 66
+  },
+  {
+    "ID": 564,
+    "TenLe": "Thánh Cêcilia, trinh nữ, tử đạo",
+    "BacLe1": 10,
+    "BacLe2": 67
+  },
+  {
+    "ID": 565,
+    "TenLe": "Thánh Clêmentê I, giáo hoàng, tử đạo. Thánh Côlumbanô, viện phụ",
+    "BacLe1": 12,
+    "BacLe2": 75
+  },
+  {
+    "ID": 566,
+    "TenLe": "Thánh Anrê Trần An Dũng Lạc và các bạn, tử đạo",
+    "BacLe1": 3,
+    "BacLe2": 13
+  },
+  {
+    "ID": 567,
+    "TenLe": "Thánh Anrê, tông đồ",
+    "BacLe1": 7,
+    "BacLe2": 16
+  },
+  {
+    "ID": 568,
+    "TenLe": "Thánh Phanxicô Xaviê, linh mục. Bổn mạng các xứ truyền giáo",
+    "BacLe1": 7,
+    "BacLe2": 21
+  },
+  {
+    "ID": 569,
+    "TenLe": "Thánh Gioan Đamas, linh mục, tiến sĩ Hội Thánh",
+    "BacLe1": 12,
+    "BacLe2": 76
+  },
+  {
+    "ID": 570,
+    "TenLe": "Thánh Nicôla, giám mục",
+    "BacLe1": 12,
+    "BacLe2": 77
+  },
+  {
+    "ID": 571,
+    "TenLe": "Thánh Ambrôsiô, giám mục, tiến sĩ Hội Thánh",
+    "BacLe1": 10,
+    "BacLe2": 68
+  },
+  {
+    "ID": 572,
+    "TenLe": "Đức Mẹ Vô Nhiễm Nguyên Tội",
+    "BacLe1": 3,
+    "BacLe2": 8
+  },
+  {
+    "ID": 573,
+    "TenLe": "Thánh Gioan Điđacô",
+    "BacLe1": 12,
+    "BacLe2": 78
+  },
+  {
+    "ID": 574,
+    "TenLe": "Thánh Đamasô I, giáo hoàng",
+    "BacLe1": 12,
+    "BacLe2": 79
+  },
+  {
+    "ID": 575,
+    "TenLe": "Đức Mẹ Guađalupê",
+    "BacLe1": 12,
+    "BacLe2": 80
+  },
+  {
+    "ID": 576,
+    "TenLe": "Thánh Lucia, trinh nữ, tử đạo",
+    "BacLe1": 10,
+    "BacLe2": 69
+  },
+  {
+    "ID": 577,
+    "TenLe": "Thánh Gioan Thánh Giá, linh mục",
+    "BacLe1": 10,
+    "BacLe2": 70
+  },
+  {
+    "ID": 578,
+    "TenLe": "Thánh Phêrô Canisiô, linh mục, tiến sĩ Hội Thánh",
+    "BacLe1": 12,
+    "BacLe2": 81
+  },
+  {
+    "ID": 579,
+    "TenLe": "Thánh Gioan Kêty, linh mục",
+    "BacLe1": 12,
+    "BacLe2": 82
+  },
+  {
+    "ID": 580,
+    "TenLe": "Thánh Stêphanô, tử đạo tiên khởi",
+    "BacLe1": 7,
+    "BacLe2": 17
+  },
+  {
+    "ID": 581,
+    "TenLe": "Thánh Gioan, Tông Đồ. Tác giả sách Tin Mừng",
+    "BacLe1": 7,
+    "BacLe2": 18
+  },
+  {
+    "ID": 582,
+    "TenLe": "Các Thánh Anh Hài, tử đạo",
+    "BacLe1": 7,
+    "BacLe2": 19
+  },
+  {
+    "ID": 583,
+    "TenLe": "Thánh Toma Becket, giám mục, tử đạo",
+    "BacLe1": 12,
+    "BacLe2": 83
+  },
+  {
+    "ID": 584,
+    "TenLe": "Thánh Silvester I, giáo hoàng",
+    "BacLe1": 12,
+    "BacLe2": 84
+  },
+  {
+    "ID": 585,
+    "TenLe": "Thánh Gioan Lasan, linh mục",
+    "BacLe1": 10,
+    "BacLe2": 16
+  },
+  {
+    "ID": 586,
+    "TenLe": "Các Thánh Tử Đạo Việt Nam. Bổn mạng Hội Thánh Việt Nam",
+    "BacLe1": null,
+    "BacLe2": null
+  },
+  {
+    "ID": 587,
+    "TenLe": "Lễ Giao Thừa",
+    "BacLe1": null,
+    "BacLe2": null
+  },
+  {
+    "ID": 588,
+    "TenLe": "Lễ Tất Niên",
+    "BacLe1": null,
+    "BacLe2": null
+  },
+  {
+    "ID": 589,
+    "TenLe": "Mồng Một Tết",
+    "BacLe1": null,
+    "BacLe2": null
+  },
+  {
+    "ID": 590,
+    "TenLe": "Mồng Hai Tết",
+    "BacLe1": null,
+    "BacLe2": null
+  },
+  {
+    "ID": 591,
+    "TenLe": "Mồng Ba Tết",
+    "BacLe1": null,
+    "BacLe2": null
+  },
+  {
+    "ID": 592,
+    "TenLe": "Tết Trung Thu",
+    "BacLe1": null,
+    "BacLe2": null
+  },
+  {
+    "ID": 593,
+    "TenLe": "Lễ Vọng Giáng Sinh",
+    "BacLe1": null,
+    "BacLe2": null
+  },
+  {
+    "ID": 594,
+    "TenLe": "Chúa Nhật Phục Sinh. Mừng Chúa Sống Lại. (Canh thức vượt qua)",
+    "BacLe1": null,
+    "BacLe2": null
+  },
+  {
+    "ID": 595,
+    "TenLe": "Lễ Vọng Chúa Thăng Thiên",
+    "BacLe1": null,
+    "BacLe2": null
+  },
+  {
+    "ID": 596,
+    "TenLe": "Lễ Vọng Chúa Thánh Thần Hiện Xuống",
+    "BacLe1": null,
+    "BacLe2": null
+  },
+  {
+    "ID": 597,
+    "TenLe": "Lễ Vọng Sinh Nhật Thánh Gioan Tẩy Giả",
+    "BacLe1": null,
+    "BacLe2": null
+  },
+  {
+    "ID": 598,
+    "TenLe": "Lễ Vọng Thánh Phêrô và Thánh Phaolô",
+    "BacLe1": null,
+    "BacLe2": null
+  },
+  {
+    "ID": 599,
+    "TenLe": "Lễ Vọng Đức Mẹ Lên Trời",
+    "BacLe1": null,
+    "BacLe2": null
+  },
+  {
+    "ID": 600,
+    "TenLe": "Thứ Năm Tuần Thánh (buổi sáng)\r\nThánh Lễ Làm Phép Dầu",
+    "BacLe1": null,
+    "BacLe2": null
+  },
+  {
+    "ID": 601,
+    "TenLe": "Lễ Thăng Thiên",
+    "BacLe1": null,
+    "BacLe2": null
+  },
+  {
+    "ID": 602,
+    "TenLe": "Lễ Tạ Ơn Thiên Chúa",
+    "BacLe1": null,
+    "BacLe2": null
+  },
+  {
+    "ID": 603,
+    "TenLe": "Thánh Christôphôrô Magallanes, linh mục , và các bạn tử đạo",
+    "BacLe1": 12,
+    "BacLe2": null
+  },
+  {
+    "ID": 604,
+    "TenLe": "Thánh Rita Cascia, nữ tu",
+    "BacLe1": 12,
+    "BacLe2": null
+  },
+  {
+    "ID": 605,
+    "TenLe": "Thánh Augustinô Zhao Rong, linh mục và các bạn tử đạo",
+    "BacLe1": 12,
+    "BacLe2": null
+  },
+  {
+    "ID": 606,
+    "TenLe": "Thánh Apôllinarê, giám mục, tử đạo",
+    "BacLe1": 12,
+    "BacLe2": null
+  },
+  {
+    "ID": 607,
+    "TenLe": "Thánh Catarina Alexandria, trinh nữ, tử đạo",
+    "BacLe1": 12,
+    "BacLe2": null
+  },
+  {
+    "ID": 608,
+    "TenLe": "Thánh Đa Minh Trạch, tử đạo",
+    "BacLe1": 12,
+    "BacLe2": null
+  }
+]

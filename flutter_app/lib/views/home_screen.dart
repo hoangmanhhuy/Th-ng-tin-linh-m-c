@@ -571,13 +571,43 @@ class _InfoRow extends StatelessWidget {
 
 // ─── Priest Home ─────────────────────────────────────────────────────────────
 
-class PriestHomeScreen extends StatelessWidget {
+class PriestHomeScreen extends StatefulWidget {
   const PriestHomeScreen({super.key});
 
   @override
+  State<PriestHomeScreen> createState() => _PriestHomeScreenState();
+}
+
+class _PriestHomeScreenState extends State<PriestHomeScreen> {
+  LiturgicalData? _liturgicalData;
+  bool _loadingLiturgical = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadLiturgicalData();
+  }
+
+  Future<void> _loadLiturgicalData() async {
+    try {
+      final data = await context
+          .read<LiturgicalViewModel>()
+          .getLiturgicalData(DateTime.now());
+      if (mounted) {
+        setState(() {
+          _liturgicalData = data;
+          _loadingLiturgical = false;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() => _loadingLiturgical = false);
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final liturgicalData =
-        context.read<LiturgicalViewModel>().getLiturgicalData(DateTime.now());
     final auth = context.read<AuthViewModel>();
     final user = auth.currentUser!;
 
@@ -598,7 +628,17 @@ class PriestHomeScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 _SearchSection(context: context),
                 const SizedBox(height: 16),
-                _LiturgicalSection(data: liturgicalData),
+                if (_loadingLiturgical)
+                  const Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(24),
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
+                else if (_liturgicalData != null)
+                  _LiturgicalSection(data: _liturgicalData!)
+                else
+                  const SizedBox.shrink(),
                 const SizedBox(height: 12),
                 _HelpButton(context: context),
                 const SizedBox(height: 16),
