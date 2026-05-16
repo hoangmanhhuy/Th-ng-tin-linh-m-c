@@ -1335,6 +1335,7 @@ class _LiturgicalSection extends StatelessWidget {
               children: data.readings.map((r) => Padding(
                 padding: const EdgeInsets.only(bottom: 8),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       width: 32,
@@ -1346,15 +1347,26 @@ class _LiturgicalSection extends StatelessWidget {
                       child: Icon(r.icon, color: r.iconColor, size: 14),
                     ),
                     const SizedBox(width: 10),
-                    Text(r.label, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.gray600)),
-                    const Spacer(),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: AppColors.primary.withValues(alpha: 0.06),
-                        borderRadius: BorderRadius.circular(6),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(r.label, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.gray600)),
+                          const SizedBox(height: 4),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: AppColors.primary.withValues(alpha: 0.06),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Text(
+                              r.text,
+                              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: AppColors.primary),
+                              softWrap: true,
+                            ),
+                          ),
+                        ],
                       ),
-                      child: Text(r.text, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: AppColors.primary)),
                     ),
                   ],
                 ),
