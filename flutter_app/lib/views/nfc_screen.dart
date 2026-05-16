@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import '../core/app_theme.dart';
+import '../core/app_strings.dart';
 import '../models/models.dart';
 import 'priest_result_sheet.dart';
 import 'login_screen.dart';
@@ -21,7 +22,6 @@ class _NfcScreenState extends State<NfcScreen> with SingleTickerProviderStateMix
   late Animation<double> _pulseAnimation;
 
   _NfcStatus _status = _NfcStatus.checking;
-  String _statusMessage = 'Đang kiểm tra NFC...';
   bool _sessionActive = false;
 
   @override
@@ -43,7 +43,6 @@ class _NfcScreenState extends State<NfcScreen> with SingleTickerProviderStateMix
     if (!available) {
       setState(() {
         _status = _NfcStatus.notAvailable;
-        _statusMessage = 'Thiết bị không hỗ trợ NFC';
       });
       return;
     }
@@ -54,7 +53,6 @@ class _NfcScreenState extends State<NfcScreen> with SingleTickerProviderStateMix
     if (_sessionActive) return;
     setState(() {
       _status = _NfcStatus.scanning;
-      _statusMessage = 'Đang chờ quét thẻ...';
       _sessionActive = true;
     });
 
@@ -69,17 +67,11 @@ class _NfcScreenState extends State<NfcScreen> with SingleTickerProviderStateMix
               _sessionActive = false;
               if (!mounted) return;
               if (priest != null) {
-                setState(() {
-                  _status = _NfcStatus.ready;
-                  _statusMessage = 'Đã đọc thẻ thành công!';
-                });
+                setState(() { _status = _NfcStatus.ready; });
                 await showPriestResultSheet(context, priest);
                 if (mounted) _startSession();
               } else {
-                setState(() {
-                  _status = _NfcStatus.error;
-                  _statusMessage = 'Không tìm thấy thông tin linh mục';
-                });
+                setState(() { _status = _NfcStatus.error; });
                 await Future.delayed(const Duration(seconds: 2));
                 if (mounted) _startSession();
               }
@@ -89,10 +81,7 @@ class _NfcScreenState extends State<NfcScreen> with SingleTickerProviderStateMix
               );
               _sessionActive = false;
               if (mounted) {
-                setState(() {
-                  _status = _NfcStatus.error;
-                  _statusMessage = 'Thẻ không đúng định dạng';
-                });
+                setState(() { _status = _NfcStatus.error; });
                 await Future.delayed(const Duration(seconds: 2));
                 if (mounted) _startSession();
               }
@@ -101,10 +90,7 @@ class _NfcScreenState extends State<NfcScreen> with SingleTickerProviderStateMix
             await NfcManager.instance.stopSession(errorMessage: 'Lỗi đọc thẻ');
             _sessionActive = false;
             if (mounted) {
-              setState(() {
-                _status = _NfcStatus.error;
-                _statusMessage = 'Lỗi: ${e.toString()}';
-              });
+              setState(() { _status = _NfcStatus.error; });
               await Future.delayed(const Duration(seconds: 2));
               if (mounted) _startSession();
             }
@@ -117,15 +103,9 @@ class _NfcScreenState extends State<NfcScreen> with SingleTickerProviderStateMix
       final msg = e.toString();
       // Personal Team / missing entitlement
       if (msg.contains('entitlement') || msg.contains('Missing required entitlement')) {
-        setState(() {
-          _status = _NfcStatus.notAvailable;
-          _statusMessage = 'Cần tài khoản Apple Developer để dùng NFC';
-        });
+        setState(() { _status = _NfcStatus.notAvailable; });
       } else {
-        setState(() {
-          _status = _NfcStatus.error;
-          _statusMessage = 'Không thể khởi động NFC';
-        });
+        setState(() { _status = _NfcStatus.error; });
       }
     }
   }
@@ -173,8 +153,19 @@ class _NfcScreenState extends State<NfcScreen> with SingleTickerProviderStateMix
     super.dispose();
   }
 
+  String _statusMessage(AppStrings l10n) {
+    switch (_status) {
+      case _NfcStatus.checking: return l10n.nfcChecking;
+      case _NfcStatus.notAvailable: return l10n.nfcNotAvailable;
+      case _NfcStatus.scanning: return l10n.nfcWaiting;
+      case _NfcStatus.ready: return l10n.nfcReadSuccess;
+      case _NfcStatus.error: return l10n.nfcStartFailed;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
     return Scaffold(
       backgroundColor: AppColors.surface,
       body: SafeArea(
@@ -183,11 +174,11 @@ class _NfcScreenState extends State<NfcScreen> with SingleTickerProviderStateMix
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
               child: Row(
-                children: const [
+                children: [
                   Expanded(
                     child: Text(
-                      'Quét thẻ NFC',
-                      style: TextStyle(
+                      l10n.scanNfcCard,
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w900,
                         color: AppColors.textMain,
@@ -232,21 +223,21 @@ class _NfcScreenState extends State<NfcScreen> with SingleTickerProviderStateMix
 
                   const SizedBox(height: 40),
 
-                  const Text(
-                    'Chạm thẻ Linh mục',
-                    style: TextStyle(
+                  Text(
+                    l10n.touchPriestCard,
+                    style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.w900,
                       color: AppColors.textMain,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 48),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 48),
                     child: Text(
-                      'Giữ thẻ NFC gần mặt sau điện thoại để xác thực danh tính linh mục.',
+                      l10n.nfcInstruction,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         color: AppColors.gray500,
                         height: 1.5,
@@ -256,14 +247,14 @@ class _NfcScreenState extends State<NfcScreen> with SingleTickerProviderStateMix
 
                   const SizedBox(height: 48),
 
-                  _StatusChip(status: _status, message: _statusMessage),
+                  _StatusChip(status: _status, message: _statusMessage(l10n)),
 
                   if (_status == _NfcStatus.notAvailable) ...[
                     const SizedBox(height: 16),
                     TextButton.icon(
                       onPressed: _init,
                       icon: const Icon(Icons.refresh_rounded, size: 16),
-                      label: const Text('Thử lại'),
+                      label: Text(l10n.retryLower),
                     ),
                   ],
                 ],
@@ -274,9 +265,9 @@ class _NfcScreenState extends State<NfcScreen> with SingleTickerProviderStateMix
               padding: const EdgeInsets.all(24),
               child: Column(
                 children: [
-                  const Text(
-                    'Không có thẻ NFC?',
-                    style: TextStyle(
+                  Text(
+                    l10n.noNfcCard,
+                    style: const TextStyle(
                       fontSize: 12,
                       color: AppColors.gray400,
                       fontWeight: FontWeight.w600,
@@ -298,9 +289,9 @@ class _NfcScreenState extends State<NfcScreen> with SingleTickerProviderStateMix
                           borderRadius: BorderRadius.circular(16),
                         ),
                       ),
-                      child: const Text(
-                        'Đăng nhập bằng mật khẩu',
-                        style: TextStyle(fontWeight: FontWeight.w900),
+                      child: Text(
+                        l10n.loginWithPassword,
+                        style: const TextStyle(fontWeight: FontWeight.w900),
                       ),
                     ),
                   ),

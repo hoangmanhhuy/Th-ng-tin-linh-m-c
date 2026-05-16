@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import '../core/app_theme.dart';
+import '../core/app_strings.dart';
 import '../models/models.dart';
 
 class NfcManagementScreen extends StatefulWidget {
@@ -34,10 +35,13 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
   }
 
   Future<void> _addCardDialog() async {
+    final l10n = AppStrings.of(context);
     final controller = TextEditingController();
     final result = await showDialog<String>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) {
+        final dl10n = AppStrings.of(ctx);
+        return AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         contentPadding: const EdgeInsets.fromLTRB(24, 20, 24, 16),
         title: Row(
@@ -48,16 +52,16 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
               child: const Icon(Icons.nfc_rounded, size: 20, color: AppColors.orange500),
             ),
             const SizedBox(width: 10),
-            const Text('Thêm thẻ NFC', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppColors.gray800)),
+            Text(dl10n.addNfcCardTitle, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppColors.gray800)),
           ],
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Nhập mã thẻ NFC hoặc chạm thẻ vào điện thoại.',
-              style: TextStyle(fontSize: 13, color: AppColors.gray500, height: 1.4),
+            Text(
+              dl10n.addNfcCardDesc,
+              style: const TextStyle(fontSize: 13, color: AppColors.gray500, height: 1.4),
             ),
             const SizedBox(height: 16),
             TextField(
@@ -65,7 +69,7 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
               autofocus: true,
               textCapitalization: TextCapitalization.characters,
               decoration: InputDecoration(
-                hintText: 'VD: NFC-ABC123',
+                hintText: dl10n.nfcCardHint,
                 hintStyle: const TextStyle(color: AppColors.gray400),
                 prefixIcon: const Icon(Icons.nfc_rounded, color: AppColors.gray400, size: 20),
                 filled: true,
@@ -95,7 +99,7 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
                   controller.text = 'NFC-${ts.toString().padLeft(5, '0')}';
                 },
                 icon: const Icon(Icons.nfc_rounded, size: 18),
-                label: const Text('Quét thẻ NFC', style: TextStyle(fontWeight: FontWeight.w700)),
+                label: Text(dl10n.scanNfcCardButton, style: const TextStyle(fontWeight: FontWeight.w700)),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: AppColors.orange500,
                   side: const BorderSide(color: AppColors.orange500),
@@ -109,7 +113,7 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('Hủy', style: TextStyle(color: AppColors.gray400, fontWeight: FontWeight.w700)),
+            child: Text(dl10n.cancel, style: const TextStyle(color: AppColors.gray400, fontWeight: FontWeight.w700)),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(ctx, controller.text.trim()),
@@ -119,10 +123,11 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
               elevation: 0,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),
-            child: const Text('Thêm', style: TextStyle(fontWeight: FontWeight.w900)),
+            child: Text(dl10n.add, style: const TextStyle(fontWeight: FontWeight.w900)),
           ),
         ],
-      ),
+      );
+      },
     );
 
     if (result != null && result.isNotEmpty) {
@@ -136,7 +141,7 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Đã thêm thẻ $result'),
+            content: Text(AppStrings.of(context).cardAdded(result)),
             behavior: SnackBarBehavior.floating,
             backgroundColor: AppColors.emerald600,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -147,9 +152,12 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
   }
 
   Future<void> _deleteCard(_NfcCard card) async {
+    final l10n = AppStrings.of(context);
     final confirm = await showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) {
+        final dl10n = AppStrings.of(ctx);
+        return AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         contentPadding: const EdgeInsets.all(24),
         content: Column(
@@ -161,10 +169,10 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
               child: const Icon(LucideIcons.trash2, color: AppColors.red, size: 28),
             ),
             const SizedBox(height: 16),
-            const Text('Xoá thẻ NFC?', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppColors.gray800)),
+            Text(dl10n.deleteNfcCard, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppColors.gray800)),
             const SizedBox(height: 8),
             Text(
-              'Thẻ "${card.id}" sẽ bị xoá khỏi hệ thống. Linh mục sẽ không thể dùng thẻ này để xác thực.',
+              dl10n.deleteNfcCardDesc(card.id),
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 13, color: AppColors.gray500, height: 1.4),
             ),
@@ -173,7 +181,7 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
-            child: const Text('Hủy', style: TextStyle(color: AppColors.gray500, fontWeight: FontWeight.w700)),
+            child: Text(dl10n.cancel, style: const TextStyle(color: AppColors.gray500, fontWeight: FontWeight.w700)),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(ctx, true),
@@ -183,17 +191,18 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
               elevation: 0,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),
-            child: const Text('Xoá', style: TextStyle(fontWeight: FontWeight.w900)),
+            child: Text(dl10n.delete, style: const TextStyle(fontWeight: FontWeight.w900)),
           ),
         ],
-      ),
+      );
+      },
     );
     if (confirm == true) {
       setState(() => _cards.remove(card));
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Đã xoá thẻ ${card.id}'),
+            content: Text(AppStrings.of(context).cardDeleted(card.id)),
             behavior: SnackBarBehavior.floating,
             backgroundColor: AppColors.gray800,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -205,6 +214,7 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
     return Scaffold(
       backgroundColor: AppColors.surface,
       appBar: AppBar(
@@ -217,7 +227,7 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
         ),
         title: Column(
           children: [
-            const Text('Quản lý thẻ NFC', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: AppColors.primary)),
+            Text(l10n.nfcManagementTitle, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: AppColors.primary)),
             Text(
               'LM. ${widget.priest.holyName} ${widget.priest.fullName}',
               style: const TextStyle(fontSize: 10, color: AppColors.gray400, fontWeight: FontWeight.w600),
@@ -290,7 +300,7 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
                       const Icon(Icons.nfc_rounded, color: Colors.white, size: 14),
                       const SizedBox(width: 4),
                       Text(
-                        '${_cards.length} thẻ',
+                        l10n.cardCount(_cards.length),
                         style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w900),
                       ),
                     ],
@@ -305,9 +315,9 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 10),
             child: Row(
               children: [
-                const Text(
-                  'DANH SÁCH THẺ ĐÃ ĐĂNG KÝ',
-                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1.5),
+                Text(
+                  l10n.registeredCards,
+                  style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1.5),
                 ),
                 const Spacer(),
                 GestureDetector(
@@ -318,12 +328,12 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
                       color: AppColors.primary,
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.add_rounded, color: Colors.white, size: 14),
-                        SizedBox(width: 4),
-                        Text('Thêm thẻ', style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w900)),
+                        const Icon(Icons.add_rounded, color: Colors.white, size: 14),
+                        const SizedBox(width: 4),
+                        Text(l10n.addCard, style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w900)),
                       ],
                     ),
                   ),
@@ -353,6 +363,7 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
   }
 
   Widget _buildEmpty() {
+    final l10n = AppStrings.of(context);
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(40),
@@ -365,18 +376,18 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
               child: const Icon(Icons.nfc_rounded, size: 36, color: AppColors.gray300),
             ),
             const SizedBox(height: 20),
-            const Text('Chưa có thẻ NFC', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: AppColors.gray700)),
+            Text(l10n.noNfcCards, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: AppColors.gray700)),
             const SizedBox(height: 8),
-            const Text(
-              'Nhấn "Thêm thẻ" để đăng ký\nthẻ NFC cho linh mục này.',
+            Text(
+              l10n.noNfcCardsDesc,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 13, color: AppColors.gray400, height: 1.5),
+              style: const TextStyle(fontSize: 13, color: AppColors.gray400, height: 1.5),
             ),
             const SizedBox(height: 24),
             ElevatedButton.icon(
               onPressed: _addCardDialog,
               icon: const Icon(Icons.add_rounded, size: 18),
-              label: const Text('Thêm thẻ NFC', style: TextStyle(fontWeight: FontWeight.w900)),
+              label: Text(l10n.addNfcCard, style: const TextStyle(fontWeight: FontWeight.w900)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
@@ -401,6 +412,7 @@ class _NfcCardTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -444,7 +456,7 @@ class _NfcCardTile extends StatelessWidget {
                   children: [
                     const Icon(LucideIcons.calendar, size: 11, color: AppColors.gray400),
                     const SizedBox(width: 4),
-                    Text('Thêm ngày ${card.addedDate}', style: const TextStyle(fontSize: 11, color: AppColors.gray400)),
+                    Text('${l10n.addedOn} ${card.addedDate}', style: const TextStyle(fontSize: 11, color: AppColors.gray400)),
                   ],
                 ),
               ],
@@ -475,7 +487,7 @@ class _NfcCardTile extends StatelessWidget {
                       ),
                       const SizedBox(width: 5),
                       Text(
-                        card.isActive ? 'Hoạt động' : 'Tắt',
+                        card.isActive ? l10n.cardActive : l10n.cardInactive,
                         style: TextStyle(
                           fontSize: 10, fontWeight: FontWeight.w900,
                           color: card.isActive ? AppColors.emerald600 : AppColors.gray400,
@@ -499,7 +511,7 @@ class _NfcCardTile extends StatelessWidget {
                     children: [
                       const Icon(LucideIcons.trash2, size: 12, color: AppColors.red),
                       const SizedBox(width: 4),
-                      const Text('Xoá', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: AppColors.red)),
+                      Text(l10n.delete, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: AppColors.red)),
                     ],
                   ),
                 ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../core/app_theme.dart';
+import '../core/app_strings.dart';
 
 class BiometricsScreen extends StatefulWidget {
   const BiometricsScreen({super.key});
@@ -39,6 +40,7 @@ class _BiometricsScreenState extends State<BiometricsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
     return Scaffold(
       backgroundColor: AppColors.surface,
       appBar: AppBar(
@@ -49,9 +51,9 @@ class _BiometricsScreenState extends State<BiometricsScreen> {
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18, color: AppColors.primary),
         ),
-        title: const Text(
-          'Sinh trắc học',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.primary),
+        title: Text(
+          l10n.biometricsTitle,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.primary),
         ),
         centerTitle: true,
         bottom: const PreferredSize(
@@ -91,18 +93,18 @@ class _BiometricsScreenState extends State<BiometricsScreen> {
                           child: const Icon(LucideIcons.fingerprint, size: 28, color: Colors.white),
                         ),
                         const SizedBox(width: 16),
-                        const Expanded(
+                        Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Bảo mật sinh trắc học',
-                                style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w900),
+                                l10n.biometricsSecurity,
+                                style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w900),
                               ),
-                              SizedBox(height: 4),
+                              const SizedBox(height: 4),
                               Text(
-                                'Dùng Face ID hoặc vân tay để mở khóa ứng dụng nhanh và bảo mật.',
-                                style: TextStyle(color: Colors.white70, fontSize: 11, height: 1.4),
+                                l10n.biometricsDesc,
+                                style: const TextStyle(color: Colors.white70, fontSize: 11, height: 1.4),
                               ),
                             ],
                           ),
@@ -113,19 +115,19 @@ class _BiometricsScreenState extends State<BiometricsScreen> {
 
                   const SizedBox(height: 24),
 
-                  _SectionLabel(title: 'PHƯƠNG THỨC XÁC THỰC'),
+                  _SectionLabel(title: l10n.sectionAuthMethod),
                   _ToggleCard(
                     icon: LucideIcons.scan,
                     iconColor: AppColors.primary,
                     bgColor: AppColors.blue50,
                     title: 'Face ID',
-                    subtitle: 'Mở khóa bằng khuôn mặt',
+                    subtitle: l10n.faceIdSubtitle,
                     value: _faceIdEnabled,
                     onChanged: (v) {
                       setState(() => _faceIdEnabled = v);
                       _toggle('bio_faceid', v);
                       if (v) {
-                        _showConfirmSnack(context, 'Face ID đã bật');
+                        _showConfirmSnack(context, l10n.faceIdEnabled);
                       }
                     },
                   ),
@@ -134,27 +136,27 @@ class _BiometricsScreenState extends State<BiometricsScreen> {
                     icon: LucideIcons.fingerprint,
                     iconColor: AppColors.orange500,
                     bgColor: AppColors.orange50,
-                    title: 'Vân tay (Touch ID)',
-                    subtitle: 'Mở khóa bằng dấu vân tay',
+                    title: l10n.touchId,
+                    subtitle: l10n.touchIdSubtitle,
                     value: _fingerprintEnabled,
                     onChanged: (v) {
                       setState(() => _fingerprintEnabled = v);
                       _toggle('bio_fingerprint', v);
                       if (v) {
-                        _showConfirmSnack(context, 'Touch ID đã bật');
+                        _showConfirmSnack(context, l10n.touchIdEnabled);
                       }
                     },
                   ),
 
                   const SizedBox(height: 20),
 
-                  _SectionLabel(title: 'CÀI ĐẶT KHÓA'),
+                  _SectionLabel(title: l10n.sectionLockSettings),
                   _ToggleCard(
                     icon: LucideIcons.lock,
                     iconColor: AppColors.emerald600,
                     bgColor: AppColors.emerald50,
-                    title: 'Tự động khóa',
-                    subtitle: 'Yêu cầu xác thực khi mở lại app',
+                    title: l10n.autoLock,
+                    subtitle: l10n.autoLockSubtitle,
                     value: _autoLockEnabled,
                     onChanged: (v) {
                       setState(() => _autoLockEnabled = v);
@@ -177,10 +179,10 @@ class _BiometricsScreenState extends State<BiometricsScreen> {
                       children: [
                         Icon(LucideIcons.shieldAlert, size: 16, color: AppColors.amber600),
                         const SizedBox(width: 10),
-                        const Expanded(
+                        Expanded(
                           child: Text(
-                            'Sinh trắc học sử dụng phần cứng bảo mật của thiết bị. Dữ liệu vân tay / Face ID không được lưu trữ trên máy chủ.',
-                            style: TextStyle(fontSize: 12, color: AppColors.amber600, height: 1.5),
+                            l10n.biometricsNote,
+                            style: const TextStyle(fontSize: 12, color: AppColors.amber600, height: 1.5),
                           ),
                         ),
                       ],

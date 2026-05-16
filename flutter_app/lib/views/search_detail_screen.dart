@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import '../core/app_theme.dart';
+import '../core/app_strings.dart';
 import '../models/models.dart';
 
 class SearchDetailScreen extends StatelessWidget {
@@ -10,6 +11,7 @@ class SearchDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
     if (priest == null) {
       return Scaffold(
         backgroundColor: AppColors.surface,
@@ -25,9 +27,9 @@ class SearchDetailScreen extends StatelessWidget {
               color: AppColors.primary,
             ),
           ),
-          title: const Text(
-            'Thông tin linh mục',
-            style: TextStyle(
+          title: Text(
+            l10n.priestInfoTitle,
+            style: const TextStyle(
               fontSize: 17,
               fontWeight: FontWeight.w900,
               color: AppColors.primary,
@@ -35,10 +37,10 @@ class SearchDetailScreen extends StatelessWidget {
           ),
           centerTitle: true,
         ),
-        body: const Center(
+        body: Center(
           child: Text(
-            'Không có dữ liệu',
-            style: TextStyle(color: AppColors.gray400),
+            l10n.noData,
+            style: const TextStyle(color: AppColors.gray400),
           ),
         ),
       );
@@ -48,11 +50,11 @@ class SearchDetailScreen extends StatelessWidget {
     final hasDateInfo = p.birthDate != null || p.ordinationDate != null;
     String dateValue = '';
     if (p.birthDate != null && p.ordinationDate != null) {
-      dateValue = '${p.birthDate} — Thụ phong: ${p.ordinationDate}';
+      dateValue = '${p.birthDate} — ${l10n.ordinationPrefix} ${p.ordinationDate}';
     } else if (p.birthDate != null) {
       dateValue = 'Sinh: ${p.birthDate}';
     } else if (p.ordinationDate != null) {
-      dateValue = 'Thụ phong: ${p.ordinationDate}';
+      dateValue = '${l10n.ordinationPrefix} ${p.ordinationDate}';
     }
 
     return Scaffold(
@@ -69,8 +71,8 @@ class SearchDetailScreen extends StatelessWidget {
             color: AppColors.primary,
           ),
         ),
-        title: const Text(
-          'Thông tin linh mục',
+        title: Text(
+          l10n.priestInfoTitle,
           style: TextStyle(
             fontSize: 17,
             fontWeight: FontWeight.w900,
@@ -168,9 +170,9 @@ class SearchDetailScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 6),
-                        const Text(
-                          'Đang hoạt động',
-                          style: TextStyle(
+                        Text(
+                          l10n.activeStatus,
+                          style: const TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w900,
                             color: AppColors.emerald600,
@@ -218,9 +220,9 @@ class SearchDetailScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 8),
-                      const Text(
-                        'THÔNG TIN CƠ BẢN',
-                        style: TextStyle(
+                      Text(
+                        l10n.sectionBasicInfo,
+                        style: const TextStyle(
                           fontSize: 9,
                           fontWeight: FontWeight.w900,
                           color: AppColors.gray400,
@@ -235,7 +237,7 @@ class SearchDetailScreen extends StatelessWidget {
                       bgColor: AppColors.blue50,
                       iconColor: AppColors.primary,
                       icon: LucideIcons.calendar,
-                      label: 'Ngày sinh & Thụ phong',
+                      label: l10n.birthAndOrdinationLabel,
                       value: dateValue,
                     ),
                     const SizedBox(height: 12),
@@ -245,7 +247,7 @@ class SearchDetailScreen extends StatelessWidget {
                       bgColor: AppColors.indigo50,
                       iconColor: AppColors.indigo600,
                       icon: LucideIcons.church,
-                      label: 'Giáo xứ hiện tại',
+                      label: l10n.currentParishLabel,
                       value: p.parish!,
                     ),
                     const SizedBox(height: 12),
@@ -255,7 +257,7 @@ class SearchDetailScreen extends StatelessWidget {
                       bgColor: AppColors.emerald50,
                       iconColor: AppColors.emerald600,
                       icon: LucideIcons.graduationCap,
-                      label: 'Học vị',
+                      label: l10n.degreeLabel,
                       value: p.degree!,
                     ),
                   if (p.role != null) ...[
@@ -264,7 +266,7 @@ class SearchDetailScreen extends StatelessWidget {
                       bgColor: AppColors.amber50,
                       iconColor: AppColors.amber600,
                       icon: LucideIcons.badgeCheck,
-                      label: 'Chức vụ',
+                      label: l10n.roleLabel,
                       value: p.role!,
                     ),
                   ],
@@ -280,16 +282,16 @@ class SearchDetailScreen extends StatelessWidget {
                 Expanded(
                   child: _ActionButton(
                     icon: LucideIcons.phone,
-                    label: 'Gọi điện',
+                    label: l10n.callAction,
                     bgColor: AppColors.blue100,
                     iconColor: AppColors.primary,
                     onTap: () {
                       if (p.phone != null) {
                         Clipboard.setData(ClipboardData(text: p.phone!));
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Đã sao chép số điện thoại'),
-                            duration: Duration(seconds: 2),
+                          SnackBar(
+                            content: Text(l10n.copiedPhone),
+                            duration: const Duration(seconds: 2),
                           ),
                         );
                       }
@@ -300,16 +302,16 @@ class SearchDetailScreen extends StatelessWidget {
                 Expanded(
                   child: _ActionButton(
                     icon: LucideIcons.mail,
-                    label: 'Gửi Email',
+                    label: l10n.emailAction,
                     bgColor: AppColors.indigo50,
                     iconColor: AppColors.indigo600,
                     onTap: () {
                       if (p.email != null) {
                         Clipboard.setData(ClipboardData(text: p.email!));
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Đã sao chép email'),
-                            duration: Duration(seconds: 2),
+                          SnackBar(
+                            content: Text(l10n.copiedEmail),
+                            duration: const Duration(seconds: 2),
                           ),
                         );
                       }

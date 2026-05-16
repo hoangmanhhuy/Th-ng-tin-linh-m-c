@@ -4,6 +4,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../core/app_theme.dart';
+import '../core/app_strings.dart';
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -134,7 +135,7 @@ class _EmergencyAnointingScreenState extends State<EmergencyAnointingScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Không thể gọi ${church.phone}'),
+            content: Text(AppStrings.of(context).cannotCall(church.phone)),
             behavior: SnackBarBehavior.floating,
             backgroundColor: AppColors.gray800,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -146,6 +147,7 @@ class _EmergencyAnointingScreenState extends State<EmergencyAnointingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
     return Scaffold(
       backgroundColor: AppColors.surface,
       body: CustomScrollView(
@@ -161,6 +163,7 @@ class _EmergencyAnointingScreenState extends State<EmergencyAnointingScreen> {
   }
 
   Widget _buildAppBar() {
+    final l10n = AppStrings.of(context);
     return SliverAppBar(
       pinned: true,
       expandedHeight: 120,
@@ -216,25 +219,25 @@ class _EmergencyAnointingScreenState extends State<EmergencyAnointingScreen> {
                               color: Colors.white.withValues(alpha: 0.2),
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: const Row(
+                            child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Icon(Icons.emergency_rounded, color: Colors.white, size: 10),
-                                SizedBox(width: 4),
-                                Text('KHẨN CẤP', style: TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 1.5)),
+                                const Icon(Icons.emergency_rounded, color: Colors.white, size: 10),
+                                const SizedBox(width: 4),
+                                Text(l10n.emergencyBadge, style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 1.5)),
                               ],
                             ),
                           ),
                         ],
                       ),
                       const SizedBox(height: 6),
-                      const Text(
-                        'Liên hệ Xức Dầu',
-                        style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w900),
+                      Text(
+                        l10n.emergencyAnointingTitle,
+                        style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w900),
                       ),
-                      const Text(
-                        'Tìm linh mục gần nhất để cử hành bí tích',
-                        style: TextStyle(color: Colors.white70, fontSize: 11),
+                      Text(
+                        l10n.emergencyAnointingSubtitle,
+                        style: const TextStyle(color: Colors.white70, fontSize: 11),
                       ),
                     ],
                   ),
@@ -263,6 +266,7 @@ class _EmergencyAnointingScreenState extends State<EmergencyAnointingScreen> {
   }
 
   Widget _buildLoading() {
+    final l10n = AppStrings.of(context);
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(40),
@@ -285,15 +289,15 @@ class _EmergencyAnointingScreenState extends State<EmergencyAnointingScreen> {
               ),
             ),
             const SizedBox(height: 24),
-            const Text(
-              'Đang xác định vị trí...',
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: AppColors.gray800),
+            Text(
+              l10n.locating,
+              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: AppColors.gray800),
             ),
             const SizedBox(height: 8),
-            const Text(
-              'Hệ thống đang tìm nhà thờ\ngần nhất trong bán kính 10km',
+            Text(
+              l10n.locatingDesc,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 13, color: AppColors.gray500, height: 1.5),
+              style: const TextStyle(fontSize: 13, color: AppColors.gray500, height: 1.5),
             ),
           ],
         ),
@@ -302,6 +306,7 @@ class _EmergencyAnointingScreenState extends State<EmergencyAnointingScreen> {
   }
 
   Widget _buildResults() {
+    final l10n = AppStrings.of(context);
     return Column(
       children: [
         // Result count banner
@@ -334,12 +339,12 @@ class _EmergencyAnointingScreenState extends State<EmergencyAnointingScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Tìm thấy ${_nearby.length} nhà thờ',
+                      l10n.nearbyChurchesFound(_nearby.length),
                       style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w900),
                     ),
-                    const Text(
-                      'Trong bán kính 10km từ vị trí của bạn',
-                      style: TextStyle(color: Colors.white70, fontSize: 11),
+                    Text(
+                      l10n.nearbyRadius,
+                      style: const TextStyle(color: Colors.white70, fontSize: 11),
                     ),
                   ],
                 ),
@@ -359,11 +364,11 @@ class _EmergencyAnointingScreenState extends State<EmergencyAnointingScreen> {
           ),
         ),
 
-        const Padding(
-          padding: EdgeInsets.fromLTRB(16, 0, 16, 10),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 10),
           child: Row(
             children: [
-              Text('NHÀ THỜ GẦN NHẤT', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1.5)),
+              Text(l10n.nearestChurches, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1.5)),
             ],
           ),
         ),
@@ -385,6 +390,7 @@ class _EmergencyAnointingScreenState extends State<EmergencyAnointingScreen> {
   }
 
   Widget _buildEmpty() {
+    final l10n = AppStrings.of(context);
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(40),
@@ -397,18 +403,18 @@ class _EmergencyAnointingScreenState extends State<EmergencyAnointingScreen> {
               child: const Icon(LucideIcons.church, size: 36, color: Color(0xFFDC2626)),
             ),
             const SizedBox(height: 20),
-            const Text('Không tìm thấy nhà thờ', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: AppColors.gray800)),
+            Text(l10n.noChurchFound, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: AppColors.gray800)),
             const SizedBox(height: 8),
-            const Text(
-              'Không có nhà thờ nào trong bán kính 10km.\nVui lòng liên hệ trực tiếp với giáo phận.',
+            Text(
+              l10n.noChurchFoundDesc,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 13, color: AppColors.gray500, height: 1.5),
+              style: const TextStyle(fontSize: 13, color: AppColors.gray500, height: 1.5),
             ),
             const SizedBox(height: 24),
             ElevatedButton.icon(
               onPressed: _findNearbyChurches,
               icon: const Icon(Icons.refresh_rounded, size: 18),
-              label: const Text('Thử lại', style: TextStyle(fontWeight: FontWeight.w900)),
+              label: Text(l10n.retryLower, style: const TextStyle(fontWeight: FontWeight.w900)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFDC2626),
                 foregroundColor: Colors.white,
@@ -424,6 +430,7 @@ class _EmergencyAnointingScreenState extends State<EmergencyAnointingScreen> {
   }
 
   Widget _buildPermissionDenied() {
+    final l10n = AppStrings.of(context);
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(40),
@@ -436,12 +443,12 @@ class _EmergencyAnointingScreenState extends State<EmergencyAnointingScreen> {
               child: const Icon(Icons.location_off_rounded, size: 40, color: Color(0xFFD97706)),
             ),
             const SizedBox(height: 20),
-            const Text('Cần quyền truy cập vị trí', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: AppColors.gray800)),
+            Text(l10n.locationPermissionRequired, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: AppColors.gray800)),
             const SizedBox(height: 8),
-            const Text(
-              'Vào Cài đặt → Thông Tin Linh Mục\n→ Vị trí → Cho phép khi dùng app',
+            Text(
+              l10n.locationPermissionDesc,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 13, color: AppColors.gray500, height: 1.6),
+              style: const TextStyle(fontSize: 13, color: AppColors.gray500, height: 1.6),
             ),
             const SizedBox(height: 24),
             SizedBox(
@@ -451,7 +458,7 @@ class _EmergencyAnointingScreenState extends State<EmergencyAnointingScreen> {
                   await Geolocator.openAppSettings();
                 },
                 icon: const Icon(Icons.settings_rounded, size: 18),
-                label: const Text('Mở Cài đặt', style: TextStyle(fontWeight: FontWeight.w900)),
+                label: Text(l10n.openSettings, style: const TextStyle(fontWeight: FontWeight.w900)),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFFDC2626),
                   foregroundColor: Colors.white,
@@ -467,7 +474,7 @@ class _EmergencyAnointingScreenState extends State<EmergencyAnointingScreen> {
               child: OutlinedButton.icon(
                 onPressed: _findNearbyChurches,
                 icon: const Icon(Icons.refresh_rounded, size: 18),
-                label: const Text('Thử lại', style: TextStyle(fontWeight: FontWeight.w900)),
+                label: Text(l10n.retryLower, style: const TextStyle(fontWeight: FontWeight.w900)),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: AppColors.gray600,
                   side: const BorderSide(color: AppColors.gray200),
@@ -483,6 +490,7 @@ class _EmergencyAnointingScreenState extends State<EmergencyAnointingScreen> {
   }
 
   Widget _buildError() {
+    final l10n = AppStrings.of(context);
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(40),
@@ -495,18 +503,18 @@ class _EmergencyAnointingScreenState extends State<EmergencyAnointingScreen> {
               child: const Icon(Icons.gps_off_rounded, size: 40, color: Color(0xFFDC2626)),
             ),
             const SizedBox(height: 20),
-            const Text('Không lấy được vị trí', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: AppColors.gray800)),
+            Text(l10n.cannotGetLocation, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: AppColors.gray800)),
             const SizedBox(height: 8),
-            const Text(
-              'Hãy đảm bảo GPS đang bật\nvà thử lại.',
+            Text(
+              l10n.cannotGetLocationDesc,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 13, color: AppColors.gray500, height: 1.5),
+              style: const TextStyle(fontSize: 13, color: AppColors.gray500, height: 1.5),
             ),
             const SizedBox(height: 24),
             ElevatedButton.icon(
               onPressed: _findNearbyChurches,
               icon: const Icon(Icons.refresh_rounded, size: 18),
-              label: const Text('Thử lại', style: TextStyle(fontWeight: FontWeight.w900)),
+              label: Text(l10n.retryLower, style: const TextStyle(fontWeight: FontWeight.w900)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFDC2626),
                 foregroundColor: Colors.white,

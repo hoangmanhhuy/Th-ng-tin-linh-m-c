@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import '../core/app_theme.dart';
+import '../core/app_strings.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
@@ -10,63 +11,66 @@ class HistoryScreen extends StatefulWidget {
 }
 
 class _HistoryScreenState extends State<HistoryScreen> {
-  String _activeFilter = 'Tất cả';
-  final _filters = ['Tất cả', 'Cập nhật', 'Dâng lễ', 'Đóng góp'];
-
-  final _historyItems = const [
-    _HistoryItemData(
-      id: 1,
-      type: 'Cập nhật',
-      title: 'Yêu cầu cập nhật thông tin',
-      status: 'Đã hoàn thành',
-      date: '20/10/2023',
-      icon: LucideIcons.userCog,
-      borderColor: AppColors.emerald,
-      statusTextColor: AppColors.emerald600,
-      statusBgColor: AppColors.emerald50,
-    ),
-    _HistoryItemData(
-      id: 2,
-      type: 'Dâng lễ',
-      title: 'Xin dâng lễ tạ ơn',
-      status: 'Đang xử lý',
-      date: '18/10/2023',
-      icon: LucideIcons.church,
-      borderColor: AppColors.orange500,
-      statusTextColor: AppColors.amber600,
-      statusBgColor: AppColors.amber50,
-    ),
-    _HistoryItemData(
-      id: 3,
-      type: 'Cập nhật',
-      title: 'Yêu cầu cập nhật thông tin',
-      status: 'Đã từ chối',
-      date: '15/10/2023',
-      icon: LucideIcons.undo2,
-      borderColor: AppColors.red,
-      statusTextColor: AppColors.red600,
-      statusBgColor: AppColors.red50,
-    ),
-    _HistoryItemData(
-      id: 4,
-      type: 'Dâng lễ',
-      title: 'Xin dâng lễ cầu bình an',
-      status: 'Đã hoàn thành',
-      date: '10/10/2023',
-      icon: LucideIcons.church,
-      borderColor: AppColors.emerald,
-      statusTextColor: AppColors.emerald600,
-      statusBgColor: AppColors.emerald50,
-    ),
-  ];
-
-  List<_HistoryItemData> get _filtered {
-    if (_activeFilter == 'Tất cả') return _historyItems;
-    return _historyItems.where((i) => i.type == _activeFilter).toList();
-  }
+  // filter index: 0=all,1=update,2=mass,3=contribution
+  int _activeFilterIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
+
+    final filters = [l10n.filterAll, l10n.filterUpdate, l10n.filterMass, l10n.filterContribution];
+
+    final historyItems = [
+      _HistoryItemData(
+        id: 1,
+        typeIndex: 1,
+        title: l10n.historyUpdateRequest,
+        status: l10n.statusCompleted,
+        date: '20/10/2023',
+        icon: LucideIcons.userCog,
+        borderColor: AppColors.emerald,
+        statusTextColor: AppColors.emerald600,
+        statusBgColor: AppColors.emerald50,
+      ),
+      _HistoryItemData(
+        id: 2,
+        typeIndex: 2,
+        title: l10n.historyMassThanksgiving,
+        status: l10n.statusProcessing,
+        date: '18/10/2023',
+        icon: LucideIcons.church,
+        borderColor: AppColors.orange500,
+        statusTextColor: AppColors.amber600,
+        statusBgColor: AppColors.amber50,
+      ),
+      _HistoryItemData(
+        id: 3,
+        typeIndex: 1,
+        title: l10n.historyUpdateRequest,
+        status: l10n.statusRejected,
+        date: '15/10/2023',
+        icon: LucideIcons.undo2,
+        borderColor: AppColors.red,
+        statusTextColor: AppColors.red600,
+        statusBgColor: AppColors.red50,
+      ),
+      _HistoryItemData(
+        id: 4,
+        typeIndex: 2,
+        title: l10n.historyMassPeace,
+        status: l10n.statusCompleted,
+        date: '10/10/2023',
+        icon: LucideIcons.church,
+        borderColor: AppColors.emerald,
+        statusTextColor: AppColors.emerald600,
+        statusBgColor: AppColors.emerald50,
+      ),
+    ];
+
+    final filtered = _activeFilterIndex == 0
+        ? historyItems
+        : historyItems.where((i) => i.typeIndex == _activeFilterIndex).toList();
+
     return Scaffold(
       backgroundColor: AppColors.surface,
       appBar: AppBar(
@@ -101,20 +105,20 @@ class _HistoryScreenState extends State<HistoryScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Lịch sử hoạt động',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: AppColors.textMain),
+                  Text(
+                    l10n.historyTitle,
+                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: AppColors.textMain),
                   ),
                   const SizedBox(height: 4),
-                  const Text(
-                    'Theo dõi các yêu cầu và cập nhật của bạn.',
-                    style: TextStyle(fontSize: 13, color: AppColors.gray400, fontWeight: FontWeight.w600),
+                  Text(
+                    l10n.historySubtitle,
+                    style: const TextStyle(fontSize: 13, color: AppColors.gray400, fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(height: 16),
                   // Search bar
                   TextField(
                     decoration: InputDecoration(
-                      hintText: 'Tìm kiếm lịch sử...',
+                      hintText: l10n.historySearch,
                       hintStyle: const TextStyle(color: AppColors.gray400, fontSize: 14),
                       prefixIcon: const Icon(LucideIcons.search, size: 18, color: AppColors.gray300),
                       filled: true,
@@ -138,13 +142,13 @@ class _HistoryScreenState extends State<HistoryScreen> {
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                itemCount: _filters.length,
+                itemCount: filters.length,
                 separatorBuilder: (_, __) => const SizedBox(width: 8),
                 itemBuilder: (_, i) {
-                  final f = _filters[i];
-                  final isActive = f == _activeFilter;
+                  final f = filters[i];
+                  final isActive = i == _activeFilterIndex;
                   return GestureDetector(
-                    onTap: () => setState(() => _activeFilter = f),
+                    onTap: () => setState(() => _activeFilterIndex = i),
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 200),
                       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -176,13 +180,13 @@ class _HistoryScreenState extends State<HistoryScreen> {
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate(
                 (_, i) {
-                  final item = _filtered[i];
+                  final item = filtered[i];
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 12),
                     child: _HistoryCard(item: item),
                   );
                 },
-                childCount: _filtered.length,
+                childCount: filtered.length,
               ),
             ),
           ),
@@ -194,7 +198,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
 class _HistoryItemData {
   final int id;
-  final String type;
+  final int typeIndex; // 1=update, 2=mass, 3=contribution
   final String title;
   final String status;
   final String date;
@@ -205,7 +209,7 @@ class _HistoryItemData {
 
   const _HistoryItemData({
     required this.id,
-    required this.type,
+    required this.typeIndex,
     required this.title,
     required this.status,
     required this.date,

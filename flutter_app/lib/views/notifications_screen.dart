@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import '../core/app_theme.dart';
+import '../core/app_strings.dart';
 
 class NotificationsScreen extends StatelessWidget {
   const NotificationsScreen({super.key});
@@ -42,6 +43,7 @@ class NotificationsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
     return Scaffold(
       backgroundColor: AppColors.surface,
       appBar: AppBar(
@@ -52,9 +54,9 @@ class NotificationsScreen extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18, color: AppColors.primary),
         ),
-        title: const Text(
-          'Thông báo',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.primary),
+        title: Text(
+          l10n.notificationsTitle,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.primary),
         ),
         centerTitle: true,
         actions: [
@@ -76,16 +78,16 @@ class NotificationsScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    'MỚI NHẤT',
-                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1.5),
+                  Text(
+                    l10n.notifLatest,
+                    style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1.5),
                   ),
                   TextButton(
                     onPressed: () {},
                     style: TextButton.styleFrom(padding: EdgeInsets.zero, tapTargetSize: MaterialTapTargetSize.shrinkWrap),
-                    child: const Text(
-                      'Đánh dấu đã đọc tất cả',
-                      style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700, fontSize: 12),
+                    child: Text(
+                      l10n.markAllRead,
+                      style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700, fontSize: 12),
                     ),
                   ),
                 ],

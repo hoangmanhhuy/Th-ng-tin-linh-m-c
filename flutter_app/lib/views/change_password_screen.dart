@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import '../core/app_theme.dart';
+import '../core/app_strings.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key});
@@ -37,54 +38,59 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     _currentCtrl.clear();
     _newCtrl.clear();
     _confirmCtrl.clear();
+    final l10n = AppStrings.of(context);
     showDialog(
       context: context,
-      builder: (_) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-        contentPadding: const EdgeInsets.all(28),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 64,
-              height: 64,
-              decoration: BoxDecoration(color: AppColors.emerald50, shape: BoxShape.circle),
-              child: const Icon(Icons.check_circle_rounded, color: AppColors.emerald, size: 36),
-            ),
-            const SizedBox(height: 16),
-            const Text('Đổi mật khẩu thành công!', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppColors.gray800)),
-            const SizedBox(height: 8),
-            const Text(
-              'Mật khẩu mới của vị đã được cập nhật. Vui lòng sử dụng mật khẩu mới cho lần đăng nhập tiếp theo.',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12, color: AppColors.gray500, height: 1.5),
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context); // close dialog
-                  Navigator.pop(context); // back to settings
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                ),
-                child: const Text('Xong', style: TextStyle(fontWeight: FontWeight.w900)),
+      builder: (ctx) {
+        final dl10n = AppStrings.of(ctx);
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+          contentPadding: const EdgeInsets.all(28),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 64,
+                height: 64,
+                decoration: BoxDecoration(color: AppColors.emerald50, shape: BoxShape.circle),
+                child: const Icon(Icons.check_circle_rounded, color: AppColors.emerald, size: 36),
               ),
-            ),
-          ],
-        ),
-      ),
+              const SizedBox(height: 16),
+              Text(dl10n.passwordChangedSuccess, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppColors.gray800)),
+              const SizedBox(height: 8),
+              Text(
+                dl10n.passwordChangedDesc,
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 12, color: AppColors.gray500, height: 1.5),
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(ctx); // close dialog
+                    Navigator.pop(context); // back to settings
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    foregroundColor: Colors.white,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
+                  child: Text(dl10n.done, style: const TextStyle(fontWeight: FontWeight.w900)),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
     return Scaffold(
       backgroundColor: AppColors.surface,
       appBar: AppBar(
@@ -95,9 +101,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18, color: AppColors.primary),
         ),
-        title: const Text(
-          'Đổi mật khẩu',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.primary),
+        title: Text(
+          l10n.changePasswordTitle,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.primary),
         ),
         centerTitle: true,
         bottom: const PreferredSize(
@@ -131,15 +137,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       child: const Icon(LucideIcons.lock, size: 22, color: AppColors.red),
                     ),
                     const SizedBox(width: 14),
-                    const Expanded(
+                    Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Bảo mật tài khoản', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w900, color: AppColors.gray800)),
-                          SizedBox(height: 4),
+                          Text(l10n.accountSecurity, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w900, color: AppColors.gray800)),
+                          const SizedBox(height: 4),
                           Text(
-                            'Mật khẩu nên có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và số.',
-                            style: TextStyle(fontSize: 11, color: AppColors.gray500, height: 1.4),
+                            l10n.passwordRequirements,
+                            style: const TextStyle(fontSize: 11, color: AppColors.gray500, height: 1.4),
                           ),
                         ],
                       ),
@@ -152,13 +158,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
               _PasswordField(
                 controller: _currentCtrl,
-                label: 'Mật khẩu hiện tại',
-                hint: 'Nhập mật khẩu đang dùng',
+                label: l10n.currentPassword,
+                hint: l10n.currentPasswordHint,
                 show: _showCurrent,
                 onToggle: () => setState(() => _showCurrent = !_showCurrent),
                 validator: (v) {
-                  if (v == null || v.isEmpty) return 'Vui lòng nhập mật khẩu hiện tại';
-                  if (v.length < 4) return 'Mật khẩu quá ngắn';
+                  if (v == null || v.isEmpty) return l10n.validCurrentPasswordRequired;
+                  if (v.length < 4) return l10n.validPasswordTooShort;
                   return null;
                 },
               ),
@@ -167,14 +173,14 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
               _PasswordField(
                 controller: _newCtrl,
-                label: 'Mật khẩu mới',
-                hint: 'Tối thiểu 8 ký tự',
+                label: l10n.newPassword,
+                hint: l10n.newPasswordHint,
                 show: _showNew,
                 onToggle: () => setState(() => _showNew = !_showNew),
                 validator: (v) {
-                  if (v == null || v.isEmpty) return 'Vui lòng nhập mật khẩu mới';
-                  if (v.length < 8) return 'Mật khẩu phải có ít nhất 8 ký tự';
-                  if (v == _currentCtrl.text) return 'Mật khẩu mới phải khác mật khẩu cũ';
+                  if (v == null || v.isEmpty) return l10n.validNewPasswordRequired;
+                  if (v.length < 8) return l10n.validPasswordMin8;
+                  if (v == _currentCtrl.text) return l10n.validPasswordSameAsCurrent;
                   return null;
                 },
               ),
@@ -183,13 +189,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
               _PasswordField(
                 controller: _confirmCtrl,
-                label: 'Xác nhận mật khẩu mới',
-                hint: 'Nhập lại mật khẩu mới',
+                label: l10n.confirmNewPassword,
+                hint: l10n.confirmPasswordHint,
                 show: _showConfirm,
                 onToggle: () => setState(() => _showConfirm = !_showConfirm),
                 validator: (v) {
-                  if (v == null || v.isEmpty) return 'Vui lòng xác nhận mật khẩu mới';
-                  if (v != _newCtrl.text) return 'Mật khẩu xác nhận không khớp';
+                  if (v == null || v.isEmpty) return l10n.validConfirmRequired;
+                  if (v != _newCtrl.text) return l10n.validConfirmMismatch;
                   return null;
                 },
               ),
@@ -209,7 +215,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   ),
                   child: _loading
                       ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
-                      : const Text('CẬP NHẬT MẬT KHẨU', style: TextStyle(fontWeight: FontWeight.w900, letterSpacing: 1)),
+                      : Text(l10n.updatePassword, style: const TextStyle(fontWeight: FontWeight.w900, letterSpacing: 1)),
                 ),
               ),
 

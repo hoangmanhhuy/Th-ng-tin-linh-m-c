@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import '../core/app_theme.dart';
+import '../core/app_strings.dart';
 import '../models/models.dart';
 
 class PersonalInfoScreen extends StatelessWidget {
@@ -10,6 +11,7 @@ class PersonalInfoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
     return Scaffold(
       backgroundColor: AppColors.surface,
       appBar: AppBar(
@@ -20,9 +22,9 @@ class PersonalInfoScreen extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18, color: AppColors.primary),
         ),
-        title: const Text(
-          'Thông tin cá nhân',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.primary),
+        title: Text(
+          l10n.personalInfoTitle,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.primary),
         ),
         centerTitle: true,
         bottom: const PreferredSize(
@@ -62,7 +64,7 @@ class PersonalInfoScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 14),
                   Text(
-                    'TÊN THÁNH',
+                    l10n.holyName,
                     style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 2),
                   ),
                   const SizedBox(height: 4),
@@ -83,12 +85,12 @@ class PersonalInfoScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: Colors.white.withValues(alpha: 0.3)),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.circle, color: Color(0xFF4ADE80), size: 8),
-                        SizedBox(width: 6),
-                        Text('Đang hoạt động', style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w900)),
+                        const Icon(Icons.circle, color: Color(0xFF4ADE80), size: 8),
+                        const SizedBox(width: 6),
+                        Text(l10n.activeStatus, style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w900)),
                       ],
                     ),
                   ),
@@ -99,40 +101,40 @@ class PersonalInfoScreen extends StatelessWidget {
             const SizedBox(height: 20),
 
             _InfoSection(
-              title: 'THÔNG TIN ĐỊNH DANH',
+              title: l10n.sectionIdentity,
               items: [
-                _InfoEntry(icon: LucideIcons.fingerprint, label: 'Mã định danh', value: user.id, copyable: true),
-                _InfoEntry(icon: LucideIcons.building2, label: 'Giáo phận', value: user.diocese),
+                _InfoEntry(icon: LucideIcons.fingerprint, label: l10n.fieldId, value: user.id, copyable: true),
+                _InfoEntry(icon: LucideIcons.building2, label: l10n.fieldDiocese, value: user.diocese),
                 if (user.parish != null)
-                  _InfoEntry(icon: LucideIcons.mapPin, label: 'Giáo xứ', value: user.parish!),
+                  _InfoEntry(icon: LucideIcons.mapPin, label: l10n.fieldParish, value: user.parish!),
                 if (user.role != null)
-                  _InfoEntry(icon: LucideIcons.briefcase, label: 'Chức vụ', value: user.role!),
+                  _InfoEntry(icon: LucideIcons.briefcase, label: l10n.fieldRole, value: user.role!),
               ],
             ),
 
             const SizedBox(height: 16),
 
             _InfoSection(
-              title: 'THÔNG TIN CÁ NHÂN',
+              title: l10n.sectionPersonal,
               items: [
                 if (user.birthDate != null)
-                  _InfoEntry(icon: LucideIcons.cake, label: 'Ngày sinh', value: user.birthDate!),
+                  _InfoEntry(icon: LucideIcons.cake, label: l10n.fieldBirthDate, value: user.birthDate!),
                 if (user.ordinationDate != null)
-                  _InfoEntry(icon: LucideIcons.cross, label: 'Ngày thụ phong', value: user.ordinationDate!),
+                  _InfoEntry(icon: LucideIcons.cross, label: l10n.fieldOrdinationDate, value: user.ordinationDate!),
                 if (user.degree != null)
-                  _InfoEntry(icon: LucideIcons.graduationCap, label: 'Học vị', value: user.degree!),
+                  _InfoEntry(icon: LucideIcons.graduationCap, label: l10n.fieldDegree, value: user.degree!),
               ],
             ),
 
             const SizedBox(height: 16),
 
             _InfoSection(
-              title: 'LIÊN LẠC',
+              title: l10n.sectionContact,
               items: [
                 if (user.email != null)
-                  _InfoEntry(icon: LucideIcons.mail, label: 'Email', value: user.email!, copyable: true),
+                  _InfoEntry(icon: LucideIcons.mail, label: l10n.fieldEmail, value: user.email!, copyable: true),
                 if (user.phone != null)
-                  _InfoEntry(icon: LucideIcons.phone, label: 'Điện thoại', value: user.phone!, copyable: true),
+                  _InfoEntry(icon: LucideIcons.phone, label: l10n.fieldPhone, value: user.phone!, copyable: true),
               ],
             ),
 
@@ -146,15 +148,15 @@ class PersonalInfoScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(18),
                 border: Border.all(color: AppColors.blue100),
               ),
-              child: const Row(
+              child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(LucideIcons.info, size: 16, color: AppColors.primary),
-                  SizedBox(width: 10),
+                  const Icon(LucideIcons.info, size: 16, color: AppColors.primary),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: Text(
-                      'Để cập nhật thông tin cá nhân, vui lòng gửi "Đề nghị cập nhật" hoặc liên hệ văn phòng Giáo phận.',
-                      style: TextStyle(fontSize: 12, color: AppColors.primary, height: 1.5),
+                      l10n.personalInfoNote,
+                      style: const TextStyle(fontSize: 12, color: AppColors.primary, height: 1.5),
                     ),
                   ),
                 ],
@@ -227,9 +229,10 @@ class _InfoSection extends StatelessWidget {
                           GestureDetector(
                             onTap: () {
                               Clipboard.setData(ClipboardData(text: item.value));
+                              final l10n = AppStrings.of(context);
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text('Đã sao chép: ${item.value}'),
+                                  content: Text('${l10n.copiedValue}: ${item.value}'),
                                   duration: const Duration(seconds: 2),
                                   behavior: SnackBarBehavior.floating,
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

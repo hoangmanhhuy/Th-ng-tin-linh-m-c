@@ -3,6 +3,7 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:provider/provider.dart';
 import '../viewmodels/viewmodels.dart';
 import '../core/app_theme.dart';
+import '../core/app_strings.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -25,6 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
     final auth = context.read<AuthViewModel>();
 
     return Scaffold(
@@ -53,18 +55,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: const Icon(LucideIcons.shieldCheck, color: Colors.white, size: 36),
               ),
               const SizedBox(height: 20),
-              const Text(
-                'Thông Tin Linh Mục',
-                style: TextStyle(
+              Text(
+                l10n.loginTitle,
+                style: const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.w900,
                   color: AppColors.primary,
                 ),
               ),
               const SizedBox(height: 4),
-              const Text(
-                'ĐĂNG NHẬP LINH MỤC',
-                style: TextStyle(
+              Text(
+                l10n.loginSubtitle,
+                style: const TextStyle(
                   color: AppColors.gray400,
                   fontWeight: FontWeight.w900,
                   fontSize: 11,
@@ -90,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildLabel('TÊN ĐĂNG NHẬP HOẶC EMAIL'),
+                    _buildLabel(l10n.loginUsernameLabel),
                     const SizedBox(height: 8),
                     _buildTextField(
                       controller: _usernameController,
@@ -98,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       hint: 'linhmuc@giaophan.org',
                     ),
                     const SizedBox(height: 20),
-                    _buildLabel('MẬT KHẨU'),
+                    _buildLabel(l10n.loginPasswordLabel),
                     const SizedBox(height: 8),
                     _buildTextField(
                       controller: _passwordController,
@@ -115,9 +117,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           padding: EdgeInsets.zero,
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
-                        child: const Text(
-                          'Quên mật khẩu?',
-                          style: TextStyle(
+                        child: Text(
+                          l10n.forgotPassword,
+                          style: const TextStyle(
                             color: AppColors.primary,
                             fontWeight: FontWeight.w700,
                             fontSize: 12,
@@ -137,11 +139,11 @@ class _LoginScreenState extends State<LoginScreen> {
               Row(
                 children: [
                   const Expanded(child: Divider(color: AppColors.gray200)),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Text(
-                      'HOẶC SỬ DỤNG THẺ TÁC VỤ',
-                      style: TextStyle(
+                      l10n.orUseNfcCard,
+                      style: const TextStyle(
                         fontSize: 9,
                         fontWeight: FontWeight.w900,
                         color: AppColors.gray300,
@@ -162,9 +164,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: ElevatedButton.icon(
                   onPressed: () {},
                   icon: const Icon(Icons.nfc_rounded, size: 22),
-                  label: const Text(
-                    'Chạm thẻ Linh mục',
-                    style: TextStyle(fontWeight: FontWeight.w900, fontSize: 14),
+                  label: Text(
+                    l10n.tapPriestCard,
+                    style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 14),
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.amber600,
@@ -179,9 +181,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 40),
 
-              const Text(
-                'Không phải là Linh mục?',
-                style: TextStyle(
+              Text(
+                l10n.notAPriest,
+                style: const TextStyle(
                   color: AppColors.gray400,
                   fontWeight: FontWeight.w700,
                   fontSize: 12,
@@ -191,9 +193,9 @@ class _LoginScreenState extends State<LoginScreen> {
               TextButton.icon(
                 onPressed: () => Navigator.pop(context),
                 icon: const Icon(Icons.chevron_left_rounded, size: 18, color: AppColors.primary),
-                label: const Text(
-                  'Quay lại Trang chủ Giáo dân',
-                  style: TextStyle(
+                label: Text(
+                  l10n.backToLaityHome,
+                  style: const TextStyle(
                     color: AppColors.primary,
                     fontWeight: FontWeight.w700,
                     fontSize: 13,
@@ -296,9 +298,9 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Đăng nhập',
-              style: TextStyle(
+            Text(
+              AppStrings.of(context).login,
+              style: const TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 16,
               ),

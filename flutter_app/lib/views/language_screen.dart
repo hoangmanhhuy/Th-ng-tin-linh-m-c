@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 import '../core/app_theme.dart';
+import '../core/app_strings.dart';
+import '../viewmodels/language_provider.dart';
 
 class LanguageScreen extends StatefulWidget {
   const LanguageScreen({super.key});
@@ -16,30 +18,18 @@ class _LanguageScreenState extends State<LanguageScreen> {
   @override
   void initState() {
     super.initState();
-    _load();
-  }
-
-  Future<void> _load() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() => _selected = prefs.getString('app_lang') ?? 'vi');
+    _selected = context.read<LanguageProvider>().languageCode;
   }
 
   Future<void> _select(String code, bool available) async {
-    if (!available) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: const Text('Ngôn ngữ này chưa được hỗ trợ. Sẽ ra mắt sớm!'),
-        duration: const Duration(seconds: 2),
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      ));
-      return;
-    }
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('app_lang', code);
+    final l10n = AppStrings.of(context);
+    if (!available) return;
+    await context.read<LanguageProvider>().setLanguage(code);
     setState(() => _selected = code);
     if (mounted) {
+      final name = _languages.firstWhere((l) => l.code == code).name;
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Đã chuyển sang ${_languages.firstWhere((l) => l.code == code).name}'),
+        content: Text(l10n.languageSwitched(name)),
         duration: const Duration(seconds: 2),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -49,12 +39,13 @@ class _LanguageScreenState extends State<LanguageScreen> {
 
   static const _languages = [
     _LangOption(code: 'vi', name: 'Tiếng Việt', flag: '🇻🇳', subtitle: 'Vietnamese', available: true),
-    _LangOption(code: 'en', name: 'English', flag: '🇺🇸', subtitle: 'English (US)', available: false),
+    _LangOption(code: 'en', name: 'English', flag: '🇺🇸', subtitle: 'English (US)', available: true),
     _LangOption(code: 'la', name: 'Latina', flag: '🇻🇦', subtitle: 'Latin (Vatican)', available: false),
   ];
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
     return Scaffold(
       backgroundColor: AppColors.surface,
       appBar: AppBar(
@@ -65,9 +56,9 @@ class _LanguageScreenState extends State<LanguageScreen> {
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18, color: AppColors.primary),
         ),
-        title: const Text(
-          'Ngôn ngữ',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.primary),
+        title: Text(
+          l10n.languageTitle,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.primary),
         ),
         centerTitle: true,
         bottom: const PreferredSize(
@@ -99,15 +90,15 @@ class _LanguageScreenState extends State<LanguageScreen> {
                     child: const Icon(LucideIcons.languages, size: 22, color: AppColors.emerald600),
                   ),
                   const SizedBox(width: 14),
-                  const Expanded(
+                  Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Chọn ngôn ngữ', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w900, color: AppColors.gray800)),
-                        SizedBox(height: 4),
+                        Text(l10n.chooseLanguage, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w900, color: AppColors.gray800)),
+                        const SizedBox(height: 4),
                         Text(
-                          'Ngôn ngữ hiển thị trên toàn bộ ứng dụng. Hiện tại hỗ trợ Tiếng Việt.',
-                          style: TextStyle(fontSize: 11, color: AppColors.gray500, height: 1.4),
+                          l10n.languageSupportDesc,
+                          style: const TextStyle(fontSize: 11, color: AppColors.gray500, height: 1.4),
                         ),
                       ],
                     ),
@@ -122,9 +113,9 @@ class _LanguageScreenState extends State<LanguageScreen> {
               padding: const EdgeInsets.only(left: 4, bottom: 10),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: const Text(
-                  'NGÔN NGỮ CÓ SẴN',
-                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1.5),
+                child: Text(
+                  l10n.availableLanguages,
+                  style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1.5),
                 ),
               ),
             ),
@@ -172,7 +163,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                                               color: AppColors.gray100,
                                               borderRadius: BorderRadius.circular(6),
                                             ),
-                                            child: const Text('Sắp ra mắt', style: TextStyle(fontSize: 9, color: AppColors.gray400, fontWeight: FontWeight.w900)),
+                                            child: Text(l10n.comingSoon, style: const TextStyle(fontSize: 9, color: AppColors.gray400, fontWeight: FontWeight.w900)),
                                           ),
                                         ],
                                       ],
@@ -186,7 +177,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                                 Container(
                                   width: 24,
                                   height: 24,
-                                  decoration: BoxDecoration(color: AppColors.primary, shape: BoxShape.circle),
+                                  decoration: const BoxDecoration(color: AppColors.primary, shape: BoxShape.circle),
                                   child: const Icon(Icons.check_rounded, color: Colors.white, size: 14),
                                 )
                               else

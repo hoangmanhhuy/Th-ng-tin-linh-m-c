@@ -4,6 +4,7 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import '../core/app_theme.dart';
+import '../core/app_strings.dart';
 import '../models/models.dart';
 import '../viewmodels/viewmodels.dart';
 
@@ -14,6 +15,7 @@ class PriestProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = context.read<AuthViewModel>();
+    final l10n = AppStrings.of(context);
 
     return Scaffold(
       backgroundColor: AppColors.surface,
@@ -47,9 +49,9 @@ class PriestProfileScreen extends StatelessWidget {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
               ),
-              child: const Text(
-                'Đăng xuất',
-                style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700, fontSize: 13),
+              child: Text(
+                l10n.logout,
+                style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700, fontSize: 13),
               ),
             ),
           ),
@@ -93,9 +95,9 @@ class PriestProfileScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 14),
-            const Text(
-              'TÊN THÁNH',
-              style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.gray400, letterSpacing: 2),
+            Text(
+              l10n.holyName,
+              style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.gray400, letterSpacing: 2),
             ),
             const SizedBox(height: 4),
             Text(
@@ -122,9 +124,9 @@ class PriestProfileScreen extends StatelessWidget {
                     decoration: const BoxDecoration(color: AppColors.emerald, shape: BoxShape.circle),
                   ),
                   const SizedBox(width: 6),
-                  const Text(
-                    'Đang hoạt động',
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: AppColors.emerald600),
+                  Text(
+                    l10n.activeStatus,
+                    style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: AppColors.emerald600),
                   ),
                 ],
               ),
@@ -167,9 +169,9 @@ class PriestProfileScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  'MÃ ĐỊNH DANH',
-                                  style: TextStyle(color: Colors.white54, fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: 1.5),
+                                Text(
+                                  l10n.priestIdCode,
+                                  style: const TextStyle(color: Colors.white54, fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: 1.5),
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
@@ -199,9 +201,9 @@ class PriestProfileScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  'GIÁO PHẬN',
-                                  style: TextStyle(color: Colors.white54, fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: 1.5),
+                                Text(
+                                  l10n.dioceseLabel,
+                                  style: const TextStyle(color: Colors.white54, fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: 1.5),
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
@@ -253,9 +255,9 @@ class PriestProfileScreen extends StatelessWidget {
                         child: const Icon(LucideIcons.clipboardList, size: 14, color: AppColors.gray400),
                       ),
                       const SizedBox(width: 8),
-                      const Text(
-                        'THÔNG TIN CHI TIẾT',
-                        style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1.5),
+                      Text(
+                        l10n.sectionDetailedInfo,
+                        style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1.5),
                       ),
                     ],
                   ),
@@ -269,7 +271,7 @@ class PriestProfileScreen extends StatelessWidget {
                           icon: LucideIcons.cake,
                           iconColor: AppColors.primary,
                           iconBg: AppColors.blue50,
-                          label: 'Ngày sinh',
+                          label: l10n.labelBirthDate,
                           value: user.birthDate ?? '—',
                         ),
                       ),
@@ -279,7 +281,7 @@ class PriestProfileScreen extends StatelessWidget {
                           icon: LucideIcons.sparkles,
                           iconColor: AppColors.fuchsia500,
                           iconBg: AppColors.fuchsia50,
-                          label: 'Thụ phong',
+                          label: l10n.labelOrdination,
                           value: user.ordinationDate ?? '—',
                         ),
                       ),
@@ -291,7 +293,7 @@ class PriestProfileScreen extends StatelessWidget {
                     icon: LucideIcons.church,
                     iconColor: AppColors.indigo600,
                     iconBg: AppColors.indigo50,
-                    label: 'Giáo xứ hiện tại',
+                    label: l10n.labelCurrentParish,
                     value: user.parish ?? '—',
                   ),
                   const SizedBox(height: 12),
@@ -299,7 +301,7 @@ class PriestProfileScreen extends StatelessWidget {
                     icon: LucideIcons.graduationCap,
                     iconColor: AppColors.emerald600,
                     iconBg: AppColors.emerald50,
-                    label: 'Học hàm/Học vị',
+                    label: l10n.labelDegree,
                     value: user.degree ?? '—',
                   ),
                   if (user.email != null) ...[
@@ -308,7 +310,7 @@ class PriestProfileScreen extends StatelessWidget {
                       icon: LucideIcons.mail,
                       iconColor: AppColors.orange500,
                       iconBg: AppColors.orange50,
-                      label: 'Email liên hệ',
+                      label: l10n.labelEmail,
                       value: user.email!,
                       onTap: () => Clipboard.setData(ClipboardData(text: user.email!)),
                     ),
@@ -331,9 +333,9 @@ class PriestProfileScreen extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  const Text(
-                    'Mã QR định danh',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppColors.primary),
+                  Text(
+                    l10n.qrIdCode,
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppColors.primary),
                   ),
                   const SizedBox(height: 16),
                   Container(
@@ -352,10 +354,10 @@ class PriestProfileScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 14),
-                  const Text(
-                    'Sử dụng mã này để quét tại các cổng\nkiểm soát giáo phận hoặc xác thực quyền hành lễ.',
+                  Text(
+                    l10n.qrUsageDesc,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 12, color: AppColors.gray500, height: 1.5),
+                    style: const TextStyle(fontSize: 12, color: AppColors.gray500, height: 1.5),
                   ),
                 ],
               ),
@@ -384,15 +386,15 @@ class PriestProfileScreen extends StatelessWidget {
                         child: const Icon(LucideIcons.briefcase, size: 14, color: AppColors.primary),
                       ),
                       const SizedBox(width: 8),
-                      const Text(
-                        'LỊCH SỬ CÔNG TÁC',
-                        style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1.5),
+                      Text(
+                        l10n.sectionWorkHistory,
+                        style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1.5),
                       ),
                     ],
                   ),
                   const SizedBox(height: 16),
                   _WorkItem(
-                    period: '${_year(user.ordinationDate)} - Nay',
+                    period: '${_year(user.ordinationDate)} - ${l10n.toPresent}',
                     title: user.role ?? 'Linh mục',
                     place: '${user.parish ?? ''}, ${user.diocese}',
                     isActive: true,
@@ -400,8 +402,8 @@ class PriestProfileScreen extends StatelessWidget {
                   const SizedBox(height: 12),
                   _WorkItem(
                     period: '${_prevYear(user.ordinationDate)} - ${_year(user.ordinationDate)}',
-                    title: 'Phó xứ',
-                    place: 'Giáo xứ ${user.diocese}',
+                    title: l10n.vicePriest,
+                    place: '${l10n.parishOf} ${user.diocese}',
                     isActive: false,
                   ),
                 ],
@@ -423,14 +425,14 @@ class PriestProfileScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'LỊCH SỬ CẬP NHẬT',
-                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1.5),
+                  Text(
+                    l10n.sectionUpdateHistory,
+                    style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1.5),
                   ),
                   const SizedBox(height: 12),
-                  _UpdateRow(label: 'Cập nhật chức vụ mới', date: '12/10/2023'),
+                  _UpdateRow(label: l10n.updateRoleNew, date: '12/10/2023'),
                   const SizedBox(height: 8),
-                  _UpdateRow(label: 'Thay đổi địa chỉ liên lạc', date: '05/08/2023'),
+                  _UpdateRow(label: l10n.updateContactChange, date: '05/08/2023'),
                 ],
               ),
             ),
@@ -441,6 +443,7 @@ class PriestProfileScreen extends StatelessWidget {
   }
 
   void _showQr(BuildContext context) {
+    final l10n = AppStrings.of(context);
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
@@ -455,7 +458,7 @@ class PriestProfileScreen extends StatelessWidget {
           children: [
             Container(width: 40, height: 4, decoration: BoxDecoration(color: AppColors.gray200, borderRadius: BorderRadius.circular(2))),
             const SizedBox(height: 20),
-            const Text('Mã QR Định Danh', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.textMain)),
+            Text(l10n.qrIdCodeModal, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.textMain)),
             const SizedBox(height: 20),
             QrImageView(data: 'PRIEST:${user.id}', version: QrVersions.auto, size: 220, backgroundColor: Colors.white),
             const SizedBox(height: 16),

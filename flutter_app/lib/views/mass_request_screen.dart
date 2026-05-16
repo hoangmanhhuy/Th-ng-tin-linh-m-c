@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import '../core/app_theme.dart';
+import '../core/app_strings.dart';
 import '../models/models.dart';
 
 // ─── Mass Request Form (Linh mục gửi yêu cầu) ───────────────────────────────
@@ -15,18 +16,15 @@ class MassRequestScreen extends StatefulWidget {
 }
 
 class _MassRequestScreenState extends State<MassRequestScreen> {
-  String _selectedType = 'Tạ ơn';
-  final _massTypes = ['Tạ ơn', 'Cầu bình an', 'An táng', 'Hôn phối', 'Khác'];
+  int _selectedTypeIndex = 0;
   final _noteController = TextEditingController();
   final _locationController = TextEditingController();
 
   DateTime _selectedDate = DateTime.now().add(const Duration(days: 1));
   TimeOfDay _selectedTime = const TimeOfDay(hour: 18, minute: 0);
 
-  static const _weekdays = ['Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy', 'Chúa Nhật'];
-
-  String get _formattedDateTime {
-    final wd = _weekdays[_selectedDate.weekday - 1];
+  String _formattedDateTime(AppStrings l10n) {
+    final wd = l10n.weekdays[_selectedDate.weekday - 1];
     final d = _selectedDate.day.toString().padLeft(2, '0');
     final m = _selectedDate.month.toString().padLeft(2, '0');
     final y = _selectedDate.year;
@@ -87,50 +85,54 @@ class _MassRequestScreenState extends State<MassRequestScreen> {
   }
 
   Future<void> _submit() async {
+    final l10n = AppStrings.of(context);
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (_) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-        contentPadding: const EdgeInsets.all(28),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 64,
-              height: 64,
-              decoration: const BoxDecoration(color: Color(0xFFEFF6FF), shape: BoxShape.circle),
-              child: const Icon(LucideIcons.send, color: AppColors.primary, size: 30),
-            ),
-            const SizedBox(height: 16),
-            const Text('Đã gửi yêu cầu!', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppColors.gray800)),
-            const SizedBox(height: 8),
-            const Text(
-              'Yêu cầu dâng lễ của vị đã được gửi đến văn phòng giáo phận. Chúng tôi sẽ xác nhận sớm nhất.',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12, color: AppColors.gray500, height: 1.5),
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context); // close dialog
-                  Navigator.pop(context); // back
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                ),
-                child: const Text('Xong', style: TextStyle(fontWeight: FontWeight.w900)),
+      builder: (ctx) {
+        final dl10n = AppStrings.of(ctx);
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+          contentPadding: const EdgeInsets.all(28),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 64,
+                height: 64,
+                decoration: const BoxDecoration(color: Color(0xFFEFF6FF), shape: BoxShape.circle),
+                child: const Icon(LucideIcons.send, color: AppColors.primary, size: 30),
               ),
-            ),
-          ],
-        ),
-      ),
+              const SizedBox(height: 16),
+              Text(dl10n.massRequestSent, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppColors.gray800)),
+              const SizedBox(height: 8),
+              Text(
+                dl10n.massRequestSentDesc,
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 12, color: AppColors.gray500, height: 1.5),
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context); // close dialog
+                    Navigator.pop(context); // back
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    foregroundColor: Colors.white,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
+                  child: Text(dl10n.done, style: const TextStyle(fontWeight: FontWeight.w900)),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -143,6 +145,8 @@ class _MassRequestScreenState extends State<MassRequestScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
+    final massTypes = [l10n.massThanksgiving, l10n.massPeace, l10n.massFuneral, l10n.massWedding, l10n.massOther];
     return Scaffold(
       backgroundColor: const Color(0xFFF6FAFE),
       appBar: AppBar(
@@ -153,15 +157,15 @@ class _MassRequestScreenState extends State<MassRequestScreen> {
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18, color: AppColors.primary),
         ),
-        title: const Column(
+        title: Column(
           children: [
             Text(
-              'Xin dâng lễ',
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: AppColors.textMain),
+              l10n.massRequestTitle,
+              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: AppColors.textMain),
             ),
             Text(
-              'Gửi yêu cầu xin dâng thánh lễ',
-              style: TextStyle(fontSize: 10, color: AppColors.gray400, fontWeight: FontWeight.w600),
+              l10n.massRequestSubtitle,
+              style: const TextStyle(fontSize: 10, color: AppColors.gray400, fontWeight: FontWeight.w600),
             ),
           ],
         ),
@@ -198,7 +202,7 @@ class _MassRequestScreenState extends State<MassRequestScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('XIN LỄ CHO', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.indigo600, letterSpacing: 1.5)),
+                          Text(l10n.massFor, style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.indigo600, letterSpacing: 1.5)),
                           const SizedBox(height: 2),
                           Text(
                             'LM. ${widget.priest!.holyName} ${widget.priest!.fullName}',
@@ -222,14 +226,16 @@ class _MassRequestScreenState extends State<MassRequestScreen> {
               icon: LucideIcons.listFilter,
               iconBgColor: AppColors.blue50,
               iconColor: AppColors.primary,
-              label: 'Loại lễ',
+              label: l10n.massType,
               child: Wrap(
                 spacing: 8,
                 runSpacing: 8,
-                children: _massTypes.map((type) {
-                  final isActive = type == _selectedType;
+                children: massTypes.asMap().entries.map((entry) {
+                  final i = entry.key;
+                  final type = entry.value;
+                  final isActive = i == _selectedTypeIndex;
                   return GestureDetector(
-                    onTap: () => setState(() => _selectedType = type),
+                    onTap: () => setState(() => _selectedTypeIndex = i),
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 200),
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -262,7 +268,7 @@ class _MassRequestScreenState extends State<MassRequestScreen> {
               icon: LucideIcons.calendar,
               iconBgColor: AppColors.blue50,
               iconColor: AppColors.primary,
-              label: 'Thời gian dự kiến',
+              label: l10n.scheduledTime,
               child: InkWell(
                 onTap: _pickDateTime,
                 borderRadius: BorderRadius.circular(14),
@@ -278,7 +284,7 @@ class _MassRequestScreenState extends State<MassRequestScreen> {
                       const Icon(LucideIcons.calendar, size: 16, color: AppColors.primary),
                       const SizedBox(width: 10),
                       Text(
-                        _formattedDateTime,
+                        _formattedDateTime(l10n),
                         style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.gray700),
                       ),
                       const Spacer(),
@@ -288,7 +294,7 @@ class _MassRequestScreenState extends State<MassRequestScreen> {
                           color: AppColors.blue50,
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: const Text('Chọn', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: AppColors.primary)),
+                        child: Text(l10n.select, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: AppColors.primary)),
                       ),
                     ],
                   ),
@@ -303,11 +309,11 @@ class _MassRequestScreenState extends State<MassRequestScreen> {
               icon: LucideIcons.mapPin,
               iconBgColor: AppColors.emerald50,
               iconColor: AppColors.emerald600,
-              label: 'Địa điểm',
+              label: l10n.location,
               child: TextField(
                 controller: _locationController,
                 decoration: InputDecoration(
-                  hintText: 'Nhập tên giáo xứ hoặc địa điểm...',
+                  hintText: l10n.locationHint,
                   hintStyle: const TextStyle(color: AppColors.gray400, fontSize: 13),
                   filled: true,
                   fillColor: AppColors.surface,
@@ -326,12 +332,12 @@ class _MassRequestScreenState extends State<MassRequestScreen> {
               icon: LucideIcons.fileText,
               iconBgColor: AppColors.amber50,
               iconColor: AppColors.amber600,
-              label: 'Ý chỉ / Ghi chú',
+              label: l10n.intentionNote,
               child: TextField(
                 controller: _noteController,
                 maxLines: 4,
                 decoration: InputDecoration(
-                  hintText: 'Nhập ý chỉ dâng lễ...',
+                  hintText: l10n.intentionHint,
                   hintStyle: const TextStyle(color: AppColors.gray400, fontSize: 13),
                   filled: true,
                   fillColor: AppColors.surface,
@@ -356,9 +362,9 @@ class _MassRequestScreenState extends State<MassRequestScreen> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
                   elevation: 0,
                 ),
-                child: const Text(
-                  'GỬI YÊU CẦU',
-                  style: TextStyle(fontWeight: FontWeight.w900, letterSpacing: 1.5, fontSize: 14),
+                child: Text(
+                  l10n.sendRequest,
+                  style: const TextStyle(fontWeight: FontWeight.w900, letterSpacing: 1.5, fontSize: 14),
                 ),
               ),
             ),
@@ -428,6 +434,7 @@ class MassRequestDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
     return Scaffold(
       backgroundColor: const Color(0xFFF6F8FB),
       appBar: AppBar(
@@ -438,9 +445,9 @@ class MassRequestDetailScreen extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18, color: AppColors.primary),
         ),
-        title: const Text(
-          'Chi tiết yêu cầu',
-          style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: Color(0xFF1E3A5F)),
+        title: Text(
+          l10n.massDetailTitle,
+          style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: Color(0xFF1E3A5F)),
         ),
         centerTitle: true,
         bottom: const PreferredSize(
@@ -469,19 +476,19 @@ class MassRequestDetailScreen extends StatelessWidget {
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
-                          children: const [
-                            Icon(LucideIcons.sparkles, size: 16, color: AppColors.primary),
-                            SizedBox(width: 6),
-                            Text('YÊU CẦU MỚI', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.primary, letterSpacing: 1.5)),
+                          children: [
+                            const Icon(LucideIcons.sparkles, size: 16, color: AppColors.primary),
+                            const SizedBox(width: 6),
+                            Text(l10n.massNewRequest, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.primary, letterSpacing: 1.5)),
                           ],
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 6),
-                  const Text(
-                    'Yêu cầu dâng lễ từ linh mục khác cần được duyệt.',
-                    style: TextStyle(fontSize: 11, color: AppColors.gray400, fontWeight: FontWeight.w600),
+                  Text(
+                    l10n.massNewRequestDesc,
+                    style: const TextStyle(fontSize: 11, color: AppColors.gray400, fontWeight: FontWeight.w600),
                     textAlign: TextAlign.center,
                   ),
 
@@ -490,7 +497,7 @@ class MassRequestDetailScreen extends StatelessWidget {
                   // Sender info
                   _DetailSection(
                     icon: LucideIcons.user,
-                    title: 'THÔNG TIN LINH MỤC GỬI YÊU CẦU',
+                    title: l10n.sectionSenderInfo,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -510,18 +517,18 @@ class MassRequestDetailScreen extends StatelessWidget {
                             const SizedBox(width: 14),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text('TÊN THÁNH & HỌ TÊN', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1)),
-                                SizedBox(height: 2),
-                                Text('Phaolô Nguyễn Văn A', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppColors.gray800)),
+                              children: [
+                                Text(l10n.senderNameLabel, style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1)),
+                                const SizedBox(height: 2),
+                                const Text('Phaolô Nguyễn Văn A', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppColors.gray800)),
                               ],
                             ),
                           ],
                         ),
                         const SizedBox(height: 16),
-                        _InfoRow(icon: LucideIcons.church, label: 'Giáo xứ hiện tại', value: 'Giáo xứ Thánh Đa Minh, TGP Sài Gòn'),
+                        _InfoRow(icon: LucideIcons.church, label: l10n.currentParishContact, value: 'Giáo xứ Thánh Đa Minh, TGP Sài Gòn'),
                         const SizedBox(height: 10),
-                        _InfoRow(icon: LucideIcons.mapPin, label: 'Số điện thoại liên hệ', value: '090 123 4567'),
+                        _InfoRow(icon: LucideIcons.mapPin, label: l10n.phoneContact, value: '090 123 4567'),
                       ],
                     ),
                   ),
@@ -531,7 +538,7 @@ class MassRequestDetailScreen extends StatelessWidget {
                   // Mass details
                   _DetailSection(
                     icon: LucideIcons.listFilter,
-                    title: 'CHI TIẾT DÂNG LỄ',
+                    title: l10n.sectionMassDetails,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -547,10 +554,10 @@ class MassRequestDetailScreen extends StatelessWidget {
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text('LOẠI LỄ', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.orange500, letterSpacing: 1)),
-                              SizedBox(height: 2),
-                              Text('Lễ Cầu Hồn', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: Color(0xFF431407))),
+                            children: [
+                              Text(l10n.massTypeLabel, style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.orange500, letterSpacing: 1)),
+                              const SizedBox(height: 2),
+                              const Text('Lễ Cầu Hồn', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: Color(0xFF431407))),
                             ],
                           ),
                         ),
@@ -566,16 +573,16 @@ class MassRequestDetailScreen extends StatelessWidget {
                             const SizedBox(width: 12),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text('THỜI GIAN DỰ KIẾN', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1)),
-                                SizedBox(height: 2),
-                                Text('18:00 - Thứ Sáu, 24/11/2023', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w900, color: AppColors.gray800)),
+                              children: [
+                                Text(l10n.estimatedTime, style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1)),
+                                const SizedBox(height: 2),
+                                const Text('18:00 - Thứ Sáu, 24/11/2023', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w900, color: AppColors.gray800)),
                               ],
                             ),
                           ],
                         ),
                         const SizedBox(height: 14),
-                        const Text('Ý CHỈ / GHI CHÚ', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1)),
+                        Text(l10n.intentionLabel, style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1)),
                         const SizedBox(height: 8),
                         Container(
                           width: double.infinity,
@@ -611,7 +618,7 @@ class MassRequestDetailScreen extends StatelessWidget {
                     child: OutlinedButton.icon(
                       onPressed: () => Navigator.pop(context),
                       icon: const Icon(Icons.close_rounded, size: 18),
-                      label: const Text('Từ chối', style: TextStyle(fontWeight: FontWeight.w900)),
+                      label: Text(l10n.reject, style: const TextStyle(fontWeight: FontWeight.w900)),
                       style: OutlinedButton.styleFrom(
                         foregroundColor: AppColors.gray600,
                         side: const BorderSide(color: AppColors.gray200, width: 1.5),
@@ -625,7 +632,7 @@ class MassRequestDetailScreen extends StatelessWidget {
                     child: ElevatedButton.icon(
                       onPressed: () => Navigator.pop(context),
                       icon: const Icon(Icons.check_rounded, size: 18),
-                      label: const Text('Duyệt yêu cầu', style: TextStyle(fontWeight: FontWeight.w900)),
+                      label: Text(l10n.approveRequest, style: const TextStyle(fontWeight: FontWeight.w900)),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,
                         foregroundColor: Colors.white,

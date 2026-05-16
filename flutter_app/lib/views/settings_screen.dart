@@ -3,6 +3,7 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:provider/provider.dart';
 import '../viewmodels/viewmodels.dart';
 import '../core/app_theme.dart';
+import '../core/app_strings.dart';
 import 'notifications_screen.dart';
 import 'priest_profile_screen.dart';
 import 'biometrics_screen.dart';
@@ -16,6 +17,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
     final auth = context.read<AuthViewModel>();
     final user = auth.currentUser;
 
@@ -25,9 +27,9 @@ class SettingsScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
-        title: const Text(
-          'Cài đặt',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: AppColors.primary),
+        title: Text(
+          l10n.settingsTitle,
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: AppColors.primary),
         ),
         centerTitle: true,
         actions: [
@@ -83,7 +85,7 @@ class SettingsScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            user != null ? 'LM. ${user.holyName} ${user.fullName}' : 'Linh mục',
+                            user != null ? 'LM. ${user.holyName} ${user.fullName}' : l10n.touchPriestCard,
                             style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w900, color: AppColors.gray800),
                           ),
                           const SizedBox(height: 4),
@@ -101,16 +103,16 @@ class SettingsScreen extends StatelessWidget {
             ),
 
             // Tài khoản & Bảo mật
-            const Padding(
-              padding: EdgeInsets.only(top: 24, left: 4, bottom: 10),
+            Padding(
+              padding: const EdgeInsets.only(top: 24, left: 4, bottom: 10),
               child: Text(
-                'TÀI KHOẢN & BẢO MẬT',
-                style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1.5),
+                l10n.sectionAccountSecurity,
+                style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1.5),
               ),
             ),
             _SettingsTile(
               icon: LucideIcons.user,
-              label: 'Thông tin cá nhân',
+              label: l10n.menuPersonalInfo,
               iconColor: AppColors.primary,
               bgColor: AppColors.blue50,
               onTap: user != null
@@ -119,14 +121,14 @@ class SettingsScreen extends StatelessWidget {
             ),
             _SettingsTile(
               icon: LucideIcons.fingerprint,
-              label: 'Sinh trắc học',
+              label: l10n.menuBiometrics,
               iconColor: AppColors.orange500,
               bgColor: AppColors.orange50,
               onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const BiometricsScreen())),
             ),
             _SettingsTile(
               icon: LucideIcons.lock,
-              label: 'Đổi mật khẩu',
+              label: l10n.menuChangePassword,
               iconColor: AppColors.red600,
               bgColor: AppColors.red50,
               onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const ChangePasswordScreen())),
@@ -134,30 +136,30 @@ class SettingsScreen extends StatelessWidget {
             ),
 
             // Ứng dụng & Hỗ trợ
-            const Padding(
-              padding: EdgeInsets.only(top: 24, left: 4, bottom: 10),
+            Padding(
+              padding: const EdgeInsets.only(top: 24, left: 4, bottom: 10),
               child: Text(
-                'ỨNG DỤNG & HỖ TRỢ',
-                style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1.5),
+                l10n.sectionAppSupport,
+                style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1.5),
               ),
             ),
             _SettingsTile(
               icon: LucideIcons.languages,
-              label: 'Ngôn ngữ',
+              label: l10n.menuLanguage,
               iconColor: AppColors.emerald600,
               bgColor: AppColors.emerald50,
               onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const LanguageScreen())),
             ),
             _SettingsTile(
               icon: LucideIcons.undo2,
-              label: 'Đề nghị cập nhật',
+              label: l10n.menuUpdateRequest,
               iconColor: AppColors.indigo600,
               bgColor: AppColors.indigo50,
               onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const UpdateRequestScreen())),
             ),
             _SettingsTile(
               icon: LucideIcons.helpCircle,
-              label: 'Hỗ trợ',
+              label: l10n.menuSupport,
               iconColor: AppColors.amber600,
               bgColor: AppColors.amber50,
               onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const HelpScreen())),
@@ -172,9 +174,9 @@ class SettingsScreen extends StatelessWidget {
               child: OutlinedButton.icon(
                 onPressed: () => auth.logout(),
                 icon: const Icon(LucideIcons.logOut, size: 18),
-                label: const Text(
-                  'ĐĂNG XUẤT',
-                  style: TextStyle(fontWeight: FontWeight.w900, letterSpacing: 1.5),
+                label: Text(
+                  l10n.logoutUppercase,
+                  style: const TextStyle(fontWeight: FontWeight.w900, letterSpacing: 1.5),
                 ),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: AppColors.red,

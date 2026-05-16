@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../viewmodels/viewmodels.dart';
 import '../models/models.dart';
 import '../core/app_theme.dart';
+import '../core/app_strings.dart';
 import 'login_screen.dart';
 import 'notifications_screen.dart';
 import 'qr_screen.dart';
@@ -95,6 +96,7 @@ class _PublicHomeScreenState extends State<PublicHomeScreen> {
 class _PublicAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
     return SliverAppBar(
       pinned: true,
       backgroundColor: Colors.white.withValues(alpha: 0.95),
@@ -114,9 +116,9 @@ class _PublicAppBar extends StatelessWidget {
             child: const Icon(LucideIcons.shieldCheck, color: Colors.white, size: 18),
           ),
           const SizedBox(width: 10),
-          const Text(
-            'THÔNG TIN LINH MỤC',
-            style: TextStyle(
+          Text(
+            l10n.appTitleShort,
+            style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w900,
               color: AppColors.primary,
@@ -135,7 +137,7 @@ class _PublicAppBar extends StatelessWidget {
               MaterialPageRoute(builder: (_) => const LoginScreen()),
             ),
             icon: const Icon(LucideIcons.logIn, size: 14),
-            label: const Text('Đăng nhập', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
+            label: Text(l10n.login, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
             style: OutlinedButton.styleFrom(
               foregroundColor: AppColors.primary,
               side: const BorderSide(color: AppColors.gray200),
@@ -160,7 +162,7 @@ class _SearchCard extends StatefulWidget {
 
 class _SearchCardState extends State<_SearchCard> {
   final TextEditingController _nameController = TextEditingController();
-  String _selectedDiocese = 'Chọn giáo phận';
+  String? _selectedDiocese;
 
   @override
   void dispose() {
@@ -168,17 +170,18 @@ class _SearchCardState extends State<_SearchCard> {
     super.dispose();
   }
 
-  void _doSearch(BuildContext context) {
+  void _doSearch(BuildContext context, String chooseDiocese) {
+    final diocese = _selectedDiocese ?? chooseDiocese;
     final results = PriestDatabase.search(
       query: _nameController.text,
-      diocese: _selectedDiocese,
+      diocese: diocese,
     );
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (_) => SearchResultsScreen(
           query: _nameController.text.trim(),
-          diocese: _selectedDiocese == 'Chọn giáo phận' ? '' : _selectedDiocese,
+          diocese: diocese == chooseDiocese ? '' : diocese,
           results: results,
         ),
       ),
@@ -187,7 +190,17 @@ class _SearchCardState extends State<_SearchCard> {
 
   @override
   Widget build(BuildContext context) {
-    final dioceses = ['Chọn giáo phận', ...PriestDatabase.allDioceses];
+    final l10n = AppStrings.of(context);
+    final chooseDiocese = l10n.chooseDiocese;
+    if (_selectedDiocese == null) {
+      _selectedDiocese = chooseDiocese;
+    }
+    final dioceses = [chooseDiocese, ...PriestDatabase.allDioceses];
+    // Make sure selectedDiocese is always in the list
+    if (!dioceses.contains(_selectedDiocese)) {
+      _selectedDiocese = chooseDiocese;
+    }
+
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -199,15 +212,15 @@ class _SearchCardState extends State<_SearchCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Tìm kiếm linh mục',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.textMain),
+          Text(
+            l10n.searchPriest,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.textMain),
           ),
           const SizedBox(height: 16),
           TextField(
             controller: _nameController,
             decoration: InputDecoration(
-              hintText: 'Nhập tên linh mục',
+              hintText: l10n.searchPriestHint,
               hintStyle: const TextStyle(color: AppColors.gray400, fontSize: 14),
               prefixIcon: const Icon(LucideIcons.search, size: 18, color: AppColors.gray400),
               filled: true,
@@ -242,7 +255,7 @@ class _SearchCardState extends State<_SearchCard> {
                     child: Text(
                       d,
                       style: TextStyle(
-                        color: d == 'Chọn giáo phận' ? AppColors.gray400 : AppColors.textMain,
+                        color: d == chooseDiocese ? AppColors.gray400 : AppColors.textMain,
                       ),
                     ),
                   );
@@ -258,9 +271,9 @@ class _SearchCardState extends State<_SearchCard> {
             width: double.infinity,
             height: 52,
             child: ElevatedButton.icon(
-              onPressed: () => _doSearch(context),
+              onPressed: () => _doSearch(context, chooseDiocese),
               icon: const Icon(LucideIcons.search, size: 16),
-              label: const Text('TÌM KIẾM', style: TextStyle(fontWeight: FontWeight.w900, letterSpacing: 1)),
+              label: Text(l10n.search, style: const TextStyle(fontWeight: FontWeight.w900, letterSpacing: 1)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
@@ -278,6 +291,7 @@ class _SearchCardState extends State<_SearchCard> {
 class _EmergencyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
     return GestureDetector(
       onTap: () => Navigator.push(
         context,
@@ -296,18 +310,18 @@ class _EmergencyCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'DÀNH CHO TRƯỜNG HỢP KHẨN CẤP',
-                  style: TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: Colors.redAccent, letterSpacing: 1),
+                Text(
+                  l10n.emergencyLabel,
+                  style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: Colors.redAccent, letterSpacing: 1),
                 ),
                 const SizedBox(height: 4),
-                const Text(
-                  'Liên hệ xức dầu',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: AppColors.red900),
+                Text(
+                  l10n.emergencyTitle,
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: AppColors.red900),
                 ),
-                const Text(
-                  'Tìm linh mục gần nhất để cử hành bí tích',
-                  style: TextStyle(fontSize: 12, color: Colors.redAccent),
+                Text(
+                  l10n.emergencySubtitle,
+                  style: const TextStyle(fontSize: 12, color: Colors.redAccent),
                 ),
               ],
             ),
@@ -335,22 +349,23 @@ class _PopularPriestSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext ctx) {
+    final l10n = AppStrings.of(ctx);
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              'Linh mục tìm nhiều',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.textMain),
+            Text(
+              l10n.popularPriests,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.textMain),
             ),
             TextButton(
               onPressed: () {},
               child: Row(
                 mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Text('Xem tất cả', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700, fontSize: 13)),
-                  Icon(Icons.chevron_right_rounded, size: 16, color: AppColors.primary),
+                children: [
+                  Text(l10n.viewAll, style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700, fontSize: 13)),
+                  const Icon(Icons.chevron_right_rounded, size: 16, color: AppColors.primary),
                 ],
               ),
             ),
@@ -369,7 +384,7 @@ class _PopularPriestSection extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12),
-        _PriestCard(
+        const _PriestCard(
           holyName: 'LM. Phanxicô Xaviê',
           fullName: 'Trần Văn B',
           parish: 'Đại chủng viện Thánh Giuse',
@@ -511,6 +526,7 @@ class _PriestCard extends StatelessWidget {
 class _InfoSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
@@ -521,26 +537,26 @@ class _InfoSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            children: const [
-              Icon(LucideIcons.info, color: AppColors.primary, size: 20),
-              SizedBox(width: 8),
+            children: [
+              const Icon(LucideIcons.info, color: AppColors.primary, size: 20),
+              const SizedBox(width: 8),
               Text(
-                'Thông tin cần biết',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppColors.primary),
+                l10n.infoNeedToKnow,
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppColors.primary),
               ),
             ],
           ),
           const SizedBox(height: 20),
           _InfoRow(
             icon: LucideIcons.shieldCheck,
-            title: 'Dữ liệu chính thức',
-            description: 'Thông tin được xác thực bởi văn phòng các Giáo phận.',
+            title: l10n.infoOfficialData,
+            description: l10n.infoOfficialDataDesc,
           ),
           const SizedBox(height: 16),
           _InfoRow(
             icon: LucideIcons.search,
-            title: 'Hướng dẫn tìm kiếm',
-            description: 'Sử dụng tên thánh hoặc tên thật để có kết quả chính xác nhất.',
+            title: l10n.infoSearchGuide,
+            description: l10n.infoSearchGuideDesc,
           ),
         ],
       ),
@@ -675,6 +691,7 @@ class _PriestAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
     return SliverAppBar(
       pinned: true,
       backgroundColor: AppColors.surface.withValues(alpha: 0.95),
@@ -692,18 +709,18 @@ class _PriestAppBar extends StatelessWidget {
             child: const Icon(LucideIcons.shieldCheck, color: Colors.white, size: 16),
           ),
           const SizedBox(width: 8),
-          const Text(
-            'THÔNG TIN LINH MỤC',
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: AppColors.primary, letterSpacing: 0.5),
+          Text(
+            l10n.appTitleShort,
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: AppColors.primary, letterSpacing: 0.5),
           ),
         ],
       ),
       actions: [
         TextButton(
           onPressed: () => auth.logout(),
-          child: const Text(
-            'THOÁT',
-            style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1),
+          child: Text(
+            l10n.exit,
+            style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1),
           ),
         ),
         Stack(
@@ -743,6 +760,7 @@ class _PriestIdCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -762,7 +780,6 @@ class _PriestIdCard extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          // Decorative circles
           Positioned(
             right: -16,
             bottom: -16,
@@ -804,9 +821,9 @@ class _PriestIdCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'CĂN CƯỚC LINH MỤC',
-                      style: TextStyle(color: Colors.white70, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 2),
+                    Text(
+                      l10n.priestIdCard,
+                      style: const TextStyle(color: Colors.white70, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 2),
                     ),
                     const SizedBox(height: 4),
                     Text(
@@ -839,10 +856,10 @@ class _PriestIdCard extends StatelessWidget {
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
-                    children: const [
-                      Icon(LucideIcons.info, color: Colors.white, size: 20),
-                      SizedBox(height: 4),
-                      Text('THÔNG TIN', style: TextStyle(color: Colors.white, fontSize: 7, fontWeight: FontWeight.w900, letterSpacing: 1)),
+                    children: [
+                      const Icon(LucideIcons.info, color: Colors.white, size: 20),
+                      const SizedBox(height: 4),
+                      Text(l10n.priestInfo, style: const TextStyle(color: Colors.white, fontSize: 7, fontWeight: FontWeight.w900, letterSpacing: 1)),
                     ],
                   ),
                 ),
@@ -862,6 +879,7 @@ class _ActionBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext ctx) {
+    final l10n = AppStrings.of(ctx);
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -875,7 +893,7 @@ class _ActionBar extends StatelessWidget {
         children: [
           _ActionItem(
             icon: Icons.nfc_rounded,
-            label: 'Quét thẻ',
+            label: l10n.actionScanCard,
             color: AppColors.orange500,
             onTap: onSwitchToScan ?? () => Navigator.push(
               context,
@@ -884,7 +902,7 @@ class _ActionBar extends StatelessWidget {
           ),
           _ActionItem(
             icon: LucideIcons.clock,
-            label: 'Xin lễ',
+            label: l10n.actionMassRequest,
             color: AppColors.indigo600,
             onTap: () => Navigator.push(
               context,
@@ -893,7 +911,7 @@ class _ActionBar extends StatelessWidget {
           ),
           _ActionItem(
             icon: LucideIcons.qrCode,
-            label: 'Mã QR',
+            label: l10n.actionQrCode,
             color: AppColors.fuchsia500,
             onTap: () => Navigator.push(
               context,
@@ -902,7 +920,7 @@ class _ActionBar extends StatelessWidget {
           ),
           _ActionItem(
             icon: LucideIcons.fingerprint,
-            label: 'FaceID',
+            label: l10n.actionFaceId,
             color: AppColors.emerald,
             onTap: () => Navigator.push(
               context,
@@ -960,6 +978,7 @@ class _MassRequestCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext ctx) {
+    final l10n = AppStrings.of(ctx);
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -1014,7 +1033,7 @@ class _MassRequestCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('5 PHÚT TRƯỚC', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.gray300, letterSpacing: 1.5)),
+                    Text(l10n.minutesAgo, style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.gray300, letterSpacing: 1.5)),
                     Row(
                       children: [
                         GestureDetector(
@@ -1029,7 +1048,7 @@ class _MassRequestCard extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(color: AppColors.gray100),
                             ),
-                            child: const Text('CHI TIẾT', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: AppColors.gray500)),
+                            child: Text(l10n.details, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: AppColors.gray500)),
                           ),
                         ),
                         const SizedBox(width: 8),
@@ -1042,10 +1061,10 @@ class _MassRequestCard extends StatelessWidget {
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
-                            children: const [
-                              Icon(Icons.check_rounded, color: Colors.white, size: 14),
-                              SizedBox(width: 4),
-                              Text('DUYỆT', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: Colors.white)),
+                            children: [
+                              const Icon(Icons.check_rounded, color: Colors.white, size: 14),
+                              const SizedBox(width: 4),
+                              Text(l10n.approve, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: Colors.white)),
                             ],
                           ),
                         ),
@@ -1072,7 +1091,7 @@ class _SearchSection extends StatefulWidget {
 
 class _SearchSectionState extends State<_SearchSection> {
   final TextEditingController _nameController = TextEditingController();
-  String _selectedDiocese = 'Chọn Giáo phận';
+  String? _selectedDiocese;
 
   @override
   void dispose() {
@@ -1080,17 +1099,18 @@ class _SearchSectionState extends State<_SearchSection> {
     super.dispose();
   }
 
-  void _doSearch() {
+  void _doSearch(String chooseDiocese) {
+    final diocese = _selectedDiocese ?? chooseDiocese;
     final results = PriestDatabase.search(
       query: _nameController.text,
-      diocese: _selectedDiocese,
+      diocese: diocese,
     );
     Navigator.push(
       widget.outerContext,
       MaterialPageRoute(
         builder: (_) => SearchResultsScreen(
           query: _nameController.text.trim(),
-          diocese: _selectedDiocese == 'Chọn Giáo phận' ? '' : _selectedDiocese,
+          diocese: diocese == chooseDiocese ? '' : diocese,
           results: results,
         ),
       ),
@@ -1099,13 +1119,22 @@ class _SearchSectionState extends State<_SearchSection> {
 
   @override
   Widget build(BuildContext ctx) {
-    final dioceses = ['Chọn Giáo phận', ...PriestDatabase.allDioceses];
+    final l10n = AppStrings.of(ctx);
+    final chooseDiocese = l10n.chooseDioceseAlt;
+    if (_selectedDiocese == null) {
+      _selectedDiocese = chooseDiocese;
+    }
+    final dioceses = [chooseDiocese, ...PriestDatabase.allDioceses];
+    if (!dioceses.contains(_selectedDiocese)) {
+      _selectedDiocese = chooseDiocese;
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Tìm kiếm Linh mục',
-          style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: AppColors.textMain),
+        Text(
+          l10n.searchPriestSection,
+          style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: AppColors.textMain),
         ),
         const SizedBox(height: 12),
         Container(
@@ -1121,7 +1150,7 @@ class _SearchSectionState extends State<_SearchSection> {
               TextField(
                 controller: _nameController,
                 decoration: InputDecoration(
-                  hintText: 'Nhập tên Linh mục...',
+                  hintText: l10n.searchPriestHintDots,
                   hintStyle: const TextStyle(color: AppColors.gray400, fontSize: 14),
                   prefixIcon: const Icon(LucideIcons.search, size: 20, color: AppColors.gray300),
                   filled: true,
@@ -1150,7 +1179,7 @@ class _SearchSectionState extends State<_SearchSection> {
                         child: Text(
                           d,
                           style: TextStyle(
-                            color: d == 'Chọn Giáo phận' ? AppColors.gray400 : AppColors.textMain,
+                            color: d == chooseDiocese ? AppColors.gray400 : AppColors.textMain,
                             fontSize: 14,
                           ),
                         ),
@@ -1167,9 +1196,9 @@ class _SearchSectionState extends State<_SearchSection> {
                 width: double.infinity,
                 height: 52,
                 child: ElevatedButton.icon(
-                  onPressed: _doSearch,
+                  onPressed: () => _doSearch(chooseDiocese),
                   icon: const Icon(LucideIcons.search, size: 16),
-                  label: const Text('TÌM KIẾM', style: TextStyle(fontWeight: FontWeight.w900, letterSpacing: 1)),
+                  label: Text(l10n.search, style: const TextStyle(fontWeight: FontWeight.w900, letterSpacing: 1)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     foregroundColor: Colors.white,
@@ -1192,6 +1221,7 @@ class _LiturgicalSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -1224,7 +1254,7 @@ class _LiturgicalSection extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('NGÀY PHỤNG VỤ', style: TextStyle(color: AppColors.emerald600, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 2)),
+                    Text(l10n.liturgicalDay, style: const TextStyle(color: AppColors.emerald600, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 2)),
                     Text(data.dateString, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w900, color: AppColors.textMain)),
                   ],
                 ),
@@ -1270,7 +1300,7 @@ class _LiturgicalSection extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('LỄ KÍNH / KỶ NIỆM', style: TextStyle(fontSize: 8, fontWeight: FontWeight.w900, color: AppColors.amber, letterSpacing: 1)),
+                        Text(l10n.feastDay, style: const TextStyle(fontSize: 8, fontWeight: FontWeight.w900, color: AppColors.amber, letterSpacing: 1)),
                         Text(data.feast, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.gray700)),
                       ],
                     ),
@@ -1336,6 +1366,7 @@ class _HelpButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext ctx) {
+    final l10n = AppStrings.of(ctx);
     return GestureDetector(
       onTap: () => Navigator.push(
         context,
@@ -1345,12 +1376,12 @@ class _HelpButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 12),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Icon(LucideIcons.helpCircle, size: 16, color: AppColors.primary),
-            SizedBox(width: 6),
+          children: [
+            const Icon(LucideIcons.helpCircle, size: 16, color: AppColors.primary),
+            const SizedBox(width: 6),
             Text(
-              'Hướng dẫn sử dụng Căn cước Linh mục',
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.primary),
+              l10n.helpGuide,
+              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.primary),
             ),
           ],
         ),

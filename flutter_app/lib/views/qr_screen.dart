@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import '../core/app_theme.dart';
+import '../core/app_strings.dart';
 
 class QrScreen extends StatelessWidget {
   const QrScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
     return Scaffold(
       backgroundColor: AppColors.surface,
       appBar: AppBar(
@@ -18,8 +20,8 @@ class QrScreen extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back_ios_new_rounded, color: AppColors.primary, size: 20),
         ),
-        title: const Text(
-          'Mã QR Định danh',
+        title: Text(
+          l10n.qrScreenTitle,
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.primary),
         ),
         centerTitle: true,
@@ -98,9 +100,9 @@ class QrScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 6),
-                  const Text(
-                    'ĐÃ XÁC THỰC DANH TÍNH',
-                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.emerald600, letterSpacing: 1.5),
+                  Text(
+                    l10n.identityVerified,
+                    style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.emerald600, letterSpacing: 1.5),
                   ),
                 ],
               ),
@@ -119,7 +121,7 @@ class QrScreen extends StatelessWidget {
               const SizedBox(height: 8),
 
               Text(
-                'Mã định danh: SL-PC-12051980',
+                '${l10n.qrIdNumber} SL-PC-12051980',
                 style: const TextStyle(fontSize: 12, color: AppColors.gray500),
               ),
 
@@ -132,7 +134,7 @@ class QrScreen extends StatelessWidget {
                     child: OutlinedButton.icon(
                       onPressed: () {},
                       icon: const Icon(LucideIcons.download, size: 16),
-                      label: const Text('Lưu ảnh', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 12)),
+                      label: Text(l10n.save, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 12)),
                       style: OutlinedButton.styleFrom(
                         foregroundColor: AppColors.gray700,
                         side: const BorderSide(color: AppColors.gray200),
@@ -146,7 +148,7 @@ class QrScreen extends StatelessWidget {
                     child: ElevatedButton.icon(
                       onPressed: () {},
                       icon: const Icon(LucideIcons.share2, size: 16),
-                      label: const Text('Chia sẻ', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 12)),
+                      label: Text(l10n.share, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 12)),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,
                         foregroundColor: Colors.white,
@@ -161,10 +163,10 @@ class QrScreen extends StatelessWidget {
 
               const SizedBox(height: 24),
 
-              const Text(
-                'SỬ DỤNG MÃ QR NÀY ĐỂ ĐIỂM DANH HOẶC CHIA SẺ THÔNG TIN MỤC VỤ CHÍNH THỨC.',
+              Text(
+                l10n.qrUsageNote,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.w700,
                   color: AppColors.gray400,

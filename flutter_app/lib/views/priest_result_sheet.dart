@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import '../core/app_theme.dart';
+import '../core/app_strings.dart';
 import '../models/models.dart';
 
 Future<void> showPriestResultSheet(
@@ -24,6 +25,7 @@ class _PriestResultSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
     return DraggableScrollableSheet(
       initialChildSize: 0.85,
       minChildSize: 0.5,
@@ -63,9 +65,9 @@ class _PriestResultSheet extends StatelessWidget {
                         children: [
                           const Icon(LucideIcons.shieldCheck, size: 14, color: AppColors.emerald),
                           const SizedBox(width: 6),
-                          const Text(
-                            'Đã xác thực',
-                            style: TextStyle(
+                          Text(
+                            l10n.verified,
+                            style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w900,
                               color: AppColors.emerald600,
@@ -133,7 +135,7 @@ class _PriestResultSheet extends StatelessWidget {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          'Mã số: ${priest.id}',
+                          '${l10n.idCode} ${priest.id}',
                           style: const TextStyle(
                             fontSize: 11,
                             color: AppColors.gray400,
@@ -172,9 +174,9 @@ class _PriestResultSheet extends StatelessWidget {
                               child: const Icon(LucideIcons.user, size: 15, color: AppColors.gray400),
                             ),
                             const SizedBox(width: 8),
-                            const Text(
-                              'THÔNG TIN CƠ BẢN',
-                              style: TextStyle(
+                            Text(
+                              l10n.sectionBasicInfo,
+                              style: const TextStyle(
                                 fontSize: 9,
                                 fontWeight: FontWeight.w900,
                                 color: AppColors.gray400,
@@ -189,9 +191,9 @@ class _PriestResultSheet extends StatelessWidget {
                             bgColor: AppColors.blue50,
                             iconColor: AppColors.primary,
                             icon: LucideIcons.calendar,
-                            label: 'Ngày sinh & Thụ phong',
+                            label: l10n.birthAndOrdination,
                             value:
-                                '${priest.birthDate ?? '—'} — Thụ phong: ${priest.ordinationDate ?? '—'}',
+                                '${priest.birthDate ?? '—'} — ${l10n.ordinationPrefix} ${priest.ordinationDate ?? '—'}',
                           ),
                         if (priest.parish != null) ...[
                           const SizedBox(height: 12),
@@ -199,7 +201,7 @@ class _PriestResultSheet extends StatelessWidget {
                             bgColor: AppColors.indigo50,
                             iconColor: AppColors.indigo600,
                             icon: LucideIcons.church,
-                            label: 'Giáo xứ hiện tại',
+                            label: l10n.labelCurrentParish,
                             value: priest.parish!,
                           ),
                         ],
@@ -209,7 +211,7 @@ class _PriestResultSheet extends StatelessWidget {
                             bgColor: AppColors.orange50,
                             iconColor: AppColors.orange500,
                             icon: LucideIcons.briefcase,
-                            label: 'Chức vụ',
+                            label: l10n.fieldRole,
                             value: priest.role!,
                           ),
                         ],
@@ -219,7 +221,7 @@ class _PriestResultSheet extends StatelessWidget {
                             bgColor: AppColors.emerald50,
                             iconColor: AppColors.emerald600,
                             icon: LucideIcons.graduationCap,
-                            label: 'Học vị',
+                            label: l10n.fieldDegree,
                             value: priest.degree!,
                           ),
                         ],
@@ -236,7 +238,7 @@ class _PriestResultSheet extends StatelessWidget {
                         Expanded(
                           child: _ActionBtn(
                             icon: LucideIcons.phone,
-                            label: 'Gọi điện',
+                            label: l10n.callPhone,
                             bgColor: AppColors.blue100,
                             iconColor: AppColors.primary,
                             onTap: () => _copyToClipboard(context, priest.phone!),
@@ -248,7 +250,7 @@ class _PriestResultSheet extends StatelessWidget {
                         Expanded(
                           child: _ActionBtn(
                             icon: LucideIcons.mail,
-                            label: 'Email',
+                            label: l10n.sendEmail,
                             bgColor: AppColors.indigo50,
                             iconColor: AppColors.indigo600,
                             onTap: () => _copyToClipboard(context, priest.email!),
@@ -270,9 +272,9 @@ class _PriestResultSheet extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16),
                         ),
                       ),
-                      child: const Text(
-                        'Đóng',
-                        style: TextStyle(
+                      child: Text(
+                        l10n.close,
+                        style: const TextStyle(
                           fontWeight: FontWeight.w900,
                           color: AppColors.gray500,
                         ),
@@ -290,9 +292,10 @@ class _PriestResultSheet extends StatelessWidget {
 
   void _copyToClipboard(BuildContext context, String text) {
     Clipboard.setData(ClipboardData(text: text));
+    final l10n = AppStrings.of(context);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Đã sao chép: $text'),
+        content: Text('${l10n.copiedValue}: $text'),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         duration: const Duration(seconds: 2),

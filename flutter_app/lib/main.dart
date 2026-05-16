@@ -4,16 +4,17 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'core/app_theme.dart';
+import 'core/app_strings.dart';
 import 'viewmodels/viewmodels.dart';
+import 'viewmodels/language_provider.dart';
 import 'models/models.dart';
 import 'views/home_screen.dart';
-import 'views/login_screen.dart';
 import 'views/history_screen.dart';
 import 'views/settings_screen.dart';
 import 'views/nfc_screen.dart';
 import 'views/scan_screen.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   GoogleFonts.config.allowRuntimeFetching = false;
   SystemChrome.setSystemUIOverlayStyle(
@@ -22,9 +23,14 @@ void main() {
       statusBarIconBrightness: Brightness.dark,
     ),
   );
+
+  final languageProvider = LanguageProvider();
+  await languageProvider.init();
+
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider.value(value: languageProvider),
         ChangeNotifierProvider(create: (_) => AuthViewModel()),
         ChangeNotifierProvider(create: (_) => LiturgicalViewModel()),
       ],
@@ -38,21 +44,25 @@ class DigitalEcclesiaApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Thông Tin Linh Mục',
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('vi', 'VN'),
-        Locale('en', 'US'),
-      ],
-      locale: const Locale('vi', 'VN'),
-      home: const RootScreen(),
+    return Consumer<LanguageProvider>(
+      builder: (context, langProvider, _) {
+        return MaterialApp(
+          title: 'Thông Tin Linh Mục',
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.lightTheme,
+          locale: langProvider.locale,
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('vi', 'VN'),
+            Locale('en', 'US'),
+          ],
+          home: const RootScreen(),
+        );
+      },
     );
   }
 }
@@ -82,16 +92,17 @@ class _PriestMainLayoutState extends State<PriestMainLayout> {
 
   void _switchTab(int index) => setState(() => _currentIndex = index);
 
-  static const _tabs = [
-    _TabItem(label: 'Trang chủ', icon: Icons.home_rounded, activeColor: AppColors.primary),
-    _TabItem(label: 'Quét thẻ', icon: Icons.nfc_rounded, activeColor: AppColors.orange500),
-    _TabItem(label: 'Quét QR', icon: Icons.qr_code_scanner_rounded, activeColor: Color(0xFF2563EB)),
-    _TabItem(label: 'Lịch sử', icon: Icons.history_rounded, activeColor: AppColors.emerald),
-    _TabItem(label: 'Cài đặt', icon: Icons.settings_rounded, activeColor: AppColors.primary),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
+    final tabs = [
+      _TabItem(label: l10n.navHome, icon: Icons.home_rounded, activeColor: AppColors.primary),
+      _TabItem(label: l10n.navScanCard, icon: Icons.nfc_rounded, activeColor: AppColors.orange500),
+      _TabItem(label: l10n.navScanQr, icon: Icons.qr_code_scanner_rounded, activeColor: const Color(0xFF2563EB)),
+      _TabItem(label: l10n.navHistory, icon: Icons.history_rounded, activeColor: AppColors.emerald),
+      _TabItem(label: l10n.navSettings, icon: Icons.settings_rounded, activeColor: AppColors.primary),
+    ];
+
     return Scaffold(
       backgroundColor: AppColors.surface,
       body: IndexedStack(
@@ -106,7 +117,7 @@ class _PriestMainLayoutState extends State<PriestMainLayout> {
       ),
       bottomNavigationBar: _BottomNav(
         currentIndex: _currentIndex,
-        tabs: _tabs,
+        tabs: tabs,
         onTap: (i) => setState(() => _currentIndex = i),
       ),
     );

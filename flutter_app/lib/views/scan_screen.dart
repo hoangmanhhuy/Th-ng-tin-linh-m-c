@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import '../core/app_theme.dart';
+import '../core/app_strings.dart';
 import '../models/models.dart';
 import 'priest_result_sheet.dart';
 
@@ -91,7 +92,7 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
             ..hideCurrentSnackBar()
             ..showSnackBar(
               SnackBar(
-                content: const Text('Mã QR không hợp lệ hoặc chưa có dữ liệu'),
+                content: Text(AppStrings.of(context).scanInvalidQr),
                 behavior: SnackBarBehavior.floating,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 duration: const Duration(seconds: 2),
@@ -136,9 +137,9 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    'Quét mã QR',
-                    style: TextStyle(
+                  Text(
+                    AppStrings.of(context).scanQr,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.w900,
@@ -170,28 +171,31 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
                   colors: [Colors.black87, Colors.transparent],
                 ),
               ),
-              child: const Column(
-                children: [
-                  Text(
-                    'Hướng camera vào mã QR của linh mục',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
+              child: Builder(builder: (context) {
+                final l10n = AppStrings.of(context);
+                return Column(
+                  children: [
+                    Text(
+                      l10n.scanInstruction,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    'App sẽ tự động nhận dạng khi phát hiện mã hợp lệ',
-                    style: TextStyle(
-                      color: Colors.white60,
-                      fontSize: 12,
+                    const SizedBox(height: 8),
+                    Text(
+                      l10n.scanAutoDetect,
+                      style: const TextStyle(
+                        color: Colors.white60,
+                        fontSize: 12,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
+                  ],
+                );
+              }),
             ),
           ),
         ],
@@ -318,7 +322,7 @@ class _CameraError extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               Text(
-                _isPermission ? 'Chưa cấp quyền camera' : 'Không thể mở camera',
+                _isPermission ? AppStrings.of(context).cameraPermissionDenied : AppStrings.of(context).cameraCannotOpen,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   color: Colors.white,
@@ -329,8 +333,8 @@ class _CameraError extends StatelessWidget {
               const SizedBox(height: 10),
               Text(
                 _isPermission
-                    ? 'Vào Cài đặt → Thông Tin Linh Mục\n→ Camera → bật quyền truy cập'
-                    : 'Thiết bị không hỗ trợ camera\nhoặc camera đang được dùng bởi app khác',
+                    ? AppStrings.of(context).cameraPermissionInstruction
+                    : AppStrings.of(context).cameraNotSupported,
                 textAlign: TextAlign.center,
                 style: const TextStyle(color: Colors.white54, fontSize: 13, height: 1.6),
               ),
@@ -340,9 +344,9 @@ class _CameraError extends StatelessWidget {
                 child: ElevatedButton.icon(
                   onPressed: () => controller.start(),
                   icon: const Icon(Icons.refresh_rounded, size: 18),
-                  label: const Text(
-                    'THỬ LẠI',
-                    style: TextStyle(fontWeight: FontWeight.w900, letterSpacing: 1),
+                  label: Text(
+                    AppStrings.of(context).retry,
+                    style: const TextStyle(fontWeight: FontWeight.w900, letterSpacing: 1),
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
@@ -360,9 +364,9 @@ class _CameraError extends StatelessWidget {
                   child: OutlinedButton.icon(
                     onPressed: () => Navigator.pop(context),
                     icon: const Icon(Icons.arrow_back_rounded, size: 18),
-                    label: const Text(
-                      'QUAY LẠI',
-                      style: TextStyle(fontWeight: FontWeight.w900, letterSpacing: 1),
+                    label: Text(
+                      AppStrings.of(context).back,
+                      style: const TextStyle(fontWeight: FontWeight.w900, letterSpacing: 1),
                     ),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: Colors.white70,

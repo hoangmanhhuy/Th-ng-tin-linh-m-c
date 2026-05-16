@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import '../core/app_theme.dart';
+import '../core/app_strings.dart';
 import '../models/models.dart';
 import 'search_detail_screen.dart';
 import 'nfc_management_screen.dart';
@@ -26,6 +27,7 @@ class SearchResultsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
     return Scaffold(
       backgroundColor: AppColors.surface,
       appBar: AppBar(
@@ -40,8 +42,8 @@ class SearchResultsScreen extends StatelessWidget {
             color: AppColors.primary,
           ),
         ),
-        title: const Text(
-          'Kết quả tìm kiếm',
+        title: Text(
+          l10n.searchResultsTitle,
           style: TextStyle(
             fontSize: 17,
             fontWeight: FontWeight.w900,
@@ -87,7 +89,7 @@ class SearchResultsScreen extends StatelessWidget {
                           (diocese.isEmpty ||
                               diocese.toLowerCase() == 'chọn giáo phận'))
                         _Chip(
-                          label: 'Tất cả',
+                          label: l10n.allResults,
                           icon: LucideIcons.users,
                           color: AppColors.emerald600,
                           bg: AppColors.emerald50,
@@ -106,7 +108,7 @@ class SearchResultsScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
-                    '${results.length} kết quả',
+                    '${results.length} ${l10n.resultCount}',
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w900,
@@ -186,6 +188,7 @@ class _Chip extends StatelessWidget {
 class _EmptyState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppStrings.of(context);
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(32),
@@ -206,18 +209,18 @@ class _EmptyState extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            const Text(
-              'Không tìm thấy linh mục',
-              style: TextStyle(
+            Text(
+              l10n.noResultsTitle,
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w900,
                 color: AppColors.gray700,
               ),
             ),
             const SizedBox(height: 8),
-            const Text(
-              'Thử tìm kiếm với tên khác hoặc\nthay đổi giáo phận.',
-              style: TextStyle(
+            Text(
+              l10n.noResultsDesc,
+              style: const TextStyle(
                 fontSize: 13,
                 color: AppColors.gray500,
                 height: 1.5,
@@ -241,6 +244,7 @@ class _PriestResultCard extends StatelessWidget {
   });
 
   void _resetPassword(BuildContext context) {
+    final l10n = AppStrings.of(context);
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
@@ -255,26 +259,26 @@ class _PriestResultCard extends StatelessWidget {
               child: const Icon(LucideIcons.keyRound, color: AppColors.red, size: 26),
             ),
             const SizedBox(height: 16),
-            const Text('Reset mật khẩu?', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppColors.gray800)),
+            Text(l10n.resetPasswordTitle, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppColors.gray800)),
             const SizedBox(height: 8),
-            const Text(
-              'Mật khẩu sẽ được đặt lại về mặc định. Linh mục cần đổi mật khẩu khi đăng nhập lại.',
+            Text(
+              l10n.resetPasswordDesc,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 13, color: AppColors.gray500, height: 1.4),
+              style: const TextStyle(fontSize: 13, color: AppColors.gray500, height: 1.4),
             ),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('Hủy', style: TextStyle(color: AppColors.gray400, fontWeight: FontWeight.w700)),
+            child: Text(l10n.cancel, style: const TextStyle(color: AppColors.gray400, fontWeight: FontWeight.w700)),
           ),
           ElevatedButton(
             onPressed: () {
               Navigator.pop(ctx);
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('Đã reset mật khẩu cho LM. ${priest.holyName} ${priest.fullName}'),
+                  content: Text(l10n.resetPasswordConfirm(priest.holyName, priest.fullName)),
                   behavior: SnackBarBehavior.floating,
                   backgroundColor: AppColors.emerald600,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -378,7 +382,7 @@ class _PriestResultCard extends StatelessWidget {
                 Expanded(
                   child: _MgmtBtn(
                     icon: LucideIcons.keyRound,
-                    label: 'Reset MK',
+                    label: AppStrings.of(context).resetPasswordAction,
                     color: AppColors.red600,
                     bg: AppColors.red50,
                     onTap: () => _resetPassword(context),
@@ -388,7 +392,7 @@ class _PriestResultCard extends StatelessWidget {
                 Expanded(
                   child: _MgmtBtn(
                     icon: Icons.nfc_rounded,
-                    label: 'Thẻ NFC',
+                    label: AppStrings.of(context).nfcCardAction,
                     color: AppColors.orange500,
                     bg: AppColors.orange50,
                     onTap: () => Navigator.push(
@@ -401,7 +405,7 @@ class _PriestResultCard extends StatelessWidget {
                 Expanded(
                   child: _MgmtBtn(
                     icon: LucideIcons.clock,
-                    label: 'Xin lễ',
+                    label: AppStrings.of(context).massRequestAction,
                     color: AppColors.indigo600,
                     bg: AppColors.indigo50,
                     onTap: () => Navigator.push(
