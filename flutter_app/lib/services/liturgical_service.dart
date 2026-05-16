@@ -218,7 +218,6 @@ class LiturgicalService {
     if (isSameDay(ngay, leBaNgoi)) return 'Tr';
     if (isSameDay(ngay, leMM)) return 'Tr';
     if (isSameDay(ngay, leMM.add(const Duration(days: 5)))) return 'Đ';
-    if (isSameDay(ngay, leMM.add(const Duration(days: 7)))) return 'Tr';
     if (isSameDay(ngay, cnVIIPS)) return 'Tr';
     if (isSameDay(ngay, cnMV.subtract(const Duration(days: 7)))) return 'Tr';
 
@@ -263,7 +262,6 @@ class LiturgicalService {
     if (isSameDay(ngay, leBaNgoi)) return 2;
     if (isSameDay(ngay, leMM)) return 2;
     if (isSameDay(ngay, leMM.add(const Duration(days: 5)))) return 2;
-    if (isSameDay(ngay, leMM.add(const Duration(days: 7)))) return 2;
     if (isSameDay(ngay, cnMV.subtract(const Duration(days: 7)))) return 2;
 
     if (ngay.weekday == DateTime.sunday) {
@@ -327,9 +325,6 @@ class LiturgicalService {
     if (isSameDay(ngay, leMM)) return 'Lễ Mình Máu Thánh Chúa Kitô';
     if (isSameDay(ngay, leMM.add(const Duration(days: 5)))) {
       return 'Lễ Thánh Tâm Chúa Giêsu';
-    }
-    if (isSameDay(ngay, leMM.add(const Duration(days: 7)))) {
-      return 'Lễ Thánh Tâm Chúa (CN)';
     }
     if (isSameDay(ngay, leVua)) return 'Lễ Chúa Giêsu Kitô, Vua Vũ Trụ';
     if (isSameDay(ngay, hienLinh)) return 'Lễ Hiển Linh';
@@ -461,7 +456,7 @@ class LiturgicalService {
       final r29 = (_readings!['29'] as Map?)?.cast<String, dynamic>() ?? {};
       return {
         'bd1': r29['nam_le'] ?? '',
-        'bd2': '',
+        'bd2': r29['nam_chan'] ?? '',
         'tm': r29['tin_mung'] ?? '',
         'ghi_chu': 'Lễ Giáng Sinh',
       };
@@ -481,8 +476,8 @@ class LiturgicalService {
       }
     }
 
-    // Lễ Thánh Tâm (CN sau Mình Máu, MM+7)
-    if (isSameDay(ngay, leMM.add(const Duration(days: 7)))) {
+    // Lễ Thánh Tâm Chúa Giêsu (Thứ Sáu sau Mình Máu, MM+5)
+    if (isSameDay(ngay, leMM.add(const Duration(days: 5)))) {
       final r389 = (_readings!['389'] as Map?)?.cast<String, dynamic>() ?? {};
       final bd = (r389['CN_$nam'] as Map?)?.cast<String, dynamic>() ??
           (r389['CN_A'] as Map?)?.cast<String, dynamic>() ??
@@ -573,7 +568,11 @@ class LiturgicalService {
         }
       }
 
-      final bd = (r['CN_$nam'] as Map?)?.cast<String, dynamic>() ?? {};
+      // Fallback to CN_B for fixed solemnities that have same readings every year
+      final bd = (r['CN_$nam'] as Map?)?.cast<String, dynamic>() ??
+          (r['CN_B'] as Map?)?.cast<String, dynamic>() ??
+          (r['CN_A'] as Map?)?.cast<String, dynamic>() ??
+          {};
       return {
         'bd1': bd['bd1'] ?? '',
         'bd2': bd['bd2'] ?? '',

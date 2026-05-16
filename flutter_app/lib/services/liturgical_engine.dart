@@ -49,7 +49,7 @@ DateTime _cnIMuaVong(int year) {
 /// Lễ Thánh Gia Thất: nếu Giáng Sinh là CN → 28/12, ngược lại CN đầu sau 25/12.
 DateTime leTGT(int year) {
   final gs = DateTime(year, 12, 25);
-  if (gs.weekday == DateTime.sunday) return DateTime(year, 12, 28);
+  if (gs.weekday == DateTime.sunday) return DateTime(year, 12, 30);
   DateTime d = gs.add(const Duration(days: 1));
   while (d.weekday != DateTime.sunday) {
     d = d.add(const Duration(days: 1));
