@@ -18,8 +18,40 @@ import 'emergency_anointing_screen.dart';
 
 // ─── Public Home ────────────────────────────────────────────────────────────
 
-class PublicHomeScreen extends StatelessWidget {
+class PublicHomeScreen extends StatefulWidget {
   const PublicHomeScreen({super.key});
+
+  @override
+  State<PublicHomeScreen> createState() => _PublicHomeScreenState();
+}
+
+class _PublicHomeScreenState extends State<PublicHomeScreen> {
+  LiturgicalData? _liturgicalData;
+  bool _loadingLiturgical = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadLiturgicalData();
+  }
+
+  Future<void> _loadLiturgicalData() async {
+    try {
+      final data = await context
+          .read<LiturgicalViewModel>()
+          .getLiturgicalData(DateTime.now());
+      if (mounted) {
+        setState(() {
+          _liturgicalData = data;
+          _loadingLiturgical = false;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() => _loadingLiturgical = false);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +68,17 @@ class PublicHomeScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 _EmergencyCard(),
                 const SizedBox(height: 16),
-                _DailyWordCard(),
+                if (_loadingLiturgical)
+                  const Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(24),
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
+                else if (_liturgicalData != null)
+                  _LiturgicalSection(data: _liturgicalData!)
+                else
+                  const SizedBox.shrink(),
                 const SizedBox(height: 20),
                 _PopularPriestSection(context: context),
                 const SizedBox(height: 20),
@@ -283,97 +325,6 @@ class _EmergencyCard extends StatelessWidget {
         ],
       ),
     ),
-    );
-  }
-}
-
-class _DailyWordCard extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFFF9F2),
-        borderRadius: BorderRadius.circular(28),
-        border: Border.all(color: AppColors.orange50),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                width: 32,
-                height: 32,
-                decoration: BoxDecoration(
-                  color: AppColors.orange100,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Icon(LucideIcons.bookOpen, size: 16, color: AppColors.amber600),
-              ),
-              const SizedBox(width: 8),
-              const Text(
-                'LỜI CHÚA HÔM NAY',
-                style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: Colors.orangeAccent, letterSpacing: 1.5),
-              ),
-              const Spacer(),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                decoration: BoxDecoration(
-                  color: AppColors.red50,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: AppColors.red100),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: 6, height: 6,
-                      decoration: const BoxDecoration(color: Colors.red, shape: BoxShape.circle),
-                    ),
-                    const SizedBox(width: 4),
-                    const Text('Lễ kính buộc', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: Colors.red, letterSpacing: 0.5)),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          const Text(
-            'Lễ Kính Thánh Tâm Chúa Giêsu',
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: Color(0xFF7C2D12)),
-          ),
-          const SizedBox(height: 8),
-          const Text(
-            '"Ta là con đường, là sự thật và là sự sống. Không ai đến được với Cha mà không qua Thầy."',
-            style: TextStyle(fontSize: 15, fontStyle: FontStyle.italic, color: AppColors.gray800, height: 1.5),
-          ),
-          const SizedBox(height: 8),
-          Align(
-            alignment: Alignment.centerRight,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 4)],
-              ),
-              child: const Text('— Ga 14, 6', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: AppColors.primary)),
-            ),
-          ),
-          const SizedBox(height: 12),
-          Row(
-            children: [
-              const Text(
-                'Suy niệm thêm',
-                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: AppColors.orange500, letterSpacing: 1),
-              ),
-              const SizedBox(width: 4),
-              const Icon(Icons.arrow_forward_rounded, size: 14, color: AppColors.orange500),
-            ],
-          ),
-        ],
-      ),
     );
   }
 }
