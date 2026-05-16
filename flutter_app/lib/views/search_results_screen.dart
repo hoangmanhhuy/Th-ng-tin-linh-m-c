@@ -331,7 +331,7 @@ class _PriestResultCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'LM. ${priest.holyName}',
+                          'LM. ${AppStrings.of(context).translateHolyName(priest.holyName)}',
                           style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: AppColors.primary, letterSpacing: 0.3),
                         ),
                         const SizedBox(height: 2),
@@ -343,7 +343,7 @@ class _PriestResultCard extends StatelessWidget {
                             const SizedBox(width: 4),
                             Expanded(
                               child: Text(
-                                priest.parish ?? priest.diocese,
+                                AppStrings.of(context).translateDiocese(priest.parish ?? priest.diocese),
                                 style: const TextStyle(fontSize: 12, color: AppColors.gray500),
                                 overflow: TextOverflow.ellipsis,
                               ),

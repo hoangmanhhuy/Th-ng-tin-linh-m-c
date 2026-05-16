@@ -827,7 +827,7 @@ class _PriestIdCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'LM. ${user.holyName.toUpperCase()}',
+                      'LM. ${l10n.translateHolyName(user.holyName).toUpperCase()}',
                       style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w900),
                     ),
                     Text(
@@ -836,7 +836,7 @@ class _PriestIdCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      user.diocese,
+                      l10n.translateDiocese(user.diocese),
                       style: const TextStyle(color: Colors.white70, fontSize: 10, fontWeight: FontWeight.w700),
                     ),
                   ],
@@ -1255,7 +1255,7 @@ class _LiturgicalSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(l10n.liturgicalDay, style: const TextStyle(color: AppColors.emerald600, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 2)),
-                    Text(data.dateString, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w900, color: AppColors.textMain)),
+                    Text(l10n.translateLiturgicalDate(data.dateString), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w900, color: AppColors.textMain)),
                   ],
                 ),
                 const Spacer(),
@@ -1267,7 +1267,7 @@ class _LiturgicalSection extends StatelessWidget {
                     border: Border.all(color: AppColors.emerald100),
                   ),
                   child: Text(
-                    data.season,
+                    l10n.translateLiturgicalSeason(data.season),
                     style: const TextStyle(color: AppColors.emerald700, fontSize: 9, fontWeight: FontWeight.w900),
                   ),
                 ),
@@ -1301,7 +1301,7 @@ class _LiturgicalSection extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(l10n.feastDay, style: const TextStyle(fontSize: 8, fontWeight: FontWeight.w900, color: AppColors.amber, letterSpacing: 1)),
-                        Text(data.feast, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.gray700)),
+                        Text(l10n.translateFeast(data.feast), style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.gray700)),
                       ],
                     ),
                   ),
@@ -1332,7 +1332,7 @@ class _LiturgicalSection extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(r.label, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.gray600)),
+                          Text(l10n.translateReadingLabel(r.label), style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.gray600)),
                           const SizedBox(height: 4),
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -1341,7 +1341,7 @@ class _LiturgicalSection extends StatelessWidget {
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: Text(
-                              r.text,
+                              l10n.translateReadingText(r.text),
                               style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: AppColors.primary),
                               softWrap: true,
                             ),

@@ -69,7 +69,7 @@ class PersonalInfoScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    user.holyName,
+                    l10n.translateHolyName(user.holyName),
                     style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w900),
                   ),
                   const SizedBox(height: 4),
@@ -104,11 +104,11 @@ class PersonalInfoScreen extends StatelessWidget {
               title: l10n.sectionIdentity,
               items: [
                 _InfoEntry(icon: LucideIcons.fingerprint, label: l10n.fieldId, value: user.id, copyable: true),
-                _InfoEntry(icon: LucideIcons.building2, label: l10n.fieldDiocese, value: user.diocese),
+                _InfoEntry(icon: LucideIcons.building2, label: l10n.fieldDiocese, value: l10n.translateDiocese(user.diocese)),
                 if (user.parish != null)
-                  _InfoEntry(icon: LucideIcons.mapPin, label: l10n.fieldParish, value: user.parish!),
+                  _InfoEntry(icon: LucideIcons.mapPin, label: l10n.fieldParish, value: l10n.translateDiocese(user.parish!)),
                 if (user.role != null)
-                  _InfoEntry(icon: LucideIcons.briefcase, label: l10n.fieldRole, value: user.role!),
+                  _InfoEntry(icon: LucideIcons.briefcase, label: l10n.fieldRole, value: l10n.translateRole(user.role!)),
               ],
             ),
 
@@ -122,7 +122,7 @@ class PersonalInfoScreen extends StatelessWidget {
                 if (user.ordinationDate != null)
                   _InfoEntry(icon: LucideIcons.cross, label: l10n.fieldOrdinationDate, value: user.ordinationDate!),
                 if (user.degree != null)
-                  _InfoEntry(icon: LucideIcons.graduationCap, label: l10n.fieldDegree, value: user.degree!),
+                  _InfoEntry(icon: LucideIcons.graduationCap, label: l10n.fieldDegree, value: l10n.translateDegree(user.degree!)),
               ],
             ),
 

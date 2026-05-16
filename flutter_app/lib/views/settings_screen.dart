@@ -85,12 +85,12 @@ class SettingsScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            user != null ? 'LM. ${user.holyName} ${user.fullName}' : l10n.touchPriestCard,
+                            user != null ? 'LM. ${l10n.translateHolyName(user.holyName)} ${user.fullName}' : l10n.touchPriestCard,
                             style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w900, color: AppColors.gray800),
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            user?.diocese.toUpperCase() ?? '',
+                            user != null ? l10n.translateDiocese(user.diocese).toUpperCase() : '',
                             style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.primary, letterSpacing: 1.5),
                           ),
                         ],

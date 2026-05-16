@@ -114,7 +114,7 @@ class _PriestResultSheet extends StatelessWidget {
                         ),
                         const SizedBox(height: 12),
                         Text(
-                          'LM. ${priest.holyName} ${priest.fullName}',
+                          'LM. ${l10n.translateHolyName(priest.holyName)} ${priest.fullName}',
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w900,
@@ -124,7 +124,7 @@ class _PriestResultSheet extends StatelessWidget {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          priest.diocese.toUpperCase(),
+                          l10n.translateDiocese(priest.diocese).toUpperCase(),
                           style: const TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.w900,
@@ -202,7 +202,7 @@ class _PriestResultSheet extends StatelessWidget {
                             iconColor: AppColors.indigo600,
                             icon: LucideIcons.church,
                             label: l10n.labelCurrentParish,
-                            value: priest.parish!,
+                            value: l10n.translateDiocese(priest.parish!),
                           ),
                         ],
                         if (priest.role != null) ...[
@@ -212,7 +212,7 @@ class _PriestResultSheet extends StatelessWidget {
                             iconColor: AppColors.orange500,
                             icon: LucideIcons.briefcase,
                             label: l10n.fieldRole,
-                            value: priest.role!,
+                            value: l10n.translateRole(priest.role!),
                           ),
                         ],
                         if (priest.degree != null) ...[
@@ -222,7 +222,7 @@ class _PriestResultSheet extends StatelessWidget {
                             iconColor: AppColors.emerald600,
                             icon: LucideIcons.graduationCap,
                             label: l10n.fieldDegree,
-                            value: priest.degree!,
+                            value: l10n.translateDegree(priest.degree!),
                           ),
                         ],
                       ],

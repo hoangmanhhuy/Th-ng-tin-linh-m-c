@@ -416,4 +416,289 @@ class AppStrings {
   String get comingSoon => isEn ? 'Coming soon' : 'Sắp ra mắt';
   String languageSwitched(String name) => isEn ? 'Switched to $name' : 'Đã chuyển sang $name';
   String get languageChanged => isEn ? 'Language updated!' : 'Đã cập nhật ngôn ngữ!';
+
+  // ── Liturgical date translation ──────────────────────────────────────────────
+  String translateLiturgicalDate(String viDate) {
+    if (!isEn) return viDate;
+    var s = viDate
+        .replaceFirst('Thứ Hai', 'Monday')
+        .replaceFirst('Thứ Ba', 'Tuesday')
+        .replaceFirst('Thứ Tư', 'Wednesday')
+        .replaceFirst('Thứ Năm', 'Thursday')
+        .replaceFirst('Thứ Sáu', 'Friday')
+        .replaceFirst('Thứ Bảy', 'Saturday')
+        .replaceFirst('Chúa Nhật', 'Sunday');
+    // "15 Tháng 5" → "May 15"
+    s = s.replaceAllMapped(RegExp(r'(\d+) Tháng (\d+)'), (m) {
+      const months = ['January','February','March','April','May','June',
+          'July','August','September','October','November','December'];
+      final day = m.group(1)!;
+      final monthIdx = int.tryParse(m.group(2)!) ?? 1;
+      return '${months[monthIdx - 1]} $day';
+    });
+    return s;
+  }
+
+  // ── Liturgical season / week badge translation ───────────────────────────────
+  String translateLiturgicalSeason(String viSeason) {
+    if (!isEn) return viSeason;
+    const exact = <String, String>{
+      'Thứ Tư Lễ Tro': 'Ash Wednesday',
+      'Mùa Giáng Sinh': 'Christmas Season',
+      'Mùa Thường Niên': 'Ordinary Time',
+      'Chúa Nhật Phục Sinh': 'Easter Sunday',
+      'Lễ Thăng Thiên': 'Ascension',
+      'Lễ Hiện Xuống': 'Pentecost',
+      'Lễ Chúa Ba Ngôi': 'Trinity Sunday',
+      'Lễ Mình Máu Thánh': 'Corpus Christi',
+      'Lễ Thánh Tâm': 'Sacred Heart',
+      'Lễ Chúa Kitô Vua': 'Christ the King',
+      'Lễ Hiển Linh': 'Epiphany',
+      'Lễ Chúa Giêsu Chịu Phép Rửa': 'Baptism of the Lord',
+      'Lễ Giáng Sinh': 'Christmas',
+      'CN II Phục Sinh - Lòng Thương Xót': 'Divine Mercy Sunday',
+    };
+    if (exact.containsKey(viSeason)) return exact[viSeason]!;
+    // Pattern: "Tuần X Mùa Vọng/Mùa Chay/Phục Sinh/Thường Niên"
+    var s = viSeason
+        .replaceAll('Mùa Vọng', 'Advent')
+        .replaceAll('Mùa Chay', 'Lent')
+        .replaceAll('Phục Sinh', 'Easter')
+        .replaceAll('Thường Niên', 'Ordinary Time')
+        .replaceAll('Mùa Giáng Sinh', 'Christmas Season')
+        .replaceAll('Tuần ', 'Week ');
+    s = s.replaceAllMapped(
+      RegExp(r'Week ([IVXLCDM]+) (Advent|Lent|Easter|Ordinary Time)'),
+      (m) => 'Week ${m.group(1)} of ${m.group(2)}',
+    );
+    return s;
+  }
+
+  // ── Feast name translation ───────────────────────────────────────────────────
+  String translateFeast(String viFeast) {
+    if (!isEn) return viFeast;
+    const exact = <String, String>{
+      'Thứ Tư Lễ Tro': 'Ash Wednesday',
+      'Chúa Nhật Lễ Lá - Cuộc Thương Khó': 'Palm Sunday',
+      'Thứ Năm Tuần Thánh - Lễ Tiệc Ly': 'Holy Thursday',
+      'Thứ Sáu Tuần Thánh - Cuộc Khổ Nạn Chúa': 'Good Friday',
+      'Thứ Bảy Tuần Thánh - Vọng Phục Sinh': 'Holy Saturday',
+      'Chúa Nhật Phục Sinh': 'Easter Sunday',
+      'CN II Phục Sinh - Lòng Thương Xót Chúa': 'Divine Mercy Sunday',
+      'Lễ Thăng Thiên': 'Ascension of the Lord',
+      'Lễ Chúa Thánh Thần Hiện Xuống': 'Pentecost Sunday',
+      'Lễ Chúa Ba Ngôi': 'Most Holy Trinity',
+      'Lễ Mình Máu Thánh Chúa Kitô': 'Corpus Christi',
+      'Lễ Thánh Tâm Chúa Giêsu': 'Sacred Heart of Jesus',
+      'Lễ Chúa Giêsu Kitô, Vua Vũ Trụ': 'Christ the King',
+      'Lễ Hiển Linh': 'Epiphany of the Lord',
+      'Lễ Chúa Giêsu Chịu Phép Rửa': 'Baptism of the Lord',
+      'Lễ Giáng Sinh': 'Christmas',
+      'Lễ Thánh Gia Thất': 'Holy Family',
+      // Advent Sundays
+      'Chúa Nhật I Mùa Vọng': '1st Sunday of Advent',
+      'Chúa Nhật II Mùa Vọng': '2nd Sunday of Advent',
+      'Chúa Nhật III Mùa Vọng': '3rd Sunday of Advent',
+      'Chúa Nhật IV Mùa Vọng': '4th Sunday of Advent',
+      // Lent Sundays
+      'Chúa Nhật I Mùa Chay': '1st Sunday of Lent',
+      'Chúa Nhật II Mùa Chay': '2nd Sunday of Lent',
+      'Chúa Nhật III Mùa Chay': '3rd Sunday of Lent',
+      'Chúa Nhật IV Mùa Chay': '4th Sunday of Lent',
+      'Chúa Nhật V Mùa Chay': '5th Sunday of Lent',
+      // Easter Sundays
+      'Chúa Nhật III Phục Sinh': '3rd Sunday of Easter',
+      'Chúa Nhật IV Phục Sinh': '4th Sunday of Easter',
+      'Chúa Nhật V Phục Sinh': '5th Sunday of Easter',
+      'Chúa Nhật VI Phục Sinh': '6th Sunday of Easter',
+      'Chúa Nhật VII Phục Sinh': '7th Sunday of Easter',
+      // Easter octave
+      'Ngày II Bát Nhật Phục Sinh': 'Monday of Easter Week',
+      'Ngày III Bát Nhật Phục Sinh': 'Tuesday of Easter Week',
+      'Ngày IV Bát Nhật Phục Sinh': 'Wednesday of Easter Week',
+      'Ngày V Bát Nhật Phục Sinh': 'Thursday of Easter Week',
+      'Ngày VI Bát Nhật Phục Sinh': 'Friday of Easter Week',
+      'Ngày VII Bát Nhật Phục Sinh': 'Saturday of Easter Week',
+      'Ngày VIII Bát Nhật Phục Sinh': 'Divine Mercy Sunday',
+      // Fixed solemnities
+      'Đức Maria, Mẹ Thiên Chúa': 'Mary, Mother of God',
+      'Dâng Chúa Vào Đền Thánh': 'Presentation of the Lord',
+      'Thánh Giuse Bạn Đức Mẹ': 'St. Joseph, Spouse of Mary',
+      'Truyền Tin': 'Annunciation of the Lord',
+      'Sinh nhật Thánh Gioan Tẩy Giả': 'Birth of St. John the Baptist',
+      'Thánh Phêrô và Thánh Phaolô': 'Sts. Peter and Paul',
+      'Đức Mẹ Hồn Xác Lên Trời': 'Assumption of the Blessed Virgin Mary',
+      'Suy Tôn Thánh Giá': 'Exaltation of the Holy Cross',
+      'Các Thánh Nam Nữ': 'All Saints',
+      'Cầu cho các Tín hữu đã qua đời': 'All Souls',
+      'Lễ Cầu Cho Các Tín Hữu Đã Qua Đời': 'All Souls',
+      'Các Thánh Tử Đạo Việt Nam': 'Vietnamese Martyrs',
+      'Đức Mẹ Vô Nhiễm Nguyên Tội': 'Immaculate Conception',
+      'Kính Suy Tôn Thánh Giá (11/09)': 'Exaltation of the Holy Cross (Sep 14)',
+    };
+    if (exact.containsKey(viFeast)) return exact[viFeast]!;
+    // Pattern: weekday + season
+    var s = viFeast
+        .replaceAll('Thứ Hai. ', 'Monday. ')
+        .replaceAll('Thứ Ba. ', 'Tuesday. ')
+        .replaceAll('Thứ Tư. ', 'Wednesday. ')
+        .replaceAll('Thứ Năm. ', 'Thursday. ')
+        .replaceAll('Thứ Sáu. ', 'Friday. ')
+        .replaceAll('Thứ Bảy. ', 'Saturday. ')
+        .replaceAll('Chúa Nhật. ', 'Sunday. ');
+    s = translateLiturgicalSeason(s);
+    // "Lễ Kính — X" → "Feast — X"
+    s = s.replaceAll('Lễ Kính — ', 'Feast — ')
+         .replaceAll('Lễ Trọng — ', 'Solemnity — ')
+         .replaceAll('Lễ Nhớ — ', 'Memorial — ');
+    // Translate saint names in remaining text
+    s = _translateSaintPhrase(s);
+    return s;
+  }
+
+  String _translateSaintPhrase(String s) {
+    // "Thánh X" → "St. X"
+    var result = s;
+    _saintNameMap.forEach((vi, en) {
+      result = result.replaceAll('Thánh $vi', 'St. $en');
+      result = result.replaceAll(vi, en);
+    });
+    result = result.replaceAll('Đức Bà', 'Our Lady');
+    result = result.replaceAll('Đức Mẹ', 'Our Lady');
+    result = result.replaceAll('Chúa Nhật', 'Sunday');
+    result = result.replaceAll('Lễ Kính', 'Feast');
+    result = result.replaceAll('Lễ Nhớ', 'Memorial');
+    return result;
+  }
+
+  // ── Reading label / text translation ────────────────────────────────────────
+  String translateReadingLabel(String viLabel) {
+    if (!isEn) return viLabel;
+    switch (viLabel) {
+      case 'Bài Đọc I': return 'First Reading';
+      case 'Bài Đọc II': return 'Second Reading';
+      case 'Đáp Ca': return 'Responsorial Psalm';
+      case 'Tin Mừng': return 'Gospel';
+      default: return viLabel;
+    }
+  }
+
+  String translateReadingText(String viText) {
+    if (!isEn) return viText;
+    if (viText == 'Thánh vịnh') return 'Psalm';
+    return viText;
+  }
+
+  // ── Saint (holy) name translation ────────────────────────────────────────────
+  static const _saintNameMap = <String, String>{
+    'Phaolô': 'Paul',
+    'Phêrô': 'Peter',
+    'Gioan': 'John',
+    'Giuse': 'Joseph',
+    'Maria': 'Mary',
+    'Anrê': 'Andrew',
+    'Matthêu': 'Matthew',
+    'Luca': 'Luke',
+    'Maccô': 'Mark',
+    'Giacôbê': 'James',
+    'Tôma': 'Thomas',
+    'Philipphê': 'Philip',
+    'Batôlômêô': 'Bartholomew',
+    'Simôn': 'Simon',
+    'Giuđa': 'Jude',
+    'Matthia': 'Matthias',
+    'Barnaba': 'Barnabas',
+    'Têphanô': 'Stephen',
+    'Augustinô': 'Augustine',
+    'Têrêxa': 'Therese',
+    'Antôn': 'Anthony',
+    'Phanxicô': 'Francis',
+    'Đaminh': 'Dominic',
+    'Inhaxiô': 'Ignatius',
+    'Lôrenxô': 'Lawrence',
+    'Grêgôriô': 'Gregory',
+    'Lêô': 'Leo',
+    'Bênêđictô': 'Benedict',
+    'Luxia': 'Lucy',
+    'Catarina': 'Catherine',
+    'Mácthê': 'Martha',
+    'Nicôla': 'Nicholas',
+    'Vincentê': 'Vincent',
+    'Carôlô': 'Charles',
+    'Rôcô': 'Roch',
+    'Annê': 'Anne',
+    'Giôakêm': 'Joachim',
+    'Êlisabét': 'Elizabeth',
+    'Gioan Tẩy Giả': 'John the Baptist',
+    'Cêcilia': 'Cecilia',
+    'Monica': 'Monica',
+    'Agata': 'Agatha',
+    'Anê': 'Agnes',
+    'Bônaventura': 'Bonaventure',
+    'Bênađô': 'Bernard',
+    'Piô': 'Pius',
+    'Micae': 'Michael',
+    'Raphaen': 'Raphael',
+    'Gabrien': 'Gabriel',
+    'Cyrillô': 'Cyril',
+    'Mêthôđiô': 'Methodius',
+    'Giêrônimô': 'Jerome',
+    'Ambrôxiô': 'Ambrose',
+    'Clêmentê': 'Clement',
+    'Xixtô': 'Sixtus',
+    'Đa Minh': 'Dominic',
+    'Anrê Dũng Lạc': 'Andrew Dung-Lac',
+    'Gioan Phaolô': 'John Paul',
+    'Phanxicô Xaviê': 'Francis Xavier',
+    'Phanxicô Salê': 'Francis de Sales',
+  };
+
+  String translateHolyName(String name) {
+    if (!isEn) return name;
+    return _saintNameMap[name] ?? name;
+  }
+
+  // ── Diocese / parish / role translation ─────────────────────────────────────
+  String translateDiocese(String diocese) {
+    if (!isEn) return diocese;
+    return diocese
+        .replaceFirst('Tổng Giáo phận TP.HCM', 'Archdiocese of Ho Chi Minh City')
+        .replaceFirst('Tổng Giáo phận Hà Nội', 'Archdiocese of Hanoi')
+        .replaceFirst('Tổng Giáo phận Huế', 'Archdiocese of Hue')
+        .replaceFirst('Tổng Giáo phận', 'Archdiocese of')
+        .replaceFirst('Giáo phận', 'Diocese of')
+        .replaceFirst('Giáo xứ', 'Parish of');
+  }
+
+  String translateRole(String role) {
+    if (!isEn) return role;
+    const roleMap = <String, String>{
+      'Trưởng ban Truyền thông': 'Head of Communications',
+      'Quản xứ': 'Parish Priest',
+      'Phó xứ': 'Associate Pastor',
+      'Chính xứ': 'Pastor',
+      'Giám mục': 'Bishop',
+      'Hồng y': 'Cardinal',
+      'Tổng Giám mục': 'Archbishop',
+      'Linh mục': 'Priest',
+      'Phó tế': 'Deacon',
+      'Tu sĩ': 'Religious',
+      'Bề trên': 'Superior',
+      'Giám đốc': 'Director',
+    };
+    return roleMap[role] ?? role;
+  }
+
+  String translateDegree(String degree) {
+    if (!isEn) return degree;
+    const degreeMap = <String, String>{
+      'Thạc sĩ Mục vụ': 'Master of Pastoral Ministry',
+      'Tiến sĩ Thần học': 'Doctor of Theology',
+      'Thạc sĩ Thần học': 'Master of Theology',
+      'Cử nhân Thần học': 'Bachelor of Theology',
+      'Tiến sĩ Triết học': 'Doctor of Philosophy',
+      'Thạc sĩ Triết học': 'Master of Philosophy',
+    };
+    return degreeMap[degree] ?? degree;
+  }
 }

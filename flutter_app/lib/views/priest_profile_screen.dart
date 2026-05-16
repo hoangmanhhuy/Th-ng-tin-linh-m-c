@@ -101,7 +101,7 @@ class PriestProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              user.holyName,
+              l10n.translateHolyName(user.holyName),
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.primary),
             ),
             Text(
@@ -207,7 +207,7 @@ class PriestProfileScreen extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
-                                  user.diocese.toUpperCase(),
+                                  l10n.translateDiocese(user.diocese).toUpperCase(),
                                   style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w900),
                                 ),
                               ],
@@ -294,7 +294,7 @@ class PriestProfileScreen extends StatelessWidget {
                     iconColor: AppColors.indigo600,
                     iconBg: AppColors.indigo50,
                     label: l10n.labelCurrentParish,
-                    value: user.parish ?? '—',
+                    value: l10n.translateDiocese(user.parish ?? '—'),
                   ),
                   const SizedBox(height: 12),
                   _InfoRow(
@@ -302,7 +302,7 @@ class PriestProfileScreen extends StatelessWidget {
                     iconColor: AppColors.emerald600,
                     iconBg: AppColors.emerald50,
                     label: l10n.labelDegree,
-                    value: user.degree ?? '—',
+                    value: l10n.translateDegree(user.degree ?? '—'),
                   ),
                   if (user.email != null) ...[
                     const SizedBox(height: 12),
@@ -395,8 +395,8 @@ class PriestProfileScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                   _WorkItem(
                     period: '${_year(user.ordinationDate)} - ${l10n.toPresent}',
-                    title: user.role ?? 'Linh mục',
-                    place: '${user.parish ?? ''}, ${user.diocese}',
+                    title: l10n.translateRole(user.role ?? 'Linh mục'),
+                    place: '${l10n.translateDiocese(user.parish ?? '')}, ${l10n.translateDiocese(user.diocese)}',
                     isActive: true,
                   ),
                   const SizedBox(height: 12),

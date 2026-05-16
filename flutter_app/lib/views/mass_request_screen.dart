@@ -205,11 +205,11 @@ class _MassRequestScreenState extends State<MassRequestScreen> {
                           Text(l10n.massFor, style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.indigo600, letterSpacing: 1.5)),
                           const SizedBox(height: 2),
                           Text(
-                            'LM. ${widget.priest!.holyName} ${widget.priest!.fullName}',
+                            'LM. ${AppStrings.of(context).translateHolyName(widget.priest!.holyName)} ${widget.priest!.fullName}',
                             style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w900, color: AppColors.primary),
                           ),
                           Text(
-                            widget.priest!.diocese,
+                            AppStrings.of(context).translateDiocese(widget.priest!.diocese),
                             style: const TextStyle(fontSize: 11, color: AppColors.indigo600),
                           ),
                         ],

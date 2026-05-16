@@ -229,7 +229,7 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
           children: [
             Text(l10n.nfcManagementTitle, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: AppColors.primary)),
             Text(
-              'LM. ${widget.priest.holyName} ${widget.priest.fullName}',
+              'LM. ${AppStrings.of(context).translateHolyName(widget.priest.holyName)} ${widget.priest.fullName}',
               style: const TextStyle(fontSize: 10, color: AppColors.gray400, fontWeight: FontWeight.w600),
             ),
           ],
@@ -277,12 +277,12 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'LM. ${widget.priest.holyName} ${widget.priest.fullName}',
+                        'LM. ${AppStrings.of(context).translateHolyName(widget.priest.holyName)} ${widget.priest.fullName}',
                         style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w900),
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        widget.priest.diocese,
+                        AppStrings.of(context).translateDiocese(widget.priest.diocese),
                         style: const TextStyle(color: Colors.white70, fontSize: 11),
                       ),
                     ],
