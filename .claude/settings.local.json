@@ -115,7 +115,10 @@
       "Bash(mkdir -p /Users/macpaul/Downloads/catholic-liturgy-web/src/app/api/liturgical/day/\\\\[date\\\\])",
       "Bash(mkdir -p /Users/macpaul/Downloads/catholic-liturgy-web/src/app/api/liturgical/year/\\\\[year\\\\])",
       "Bash(mkdir -p /Users/macpaul/Downloads/catholic-liturgy-web/src/app/api/liturgical/month/\\\\[yearMonth\\\\])",
-      "Bash(mkdir -p /Users/macpaul/Downloads/catholic-liturgy-web/src/app/api/liturgical/saints/\\\\[mmdd\\\\])"
+      "Bash(mkdir -p /Users/macpaul/Downloads/catholic-liturgy-web/src/app/api/liturgical/saints/\\\\[mmdd\\\\])",
+      "Bash(sips -s format jpeg /Users/macpaul/Downloads/IMG_0123.heic --out /tmp/img0123.jpg)",
+      "Bash(sips -s format jpeg /Users/macpaul/Downloads/IMG_0124.heic --out /tmp/img0124.jpg)",
+      "Bash(sips -s format jpeg /Users/macpaul/Downloads/IMG_0125.heic --out /tmp/img0125.jpg)"
     ]
   }
 }

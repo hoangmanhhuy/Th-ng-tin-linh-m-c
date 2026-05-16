@@ -1021,10 +1021,10 @@ class _MassRequestCard extends StatelessWidget {
                       child: const Icon(LucideIcons.clock, size: 20, color: AppColors.indigo600),
                     ),
                     const SizedBox(width: 12),
-                    const Expanded(
+                    Expanded(
                       child: Text(
-                        'Linh mục Phaolô Hoàng Mạnh Huy Giáo phận Phú Cường xin dâng lễ an táng.',
-                        style: TextStyle(fontSize: 13, color: AppColors.gray800, height: 1.4),
+                        l10n.massNotificationSample,
+                        style: const TextStyle(fontSize: 13, color: AppColors.gray800, height: 1.4),
                       ),
                     ),
                   ],

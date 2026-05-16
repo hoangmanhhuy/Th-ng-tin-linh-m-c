@@ -520,13 +520,13 @@ class MassRequestDetailScreen extends StatelessWidget {
                               children: [
                                 Text(l10n.senderNameLabel, style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1)),
                                 const SizedBox(height: 2),
-                                const Text('Phaolô Nguyễn Văn A', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppColors.gray800)),
+                                Text('${l10n.translateHolyName('Phaolô')} Nguyễn Văn A', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: AppColors.gray800)),
                               ],
                             ),
                           ],
                         ),
                         const SizedBox(height: 16),
-                        _InfoRow(icon: LucideIcons.church, label: l10n.currentParishContact, value: 'Giáo xứ Thánh Đa Minh, TGP Sài Gòn'),
+                        _InfoRow(icon: LucideIcons.church, label: l10n.currentParishContact, value: l10n.translateDiocese('Giáo xứ Thánh Đa Minh, TGP Sài Gòn')),
                         const SizedBox(height: 10),
                         _InfoRow(icon: LucideIcons.mapPin, label: l10n.phoneContact, value: '090 123 4567'),
                       ],
@@ -557,7 +557,7 @@ class MassRequestDetailScreen extends StatelessWidget {
                             children: [
                               Text(l10n.massTypeLabel, style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.orange500, letterSpacing: 1)),
                               const SizedBox(height: 2),
-                              const Text('Lễ Cầu Hồn', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: Color(0xFF431407))),
+                              Text(l10n.translateMassType('Lễ Cầu Hồn'), style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: Color(0xFF431407))),
                             ],
                           ),
                         ),
@@ -576,7 +576,7 @@ class MassRequestDetailScreen extends StatelessWidget {
                               children: [
                                 Text(l10n.estimatedTime, style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1)),
                                 const SizedBox(height: 2),
-                                const Text('18:00 - Thứ Sáu, 24/11/2023', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w900, color: AppColors.gray800)),
+                                Text(l10n.translateLiturgicalDate('18:00 - Thứ Sáu, 24/11/2023'), style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w900, color: AppColors.gray800)),
                               ],
                             ),
                           ],

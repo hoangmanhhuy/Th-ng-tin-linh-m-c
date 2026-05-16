@@ -85,6 +85,9 @@ class AppStrings {
 
   // Mass request card (home)
   String get minutesAgo => isEn ? '5 MINUTES AGO' : '5 PHÚT TRƯỚC';
+  String get massNotificationSample => isEn
+      ? 'Fr. Paul Hoang Manh Huy, Diocese of Phu Cuong, requests a Funeral Mass.'
+      : 'Linh mục Phaolô Hoàng Mạnh Huy Giáo phận Phú Cường xin dâng lễ an táng.';
 
   // Search section (priest home)
   String get searchPriestSection => isEn ? 'Search Priest' : 'Tìm kiếm Linh mục';
@@ -586,7 +589,47 @@ class AppStrings {
   String translateReadingText(String viText) {
     if (!isEn) return viText;
     if (viText == 'Thánh vịnh') return 'Psalm';
-    return viText;
+    // Translate inline liturgical notes that appear in reading references
+    var s = viText
+        .replaceAll('Các bài đọc: lấy ở chính ngày lễ.', 'Readings: taken from the feast day itself.')
+        .replaceAll('Chiều:', 'Evening (Vespers):')
+        .replaceAll('Sáng:', 'Morning:')
+        .replaceAll('LỄ VỌNG CHÚA GIÊSU CHỊU PHÉP RỬA', 'Vigil of the Baptism of the Lord')
+        .replaceAll('LỄ VỌNG CHÚA THĂNG THIÊN', 'Vigil of the Ascension of the Lord')
+        .replaceAll('LỄ VỌNG HIỆN XUỐNG', 'Vigil of Pentecost')
+        .replaceAll('LỄ VỌNG CHÚA GIÁNG SINH', 'Vigil of the Nativity of the Lord')
+        .replaceAll('LỄ VỌNG PHỤC SINH', 'Easter Vigil')
+        .replaceAll('CHÚA THĂNG THIÊN', 'Ascension of the Lord')
+        .replaceAll('HIỆN XUỐNG', 'Pentecost')
+        .replaceAll('MÌNH MÁU THÁNH CHÚA', 'Corpus Christi')
+        .replaceAll('THÁNH TÂM CHÚA', 'Sacred Heart')
+        .replaceAll('CHÚA KITÔ VUA', 'Christ the King')
+        .replaceAll('ĐỨC MẸ VÔ NHIỄM', 'Immaculate Conception')
+        .replaceAll('ĐỨC MẸ HỒN XÁC LÊN TRỜI', 'Assumption of Mary')
+        .replaceAll('SINH NHẬT ĐỨC MẸ', 'Nativity of Mary')
+        .replaceAll('(Tr)', '(W)')
+        .replaceAll('(Đỏ)', '(R)')
+        .replaceAll('(Xanh)', '(G)')
+        .replaceAll('(Tím)', '(V)')
+        .replaceAll('(Hồng)', '(Pk)');
+    return s;
+  }
+
+  // ── Mass type translation ────────────────────────────────────────────────────
+  String translateMassType(String viType) {
+    if (!isEn) return viType;
+    const massTypeMap = <String, String>{
+      'Lễ Cầu Hồn': 'Mass for the Dead',
+      'Lễ An Táng': 'Funeral Mass',
+      'Lễ Giỗ': 'Anniversary Mass',
+      'Lễ Cưới': 'Wedding Mass',
+      'Lễ Tạ Ơn': 'Thanksgiving Mass',
+      'Lễ Cầu Bình An': 'Mass for Peace',
+      'Lễ Cầu Cho Bệnh Nhân': 'Mass for the Sick',
+      'Lễ Mở Tay': 'First Mass',
+      'Lễ Thường': 'Ordinary Mass',
+    };
+    return massTypeMap[viType] ?? viType;
   }
 
   // ── Saint (holy) name translation ────────────────────────────────────────────
@@ -666,7 +709,9 @@ class AppStrings {
         .replaceFirst('Tổng Giáo phận Hà Nội', 'Archdiocese of Hanoi')
         .replaceFirst('Tổng Giáo phận Huế', 'Archdiocese of Hue')
         .replaceFirst('Tổng Giáo phận', 'Archdiocese of')
+        .replaceAll('TGP ', 'Archdiocese of ')
         .replaceFirst('Giáo phận', 'Diocese of')
+        .replaceAll('GP ', 'Diocese of ')
         .replaceFirst('Giáo xứ', 'Parish of');
   }
 

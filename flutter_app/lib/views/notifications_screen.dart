@@ -6,36 +6,44 @@ import '../core/app_strings.dart';
 class NotificationsScreen extends StatelessWidget {
   const NotificationsScreen({super.key});
 
-  static const _notifications = [
+  List<_NotifData> _buildNotifications(AppStrings l10n) => [
     _NotifData(
       id: 1,
-      title: 'Yêu cầu dâng lễ mới',
-      content: 'Linh mục Phaolô Hoàng Mạnh Huy gửi yêu cầu dâng lễ an táng.',
-      time: '5 phút trước',
+      title: l10n.isEn ? 'New Mass Request' : 'Yêu cầu dâng lễ mới',
+      content: l10n.isEn
+          ? 'Fr. Paul Hoang Manh Huy sent a request for a Funeral Mass.'
+          : 'Linh mục Phaolô Hoàng Mạnh Huy gửi yêu cầu dâng lễ an táng.',
+      time: l10n.isEn ? '5 minutes ago' : '5 phút trước',
       isRead: false,
       type: 'mass',
     ),
     _NotifData(
       id: 2,
-      title: 'Cập nhật hệ thống',
-      content: 'Hệ thống Sacred Link đã được cập nhật lên phiên bản 1.0.4.',
-      time: '2 giờ trước',
+      title: l10n.isEn ? 'System Update' : 'Cập nhật hệ thống',
+      content: l10n.isEn
+          ? 'Sacred Link has been updated to version 1.0.4.'
+          : 'Hệ thống Sacred Link đã được cập nhật lên phiên bản 1.0.4.',
+      time: l10n.isEn ? '2 hours ago' : '2 giờ trước',
       isRead: true,
       type: 'system',
     ),
     _NotifData(
       id: 3,
-      title: 'Nhắc lịch công tác',
-      content: 'Ngày mai bạn có buổi dâng lễ tại Giáo xứ Tân Định lúc 08:00.',
-      time: '1 ngày trước',
+      title: l10n.isEn ? 'Schedule Reminder' : 'Nhắc lịch công tác',
+      content: l10n.isEn
+          ? 'You have a Mass at Parish of Tan Dinh tomorrow at 08:00.'
+          : 'Ngày mai bạn có buổi dâng lễ tại Giáo xứ Tân Định lúc 08:00.',
+      time: l10n.isEn ? '1 day ago' : '1 ngày trước',
       isRead: true,
       type: 'calendar',
     ),
     _NotifData(
       id: 4,
-      title: 'Yêu cầu cập nhật thông tin',
-      content: 'Văn phòng Giáo phận yêu cầu bạn cập nhật học vị mới.',
-      time: '3 ngày trước',
+      title: l10n.isEn ? 'Profile Update Request' : 'Yêu cầu cập nhật thông tin',
+      content: l10n.isEn
+          ? 'The Diocesan Office requests you update your academic degree.'
+          : 'Văn phòng Giáo phận yêu cầu bạn cập nhật học vị mới.',
+      time: l10n.isEn ? '3 days ago' : '3 ngày trước',
       isRead: true,
       type: 'profile',
     ),
@@ -44,6 +52,7 @@ class NotificationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppStrings.of(context);
+    final notifications = _buildNotifications(l10n);
     return Scaffold(
       backgroundColor: AppColors.surface,
       appBar: AppBar(
@@ -100,9 +109,9 @@ class NotificationsScreen extends StatelessWidget {
               delegate: SliverChildBuilderDelegate(
                 (_, i) => Padding(
                   padding: const EdgeInsets.only(bottom: 10),
-                  child: _NotifCard(data: _notifications[i]),
+                  child: _NotifCard(data: notifications[i]),
                 ),
-                childCount: _notifications.length,
+                childCount: notifications.length,
               ),
             ),
           ),
