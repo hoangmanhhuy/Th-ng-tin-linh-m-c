@@ -81,4 +81,14 @@ class AppConfig {
 
   // Emergency anointing — nearest facility/church
   static const String epChurchesNearby = '/facility/nearest';
+
+  // Liturgical calendar — base URL riêng (có thể chạy trên server độc lập)
+  // Override qua --dart-define=LITURGICAL_URL=https://liturgical.example.com
+  static const String _liturgicalBaseUrl = String.fromEnvironment(
+    'LITURGICAL_URL',
+    defaultValue: '',   // rỗng → dùng chung apiBase
+  );
+  static String get liturgicalApiBase =>
+      _liturgicalBaseUrl.isNotEmpty ? _liturgicalBaseUrl : apiBase;
+  static const String epLiturgical = '/liturgical/info';
 }

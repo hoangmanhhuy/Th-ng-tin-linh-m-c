@@ -46,7 +46,7 @@
       "bd1": "",
       "bd2": "",
       "tm":  "",
-      "ghi_chu": "Thứ Bảy Tuần Thánh — không có Thánh lễ ban ngày"
+      "ghi_chu": "Thứ Bảy Tuần Thánh — Không có Thánh lễ ban ngày. Tối nay: Đêm Canh Thức Vượt Qua."
     },
     "ps_A": {
       "bd1": "Cv 10,34a.37-43",
@@ -77,7 +77,7 @@
     {"mm": 6,  "dd": 29, "ten": "Thánh Phêrô và Thánh Phaolô",      "bac_le": 3, "la_truyen_tin": false},
     {"mm": 8,  "dd": 15, "ten": "Đức Mẹ Hồn Xác Lên Trời",         "bac_le": 3, "la_truyen_tin": false},
     {"mm": 11, "dd": 1,  "ten": "Các Thánh Nam Nữ",                  "bac_le": 3, "la_truyen_tin": false},
-    {"mm": 11, "dd": 24, "ten": "Các Thánh Tử Đạo Việt Nam",        "bac_le": 5, "la_truyen_tin": false},
+    {"mm": 11, "dd": 24, "ten": "Các Thánh Tử Đạo Việt Nam",        "bac_le": 3, "la_truyen_tin": false},
     {"mm": 12, "dd": 8,  "ten": "Đức Mẹ Vô Nhiễm Nguyên Tội",      "bac_le": 3, "la_truyen_tin": false}
   ],
 
@@ -137,5 +137,54 @@
     "Mùa Vọng":       "Chúa Nhật Mùa Vọng",
     "Mùa Chay":       "Chúa Nhật Mùa Chay",
     "Mùa Phục Sinh":  "Chúa Nhật Mùa Phục Sinh"
-  }
+  },
+
+  "le_vong_co_dinh": {
+    "06-23": {
+      "ten_le_vong":  "Lễ Vọng Sinh Nhật Thánh Gioan Tẩy Giả",
+      "ten_le_chinh": "Sinh Nhật Thánh Gioan Tẩy Giả (24/6)",
+      "mau_le": "Tr",
+      "bd1": "Gr 1,4-10",
+      "bd2": "1 Pr 1,8-12",
+      "tm":  "Lc 1,5-17",
+      "ghi_chu": "Lễ Vọng Sinh Nhật Thánh Gioan Tẩy Giả — Tối nay cử hành Lễ Vọng"
+    },
+    "06-28": {
+      "ten_le_vong":  "Lễ Vọng Thánh Phêrô và Phaolô Tông Đồ",
+      "ten_le_chinh": "Thánh Phêrô và Phaolô Tông Đồ (29/6)",
+      "mau_le": "Đ",
+      "bd1": "Cv 3,1-10",
+      "bd2": "Gl 1,11-20",
+      "tm":  "Ga 21,15-19",
+      "ghi_chu": "Lễ Vọng Thánh Phêrô và Phaolô — Tối nay cử hành Lễ Vọng"
+    },
+    "08-14": {
+      "ten_le_vong":  "Lễ Vọng Đức Mẹ Hồn Xác Lên Trời",
+      "ten_le_chinh": "Đức Mẹ Hồn Xác Lên Trời (15/8)",
+      "mau_le": "Tr",
+      "bd1": "1 Sb 15,3-4.15-16; 16,1-2",
+      "bd2": "1 Cr 15,54b-57",
+      "tm":  "Lc 11,27-28",
+      "ghi_chu": "Lễ Vọng Đức Mẹ Hồn Xác Lên Trời — Tối nay cử hành Lễ Vọng"
+    }
+  },
+
+  "le_vong_hien_xuong": {
+    "ten_le_vong":  "Lễ Vọng Chúa Thánh Thần Hiện Xuống",
+    "ten_le_chinh": "Lễ Chúa Thánh Thần Hiện Xuống",
+    "mau_le": "Đ",
+    "bd1": "Rm 8,22-27",
+    "bd2": "",
+    "tm":  "Ga 7,37-39",
+    "ghi_chu": "Lễ Vọng Hiện Xuống — Tối nay cử hành Lễ Vọng (Bài đọc AT tuỳ chọn: Kn 3,1-9 hoặc Is 54,5-14 hoặc Hc 36,1-10 hoặc Ed 36,16-17a.18-28)"
+  },
+
+  "le_trong_khong_co_le_vong": [
+    "Chúa Hiển Linh", "Lễ Thăng Thiên", "Lễ Chúa Ba Ngôi",
+    "Lễ Mình Máu Thánh Chúa Kitô", "Lễ Thánh Tâm Chúa Giêsu",
+    "Lễ Chúa Giêsu Kitô, Vua Vũ Trụ",
+    "Đức Maria, Mẹ Thiên Chúa (1/1)", "Thánh Giuse (19/3)",
+    "Lễ Truyền Tin (25/3)", "Các Thánh Nam Nữ (1/11)",
+    "Đức Mẹ Vô Nhiễm Nguyên Tội (8/12)"
+  ]
 }

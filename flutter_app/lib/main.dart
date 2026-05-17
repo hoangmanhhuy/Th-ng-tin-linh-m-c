@@ -51,7 +51,9 @@ void main() async {
         Provider<AuthService>.value(value: authService),
         // ViewModels
         ChangeNotifierProvider<AuthViewModel>.value(value: authViewModel),
-        ChangeNotifierProvider(create: (_) => LiturgicalViewModel()),
+        ChangeNotifierProvider(
+          create: (_) => LiturgicalViewModel(dio: apiClient.dio),
+        ),
       ],
       child: const DigitalEcclesiaApp(),
     ),

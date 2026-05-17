@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:dio/dio.dart';
+import '../core/app_config.dart';
 import 'liturgical_engine.dart';
 
 // ── Data model ────────────────────────────────────────────────────
@@ -14,6 +16,15 @@ class LiturgicalInfo {
   final String tinMung;   // gospel reference
   final String ghiChu;    // note
 
+  // Lễ Vọng tối nay (nếu có)
+  final bool hasLeVong;         // true nếu tối nay có cử hành Lễ Vọng
+  final String tenLeVong;       // "Lễ Vọng Thánh Phêrô và Phaolô"
+  final String bd1Vong;         // bài đọc 1 Lễ Vọng
+  final String bd2Vong;         // bài đọc 2 Lễ Vọng (có thể rỗng)
+  final String tmVong;          // Tin Mừng Lễ Vọng
+  final String mauLeVong;       // màu lễ vọng
+  final String ghiChuVong;      // ghi chú lễ vọng
+
   const LiturgicalInfo({
     required this.dateString,
     required this.season,
@@ -23,12 +34,61 @@ class LiturgicalInfo {
     required this.bd2,
     required this.tinMung,
     required this.ghiChu,
+    this.hasLeVong = false,
+    this.tenLeVong = '',
+    this.bd1Vong = '',
+    this.bd2Vong = '',
+    this.tmVong = '',
+    this.mauLeVong = '',
+    this.ghiChuVong = '',
   });
+
+  /// Tạo từ JSON (dùng khi nhận từ API server).
+  factory LiturgicalInfo.fromJson(Map<String, dynamic> j) => LiturgicalInfo(
+    dateString: j['dateString'] as String? ?? '',
+    season:     j['season']     as String? ?? '',
+    feast:      j['feast']      as String? ?? '',
+    mauLe:      j['mauLe']      as String? ?? 'X',
+    bd1:        j['bd1']        as String? ?? '',
+    bd2:        j['bd2']        as String? ?? '',
+    tinMung:    j['tinMung']    as String? ?? '',
+    ghiChu:     j['ghiChu']     as String? ?? '',
+    hasLeVong:  j['hasLeVong']  as bool?   ?? false,
+    tenLeVong:  j['tenLeVong']  as String? ?? '',
+    bd1Vong:    j['bd1Vong']    as String? ?? '',
+    bd2Vong:    j['bd2Vong']    as String? ?? '',
+    tmVong:     j['tmVong']     as String? ?? '',
+    mauLeVong:  j['mauLeVong']  as String? ?? '',
+    ghiChuVong: j['ghiChuVong'] as String? ?? '',
+  );
+
+  Map<String, dynamic> toJson() => {
+    'dateString': dateString,
+    'season':     season,
+    'feast':      feast,
+    'mauLe':      mauLe,
+    'bd1':        bd1,
+    'bd2':        bd2,
+    'tinMung':    tinMung,
+    'ghiChu':     ghiChu,
+    'hasLeVong':  hasLeVong,
+    'tenLeVong':  tenLeVong,
+    'bd1Vong':    bd1Vong,
+    'bd2Vong':    bd2Vong,
+    'tmVong':     tmVong,
+    'mauLeVong':  mauLeVong,
+    'ghiChuVong': ghiChuVong,
+  };
 }
 
 // ── Service ───────────────────────────────────────────────────────
 
 class LiturgicalService {
+  /// Dio instance tuỳ chọn — nếu null, service chỉ dùng local.
+  final Dio? _dio;
+
+  LiturgicalService({Dio? dio}) : _dio = dio;
+
   // JSON caches
   Map<String, dynamic>? _readings;
   Map<String, dynamic>? _saints;
@@ -65,9 +125,30 @@ class LiturgicalService {
 
   // ── Main entry point ─────────────────────────────────────────────
 
-  Future<LiturgicalInfo> getInfo(DateTime date) async {
+  Future<LiturgicalInfo> getInfo(DateTime date, {String lang = 'vi'}) async {
+    // Thử gọi API server trước (nếu có Dio instance)
+    if (_dio != null) {
+      try {
+        final dateStr =
+            '${date.year}-${date.month.toString().padLeft(2, '0')}-'
+            '${date.day.toString().padLeft(2, '0')}';
+        final resp = await _dio!.get(
+          '${AppConfig.liturgicalApiBase}${AppConfig.epLiturgical}',
+          queryParameters: {'date': dateStr, 'lang': lang},
+          options: Options(receiveTimeout: const Duration(seconds: 5)),
+        );
+        if (resp.statusCode == 200 && resp.data is Map) {
+          return LiturgicalInfo.fromJson(
+              resp.data as Map<String, dynamic>);
+        }
+      } catch (_) {
+        // Server không phản hồi → fallback local
+      }
+    }
+
+    // Fallback: tính local
     await _load();
-    final ngay = DateTime(date.year, date.month, date.day); // strip time
+    final ngay = DateTime(date.year, date.month, date.day);
     return _compute(ngay);
   }
 
@@ -129,6 +210,9 @@ class LiturgicalService {
     // ── Reading lookup ──────────────────────────────────────────────
     final readings = _getReadings(ngay, dd, nam, mua, laCN);
 
+    // ── Lễ Vọng tối nay ────────────────────────────────────────────
+    final vong = _getLeVong(ngay, dd);
+
     return LiturgicalInfo(
       dateString: dateStr,
       season: season,
@@ -138,6 +222,13 @@ class LiturgicalService {
       bd2: readings['bd2'] ?? '',
       tinMung: readings['tm'] ?? '',
       ghiChu: readings['ghi_chu'] ?? '',
+      hasLeVong:  vong != null,
+      tenLeVong:  vong?['ten_le_vong']  as String? ?? '',
+      bd1Vong:    vong?['bd1']          as String? ?? '',
+      bd2Vong:    vong?['bd2']          as String? ?? '',
+      tmVong:     vong?['tm']           as String? ?? '',
+      mauLeVong:  vong?['mau_le']       as String? ?? '',
+      ghiChuVong: vong?['ghi_chu']      as String? ?? '',
     );
   }
 
@@ -307,7 +398,7 @@ class LiturgicalService {
     if (isSameDay(ngay, cnLL)) return 'Chúa Nhật Lễ Lá - Cuộc Thương Khó';
     if (isSameDay(ngay, thu5)) return 'Thứ Năm Tuần Thánh - Lễ Tiệc Ly';
     if (isSameDay(ngay, thu6)) return 'Thứ Sáu Tuần Thánh - Cuộc Khổ Nạn';
-    if (isSameDay(ngay, thu7)) return 'Thứ Bảy Tuần Thánh - Vọng Phục Sinh';
+    if (isSameDay(ngay, thu7)) return 'Thứ Bảy Tuần Thánh — Không có Thánh lễ ban ngày';
     if (isSameDay(ngay, ps)) return 'Chúa Nhật Phục Sinh';
 
     // Bát Nhật Phục Sinh
@@ -653,6 +744,38 @@ class LiturgicalService {
       'tm': r['tin_mung'] as String? ?? '',
       'ghi_chu': ghiChu,
     };
+  }
+
+  // ── Lễ Vọng detection ────────────────────────────────────────────
+
+  /// Trả về data lễ vọng nếu tối ngày [ngay] có cử hành Lễ Vọng, ngược lại null.
+  Map<String, dynamic>? _getLeVong(DateTime ngay, Map<String, DateTime> dd) {
+    // Lễ Vọng Giáng Sinh: 24/12 (đã có trong bai_doc_cuoi_vong nhưng thêm flag)
+    if (ngay.month == 12 && ngay.day == 24) {
+      return {
+        'ten_le_vong': 'Lễ Vọng Giáng Sinh',
+        'ten_le_chinh': 'Lễ Giáng Sinh (25/12)',
+        'mau_le': 'Tr',
+        'bd1': 'Is 62,1-5',
+        'bd2': 'Cv 13,16-17.22-25',
+        'tm':  'Mt 1,1-25',
+        'ghi_chu': 'Lễ Vọng Giáng Sinh — Tối nay cử hành Lễ Vọng',
+      };
+    }
+
+    // Lễ Vọng Hiện Xuống: Thứ Bảy trước Lễ Hiện Xuống
+    final vongHX = leVongHienXuong(ngay.year);
+    if (isSameDay(ngay, vongHX)) {
+      return (_cfg!['le_vong_hien_xuong'] as Map?)?.cast<String, dynamic>();
+    }
+
+    // Lễ Vọng cố định: 23/6, 28/6, 14/8
+    final sk = '${ngay.month.toString().padLeft(2, '0')}-'
+        '${ngay.day.toString().padLeft(2, '0')}';
+    final vongCD = (_cfg!['le_vong_co_dinh'] as Map?)?[sk];
+    if (vongCD is Map) return vongCD.cast<String, dynamic>();
+
+    return null;
   }
 
   // ── Helper: read triduum data from cfg ───────────────────────────

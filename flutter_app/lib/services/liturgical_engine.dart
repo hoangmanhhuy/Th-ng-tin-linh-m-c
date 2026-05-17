@@ -38,6 +38,13 @@ DateTime leHienLinhVN(int year) {
 /// Thứ Hai ngay sau Hiển Linh VN (Lễ Chúa Giêsu Chịu Phép Rửa VN).
 DateTime leCPRvn(int year) => leHienLinhVN(year).add(const Duration(days: 1));
 
+/// Thứ Bảy trước Lễ Hiện Xuống (Lễ Vọng Hiện Xuống).
+DateTime leVongHienXuong(int year) {
+  final ps = calcEaster(year);
+  // Hiện Xuống = PS + 49; Thứ Bảy trước = PS + 48
+  return ps.add(const Duration(days: 48));
+}
+
 /// Ngày CN đầu tiên >= 27/11 (CN I Mùa Vọng).
 DateTime _cnIMuaVong(int year) {
   DateTime d = DateTime(year, 11, 27);

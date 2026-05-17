@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:dio/dio.dart';
 import '../models/models.dart';
 import '../models/api_models.dart';
 import '../core/app_theme.dart';
@@ -7,7 +8,11 @@ import '../services/auth_service.dart';
 import '../services/liturgical_service.dart';
 
 class LiturgicalViewModel extends ChangeNotifier {
-  final LiturgicalService _service = LiturgicalService();
+  late final LiturgicalService _service;
+
+  LiturgicalViewModel({Dio? dio}) {
+    _service = LiturgicalService(dio: dio);
+  }
 
   LiturgicalData? _cached;
   DateTime? _cachedDate;
@@ -73,6 +78,21 @@ class LiturgicalViewModel extends ChangeNotifier {
         icon: LucideIcons.quote,
         color: const Color(0xFFFEF2F2),
         iconColor: AppColors.red,
+      ));
+    }
+
+    // Lễ Vọng tối nay
+    if (info.hasLeVong) {
+      readings.add(LiturgicalReading(
+        label: '🕯 ${info.tenLeVong}',
+        text: [
+          if (info.bd1Vong.isNotEmpty) 'BD I: ${info.bd1Vong}',
+          if (info.bd2Vong.isNotEmpty) 'BD II: ${info.bd2Vong}',
+          if (info.tmVong.isNotEmpty)  'TM: ${info.tmVong}',
+        ].join(' · '),
+        icon: LucideIcons.sunset,
+        color: const Color(0xFFFFFBEB),
+        iconColor: const Color(0xFFB45309),
       ));
     }
 
