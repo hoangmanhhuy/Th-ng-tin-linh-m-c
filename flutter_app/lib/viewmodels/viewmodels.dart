@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import '../models/models.dart';
+import '../models/api_models.dart';
 import '../core/app_theme.dart';
+import '../services/auth_service.dart';
 import '../services/liturgical_service.dart';
 
 class LiturgicalViewModel extends ChangeNotifier {
@@ -53,10 +55,6 @@ class LiturgicalViewModel extends ChangeNotifier {
         iconColor: AppColors.indigo600,
       ));
     } else {
-      // Đáp Ca placeholder (bd2 field used for responsorial psalm in display)
-      // For weekdays bd2 is empty but we still show a slot for Đáp Ca
-      // The actual Đáp Ca reference is embedded in bd1 for some entries
-      // Show it only if bd1 is present to avoid empty state
       if (info.bd1.isNotEmpty) {
         readings.add(const LiturgicalReading(
           label: 'Đáp Ca',
@@ -87,34 +85,97 @@ class LiturgicalViewModel extends ChangeNotifier {
   }
 }
 
+// ── AuthViewModel ─────────────────────────────────────────────────────────────
+
 class AuthViewModel extends ChangeNotifier {
+  final AuthService _authService;
+
   UserRole _role = UserRole.public;
   UserProfile? _currentUser;
+  bool _isLoading = false;
+  String? _errorMessage;
+
+  AuthViewModel(this._authService);
 
   UserRole get role => _role;
   UserProfile? get currentUser => _currentUser;
+  bool get isLoading => _isLoading;
+  String? get errorMessage => _errorMessage;
 
-  void login() {
-    _role = UserRole.priest;
-    _currentUser = const UserProfile(
-      id: "SL-PC-12051980",
-      holyName: "Phaolô",
-      fullName: "Hoàng Mạnh Huy",
-      diocese: "Giáo phận Phú Cường",
-      parish: "Giáo xứ Phú Cường",
-      role: "Trưởng ban Truyền thông",
-      birthDate: "12/05/1980",
-      ordinationDate: "20/06/2008",
-      degree: "Thạc sĩ Mục vụ",
-      email: "hoangmanhhuy@gmail.com",
-      phone: "090 123 4567",
-    );
+  /// Khôi phục session khi app khởi động
+  Future<void> init() async {
+    if (await _authService.hasValidToken()) {
+      final user = await _authService.getStoredUser();
+      if (user != null) {
+        _currentUser = user;
+        _role = UserRole.priest;
+        notifyListeners();
+
+        // Thử refresh profile từ server trong background
+        _refreshProfileInBackground();
+      }
+    }
+  }
+
+  void _refreshProfileInBackground() async {
+    try {
+      final fresh = await _authService.fetchProfile();
+      if (fresh != null && _role == UserRole.priest) {
+        _currentUser = fresh;
+        notifyListeners();
+      }
+    } catch (_) {
+      // Không nghiêm trọng — giữ nguyên cached profile
+    }
+  }
+
+  /// Đăng nhập với email/phone và mật khẩu
+  Future<void> login(String email, String password) async {
+    _isLoading = true;
+    _errorMessage = null;
+    notifyListeners();
+
+    try {
+      final result = await _authService.login(email.trim(), password);
+      _currentUser = result.priest;
+      _role = UserRole.priest;
+    } on ApiError catch (e) {
+      _errorMessage = e.message;
+    } catch (e) {
+      _errorMessage = 'Đăng nhập thất bại. Vui lòng thử lại.';
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  /// Đăng xuất
+  Future<void> logout() async {
+    await _authService.logout();
+    _role = UserRole.public;
+    _currentUser = null;
+    _errorMessage = null;
     notifyListeners();
   }
 
-  void logout() {
-    _role = UserRole.public;
-    _currentUser = null;
+  /// Đổi mật khẩu — throws ApiError nếu thất bại
+  Future<void> changePassword(String current, String newPass) async {
+    _isLoading = true;
+    _errorMessage = null;
+    notifyListeners();
+    try {
+      await _authService.changePassword(current, newPass);
+    } on ApiError catch (e) {
+      _errorMessage = e.message;
+      rethrow;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  void clearError() {
+    _errorMessage = null;
     notifyListeners();
   }
 }

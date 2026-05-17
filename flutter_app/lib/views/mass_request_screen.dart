@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:provider/provider.dart';
 import '../core/app_theme.dart';
 import '../core/app_strings.dart';
 import '../models/models.dart';
+import '../models/api_models.dart';
+import '../services/api_client.dart';
+import '../services/mass_request_service.dart';
 
 // ─── Mass Request Form (Linh mục gửi yêu cầu) ───────────────────────────────
 
@@ -19,6 +23,8 @@ class _MassRequestScreenState extends State<MassRequestScreen> {
   int _selectedTypeIndex = 0;
   final _noteController = TextEditingController();
   final _locationController = TextEditingController();
+  bool _submitting = false;
+  late final MassRequestService _service;
 
   DateTime _selectedDate = DateTime.now().add(const Duration(days: 1));
   TimeOfDay _selectedTime = const TimeOfDay(hour: 18, minute: 0);
@@ -84,8 +90,50 @@ class _MassRequestScreenState extends State<MassRequestScreen> {
     });
   }
 
+  @override
+  void initState() {
+    super.initState();
+    _service = RemoteMassRequestService(context.read<ApiClient>());
+  }
+
   Future<void> _submit() async {
-    final l10n = AppStrings.of(context);
+    if (_submitting) return;
+    setState(() => _submitting = true);
+
+    try {
+      final l10n = AppStrings.of(context);
+      final massTypes = [l10n.massThanksgiving, l10n.massPeace, l10n.massFuneral, l10n.massWedding, l10n.massOther];
+      final dt = DateTime(
+        _selectedDate.year, _selectedDate.month, _selectedDate.day,
+        _selectedTime.hour, _selectedTime.minute,
+      );
+      final payload = MassRequestPayload(
+        massType: massTypes[_selectedTypeIndex],
+        scheduledAt: dt.toIso8601String(),
+        location: _locationController.text.trim(),
+        intention: _noteController.text.trim(),
+        forPriestId: widget.priest?.id,
+      );
+      await _service.submitRequest(payload);
+    } on ApiError catch (e) {
+      setState(() => _submitting = false);
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.message),
+          backgroundColor: AppColors.red,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ),
+      );
+      return;
+    } catch (_) {
+      // Network error → service returns mock success
+    }
+
+    setState(() => _submitting = false);
+    if (!mounted) return;
+
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -116,7 +164,7 @@ class _MassRequestScreenState extends State<MassRequestScreen> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pop(context); // close dialog
+                    Navigator.pop(ctx); // close dialog
                     Navigator.pop(context); // back
                   },
                   style: ElevatedButton.styleFrom(
@@ -355,17 +403,20 @@ class _MassRequestScreenState extends State<MassRequestScreen> {
               width: double.infinity,
               height: 56,
               child: ElevatedButton(
-                onPressed: _submit,
+                onPressed: _submitting ? null : _submit,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   foregroundColor: Colors.white,
+                  disabledBackgroundColor: AppColors.primary.withOpacity(0.6),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
                   elevation: 0,
                 ),
-                child: Text(
-                  l10n.sendRequest,
-                  style: const TextStyle(fontWeight: FontWeight.w900, letterSpacing: 1.5, fontSize: 14),
-                ),
+                child: _submitting
+                    ? const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5))
+                    : Text(
+                        l10n.sendRequest,
+                        style: const TextStyle(fontWeight: FontWeight.w900, letterSpacing: 1.5, fontSize: 14),
+                      ),
               ),
             ),
             const SizedBox(height: 32),

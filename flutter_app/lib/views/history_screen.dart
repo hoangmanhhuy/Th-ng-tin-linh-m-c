@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:provider/provider.dart';
 import '../core/app_theme.dart';
 import '../core/app_strings.dart';
+import '../models/api_models.dart';
+import '../services/api_client.dart';
+import '../services/history_service.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
@@ -11,65 +15,74 @@ class HistoryScreen extends StatefulWidget {
 }
 
 class _HistoryScreenState extends State<HistoryScreen> {
-  // filter index: 0=all,1=update,2=mass,3=contribution
   int _activeFilterIndex = 0;
+  late final HistoryService _service;
+  List<HistoryRecord> _allItems = [];
+  bool _isLoading = true;
+  String? _error;
+
+  @override
+  void initState() {
+    super.initState();
+    _service = RemoteHistoryService(context.read<ApiClient>());
+    _loadHistory();
+  }
+
+  Future<void> _loadHistory() async {
+    setState(() { _isLoading = true; _error = null; });
+    try {
+      final items = await _service.getHistory();
+      if (mounted) setState(() { _allItems = items; _isLoading = false; });
+    } catch (e) {
+      if (mounted) setState(() { _isLoading = false; _error = e.toString(); });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppStrings.of(context);
-
     final filters = [l10n.filterAll, l10n.filterUpdate, l10n.filterMass, l10n.filterContribution];
 
-    final historyItems = [
-      _HistoryItemData(
-        id: 1,
-        typeIndex: 1,
-        title: l10n.historyUpdateRequest,
-        status: l10n.statusCompleted,
-        date: '20/10/2023',
-        icon: LucideIcons.userCog,
-        borderColor: AppColors.emerald,
-        statusTextColor: AppColors.emerald600,
-        statusBgColor: AppColors.emerald50,
-      ),
-      _HistoryItemData(
-        id: 2,
-        typeIndex: 2,
-        title: l10n.historyMassThanksgiving,
-        status: l10n.statusProcessing,
-        date: '18/10/2023',
-        icon: LucideIcons.church,
-        borderColor: AppColors.orange500,
-        statusTextColor: AppColors.amber600,
-        statusBgColor: AppColors.amber50,
-      ),
-      _HistoryItemData(
-        id: 3,
-        typeIndex: 1,
-        title: l10n.historyUpdateRequest,
-        status: l10n.statusRejected,
-        date: '15/10/2023',
-        icon: LucideIcons.undo2,
-        borderColor: AppColors.red,
-        statusTextColor: AppColors.red600,
-        statusBgColor: AppColors.red50,
-      ),
-      _HistoryItemData(
-        id: 4,
-        typeIndex: 2,
-        title: l10n.historyMassPeace,
-        status: l10n.statusCompleted,
-        date: '10/10/2023',
-        icon: LucideIcons.church,
-        borderColor: AppColors.emerald,
-        statusTextColor: AppColors.emerald600,
-        statusBgColor: AppColors.emerald50,
-      ),
-    ];
+    // Convert HistoryRecord → _HistoryItemData for display
+    List<_HistoryItemData> toDisplay(List<HistoryRecord> records) {
+      return records.map((r) {
+        final isMass = r.type == 'mass';
+        final isCompleted = r.status == 'completed';
+        final isRejected = r.status == 'rejected';
+        return _HistoryItemData(
+          id: r.id,
+          typeIndex: isMass ? 2 : 1,
+          title: r.title,
+          status: isCompleted
+              ? l10n.statusCompleted
+              : isRejected
+                  ? l10n.statusRejected
+                  : l10n.statusProcessing,
+          date: r.date,
+          icon: isMass ? LucideIcons.church : LucideIcons.userCog,
+          borderColor: isCompleted
+              ? AppColors.emerald
+              : isRejected
+                  ? AppColors.red
+                  : AppColors.orange500,
+          statusTextColor: isCompleted
+              ? AppColors.emerald600
+              : isRejected
+                  ? AppColors.red600
+                  : AppColors.amber600,
+          statusBgColor: isCompleted
+              ? AppColors.emerald50
+              : isRejected
+                  ? AppColors.red50
+                  : AppColors.amber50,
+        );
+      }).toList();
+    }
 
+    final allDisplayItems = toDisplay(_allItems);
     final filtered = _activeFilterIndex == 0
-        ? historyItems
-        : historyItems.where((i) => i.typeIndex == _activeFilterIndex).toList();
+        ? allDisplayItems
+        : allDisplayItems.where((i) => i.typeIndex == _activeFilterIndex).toList();
 
     return Scaffold(
       backgroundColor: AppColors.surface,
@@ -81,15 +94,15 @@ class _HistoryScreenState extends State<HistoryScreen> {
           onPressed: () {},
           icon: const Icon(Icons.menu_rounded, color: AppColors.primary),
         ),
-        title: const Text(
-          'Sacred Link',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: AppColors.primary),
+        title: Text(
+          l10n.appTitleShort,
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: AppColors.primary),
         ),
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: const Icon(LucideIcons.search, color: AppColors.primary),
+            onPressed: _loadHistory,
+            icon: const Icon(LucideIcons.refreshCw, color: AppColors.primary, size: 20),
           ),
         ],
         bottom: const PreferredSize(
@@ -115,7 +128,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     style: const TextStyle(fontSize: 13, color: AppColors.gray400, fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(height: 16),
-                  // Search bar
                   TextField(
                     decoration: InputDecoration(
                       hintText: l10n.historySearch,
@@ -175,21 +187,53 @@ class _HistoryScreenState extends State<HistoryScreen> {
             ),
           ),
           const SliverPadding(padding: EdgeInsets.only(top: 16)),
-          SliverPadding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 32),
-            sliver: SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (_, i) {
-                  final item = filtered[i];
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: _HistoryCard(item: item),
-                  );
-                },
-                childCount: filtered.length,
+          if (_isLoading)
+            const SliverFillRemaining(
+              child: Center(child: CircularProgressIndicator()),
+            )
+          else if (_error != null)
+            SliverFillRemaining(
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(LucideIcons.wifiOff, color: AppColors.gray300, size: 48),
+                    const SizedBox(height: 12),
+                    Text(
+                      l10n.historySubtitle,
+                      style: const TextStyle(color: AppColors.gray400),
+                    ),
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: _loadHistory,
+                      child: const Text('Thử lại'),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          else if (filtered.isEmpty)
+            const SliverFillRemaining(
+              child: Center(
+                child: Icon(LucideIcons.inbox, color: AppColors.gray200, size: 64),
+              ),
+            )
+          else
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 32),
+              sliver: SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (_, i) {
+                    final item = filtered[i];
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 12),
+                      child: _HistoryCard(item: item),
+                    );
+                  },
+                  childCount: filtered.length,
+                ),
               ),
             ),
-          ),
         ],
       ),
     );
@@ -197,8 +241,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
 }
 
 class _HistoryItemData {
-  final int id;
-  final int typeIndex; // 1=update, 2=mass, 3=contribution
+  final String id;
+  final int typeIndex; // 1=update, 2=mass
   final String title;
   final String status;
   final String date;

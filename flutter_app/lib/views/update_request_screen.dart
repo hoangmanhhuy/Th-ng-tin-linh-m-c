@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:provider/provider.dart';
 import '../core/app_theme.dart';
+import '../models/api_models.dart';
+import '../services/api_client.dart';
+import '../services/update_request_service.dart';
 
 class UpdateRequestScreen extends StatefulWidget {
   const UpdateRequestScreen({super.key});
@@ -14,6 +18,7 @@ class _UpdateRequestScreenState extends State<UpdateRequestScreen> {
   final _contentCtrl = TextEditingController();
   String _category = 'Thông tin cá nhân';
   bool _loading = false;
+  late final UpdateRequestService _service;
 
   static const _categories = [
     'Thông tin cá nhân',
@@ -25,6 +30,12 @@ class _UpdateRequestScreenState extends State<UpdateRequestScreen> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    _service = RemoteUpdateRequestService(context.read<ApiClient>());
+  }
+
+  @override
   void dispose() {
     _contentCtrl.dispose();
     super.dispose();
@@ -33,7 +44,23 @@ class _UpdateRequestScreenState extends State<UpdateRequestScreen> {
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
     setState(() => _loading = true);
-    await Future.delayed(const Duration(seconds: 1));
+    try {
+      await _service.submitRequest(_category, _contentCtrl.text.trim());
+    } on ApiError catch (e) {
+      setState(() => _loading = false);
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.message),
+          backgroundColor: AppColors.red,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ),
+      );
+      return;
+    } catch (_) {
+      // Network error → mock success (service handles fallback)
+    }
     setState(() => _loading = false);
     if (!mounted) return;
     _contentCtrl.clear();

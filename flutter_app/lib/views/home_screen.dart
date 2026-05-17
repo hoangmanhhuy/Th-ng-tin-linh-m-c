@@ -806,15 +806,30 @@ class _PriestIdCard extends StatelessWidget {
           ),
           Row(
             children: [
-              Container(
-                width: 56,
-                height: 56,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: const [BoxShadow(color: Color(0x22000000), blurRadius: 8)],
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Container(
+                  width: 56,
+                  height: 56,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: const [BoxShadow(color: Color(0x22000000), blurRadius: 8)],
+                  ),
+                  child: (user.photo != null && user.photo!.isNotEmpty)
+                      ? Image.network(
+                          user.photo!,
+                          width: 56,
+                          height: 56,
+                          fit: BoxFit.cover,
+                          errorBuilder: (_, __, ___) => const Icon(
+                            LucideIcons.user,
+                            color: AppColors.primary,
+                            size: 28,
+                          ),
+                        )
+                      : const Icon(LucideIcons.user, color: AppColors.primary, size: 28),
                 ),
-                child: const Icon(LucideIcons.user, color: AppColors.primary, size: 28),
               ),
               const SizedBox(width: 16),
               Expanded(

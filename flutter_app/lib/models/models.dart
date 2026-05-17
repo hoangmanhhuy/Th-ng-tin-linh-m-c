@@ -45,6 +45,10 @@ class UserProfile {
   final String? degree;
   final String? email;
   final String? phone;
+  /// URL ảnh đại diện từ server
+  final String? photo;
+  /// Level từ API: "PRIEST" | "BISHOP" | "DEACON" | "AUXILIARY_BISHOP"
+  final String? level;
 
   const UserProfile({
     required this.id,
@@ -58,7 +62,205 @@ class UserProfile {
     this.degree,
     this.email,
     this.phone,
+    this.photo,
+    this.level,
   });
+
+  // ── Helpers (private) ─────────────────────────────────────────────────────
+
+  /// Lấy tên thánh đầu tiên từ danh sách saints
+  static String _extractHolyName(dynamic saints) {
+    if (saints is! List || saints.isEmpty) return '';
+    final first = saints.first;
+    if (first is Map<String, dynamic>) {
+      return first['vietnameseName'] as String? ?? '';
+    }
+    return '';
+  }
+
+  /// Ghép họ tên: lastName + middleName + firstName (theo chuẩn Việt Nam)
+  static String _buildFullName(
+      String? lastName, String? middleName, String? firstName) {
+    return [lastName, middleName, firstName]
+        .where((s) => (s ?? '').isNotEmpty)
+        .join(' ');
+  }
+
+  /// Parse ISO date → dd/MM/yyyy, trả về rỗng nếu lỗi
+  static String _parseIsoDate(String? isoDate, {String format = 'dd/MM/yyyy'}) {
+    if (isoDate == null || isoDate.isEmpty) return '';
+    try {
+      final dt = DateTime.parse(isoDate).toUtc().add(const Duration(hours: 7));
+      if (format == 'dd/MM') {
+        return '${dt.day.toString().padLeft(2, '0')}/${dt.month.toString().padLeft(2, '0')}';
+      }
+      return '${dt.day.toString().padLeft(2, '0')}/${dt.month.toString().padLeft(2, '0')}/${dt.year}';
+    } catch (_) {
+      return isoDate;
+    }
+  }
+
+  // ── Factories ─────────────────────────────────────────────────────────────
+
+  /// Tạo từ JSON response sau login (`userInfo` block):
+  /// { userId, cId, fullName, saints, phone, level, permissions }
+  factory UserProfile.fromUserInfo(Map<String, dynamic> json) {
+    final holyName = _extractHolyName(json['saints']);
+    return UserProfile(
+      id: json['userId'] as String? ?? json['cId'] as String? ?? '',
+      holyName: holyName,
+      fullName: json['fullName'] as String? ?? '',
+      diocese: '', // không có trong userInfo, sẽ update khi fetch profile
+      phone: json['phone'] as String?,
+      level: json['level'] as String?,
+    );
+  }
+
+  /// Tạo từ JSON response chi tiết linh mục (`PriestData`):
+  /// { id, level, firstName, middleName, lastName, saints, diocese,
+  ///   dateOfBirth, phoneNumber, photo, appointments, anniversaries }
+  factory UserProfile.fromPriestDetail(Map<String, dynamic> json) {
+    // Tên thánh
+    final holyName = _extractHolyName(json['saints']);
+
+    // Họ tên đầy đủ (Việt Nam: Họ Đệm Tên)
+    final fullName = _buildFullName(
+      json['lastName'] as String?,
+      json['middleName'] as String?,
+      json['firstName'] as String?,
+    );
+
+    // Chức vụ & giáo xứ từ danh sách appointments (lấy record ACTIVE)
+    String? role, parish;
+    final appointments = json['appointments'];
+    if (appointments is List) {
+      // Ưu tiên bản ghi ACTIVE có entityType = facility
+      Map<String, dynamic>? active;
+      for (final a in appointments) {
+        if (a is Map<String, dynamic> && a['status'] == 'ACTIVE') {
+          if (active == null) {
+            active = a;
+          }
+          if ((a['entityType'] as String? ?? '').toLowerCase() == 'facility') {
+            active = a;
+            break;
+          }
+        }
+      }
+      role = active?['positionName'] as String?;
+      parish = active?['entityName'] as String?;
+    }
+
+    // Ngày phong chức (anniversary type = PRIEST)
+    String? ordinationDate;
+    final anniversaries = json['anniversaries'];
+    if (anniversaries is List) {
+      for (final a in anniversaries) {
+        if (a is Map<String, dynamic>) {
+          final type = (a['type'] as String? ?? '').toUpperCase();
+          if (type == 'PRIEST' || type == 'ORDINATION') {
+            ordinationDate = _parseIsoDate(a['date'] as String?);
+            break;
+          }
+        }
+      }
+    }
+
+    return UserProfile(
+      id: json['id'] as String? ?? '',
+      holyName: holyName,
+      fullName: fullName.isEmpty
+          ? json['fullName'] as String? ?? ''
+          : fullName,
+      diocese: json['diocese'] as String? ?? '',
+      parish: parish ?? json['workplaceName'] as String?,
+      role: role,
+      birthDate: _parseIsoDate(json['dateOfBirth'] as String?),
+      ordinationDate: ordinationDate,
+      degree: json['degree'] as String?,
+      email: json['email'] as String?,
+      phone: json['phoneNumber'] as String? ?? json['phone'] as String?,
+      photo: json['photo'] as String?,
+      level: json['level'] as String?,
+    );
+  }
+
+  /// Generic fromJson — tự detect format theo key có trong JSON.
+  /// - Có 'userId' / 'cId'  → fromUserInfo (login response)
+  /// - Có 'firstName' / 'appointments' → fromPriestDetail (priest API)
+  /// - Có 'holyName' → cached/legacy format (toJson của chính mình)
+  factory UserProfile.fromJson(Map<String, dynamic> json) {
+    if (json.containsKey('userId') || json.containsKey('cId')) {
+      return UserProfile.fromUserInfo(json);
+    }
+    if (json.containsKey('firstName') || json.containsKey('appointments')) {
+      return UserProfile.fromPriestDetail(json);
+    }
+    // Cached / legacy format — do chính toJson() tạo ra
+    return UserProfile(
+      id: json['id'] as String? ?? '',
+      holyName: json['holyName'] as String? ?? '',
+      fullName: json['fullName'] as String? ?? '',
+      diocese: json['diocese'] as String? ?? '',
+      parish: json['parish'] as String?,
+      role: json['role'] as String?,
+      birthDate: json['birthDate'] as String?,
+      ordinationDate: json['ordinationDate'] as String?,
+      degree: json['degree'] as String?,
+      email: json['email'] as String?,
+      phone: json['phone'] as String?,
+      photo: json['photo'] as String?,
+      level: json['level'] as String?,
+    );
+  }
+
+  /// Chuyển sang JSON để cache local (dùng format đơn giản đã parse xong)
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'holyName': holyName,
+        'fullName': fullName,
+        'diocese': diocese,
+        if (parish != null) 'parish': parish,
+        if (role != null) 'role': role,
+        if (birthDate != null) 'birthDate': birthDate,
+        if (ordinationDate != null) 'ordinationDate': ordinationDate,
+        if (degree != null) 'degree': degree,
+        if (email != null) 'email': email,
+        if (phone != null) 'phone': phone,
+        if (photo != null) 'photo': photo,
+        if (level != null) 'level': level,
+      };
+
+  UserProfile copyWith({
+    String? id,
+    String? holyName,
+    String? fullName,
+    String? diocese,
+    String? parish,
+    String? role,
+    String? birthDate,
+    String? ordinationDate,
+    String? degree,
+    String? email,
+    String? phone,
+    String? photo,
+    String? level,
+  }) =>
+      UserProfile(
+        id: id ?? this.id,
+        holyName: holyName ?? this.holyName,
+        fullName: fullName ?? this.fullName,
+        diocese: diocese ?? this.diocese,
+        parish: parish ?? this.parish,
+        role: role ?? this.role,
+        birthDate: birthDate ?? this.birthDate,
+        ordinationDate: ordinationDate ?? this.ordinationDate,
+        degree: degree ?? this.degree,
+        email: email ?? this.email,
+        phone: phone ?? this.phone,
+        photo: photo ?? this.photo,
+        level: level ?? this.level,
+      );
 }
 
 class HistoryItem {

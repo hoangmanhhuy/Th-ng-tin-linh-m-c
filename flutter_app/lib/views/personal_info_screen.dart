@@ -60,7 +60,18 @@ class PersonalInfoScreen extends StatelessWidget {
                       shape: BoxShape.circle,
                       border: Border.all(color: Colors.white.withValues(alpha: 0.4), width: 2),
                     ),
-                    child: const Icon(LucideIcons.user, size: 36, color: Colors.white),
+                    child: ClipOval(
+                      child: (user.photo != null && user.photo!.isNotEmpty)
+                          ? Image.network(
+                              user.photo!,
+                              width: 80,
+                              height: 80,
+                              fit: BoxFit.cover,
+                              errorBuilder: (_, __, ___) =>
+                                  const Icon(LucideIcons.user, size: 36, color: Colors.white),
+                            )
+                          : const Icon(LucideIcons.user, size: 36, color: Colors.white),
+                    ),
                   ),
                   const SizedBox(height: 14),
                   Text(

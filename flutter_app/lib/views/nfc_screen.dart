@@ -2,9 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:nfc_manager/nfc_manager.dart';
+import 'package:provider/provider.dart';
 import '../core/app_theme.dart';
 import '../core/app_strings.dart';
-import '../models/models.dart';
+import '../services/api_client.dart';
+import '../services/priest_service.dart';
 import 'priest_result_sheet.dart';
 import 'login_screen.dart';
 
@@ -20,6 +22,7 @@ class NfcScreen extends StatefulWidget {
 class _NfcScreenState extends State<NfcScreen> with SingleTickerProviderStateMixin {
   late AnimationController _pulseController;
   late Animation<double> _pulseAnimation;
+  late final PriestService _priestService;
 
   _NfcStatus _status = _NfcStatus.checking;
   bool _sessionActive = false;
@@ -34,6 +37,7 @@ class _NfcScreenState extends State<NfcScreen> with SingleTickerProviderStateMix
     _pulseAnimation = Tween<double>(begin: 0.85, end: 1.0).animate(
       CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
     );
+    _priestService = RemotePriestService(context.read<ApiClient>());
     _init();
   }
 
@@ -62,7 +66,7 @@ class _NfcScreenState extends State<NfcScreen> with SingleTickerProviderStateMix
           try {
             final text = _extractText(tag);
             if (text != null) {
-              final priest = PriestDatabase.lookup(text);
+              final priest = await _priestService.getById(text);
               await NfcManager.instance.stopSession();
               _sessionActive = false;
               if (!mounted) return;

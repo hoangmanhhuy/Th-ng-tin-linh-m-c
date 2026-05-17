@@ -80,7 +80,18 @@ class PriestProfileScreen extends StatelessWidget {
                       BoxShadow(color: AppColors.primary.withOpacity(0.15), blurRadius: 16),
                     ],
                   ),
-                  child: const Icon(LucideIcons.user, size: 44, color: AppColors.primary),
+                  child: ClipOval(
+                    child: (user.photo != null && user.photo!.isNotEmpty)
+                        ? Image.network(
+                            user.photo!,
+                            width: 96,
+                            height: 96,
+                            fit: BoxFit.cover,
+                            errorBuilder: (_, __, ___) =>
+                                const Icon(LucideIcons.user, size: 44, color: AppColors.primary),
+                          )
+                        : const Icon(LucideIcons.user, size: 44, color: AppColors.primary),
+                  ),
                 ),
                 Container(
                   width: 28,

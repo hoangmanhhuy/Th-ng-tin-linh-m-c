@@ -1,58 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:provider/provider.dart';
 import '../core/app_theme.dart';
 import '../core/app_strings.dart';
+import '../models/api_models.dart';
+import '../services/api_client.dart';
+import '../services/notification_service.dart';
 
-class NotificationsScreen extends StatelessWidget {
+class NotificationsScreen extends StatefulWidget {
   const NotificationsScreen({super.key});
 
-  List<_NotifData> _buildNotifications(AppStrings l10n) => [
-    _NotifData(
-      id: 1,
-      title: l10n.isEn ? 'New Mass Request' : 'Yêu cầu dâng lễ mới',
-      content: l10n.isEn
-          ? 'Fr. Paul Hoang Manh Huy sent a request for a Funeral Mass.'
-          : 'Linh mục Phaolô Hoàng Mạnh Huy gửi yêu cầu dâng lễ an táng.',
-      time: l10n.isEn ? '5 minutes ago' : '5 phút trước',
-      isRead: false,
-      type: 'mass',
-    ),
-    _NotifData(
-      id: 2,
-      title: l10n.isEn ? 'System Update' : 'Cập nhật hệ thống',
-      content: l10n.isEn
-          ? 'Sacred Link has been updated to version 1.0.4.'
-          : 'Hệ thống Sacred Link đã được cập nhật lên phiên bản 1.0.4.',
-      time: l10n.isEn ? '2 hours ago' : '2 giờ trước',
-      isRead: true,
-      type: 'system',
-    ),
-    _NotifData(
-      id: 3,
-      title: l10n.isEn ? 'Schedule Reminder' : 'Nhắc lịch công tác',
-      content: l10n.isEn
-          ? 'You have a Mass at Parish of Tan Dinh tomorrow at 08:00.'
-          : 'Ngày mai bạn có buổi dâng lễ tại Giáo xứ Tân Định lúc 08:00.',
-      time: l10n.isEn ? '1 day ago' : '1 ngày trước',
-      isRead: true,
-      type: 'calendar',
-    ),
-    _NotifData(
-      id: 4,
-      title: l10n.isEn ? 'Profile Update Request' : 'Yêu cầu cập nhật thông tin',
-      content: l10n.isEn
-          ? 'The Diocesan Office requests you update your academic degree.'
-          : 'Văn phòng Giáo phận yêu cầu bạn cập nhật học vị mới.',
-      time: l10n.isEn ? '3 days ago' : '3 ngày trước',
-      isRead: true,
-      type: 'profile',
-    ),
-  ];
+  @override
+  State<NotificationsScreen> createState() => _NotificationsScreenState();
+}
+
+class _NotificationsScreenState extends State<NotificationsScreen> {
+  late final NotificationService _service;
+  List<AppNotification> _notifications = [];
+  bool _isLoading = true;
+  String? _error;
+
+  @override
+  void initState() {
+    super.initState();
+    _service = RemoteNotificationService(context.read<ApiClient>());
+    _load();
+  }
+
+  Future<void> _load() async {
+    setState(() { _isLoading = true; _error = null; });
+    try {
+      final items = await _service.getNotifications();
+      if (mounted) setState(() { _notifications = items; _isLoading = false; });
+    } catch (e) {
+      if (mounted) setState(() { _isLoading = false; _error = e.toString(); });
+    }
+  }
+
+  Future<void> _markAllRead() async {
+    await _service.markAllRead();
+    if (mounted) {
+      setState(() {
+        _notifications = _notifications
+            .map((n) => AppNotification(
+                  id: n.id,
+                  title: n.title,
+                  content: n.content,
+                  time: n.time,
+                  isRead: true,
+                  type: n.type,
+                ))
+            .toList();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppStrings.of(context);
-    final notifications = _buildNotifications(l10n);
     return Scaffold(
       backgroundColor: AppColors.surface,
       appBar: AppBar(
@@ -70,8 +75,8 @@ class NotificationsScreen extends StatelessWidget {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.more_vert_rounded, color: AppColors.primary),
+            onPressed: _load,
+            icon: const Icon(LucideIcons.refreshCw, color: AppColors.primary, size: 18),
           ),
         ],
         bottom: const PreferredSize(
@@ -79,72 +84,82 @@ class NotificationsScreen extends StatelessWidget {
           child: Divider(height: 1, color: AppColors.gray100),
         ),
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverPadding(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-            sliver: SliverToBoxAdapter(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    l10n.notifLatest,
-                    style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1.5),
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : _error != null
+              ? Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(LucideIcons.wifiOff, color: AppColors.gray300, size: 48),
+                      const SizedBox(height: 12),
+                      Text(_error!, style: const TextStyle(color: AppColors.gray400)),
+                      const SizedBox(height: 16),
+                      ElevatedButton(onPressed: _load, child: const Text('Thử lại')),
+                    ],
                   ),
-                  TextButton(
-                    onPressed: () {},
-                    style: TextButton.styleFrom(padding: EdgeInsets.zero, tapTargetSize: MaterialTapTargetSize.shrinkWrap),
-                    child: Text(
-                      l10n.markAllRead,
-                      style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700, fontSize: 12),
+                )
+              : CustomScrollView(
+                  slivers: [
+                    SliverPadding(
+                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                      sliver: SliverToBoxAdapter(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              l10n.notifLatest,
+                              style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.gray400, letterSpacing: 1.5),
+                            ),
+                            TextButton(
+                              onPressed: _markAllRead,
+                              style: TextButton.styleFrom(padding: EdgeInsets.zero, tapTargetSize: MaterialTapTargetSize.shrinkWrap),
+                              child: Text(
+                                l10n.markAllRead,
+                                style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700, fontSize: 12),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
-            sliver: SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (_, i) => Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: _NotifCard(data: notifications[i]),
+                    if (_notifications.isEmpty)
+                      const SliverFillRemaining(
+                        child: Center(child: Icon(LucideIcons.inbox, color: AppColors.gray200, size: 64)),
+                      )
+                    else
+                      SliverPadding(
+                        padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
+                        sliver: SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            (_, i) => Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: _NotifCard(data: _notifications[i]),
+                            ),
+                            childCount: _notifications.length,
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
-                childCount: notifications.length,
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
 
-class _NotifData {
-  final int id;
-  final String title;
-  final String content;
-  final String time;
-  final bool isRead;
-  final String type;
-
-  const _NotifData({
-    required this.id,
-    required this.title,
-    required this.content,
-    required this.time,
-    required this.isRead,
-    required this.type,
-  });
-}
-
 class _NotifCard extends StatelessWidget {
-  final _NotifData data;
+  final AppNotification data;
   const _NotifCard({required this.data});
 
+  String get _normalizedType {
+    final t = data.type.toUpperCase();
+    if (t.contains('MASS')) return 'mass';
+    if (t.contains('SYSTEM') || t.contains('UPDATE')) return 'system';
+    if (t.contains('CALENDAR') || t.contains('SCHEDULE')) return 'calendar';
+    return 'profile';
+  }
+
   Color get _iconBg {
-    switch (data.type) {
+    switch (_normalizedType) {
       case 'mass': return AppColors.indigo50;
       case 'system': return AppColors.emerald50;
       case 'calendar': return AppColors.amber50;
@@ -153,7 +168,7 @@ class _NotifCard extends StatelessWidget {
   }
 
   Color get _iconColor {
-    switch (data.type) {
+    switch (_normalizedType) {
       case 'mass': return AppColors.indigo600;
       case 'system': return AppColors.emerald600;
       case 'calendar': return AppColors.amber600;
@@ -162,7 +177,7 @@ class _NotifCard extends StatelessWidget {
   }
 
   IconData get _icon {
-    switch (data.type) {
+    switch (_normalizedType) {
       case 'mass': return LucideIcons.clock;
       case 'system': return LucideIcons.badgeCheck;
       case 'calendar': return LucideIcons.calendar;

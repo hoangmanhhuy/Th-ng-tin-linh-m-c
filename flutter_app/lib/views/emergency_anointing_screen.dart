@@ -1,66 +1,15 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../core/app_theme.dart';
 import '../core/app_strings.dart';
-
-// ─── Data ────────────────────────────────────────────────────────────────────
-
-class _Church {
-  final String name;
-  final String address;
-  final String priestName;
-  final String phone;
-  final double lat;
-  final double lng;
-  double distance;
-
-  _Church({
-    required this.name,
-    required this.address,
-    required this.priestName,
-    required this.phone,
-    required this.lat,
-    required this.lng,
-    this.distance = 0,
-  });
-}
-
-final List<_Church> _allChurches = [
-  _Church(name: 'Nhà thờ Chính tòa Phú Cường', address: 'Đường Huỳnh Văn Lũy, P. Phú Cường, TP. Thủ Dầu Một', priestName: 'LM. Phaolô Hoàng Mạnh Huy', phone: '0274 382 3456', lat: 11.0047, lng: 106.6489),
-  _Church(name: 'Nhà thờ Chánh Lộ', address: 'Đường Cách Mạng Tháng 8, P. Chánh Lộ, TP. Thủ Dầu Một', priestName: 'LM. Giuse Nguyễn Văn Bình', phone: '0274 383 1234', lat: 10.9791, lng: 106.6519),
-  _Church(name: 'Nhà thờ Lái Thiêu', address: 'Đường Nguyễn Chí Thanh, P. Lái Thiêu, TP. Thuận An', priestName: 'LM. Phêrô Trần Minh Đức', phone: '0274 375 2345', lat: 10.9265, lng: 106.7025),
-  _Church(name: 'Nhà thờ Dĩ An', address: 'Đường Đồng Khởi, P. Dĩ An, TP. Dĩ An', priestName: 'LM. Anrê Lê Văn Hùng', phone: '0274 376 3456', lat: 10.8987, lng: 106.7536),
-  _Church(name: 'Nhà thờ Tân Uyên', address: 'Đường Thái Hòa, P. Uyên Hưng, TX. Tân Uyên', priestName: 'LM. Tôma Nguyễn Minh Khoa', phone: '0274 365 4567', lat: 11.0421, lng: 106.8076),
-  _Church(name: 'Nhà thờ Bến Cát', address: 'Đường Mỹ Phước, P. Mỹ Phước, TX. Bến Cát', priestName: 'LM. Đaminh Bùi Văn Long', phone: '0274 355 5678', lat: 11.1563, lng: 106.5921),
-  _Church(name: 'Nhà thờ Thủ Đức', address: 'Đường Kha Vạn Cân, P. Linh Chiểu, TP. Thủ Đức', priestName: 'LM. Micae Phạm Quang Vinh', phone: '028 3896 1234', lat: 10.8525, lng: 106.7539),
-  _Church(name: 'Nhà thờ Fatima Bình Triệu', address: 'Đường Nơ Trang Long, P. 13, Q. Bình Thạnh', priestName: 'LM. Gioan Vũ Đức Thịnh', phone: '028 3898 2345', lat: 10.8489, lng: 106.7272),
-  _Church(name: 'Nhà thờ Tân Định', address: 'Đường Hai Bà Trưng, P. 6, Q. 3, TP. HCM', priestName: 'LM. Antôn Trần Quốc Tuấn', phone: '028 3829 3456', lat: 10.7892, lng: 106.6973),
-  _Church(name: 'Nhà thờ Đức Bà Sài Gòn', address: 'Công xã Paris, P. Bến Nghé, Q. 1, TP. HCM', priestName: 'LM. Giuse Đinh Văn Hải', phone: '028 3822 4567', lat: 10.7797, lng: 106.6990),
-  _Church(name: 'Nhà thờ Huyện Sỹ', address: 'Đường Tôn Thất Tùng, P. Phạm Ngũ Lão, Q. 1', priestName: 'LM. Phanxicô Châu Minh Tân', phone: '028 3835 5678', lat: 10.7728, lng: 106.6944),
-  _Church(name: 'Nhà thờ Kỳ Đồng', address: 'Đường Kỳ Đồng, P. 9, Q. 3, TP. HCM', priestName: 'LM. Luca Nguyễn Hữu Phúc', phone: '028 3843 6789', lat: 10.7764, lng: 106.6902),
-  _Church(name: 'Nhà thờ Biên Hòa', address: 'Đường Hưng Đạo Vương, P. Trung Dũng, TP. Biên Hòa', priestName: 'LM. Barnaba Đỗ Văn Sơn', phone: '0251 382 7890', lat: 10.9461, lng: 106.8237),
-  _Church(name: 'Nhà thờ Hố Nai', address: 'Đường Hưng Đạo, KP. 1, P. Hố Nai, TP. Biên Hòa', priestName: 'LM. Matthêu Lý Minh Tâm', phone: '0251 383 8901', lat: 10.9320, lng: 106.8590),
-  _Church(name: 'Nhà thờ Xuân Lộc', address: 'Đường Hùng Vương, TT. Xuân Lộc, H. Xuân Lộc', priestName: 'LM. Phêrô Vũ Ngọc Hải', phone: '0251 371 9012', lat: 10.9317, lng: 107.2414),
-  _Church(name: 'Nhà thờ Gia Kiệm', address: 'TT. Gia Kiệm, H. Thống Nhất, Đồng Nai', priestName: 'LM. Giuse Nguyễn Thế Phong', phone: '0251 376 0123', lat: 11.0152, lng: 107.0892),
-  _Church(name: 'Nhà thờ Gò Vấp', address: 'Đường Nguyễn Văn Nghi, P. 7, Q. Gò Vấp, TP. HCM', priestName: 'LM. Anrê Trần Đức Bình', phone: '028 3895 1235', lat: 10.8326, lng: 106.6814),
-  _Church(name: 'Nhà thờ Hạnh Thông Tây', address: 'Đường Quang Trung, P. 11, Q. Gò Vấp', priestName: 'LM. Gioan Lê Đình Bảo', phone: '028 3894 2346', lat: 10.8214, lng: 106.6648),
-  _Church(name: 'Nhà thờ Tân Phú', address: 'Đường Lũy Bán Bích, P. Tân Thới Hòa, Q. Tân Phú', priestName: 'LM. Phêrô Nguyễn Văn Chính', phone: '028 3817 3457', lat: 10.7951, lng: 106.6295),
-  _Church(name: 'Nhà thờ Bình Chánh', address: 'Đường Nguyễn Hữu Trí, TT. Tân Túc, H. Bình Chánh', priestName: 'LM. Micae Bùi Quang Khải', phone: '028 3768 4568', lat: 10.7156, lng: 106.5923),
-];
+import '../models/api_models.dart';
+import '../services/api_client.dart';
+import '../services/church_service.dart';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
-
-double _haversine(double lat1, double lng1, double lat2, double lng2) {
-  const r = 6371.0;
-  final dLat = (lat2 - lat1) * pi / 180;
-  final dLng = (lng2 - lng1) * pi / 180;
-  final a = sin(dLat / 2) * sin(dLat / 2) +
-      cos(lat1 * pi / 180) * cos(lat2 * pi / 180) * sin(dLng / 2) * sin(dLng / 2);
-  return r * 2 * atan2(sqrt(a), sqrt(1 - a));
-}
 
 String _fmtDistance(double km) {
   if (km < 1) return '${(km * 1000).round()} m';
@@ -80,12 +29,13 @@ class EmergencyAnointingScreen extends StatefulWidget {
 
 class _EmergencyAnointingScreenState extends State<EmergencyAnointingScreen> {
   _ScreenState _state = _ScreenState.loading;
-  List<_Church> _nearby = [];
-  String _errorMsg = '';
+  List<Church> _nearby = [];
+  late final ChurchService _service;
 
   @override
   void initState() {
     super.initState();
+    _service = RemoteChurchService(context.read<ApiClient>());
     _findNearbyChurches();
   }
 
@@ -108,26 +58,18 @@ class _EmergencyAnointingScreenState extends State<EmergencyAnointingScreen> {
         ),
       );
 
-      final nearby = _allChurches.map((c) {
-        c.distance = _haversine(pos.latitude, pos.longitude, c.lat, c.lng);
-        return c;
-      }).where((c) => c.distance <= 10).toList()
-        ..sort((a, b) => a.distance.compareTo(b.distance));
-
+      final nearby = await _service.getNearby(pos.latitude, pos.longitude, radiusKm: 10);
       final top5 = nearby.take(5).toList();
       setState(() {
         _nearby = top5;
         _state = top5.isEmpty ? _ScreenState.empty : _ScreenState.results;
       });
-    } catch (e) {
-      setState(() {
-        _state = _ScreenState.error;
-        _errorMsg = e.toString();
-      });
+    } catch (_) {
+      setState(() => _state = _ScreenState.error);
     }
   }
 
-  Future<void> _callChurch(_Church church) async {
+  Future<void> _callChurch(Church church) async {
     final uri = Uri.parse('tel:${church.phone.replaceAll(' ', '')}');
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
@@ -147,7 +89,6 @@ class _EmergencyAnointingScreenState extends State<EmergencyAnointingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppStrings.of(context);
     return Scaffold(
       backgroundColor: AppColors.surface,
       body: CustomScrollView(
@@ -533,7 +474,7 @@ class _EmergencyAnointingScreenState extends State<EmergencyAnointingScreen> {
 // ─── Church Card ─────────────────────────────────────────────────────────────
 
 class _ChurchCard extends StatelessWidget {
-  final _Church church;
+  final Church church;
   final int rank;
   final VoidCallback onCall;
 
@@ -647,7 +588,7 @@ class _ChurchCard extends StatelessWidget {
                           const Icon(Icons.place_rounded, size: 11, color: Color(0xFFDC2626)),
                           const SizedBox(width: 3),
                           Text(
-                            _fmtDistance(church.distance),
+                            _fmtDistance(church.distanceKm ?? 0),
                             style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: Color(0xFFDC2626)),
                           ),
                         ],

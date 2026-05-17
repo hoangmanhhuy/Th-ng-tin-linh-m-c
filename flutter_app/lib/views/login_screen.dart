@@ -14,8 +14,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _obscurePassword = true;
-  final _usernameController = TextEditingController(text: 'linhmuc@giaophan.org');
-  final _passwordController = TextEditingController(text: 'password123');
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   void dispose() {
@@ -24,10 +24,43 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
+  Future<void> _signIn() async {
+    final email = _usernameController.text.trim();
+    final password = _passwordController.text;
+
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Vui lòng nhập đầy đủ thông tin đăng nhập.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    final auth = context.read<AuthViewModel>();
+    await auth.login(email, password);
+
+    if (!mounted) return;
+
+    if (auth.role.index > 0) {
+      // Đăng nhập thành công → đóng màn login
+      Navigator.pop(context);
+    } else if (auth.errorMessage != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(auth.errorMessage!),
+          backgroundColor: Colors.red,
+        ),
+      );
+      auth.clearError();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppStrings.of(context);
-    final auth = context.read<AuthViewModel>();
+    final auth = context.watch<AuthViewModel>();
 
     return Scaffold(
       backgroundColor: AppColors.surface,
@@ -97,7 +130,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     _buildTextField(
                       controller: _usernameController,
                       icon: LucideIcons.user,
-                      hint: 'linhmuc@giaophan.org',
+                      hint: 'email@giaophan.org',
+                      keyboardType: TextInputType.emailAddress,
                     ),
                     const SizedBox(height: 20),
                     _buildLabel(l10n.loginPasswordLabel),
@@ -128,7 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    _buildLoginButton(auth, context),
+                    _buildLoginButton(auth),
                   ],
                 ),
               ),
@@ -162,7 +196,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: double.infinity,
                 height: 56,
                 child: ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: auth.isLoading ? null : () {},
                   icon: const Icon(Icons.nfc_rounded, size: 22),
                   label: Text(
                     l10n.tapPriestCard,
@@ -191,7 +225,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 8),
               TextButton.icon(
-                onPressed: () => Navigator.pop(context),
+                onPressed: auth.isLoading ? null : () => Navigator.pop(context),
                 icon: const Icon(Icons.chevron_left_rounded, size: 18, color: AppColors.primary),
                 label: Text(
                   l10n.backToLaityHome,
@@ -227,10 +261,12 @@ class _LoginScreenState extends State<LoginScreen> {
     required IconData icon,
     required String hint,
     bool isPassword = false,
+    TextInputType? keyboardType,
   }) {
     return TextField(
       controller: controller,
       obscureText: isPassword && _obscurePassword,
+      keyboardType: keyboardType,
       style: const TextStyle(
         fontWeight: FontWeight.w700,
         fontSize: 14,
@@ -279,36 +315,43 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildLoginButton(AuthViewModel auth, BuildContext context) {
+  Widget _buildLoginButton(AuthViewModel auth) {
     return SizedBox(
       width: double.infinity,
       height: 56,
       child: ElevatedButton(
-        onPressed: () {
-          auth.login();
-          Navigator.pop(context);
-        },
+        onPressed: auth.isLoading ? null : _signIn,
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
           foregroundColor: Colors.white,
+          disabledBackgroundColor: AppColors.primary.withOpacity(0.6),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
           elevation: 0,
           shadowColor: AppColors.primary.withOpacity(0.3),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              AppStrings.of(context).login,
-              style: const TextStyle(
-                fontWeight: FontWeight.w900,
-                fontSize: 16,
+        child: auth.isLoading
+            ? const SizedBox(
+                width: 24,
+                height: 24,
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                  strokeWidth: 2.5,
+                ),
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    AppStrings.of(context).login,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w900,
+                      fontSize: 16,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  const Icon(Icons.arrow_forward_rounded, size: 20),
+                ],
               ),
-            ),
-            const SizedBox(width: 8),
-            const Icon(Icons.arrow_forward_rounded, size: 20),
-          ],
-        ),
       ),
     );
   }

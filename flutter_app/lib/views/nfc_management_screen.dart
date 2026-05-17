@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:provider/provider.dart';
 import '../core/app_theme.dart';
 import '../core/app_strings.dart';
 import '../models/models.dart';
+import '../models/api_models.dart';
+import '../services/api_client.dart';
+import '../services/nfc_card_service.dart';
 
 class NfcManagementScreen extends StatefulWidget {
   final UserProfile priest;
@@ -12,30 +16,29 @@ class NfcManagementScreen extends StatefulWidget {
   State<NfcManagementScreen> createState() => _NfcManagementScreenState();
 }
 
-class _NfcCard {
-  final String id;
-  final String addedDate;
-  bool isActive;
-  _NfcCard({required this.id, required this.addedDate, this.isActive = true});
-}
-
 class _NfcManagementScreenState extends State<NfcManagementScreen> {
-  late List<_NfcCard> _cards;
+  late final NfcCardService _service;
+  List<NfcCard> _cards = [];
+  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    // Dữ liệu thẻ mẫu dựa theo ID linh mục
-    _cards = [
-      _NfcCard(
-        id: 'NFC-${widget.priest.id.substring(widget.priest.id.length > 8 ? widget.priest.id.length - 8 : 0)}-01',
-        addedDate: '01/01/2024',
-      ),
-    ];
+    _service = RemoteNfcCardService(context.read<ApiClient>());
+    _loadCards();
+  }
+
+  Future<void> _loadCards() async {
+    setState(() => _isLoading = true);
+    try {
+      final cards = await _service.listCards(widget.priest.id);
+      if (mounted) setState(() { _cards = cards; _isLoading = false; });
+    } catch (_) {
+      if (mounted) setState(() => _isLoading = false);
+    }
   }
 
   Future<void> _addCardDialog() async {
-    final l10n = AppStrings.of(context);
     final controller = TextEditingController();
     final result = await showDialog<String>(
       context: context,
@@ -131,28 +134,35 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
     );
 
     if (result != null && result.isNotEmpty) {
-      final now = DateTime.now();
-      setState(() {
-        _cards.add(_NfcCard(
-          id: result.toUpperCase(),
-          addedDate: '${now.day.toString().padLeft(2, '0')}/${now.month.toString().padLeft(2, '0')}/${now.year}',
-        ));
-      });
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(AppStrings.of(context).cardAdded(result)),
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: AppColors.emerald600,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          ),
-        );
+      try {
+        final card = await _service.addCard(widget.priest.id, result.toUpperCase());
+        if (mounted) {
+          setState(() => _cards.add(card));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(AppStrings.of(context).cardAdded(result)),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: AppColors.emerald600,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            ),
+          );
+        }
+      } catch (_) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text('Không thể thêm thẻ. Vui lòng thử lại.'),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: AppColors.red,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            ),
+          );
+        }
       }
     }
   }
 
-  Future<void> _deleteCard(_NfcCard card) async {
-    final l10n = AppStrings.of(context);
+  Future<void> _deleteCard(NfcCard card) async {
     final confirm = await showDialog<bool>(
       context: context,
       builder: (ctx) {
@@ -198,8 +208,9 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
       },
     );
     if (confirm == true) {
-      setState(() => _cards.remove(card));
+      await _service.deleteCard(widget.priest.id, card.id);
       if (mounted) {
+        setState(() => _cards.removeWhere((c) => c.id == card.id));
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(AppStrings.of(context).cardDeleted(card.id)),
@@ -210,6 +221,19 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
         );
       }
     }
+  }
+
+  /// Toggle active/inactive locally (API may not support this yet)
+  void _toggleCard(NfcCard card) {
+    final idx = _cards.indexWhere((c) => c.id == card.id);
+    if (idx < 0) return;
+    setState(() {
+      _cards[idx] = NfcCard(
+        id: card.id,
+        addedDate: card.addedDate,
+        isActive: !card.isActive,
+      );
+    });
   }
 
   @override
@@ -344,18 +368,20 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
 
           // Card list
           Expanded(
-            child: _cards.isEmpty
-                ? _buildEmpty()
-                : ListView.separated(
-                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 32),
-                    itemCount: _cards.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: 10),
-                    itemBuilder: (_, i) => _NfcCardTile(
-                      card: _cards[i],
-                      onDelete: () => _deleteCard(_cards[i]),
-                      onToggle: () => setState(() => _cards[i].isActive = !_cards[i].isActive),
-                    ),
-                  ),
+            child: _isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : _cards.isEmpty
+                    ? _buildEmpty()
+                    : ListView.separated(
+                        padding: const EdgeInsets.fromLTRB(16, 0, 16, 32),
+                        itemCount: _cards.length,
+                        separatorBuilder: (_, __) => const SizedBox(height: 10),
+                        itemBuilder: (_, i) => _NfcCardTile(
+                          card: _cards[i],
+                          onDelete: () => _deleteCard(_cards[i]),
+                          onToggle: () => _toggleCard(_cards[i]),
+                        ),
+                      ),
           ),
         ],
       ),
@@ -404,7 +430,7 @@ class _NfcManagementScreenState extends State<NfcManagementScreen> {
 }
 
 class _NfcCardTile extends StatelessWidget {
-  final _NfcCard card;
+  final NfcCard card;
   final VoidCallback onDelete;
   final VoidCallback onToggle;
 

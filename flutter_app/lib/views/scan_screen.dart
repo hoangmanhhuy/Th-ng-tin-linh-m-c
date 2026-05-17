@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:provider/provider.dart';
 import '../core/app_theme.dart';
 import '../core/app_strings.dart';
-import '../models/models.dart';
+import '../services/api_client.dart';
+import '../services/priest_service.dart';
 import 'priest_result_sheet.dart';
 
 class ScanScreen extends StatefulWidget {
@@ -17,12 +19,14 @@ class ScanScreen extends StatefulWidget {
 
 class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
   late MobileScannerController _controller;
+  late final PriestService _priestService;
   bool _torchOn = false;
   bool _processing = false;
 
   @override
   void initState() {
     super.initState();
+    _priestService = RemotePriestService(context.read<ApiClient>());
     WidgetsBinding.instance.addObserver(this);
     _controller = MobileScannerController(
       detectionSpeed: DetectionSpeed.noDuplicates,
@@ -71,7 +75,7 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
       final raw = barcode.rawValue;
       if (raw == null || raw.isEmpty) continue;
 
-      final priest = PriestDatabase.lookup(raw);
+      final priest = await _priestService.getById(raw);
       if (priest != null) {
         _processing = true;
         await _controller.stop();

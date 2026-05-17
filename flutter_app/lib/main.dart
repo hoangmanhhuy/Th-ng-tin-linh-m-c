@@ -8,6 +8,8 @@ import 'core/app_strings.dart';
 import 'viewmodels/viewmodels.dart';
 import 'viewmodels/language_provider.dart';
 import 'models/models.dart';
+import 'services/api_client.dart';
+import 'services/auth_service.dart';
 import 'views/home_screen.dart';
 import 'views/history_screen.dart';
 import 'views/settings_screen.dart';
@@ -27,11 +29,28 @@ void main() async {
   final languageProvider = LanguageProvider();
   await languageProvider.init();
 
+  // ── Khởi tạo tầng service ──────────────────────────────────────────────────
+  final apiClient = ApiClient.instance;
+  final authService = RemoteAuthService(apiClient);
+  final authViewModel = AuthViewModel(authService);
+
+  // Kết nối session-expired callback: khi token hết hạn → tự logout
+  apiClient.onSessionExpired = () {
+    authViewModel.logout();
+  };
+
+  // Khôi phục session nếu đã đăng nhập trước đó
+  await authViewModel.init();
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: languageProvider),
-        ChangeNotifierProvider(create: (_) => AuthViewModel()),
+        // Expose ApiClient và AuthService để các service khác dùng
+        Provider<ApiClient>.value(value: apiClient),
+        Provider<AuthService>.value(value: authService),
+        // ViewModels
+        ChangeNotifierProvider<AuthViewModel>.value(value: authViewModel),
         ChangeNotifierProvider(create: (_) => LiturgicalViewModel()),
       ],
       child: const DigitalEcclesiaApp(),
